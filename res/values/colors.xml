@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  These colors are taken from Unc "A Units Calculator" application
+  for iOS. See http://itunes.apple.com/us/app/unc-a-units-calculator/id401471162?mt=8
+  for details.
+  -->
+<resources>
+    <color name="main_bg">#595a6f</color>
+
+    <color name="txtf_e">#e5e9c6</color>
+    <color name="txtf_c">#e1eab1</color>
+    <color name="txtf_s">#dae5a1</color>
+    <color name="txtf_b">#c4c5b5</color>
+    <color name="txtf_t">#000000</color>
+
+    <color name="act_btn_e">#bf2f12</color>
+    <color name="act_btn_c">#df4a29</color>
+    <color name="act_btn_s">#db694f</color>
+    <color name="act_btn_b">#f08460</color>
+
+    <color name="fun_btn_e">#909030</color>
+    <color name="fun_btn_c">#b4b64b</color>
+    <color name="fun_btn_s">#c2be65</color>
+    <color name="fun_btn_b">#b5b577</color>
+
+    <color name="sym_btn_e">#161f26</color>
+    <color name="sym_btn_c">#313a43</color>
+    <color name="sym_btn_s">#484f57</color>
+    <color name="sym_btn_b">#686d73</color>
+
+    <color name="mod_btn_e">#656752</color>
+    <color name="mod_btn_c">#878876</color>
+    <color name="mod_btn_s">#989b88</color>
+    <color name="mod_btn_b">#9a9c8f</color>
+
+    <color name="opt_btn_e">#2d425f</color>
+    <color name="opt_btn_c">#485f7f</color>
+    <color name="opt_btn_s">#627691</color>
+    <color name="opt_btn_b">#617085</color>
+</resources>
+

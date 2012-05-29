@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="UCBtn">
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+    <style name="UCBtn.Act">
+        <item name="android:background">@drawable/act_btn</item>
+    </style>
+    <style name="UCBtn.Opt">
+        <item name="android:background">@drawable/opt_btn</item>
+    </style>
+    <style name="UCBtn.Mod">
+        <item name="android:background">@drawable/mod_btn</item>
+    </style>
+    <style name="UCBtn.Sym">
+        <item name="android:background">@drawable/sym_btn</item>
+    </style>
+    <style name="UCBtn.Fun">
+        <item name="android:background">@drawable/fun_btn</item>
+    </style>
+    <style name="UCBtn.Txt">
+        <item name="android:background">@drawable/txtf</item>
+        <item name="android:textColor">@color/txtf_t</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+</resources>

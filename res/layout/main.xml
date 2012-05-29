@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"    
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:shrinkColumns="*">
+
+    <TableRow>
+        <TextView android:layout_span="5" android:text="55.2 mi/hr" android:textSize="24sp" android:lines="1" style="@style/UCBtn.Txt"></TextView>
+        <Button android:text="help" style="@style/UCBtn.Opt"></Button>
+    </TableRow>
+
+    <TableRow>
+        <TextView android:layout_span="4" android:text="55.2 mi/hr" style="@style/UCBtn.Txt"></TextView>
+        <TableLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:shrinkColumns="*" android:layout_span="2">
+            <TableRow>
+                <Button android:text="stack" style="@style/UCBtn.Mod"></Button>
+                <Button android:text="clear" style="@style/UCBtn.Mod"></Button>
+            </TableRow>
+            <TableRow>
+                <Button android:text="undo" style="@style/UCBtn.Mod"></Button>
+                <Button android:text="←" android:textSize="24sp" style="@style/UCBtn.Mod"></Button>
+            </TableRow>      	
+        </TableLayout>
+    </TableRow>
+
+    <TableRow>
+        <Button android:text="time" style="@style/UCBtn.Act"></Button>
+        <Button android:text="dist" style="@style/UCBtn.Act"></Button>
+        <Button android:text="vol" style="@style/UCBtn.Act"></Button>
+        <Button android:text="weight" android:textSize="14sp" style="@style/UCBtn.Act"></Button>
+        <Button android:text="elec" style="@style/UCBtn.Act"></Button>
+        <Button android:text="misc" style="@style/UCBtn.Act"></Button>
+    </TableRow>
+    <TableRow>
+        <Button android:text="per" style="@style/UCBtn.Act"></Button>
+        <Button android:text="ln" style="@style/UCBtn.Fun"></Button>
+        <Button android:text="log" style="@style/UCBtn.Fun"></Button>
+        <Button android:text="y^x" style="@style/UCBtn.Fun"></Button>
+        <Button android:text="x²" style="@style/UCBtn.Fun"></Button>
+        <Button android:text="√x" style="@style/UCBtn.Fun"></Button>
+    </TableRow>
+    <TableRow>
+        <Button android:text="prefix" style="@style/UCBtn.Act"></Button>
+        <Button android:text="deg" style="@style/UCBtn.Fun"></Button>
+        <Button android:text="sin" style="@style/UCBtn.Fun"></Button>
+        <Button android:text="cos" style="@style/UCBtn.Fun"></Button>
+        <Button android:text="tan" style="@style/UCBtn.Fun"></Button>
+        <Button android:text="1/x" style="@style/UCBtn.Fun"></Button>
+    </TableRow>
+    <TableRow>
+        <Button android:text="conv" style="@style/UCBtn.Fun"></Button>
+        <Button android:text="π" style="@style/UCBtn.Sym"></Button>
+        <Button android:text="7" style="@style/UCBtn.Sym"></Button>
+        <Button android:text="8" style="@style/UCBtn.Sym"></Button>
+        <Button android:text="9" style="@style/UCBtn.Sym"></Button>
+        <Button android:text="÷" android:textSize="24sp" style="@style/UCBtn.Fun"></Button>
+    </TableRow>
+    <TableRow>
+        <Button android:text="float" style="@style/UCBtn.Mod"></Button>
+        <Button android:text="EEX" style="@style/UCBtn.Sym"></Button>
+        <Button android:text="4" style="@style/UCBtn.Sym"></Button>
+        <Button android:text="5" style="@style/UCBtn.Sym"></Button>
+        <Button android:text="6" style="@style/UCBtn.Sym"></Button>
+        <Button android:text="×" android:textSize="24sp" style="@style/UCBtn.Fun"></Button>
+    </TableRow>
+
+    <TableRow>
+        <Button android:text="enter" style="@style/UCBtn.Act" android:layout_height="match_parent"></Button>
+
+        <TableLayout android:shrinkColumns="*" android:layout_span="5">
+            <TableRow>
+                <Button android:text="mem" style="@style/UCBtn.Mod"></Button>
+                <Button android:text="1" style="@style/UCBtn.Sym"></Button>
+                <Button android:text="2" style="@style/UCBtn.Sym"></Button>
+                <Button android:text="3" style="@style/UCBtn.Sym"></Button>
+                <Button android:text="−" android:textSize="24sp" style="@style/UCBtn.Fun"></Button>
+            </TableRow>
+
+            <TableRow>
+                <Button android:text="alt" style="@style/UCBtn.Mod"></Button>
+                <Button android:text="0" style="@style/UCBtn.Sym"></Button>
+                <Button android:text="." style="@style/UCBtn.Sym"></Button>
+                <Button android:text="+/−" style="@style/UCBtn.Sym"></Button>
+                <Button android:text="+" android:textSize="24sp" style="@style/UCBtn.Fun"></Button>
+            </TableRow>
+        </TableLayout>
+    </TableRow>
+
+    <!-- TODO: nice dotted pager for different modes switching
+<android.support.v4.view.ViewPager
+     android:layout_width="fill_parent"
+     android:layout_height="5dp"
+     android:layout_weight="1"
+ />
+ -->
+
+</TableLayout>
