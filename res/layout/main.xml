@@ -7,7 +7,7 @@
         android:shrinkColumns="*">
 
     <TableRow>
-        <TextView android:layout_span="5" android:text="" android:hint="0" android:id="@+id/view_stack_head" android:textSize="24sp" android:lines="1" style="@style/UCBtn.Txt" android:ellipsize="start" />
+        <me.kstep.ucalc.UStackHeadView android:layout_span="5" android:id="@+id/view_stack_head" android:textSize="24sp" style="@style/UCBtn.Txt" android:ellipsize="start" />
         <Button android:text="help" style="@style/UCBtn.Opt" />
     </TableRow>
 
