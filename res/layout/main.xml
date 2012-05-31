@@ -12,7 +12,7 @@
     </TableRow>
 
     <TableRow>
-        <TextView android:layout_span="4" android:text="" android:id="@+id/view_stack_tail" style="@style/UCBtn.Txt" />
+        <me.kstep.ucalc.UStackTailView android:layout_span="4" android:id="@+id/view_stack_tail" style="@style/UCBtn.Txt" />
         <TableLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:shrinkColumns="*" android:layout_span="2">
             <TableRow>
                 <Button android:text="stack" style="@style/UCBtn.Mod" />
