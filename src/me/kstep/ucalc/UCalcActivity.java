@@ -29,6 +29,15 @@ public class UCalcActivity extends Activity {
         operations.put(new SubstructOp());
         operations.put(new MultiplyOp());
         operations.put(new DivideOp());
+        operations.put(new LnOp());
+        operations.put(new LogOp());
+        operations.put(new PowerOp());
+        operations.put(new SquereOp());
+        operations.put(new SquereRootOp());
+        operations.put(new SinOp());
+        operations.put(new CosOp());
+        operations.put(new TanOp());
+        operations.put(new InvertOp());
     }
 
     /**
