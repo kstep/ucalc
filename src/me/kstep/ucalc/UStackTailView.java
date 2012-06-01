@@ -22,7 +22,7 @@ class UStackTailView extends TextView {
     }
 
     private void initialize() {
-        setGravity(Gravity.CENTER_VERTICAL);
+        setGravity(Gravity.LEFT);
         setText("");
     }
 }
