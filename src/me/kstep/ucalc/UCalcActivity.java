@@ -114,9 +114,9 @@ public class UCalcActivity extends Activity {
 
     public void onBackspaceButtonClick(View view) {
         UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
-        CharSequence text = edit_view.getText();
-        if (text.length() > 0) {
+        if (!edit_view.isEmpty()) {
             if (edit_view.editing) {
+                CharSequence text = edit_view.getText();
                 edit_view.setText(text.subSequence(0, text.length() - 1));
             } else {
                 edit_view.setText("");
