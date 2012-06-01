@@ -50,7 +50,7 @@ public class UCalcActivity extends Activity {
         if (!edit_view.isEmpty()) {
             edit_view.stopEditing();
             stack.push(edit_view.getValue());
-            stack_view.setText(stack.toString());
+            stack_view.showStack(stack);
         }
     }
 
@@ -70,7 +70,7 @@ public class UCalcActivity extends Activity {
             edit_view.setValue(Float.NaN);
         }
 
-        stack_view.setText(stack.toString());
+        stack_view.showStack(stack);
     }
 
     private void showToast(CharSequence ch) {
