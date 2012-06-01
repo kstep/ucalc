@@ -7,12 +7,12 @@
         android:shrinkColumns="*">
 
     <TableRow>
-        <me.kstep.ucalc.UStackHeadView android:layout_span="5" android:id="@+id/view_stack_head" android:textSize="24sp" style="@style/UCBtn.Txt" android:ellipsize="start" />
+        <me.kstep.ucalc.UEditView android:layout_span="5" android:id="@+id/view_edit" style="@style/UCText.Edit" android:ellipsize="start" />
         <Button android:text="help" style="@style/UCBtn.Opt" />
     </TableRow>
 
     <TableRow>
-        <me.kstep.ucalc.UStackTailView android:layout_span="4" android:id="@+id/view_stack_tail" style="@style/UCBtn.Txt" />
+        <me.kstep.ucalc.UStackView android:layout_span="4" android:id="@+id/view_stack" style="@style/UCText.Stack" />
         <TableLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:shrinkColumns="*" android:layout_span="2">
             <TableRow>
                 <Button android:text="stack" style="@style/UCBtn.Mod" />

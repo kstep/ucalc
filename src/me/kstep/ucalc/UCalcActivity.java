@@ -31,24 +31,28 @@ public class UCalcActivity extends Activity {
     }
 
     private void pushStack() {
-        UStackHeadView stack_head = (UStackHeadView) findViewById(R.id.view_stack_head);
+        UEditView stack_head = (UEditView) findViewById(R.id.view_edit);
+        UStackView stack_tail = (UStackView) findViewById(R.id.view_stack);
+
         String text = stack_head.getText().toString();
         if (text.length() > 0) {
-            stack_head.setText("");
-            stack_head.editing = false;
-            stack.push(Float.valueOf(text));
-            ((TextView) findViewById(R.id.view_stack_tail)).setText(stack.toString());
+            if (!stack_head.editing) {
+                stack.push(Float.valueOf(text));
+                stack_tail.setText(stack.toString());
+            } else {
+                stack_head.editing = false;
+            }
         }
     }
 
     private void popStack() {
-        if (stack.size() == 0) {
-            showToast("Stack is empty!");
-            return;
-        }
+        UEditView stack_head = (UEditView) findViewById(R.id.view_edit);
+        UStackView stack_tail = (UStackView) findViewById(R.id.view_stack);
 
-        ((TextView) findViewById(R.id.view_stack_head)).setText(stack.pop().toString());
-        ((TextView) findViewById(R.id.view_stack_tail)).setText(stack.toString());
+        stack_head.setText(stack.pop().toString());
+        stack_tail.setText(stack.toString());
+
+        stack_head.editing = false;
     }
 
     private void showToast(CharSequence ch) {
@@ -58,9 +62,10 @@ public class UCalcActivity extends Activity {
 
     public void onDigitButtonClick(View view) {
         Button button = (Button) view;
-        UStackHeadView stack_head = (UStackHeadView) findViewById(R.id.view_stack_head);
+        UEditView stack_head = (UEditView) findViewById(R.id.view_edit);
         if (!stack_head.editing) {
             pushStack();
+            stack_head.setText("");
             stack_head.editing = true;
         }
 
@@ -68,7 +73,7 @@ public class UCalcActivity extends Activity {
     }
 
     public void onDotButtonClick(View view) {
-        UStackHeadView stack_head = (UStackHeadView) findViewById(R.id.view_stack_head);
+        UEditView stack_head = (UEditView) findViewById(R.id.view_edit);
         String text = stack_head.getText().toString();
         if (!stack_head.editing || !text.contains(".")) {
             onDigitButtonClick(view);
@@ -79,19 +84,24 @@ public class UCalcActivity extends Activity {
         CharSequence name = ((Button) view).getText();
         if (constants.containsKey(name)) {
             pushStack();
-            ((TextView) findViewById(R.id.view_stack_head)).setText(constants.get(name).toString());
+            ((TextView) findViewById(R.id.view_edit)).setText(constants.get(name).toString());
         }
     }
 
     public void onEnterButtonClick(View view) {
+        ((UEditView) findViewById(R.id.view_edit)).editing = false;
         pushStack();
     }
 
     public void onBackspaceButtonClick(View view) {
-        UStackHeadView stack_head = (UStackHeadView) findViewById(R.id.view_stack_head);
+        UEditView stack_head = (UEditView) findViewById(R.id.view_edit);
         CharSequence text = stack_head.getText();
         if (text.length() > 0) {
-            stack_head.setText(text.subSequence(0, text.length() - 1));    		
+            if (stack_head.editing) {
+                stack_head.setText(text.subSequence(0, text.length() - 1));    		
+            } else {
+                stack_head.setText("");
+            }
         }
     }
 
@@ -101,7 +111,9 @@ public class UCalcActivity extends Activity {
 
         if (op != null) {
             try {
+                pushStack();
                 op.apply(stack);
+                popStack();
             } catch (EmptyStackException e) {
                 showToast("Stack underflow!");
             }
@@ -116,7 +128,7 @@ public class UCalcActivity extends Activity {
 
     public void onClearButtonClick(View view) {
         stack.clear();
-        ((TextView) findViewById(R.id.view_stack_head)).setText("");
-        ((TextView) findViewById(R.id.view_stack_tail)).setText("");
+        ((TextView) findViewById(R.id.view_edit)).setText("");
+        ((TextView) findViewById(R.id.view_stack)).setText("");
     }
 }

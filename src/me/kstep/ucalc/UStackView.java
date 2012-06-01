@@ -5,24 +5,23 @@ import android.content.Context;
 import android.view.Gravity;
 import android.util.AttributeSet;
 
-class UStackTailView extends TextView {
-    public UStackTailView(Context context) {
+class UStackView extends TextView {
+    public UStackView(Context context) {
         super(context);
         initialize();
     }
 
-    public UStackTailView(Context context, AttributeSet attrs) {
+    public UStackView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initialize();
     }
 
-    public UStackTailView(Context context, AttributeSet attrs, int defStyle) {
+    public UStackView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initialize();
     }
 
     private void initialize() {
-        setGravity(Gravity.LEFT);
         setText("");
     }
 }

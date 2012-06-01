@@ -19,10 +19,4 @@
     <style name="UCBtn.Fun">
         <item name="android:background">@drawable/fun_btn</item>
     </style>
-    <style name="UCBtn.Txt">
-        <item name="android:background">@drawable/txtf</item>
-        <item name="android:textColor">@color/txtf_t</item>
-        <item name="android:padding">5dp</item>
-        <item name="android:layout_height">match_parent</item>
-    </style>
 </resources>

@@ -5,20 +5,20 @@ import android.content.Context;
 import android.view.Gravity;
 import android.util.AttributeSet;
 
-class UStackHeadView extends TextView {
+class UEditView extends TextView {
     public boolean editing = false;
 
-    public UStackHeadView(Context context) {
+    public UEditView(Context context) {
         super(context);
         initialize();
     }
 
-    public UStackHeadView(Context context, AttributeSet attrs) {
+    public UEditView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initialize();
     }
 
-    public UStackHeadView(Context context, AttributeSet attrs, int defStyle) {
+    public UEditView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initialize();
     }
