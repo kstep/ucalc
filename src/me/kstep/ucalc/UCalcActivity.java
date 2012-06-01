@@ -47,9 +47,8 @@ public class UCalcActivity extends Activity {
         UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
         UStackView stack_view = (UStackView) findViewById(R.id.view_stack);
 
-        String text = edit_view.getText().toString();
-        if (text.length() > 0) {
-            stack.push(Float.valueOf(text));
+        if (!edit_view.isEmpty()) {
+            stack.push(edit_view.getValue());
             stack_view.setText(stack.toString());
             edit_view.dirty = false;
             edit_view.editing = false;
@@ -63,7 +62,7 @@ public class UCalcActivity extends Activity {
         UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
         UStackView stack_view = (UStackView) findViewById(R.id.view_stack);
 
-        edit_view.setText(stack.pop().toString());
+        edit_view.setValue(stack.pop());
         stack_view.setText(stack.toString());
 
         edit_view.editing = false;
@@ -104,7 +103,7 @@ public class UCalcActivity extends Activity {
 
         if (constants.containsKey(name)) {
             pushStack();
-            edit_view.setText(constants.get(name).toString());
+            edit_view.setValue(constants.get(name));
             edit_view.dirty = true;
         }
     }
