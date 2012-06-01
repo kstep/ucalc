@@ -1,5 +1,7 @@
 package me.kstep.ucalc;
 
+import java.util.EmptyStackException;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.Toast;
 public class UCalcActivity extends Activity {
     private UStack stack;
     private UConstants constants;
+    private UOperations operations;
 
     /** Called when the activity is first created. */
     @Override
@@ -19,6 +22,12 @@ public class UCalcActivity extends Activity {
 
         constants = new UConstants();
         stack = new UStack();
+
+        operations = new UOperations();
+        operations.put(new AddOp());
+        operations.put(new SubstructOp());
+        operations.put(new MultiplyOp());
+        operations.put(new DivideOp());
     }
 
     private void pushStack() {
@@ -86,29 +95,19 @@ public class UCalcActivity extends Activity {
         }
     }
 
-    public void onBinaryOpButtonClick(View view) {
-        pushStack();
-
+    public void onOperationButtonClick(View view) {
         CharSequence name = ((Button) view).getText();
-        Number arg1, arg2, result = null;
-        arg2 = stack.pop();
-        arg1 = stack.pop();
+        UOperation op = operations.get(name);
 
-        if (name.equals("+")) {
-            result = arg1.floatValue() + arg2.floatValue();
-
-        } else if (name.equals("−")) {
-            result = arg1.floatValue() - arg2.floatValue();
-
-        } else if (name.equals("×")) {
-            result = arg1.floatValue() * arg2.floatValue();
-
-        } else if (name.equals("÷")) {
-            result = arg1.floatValue() / arg2.floatValue();
+        if (op != null) {
+            try {
+                op.apply(stack);
+            } catch (EmptyStackException e) {
+                showToast("Stack underflow!");
+            }
+        } else {
+            showToast("Operation not found!");
         }
-        stack.push(result);
-
-        popStack();
     }
 
     public void onUndoButtonClick(View view) {
