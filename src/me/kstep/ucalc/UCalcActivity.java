@@ -30,29 +30,34 @@ public class UCalcActivity extends Activity {
         operations.put(new DivideOp());
     }
 
+    /**
+     * Push value from input view onto stack
+     */
     private void pushStack() {
-        UEditView stack_head = (UEditView) findViewById(R.id.view_edit);
-        UStackView stack_tail = (UStackView) findViewById(R.id.view_stack);
+        UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
+        UStackView stack_view = (UStackView) findViewById(R.id.view_stack);
 
-        String text = stack_head.getText().toString();
+        String text = edit_view.getText().toString();
         if (text.length() > 0) {
-            if (!stack_head.editing) {
-                stack.push(Float.valueOf(text));
-                stack_tail.setText(stack.toString());
-            } else {
-                stack_head.editing = false;
-            }
+            stack.push(Float.valueOf(text));
+            stack_view.setText(stack.toString());
+            edit_view.dirty = false;
+            edit_view.editing = false;
         }
     }
 
+    /**
+     * Pop value from stack into input view
+     */
     private void popStack() {
-        UEditView stack_head = (UEditView) findViewById(R.id.view_edit);
-        UStackView stack_tail = (UStackView) findViewById(R.id.view_stack);
+        UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
+        UStackView stack_view = (UStackView) findViewById(R.id.view_stack);
 
-        stack_head.setText(stack.pop().toString());
-        stack_tail.setText(stack.toString());
+        edit_view.setText(stack.pop().toString());
+        stack_view.setText(stack.toString());
 
-        stack_head.editing = false;
+        edit_view.editing = false;
+        edit_view.dirty = true;
     }
 
     private void showToast(CharSequence ch) {
@@ -62,20 +67,23 @@ public class UCalcActivity extends Activity {
 
     public void onDigitButtonClick(View view) {
         Button button = (Button) view;
-        UEditView stack_head = (UEditView) findViewById(R.id.view_edit);
-        if (!stack_head.editing) {
-            pushStack();
-            stack_head.setText("");
-            stack_head.editing = true;
+        UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
+        if (!edit_view.editing) {
+            if (edit_view.dirty) {
+                pushStack();
+            }
+            edit_view.setText("");
+            edit_view.editing = true;
+            edit_view.dirty = true;
         }
 
-        stack_head.append(button.getText());
+        edit_view.append(button.getText());
     }
 
     public void onDotButtonClick(View view) {
-        UEditView stack_head = (UEditView) findViewById(R.id.view_edit);
-        String text = stack_head.getText().toString();
-        if (!stack_head.editing || !text.contains(".")) {
+        UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
+        String text = edit_view.getText().toString();
+        if (!edit_view.editing || !text.contains(".")) {
             onDigitButtonClick(view);
         }
     }
@@ -89,18 +97,17 @@ public class UCalcActivity extends Activity {
     }
 
     public void onEnterButtonClick(View view) {
-        ((UEditView) findViewById(R.id.view_edit)).editing = false;
         pushStack();
     }
 
     public void onBackspaceButtonClick(View view) {
-        UEditView stack_head = (UEditView) findViewById(R.id.view_edit);
-        CharSequence text = stack_head.getText();
+        UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
+        CharSequence text = edit_view.getText();
         if (text.length() > 0) {
-            if (stack_head.editing) {
-                stack_head.setText(text.subSequence(0, text.length() - 1));    		
+            if (edit_view.editing) {
+                edit_view.setText(text.subSequence(0, text.length() - 1));
             } else {
-                stack_head.setText("");
+                edit_view.setText("");
             }
         }
     }
