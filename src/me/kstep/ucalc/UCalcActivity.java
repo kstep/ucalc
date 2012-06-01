@@ -117,12 +117,16 @@ public class UCalcActivity extends Activity {
         UOperation op = operations.get(name);
 
         if (op != null) {
-            try {
-                pushStack();
-                op.apply(stack);
-                popStack();
-            } catch (EmptyStackException e) {
-                showToast("Stack underflow!");
+            if (stack.size() < op.arity() - 1) {
+                showToast("Not enough operands!");
+            } else {
+                try {
+                    pushStack();
+                    op.apply(stack);
+                    popStack();
+                } catch (EmptyStackException e) {
+                    showToast("Stack underflow!");
+                }
             }
         } else {
             showToast("Operation not found!");
