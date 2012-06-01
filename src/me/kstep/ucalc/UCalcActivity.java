@@ -66,7 +66,6 @@ public class UCalcActivity extends Activity {
         try {
             edit_view.setValue(stack.pop());
         } catch (EmptyStackException e) {
-            showToast("Stack underflow!");
             edit_view.setValue(Float.NaN);
         }
 
@@ -136,7 +135,11 @@ public class UCalcActivity extends Activity {
                 showToast("Not enough operands!");
             } else {
                 pushStack();
-                op.apply(stack);
+                try {
+                    op.apply(stack);
+                } catch (EmptyStackException e) {
+                    showToast("Stack underflow!");
+                }
                 popStack();
             }
         } else {
