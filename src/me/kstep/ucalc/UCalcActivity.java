@@ -5,6 +5,7 @@ import java.util.EmptyStackException;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Gravity;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,7 +62,8 @@ public class UCalcActivity extends Activity {
     }
 
     private void showToast(CharSequence ch) {
-        Toast toast = Toast.makeText(getApplicationContext(), ch, 100);
+        Toast toast = Toast.makeText(getApplicationContext(), ch, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 30);
         toast.show();
     }
 
