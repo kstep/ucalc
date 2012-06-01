@@ -121,6 +121,9 @@ public class UCalcActivity extends Activity {
         if (!edit_view.isEmpty()) {
             if (edit_view.isEditing()) {
                 edit_view.chop();
+                if (edit_view.isEmpty()) {
+                    popStack();
+                }
             } else {
                 popStack();
             }
