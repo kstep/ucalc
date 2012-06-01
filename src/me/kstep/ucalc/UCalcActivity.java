@@ -71,7 +71,7 @@ public class UCalcActivity extends Activity {
     }
 
     private void showToast(CharSequence ch) {
-        Toast toast = Toast.makeText(getApplicationContext(), ch, Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(this, ch, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 30);
         toast.show();
     }
@@ -99,11 +99,13 @@ public class UCalcActivity extends Activity {
         }
     }
 
-    public void onConstantButtonClick(View view) {
-        CharSequence name = ((Button) view).getText();
+    public void onConstantPush(CharSequence name) {
+        UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
+
         if (constants.containsKey(name)) {
             pushStack();
-            ((TextView) findViewById(R.id.view_edit)).setText(constants.get(name).toString());
+            edit_view.setText(constants.get(name).toString());
+            edit_view.dirty = true;
         }
     }
 
@@ -123,8 +125,7 @@ public class UCalcActivity extends Activity {
         }
     }
 
-    public void onOperationButtonClick(View view) {
-        CharSequence name = ((Button) view).getText();
+    public void onOperationApply(CharSequence name) {
         UOperation op = operations.get(name);
 
         if (op != null) {

@@ -35,27 +35,27 @@
     </TableRow>
     <TableRow>
         <Button android:text="per" style="@style/UCBtn.Act" />
-        <Button android:text="ln" style="@style/UCBtn.Fun" />
-        <Button android:text="log" style="@style/UCBtn.Fun" />
-        <Button android:text="y^x" style="@style/UCBtn.Fun" />
-        <Button android:text="x²" style="@style/UCBtn.Fun" />
-        <Button android:text="√x" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.UOpButton android:text="ln" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.UOpButton android:text="log" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.UOpButton android:text="y^x" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.UOpButton android:text="x²" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.UOpButton android:text="√x" style="@style/UCBtn.Fun" />
     </TableRow>
     <TableRow>
         <Button android:text="prefix" style="@style/UCBtn.Act" />
         <Button android:text="deg" style="@style/UCBtn.Fun" />
-        <Button android:text="sin" style="@style/UCBtn.Fun" />
-        <Button android:text="cos" style="@style/UCBtn.Fun" />
-        <Button android:text="tan" style="@style/UCBtn.Fun" />
-        <Button android:text="1/x" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.UOpButton android:text="sin" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.UOpButton android:text="cos" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.UOpButton android:text="tan" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.UOpButton android:text="1/x" style="@style/UCBtn.Fun" />
     </TableRow>
     <TableRow>
         <Button android:text="conv" style="@style/UCBtn.Fun" />
-        <Button android:text="π" android:onClick="onConstantButtonClick" style="@style/UCBtn.Sym" />
+        <me.kstep.ucalc.UConstButton android:text="π" style="@style/UCBtn.Sym" />
         <Button android:text="7" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
         <Button android:text="8" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
         <Button android:text="9" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
-        <Button android:text="÷" android:onClick="onOperationButtonClick" android:textSize="24sp" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.UOpButton android:text="÷" android:textSize="24sp" style="@style/UCBtn.Fun" />
     </TableRow>
     <TableRow>
         <Button android:text="float" style="@style/UCBtn.Mod" />
@@ -63,7 +63,7 @@
         <Button android:text="4" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
         <Button android:text="5" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
         <Button android:text="6" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
-        <Button android:text="×" android:onClick="onOperationButtonClick" android:textSize="24sp" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.UOpButton android:text="×" android:textSize="24sp" style="@style/UCBtn.Fun" />
     </TableRow>
 
     <TableRow>
@@ -75,7 +75,7 @@
                 <Button android:text="1" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
                 <Button android:text="2" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
                 <Button android:text="3" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
-                <Button android:text="−" android:onClick="onOperationButtonClick" android:textSize="24sp" style="@style/UCBtn.Fun" />
+                <me.kstep.ucalc.UOpButton android:text="−" android:textSize="24sp" style="@style/UCBtn.Fun" />
             </TableRow>
 
             <TableRow>
@@ -83,7 +83,7 @@
                 <Button android:text="0" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
                 <Button android:text="." android:onClick="onDotButtonClick" style="@style/UCBtn.Sym" />
                 <Button android:text="+/−" android:onClick="onSignToggleButtonClick" style="@style/UCBtn.Sym" />
-                <Button android:text="+" android:onClick="onOperationButtonClick" android:textSize="24sp" style="@style/UCBtn.Fun" />
+                <me.kstep.ucalc.UOpButton android:text="+" android:textSize="24sp" style="@style/UCBtn.Fun" />
             </TableRow>
         </TableLayout>
     </TableRow>
