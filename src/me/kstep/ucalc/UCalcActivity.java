@@ -48,10 +48,9 @@ public class UCalcActivity extends Activity {
         UStackView stack_view = (UStackView) findViewById(R.id.view_stack);
 
         if (!edit_view.isEmpty()) {
+            edit_view.stopEditing();
             stack.push(edit_view.getValue());
             stack_view.setText(stack.toString());
-            edit_view.dirty = false;
-            edit_view.editing = false;
         }
     }
 
@@ -62,11 +61,16 @@ public class UCalcActivity extends Activity {
         UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
         UStackView stack_view = (UStackView) findViewById(R.id.view_stack);
 
-        edit_view.setValue(stack.pop());
-        stack_view.setText(stack.toString());
+        edit_view.stopEditing();
 
-        edit_view.editing = false;
-        edit_view.dirty = true;
+        try {
+            edit_view.setValue(stack.pop());
+        } catch (EmptyStackException e) {
+            showToast("Stack underflow!");
+            edit_view.setValue(Float.NaN);
+        }
+
+        stack_view.setText(stack.toString());
     }
 
     private void showToast(CharSequence ch) {
@@ -78,13 +82,10 @@ public class UCalcActivity extends Activity {
     public void onDigitButtonClick(View view) {
         Button button = (Button) view;
         UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
-        if (!edit_view.editing) {
-            if (edit_view.dirty) {
-                pushStack();
-            }
-            edit_view.setText("");
-            edit_view.editing = true;
-            edit_view.dirty = true;
+        if (!edit_view.isEditing()) {
+            pushStack();
+            edit_view.setValue(Float.NaN);
+            edit_view.startEditing();
         }
 
         edit_view.append(button.getText());
@@ -93,7 +94,7 @@ public class UCalcActivity extends Activity {
     public void onDotButtonClick(View view) {
         UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
         String text = edit_view.getText().toString();
-        if (!edit_view.editing || !text.contains(".")) {
+        if (!edit_view.isEditing() || !text.contains(".")) {
             onDigitButtonClick(view);
         }
     }
@@ -104,22 +105,25 @@ public class UCalcActivity extends Activity {
         if (constants.containsKey(name)) {
             pushStack();
             edit_view.setValue(constants.get(name));
-            edit_view.dirty = true;
         }
     }
 
     public void onEnterButtonClick(View view) {
-        pushStack();
+        UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
+        if (edit_view.isEditing()) {
+            edit_view.stopEditing();
+        } else {
+            pushStack();
+        }
     }
 
     public void onBackspaceButtonClick(View view) {
         UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
         if (!edit_view.isEmpty()) {
-            if (edit_view.editing) {
-                CharSequence text = edit_view.getText();
-                edit_view.setText(text.subSequence(0, text.length() - 1));
+            if (edit_view.isEditing()) {
+                edit_view.chop();
             } else {
-                edit_view.setText("");
+                popStack();
             }
         }
     }
@@ -131,13 +135,9 @@ public class UCalcActivity extends Activity {
             if (stack.size() < op.arity() - 1) {
                 showToast("Not enough operands!");
             } else {
-                try {
-                    pushStack();
-                    op.apply(stack);
-                    popStack();
-                } catch (EmptyStackException e) {
-                    showToast("Stack underflow!");
-                }
+                pushStack();
+                op.apply(stack);
+                popStack();
             }
         } else {
             showToast("Operation not found!");
@@ -150,7 +150,7 @@ public class UCalcActivity extends Activity {
 
     public void onClearButtonClick(View view) {
         stack.clear();
-        ((TextView) findViewById(R.id.view_edit)).setText("");
-        ((TextView) findViewById(R.id.view_stack)).setText("");
+        ((UEditView) findViewById(R.id.view_edit)).setValue(Float.NaN);
+        ((UStackView) findViewById(R.id.view_stack)).setText("");
     }
 }
