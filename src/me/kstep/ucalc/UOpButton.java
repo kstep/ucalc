@@ -1,6 +1,7 @@
 package me.kstep.ucalc;
 
 import android.content.Context;
+import android.view.View;
 import android.util.AttributeSet;
 
 class UOpButton extends UButton {
@@ -14,7 +15,7 @@ class UOpButton extends UButton {
         super(context, attrs, defStyle);
     }
 
-    public void onClick() {
+    public void onClick(View view) {
         ((UCalcActivity) getContext()).onOperationApply(this.getText());
     }
 }

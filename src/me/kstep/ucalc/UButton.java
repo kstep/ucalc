@@ -5,7 +5,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 
-abstract class UButton extends Button {
+abstract class UButton extends Button implements View.OnClickListener {
     public UButton(Context context) {
         super(context);
         initialize();
@@ -22,14 +22,10 @@ abstract class UButton extends Button {
     }
 
     private void initialize() {
-        setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                ((UButton) view).onClick();
-            }
-        });
+        setOnClickListener(this);
     }
 
-    abstract public void onClick();
+    abstract public void onClick(View view);
 }
 
 
