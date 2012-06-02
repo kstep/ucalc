@@ -154,6 +154,48 @@ public class UCalcActivity extends Activity {
         // TODO
     }
 
+    public void onSignToggleButtonClick(View view) {
+        UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
+        if (!edit_view.isEmpty()) {
+            if (edit_view.isEditing()) {
+
+                String text = edit_view.getText().toString();
+                int expPos = text.indexOf('e');
+                if (expPos == -1) {
+                    if (text.charAt(0) == '-') {
+                        text = text.substring(1);
+                    } else {
+                        text = "-" + text;
+                    }
+
+                } else { // Exponent entered
+                    try {
+                        if (text.charAt(expPos + 1) == '-') {
+                            text = text.substring(0, expPos) + "e" + text.substring(expPos + 2);
+                        } else {
+                            text = text.substring(0, expPos) + "e-" + text.substring(expPos + 1);
+                        }
+                    } catch (StringIndexOutOfBoundsException e) {
+                        text = text + "-";
+                    }
+                }
+
+                edit_view.setText(text);
+
+            } else {
+                edit_view.setValue(-edit_view.getValue().doubleValue());
+            }
+        }
+    }
+
+    public void onExponentButtonClick(View view) {
+        UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
+        String text = edit_view.getText().toString();
+        if (!edit_view.isEditing() || !text.contains("e")) {
+            edit_view.append("e");
+        }
+    }
+
     public void onClearButtonClick(View view) {
         stack.clear();
         ((UEditView) findViewById(R.id.view_edit)).setValue(Float.NaN);
