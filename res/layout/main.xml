@@ -27,11 +27,11 @@
 
     <TableRow>
         <Button android:text="time" style="@style/UCBtn.Act" />
-        <Button android:text="dist" style="@style/UCBtn.Act" />
-        <Button android:text="vol" style="@style/UCBtn.Act" />
-        <Button android:text="weight" android:textSize="14sp" style="@style/UCBtn.Act" />
-        <Button android:text="elec" style="@style/UCBtn.Act" />
-        <Button android:text="misc" style="@style/UCBtn.Act" />
+        <me.kstep.ucalc.UToggleButton android:text="dist" style="@style/UCBtn.Act" />
+        <me.kstep.ucalc.UToggleButton android:text="vol" style="@style/UCBtn.Act" />
+        <me.kstep.ucalc.UToggleButton android:text="weight" android:textSize="14sp" style="@style/UCBtn.Act" />
+        <me.kstep.ucalc.UToggleButton android:text="elec" style="@style/UCBtn.Act" />
+        <me.kstep.ucalc.UToggleButton android:text="misc" style="@style/UCBtn.Act" />
     </TableRow>
     <TableRow>
         <Button android:text="per" style="@style/UCBtn.Act" />
@@ -42,7 +42,7 @@
         <me.kstep.ucalc.UOpButton android:text="√x" style="@style/UCBtn.Fun" />
     </TableRow>
     <TableRow>
-        <Button android:text="prefix" style="@style/UCBtn.Act" />
+        <me.kstep.ucalc.UToggleButton android:text="prefix" style="@style/UCBtn.Act" />
         <Button android:text="deg" style="@style/UCBtn.Fun" />
         <me.kstep.ucalc.UOpButton android:text="sin" style="@style/UCBtn.Fun" />
         <me.kstep.ucalc.UOpButton android:text="cos" style="@style/UCBtn.Fun" />
@@ -59,7 +59,7 @@
     </TableRow>
     <TableRow>
         <Button android:text="float" style="@style/UCBtn.Mod" />
-        <Button android:text="EEX" style="@style/UCBtn.Sym" />
+        <Button android:text="EEX" android:onClick="onExponentButtonClick" style="@style/UCBtn.Sym" />
         <Button android:text="4" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
         <Button android:text="5" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
         <Button android:text="6" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
@@ -79,7 +79,7 @@
             </TableRow>
 
             <TableRow>
-                <Button android:text="alt" style="@style/UCBtn.Mod" />
+                <me.kstep.ucalc.UToggleButton android:text="alt" style="@style/UCBtn.Mod" />
                 <Button android:text="0" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
                 <Button android:text="." android:onClick="onDotButtonClick" style="@style/UCBtn.Sym" />
                 <Button android:text="+/−" android:onClick="onSignToggleButtonClick" style="@style/UCBtn.Sym" />
