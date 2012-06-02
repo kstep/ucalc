@@ -72,7 +72,7 @@ public class UCalcActivity extends Activity {
         stack_view.showStack(stack);
     }
 
-    private void showToast(CharSequence ch) {
+    public void showToast(CharSequence ch) {
         Toast toast = Toast.makeText(this, ch, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 30);
         toast.show();
