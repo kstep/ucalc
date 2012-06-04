@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+
 public class UCalcActivity extends Activity {
     private UStack stack;
     private UConstants constants;
@@ -38,6 +41,10 @@ public class UCalcActivity extends Activity {
         operations.put(new CosOp());
         operations.put(new TanOp());
         operations.put(new InvertOp());
+    }
+
+    public UStack getStack() {
+        return stack;
     }
 
     /**
@@ -200,5 +207,16 @@ public class UCalcActivity extends Activity {
         stack.clear();
         ((UEditView) findViewById(R.id.view_edit)).setValue(Float.NaN);
         ((UStackView) findViewById(R.id.view_stack)).setText("");
+    }
+
+    public void onStackButtonClick(View view) {
+        FragmentManager fragman = getFragmentManager();
+        FragmentTransaction txn = fragman.beginTransaction();
+
+        UStackFragment stack_fragment = new UStackFragment();
+
+        txn.add(R.id.main_layout, stack_fragment);
+        txn.addToBackStack(null);
+        txn.commit();
     }
 }
