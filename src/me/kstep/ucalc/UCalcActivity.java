@@ -209,11 +209,14 @@ public class UCalcActivity extends Activity {
         ((UStackView) findViewById(R.id.view_stack)).setText("");
     }
 
+    private UStackFragment stack_fragment;
     public void onStackButtonClick(View view) {
         FragmentManager fragman = getFragmentManager();
         FragmentTransaction txn = fragman.beginTransaction();
 
-        UStackFragment stack_fragment = new UStackFragment();
+        if (stack_fragment == null) {
+            stack_fragment = new UStackFragment();
+        }
 
         txn.add(R.id.main_layout, stack_fragment);
         txn.addToBackStack(null);

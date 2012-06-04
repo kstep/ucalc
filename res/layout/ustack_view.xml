@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"    
+    xmlns:tlv="http://schemas.android.com/apk/res/me.kstep.ucalc"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <ListView
+    <com.commonsware.cwac.tlv.TouchListView
         android:id="@id/android:list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="#ffffff"
         android:divider="#d8d8d8"
         android:dividerHeight="1dp"
+        android:drawSelectorOnTop="false"
+        tlv:grabber="@+id/item_handle"
+        tlv:remove_mode="fling"
+        tlv:normal_height="53dp"
+        tlv:expanded_height="106dp"
         />
 
 </LinearLayout>
