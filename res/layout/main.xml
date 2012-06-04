@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<TableLayout
+<FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"    
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/main_layout">
+
+<TableLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:shrinkColumns="*">
@@ -15,7 +20,7 @@
         <me.kstep.ucalc.UStackView android:layout_span="4" android:id="@+id/view_stack" style="@style/UCText.Stack" />
         <TableLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:shrinkColumns="*" android:layout_span="2">
             <TableRow>
-                <Button android:text="stack" style="@style/UCBtn.Mod" />
+                <Button android:text="stack" style="@style/UCBtn.Mod" android:onClick="onStackButtonClick" />
                 <Button android:text="clear" android:onClick="onClearButtonClick" style="@style/UCBtn.Mod" />
             </TableRow>
             <TableRow>
@@ -97,3 +102,5 @@
  -->
 
 </TableLayout>
+
+</FrameLayout>
