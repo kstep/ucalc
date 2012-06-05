@@ -13,6 +13,9 @@ import android.widget.Toast;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 
+import me.kstep.ucalc.operations.UOperations;
+import me.kstep.ucalc.operations.UOperation;
+
 public class UCalcActivity extends Activity {
     private UStack stack;
     private UConstants constants;
@@ -28,19 +31,7 @@ public class UCalcActivity extends Activity {
         stack = new UStack();
 
         operations = new UOperations();
-        operations.put(new AddOp());
-        operations.put(new SubstructOp());
-        operations.put(new MultiplyOp());
-        operations.put(new DivideOp());
-        operations.put(new LnOp());
-        operations.put(new LogOp());
-        operations.put(new PowerOp());
-        operations.put(new SquereOp());
-        operations.put(new SquereRootOp());
-        operations.put(new SinOp());
-        operations.put(new CosOp());
-        operations.put(new TanOp());
-        operations.put(new InvertOp());
+        operations.autoFill();
     }
 
     public UStack getStack() {
