@@ -7,13 +7,11 @@ import android.widget.ArrayAdapter;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.View;
-import android.view.DragEvent;
 import android.content.Context;
 
 import android.widget.Toast;
 
 import java.util.Stack;
-import java.util.Collections;
 
 import com.commonsware.cwac.tlv.TouchListView;
 
