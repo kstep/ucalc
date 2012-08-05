@@ -1,6 +1,8 @@
 package me.kstep.ucalc.units;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Set;
 
 class UnitsManager {
     HashMap<String, Unit> units;
@@ -15,6 +17,14 @@ class UnitsManager {
             instance = new UnitsManager();
         }
         return instance;
+    }
+
+    public Collection units() {
+        return units.values();
+    }
+
+    public Set names() {
+        return units.keySet();
     }
 
     public void add(Unit unit) {
@@ -43,6 +53,10 @@ class UnitsManager {
 
     public boolean exists(String name) {
         return units.containsKey(name);
+    }
+
+    public boolean exists(Unit unit) {
+        return units.containsValue(unit);
     }
 
     public Unit[] findAliases(Unit unit) {
