@@ -54,7 +54,7 @@ class MultipleUnit extends ComplexUnit {
         this(joinUnitNames(units), units);
     }
 
-    public boolean compatible(Unit unit) {
+    public boolean direct(Unit unit) {
         if (this == unit) return true;
         if (!(unit instanceof MultipleUnit)) return false;
 
@@ -62,7 +62,7 @@ class MultipleUnit extends ComplexUnit {
         if (units.length != targetUnits.length) return false;
 
         for (int i = 0, l = units.length; i < l; i++) {
-            if (!targetUnits[i].compatible(units[i]))
+            if (!targetUnits[i].direct(units[i]))
                 return false;
         }
 

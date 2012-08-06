@@ -23,7 +23,7 @@ final class NoneUnit extends Unit {
         throw new UnitConversionException(unit, this);
     }
 
-    public boolean compatible(Unit unit) {
+    public boolean direct(Unit unit) {
         return this == unit;
     }
 

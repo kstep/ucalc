@@ -38,10 +38,10 @@ class PowerUnit extends LinearUnit {
         this(targetUnit.name + superscriptInt(power), targetUnit, power);
     }
 
-    public boolean compatible(Unit unit) {
+    public boolean direct(Unit unit) {
         boolean r = this == unit || (
                 unit instanceof LinearUnit
-                && targetUnit.compatible(((LinearUnit) unit).targetUnit)
+                && targetUnit.direct(((LinearUnit) unit).targetUnit)
                 //&& power == ((PowerUnit) unit).power
                 );
         System.out.println(this + " ?→ " + unit + " = " + r);

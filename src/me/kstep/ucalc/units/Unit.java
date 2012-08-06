@@ -22,7 +22,7 @@ abstract class Unit {
     abstract public boolean equals(Unit other);
 
     // Check if this is directly convertible to unit
-    public boolean compatible(Unit other) {
+    public boolean direct(Unit other) {
         return this.equals(other);
     }
 

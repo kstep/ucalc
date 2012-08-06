@@ -17,7 +17,7 @@ class BaseUnit extends Unit {
         return unit.to(value, this);
     }
 
-    public boolean compatible(Unit unit) {
+    public boolean direct(Unit unit) {
         return unit == this;
     }
 

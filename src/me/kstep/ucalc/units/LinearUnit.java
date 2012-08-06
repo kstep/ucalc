@@ -34,10 +34,10 @@ class LinearUnit extends Unit {
         System.out.println(this + " ← " + unit + " " + value);
         if (this == unit) return value;
 
-        if (this.compatible(unit)) {
+        if (this.direct(unit)) {
             return (value - this.offset) / this.scale;
 
-        } else if (unit.compatible(this)) {
+        } else if (unit.direct(this)) {
             return unit.to(value, this);
 
         } else {
@@ -50,10 +50,10 @@ class LinearUnit extends Unit {
         System.out.println(this + " → " + unit + " " + value);
         if (this == unit) return value;
 
-        if (this.compatible(unit)) {
+        if (this.direct(unit)) {
             return this.scale * value + this.offset;
 
-        } else if (unit.compatible(this)) {
+        } else if (unit.direct(this)) {
             return unit.from(value, this);
 
         } else {
@@ -62,7 +62,7 @@ class LinearUnit extends Unit {
     }
 
     // Can convert from this to unit directly?
-    public boolean compatible(Unit unit) {
+    public boolean direct(Unit unit) {
         return targetUnit == unit;
     }
 
