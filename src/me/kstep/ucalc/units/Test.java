@@ -9,84 +9,85 @@ class Test {
 
         // Один грамм — базовая единица (немножно не по СИ, но за то не требует
         // никакой кратности).
-        BaseUnit g = new BaseUnit("g");
+        Unit g = uman.get(BaseUnit.class, "g");
 
         // В одном килограмме 1000 граммов.
-        LinearUnit kg = new UnitPrefix("k", g);
+        Unit kg = uman.get(UnitPrefix.class, "kg", "k", g);
 
         // Фунт через килограммы. На самом деле фунтов огромное количество,
         // здесь приведён метрический фунт.
-        LinearUnit lb = new LinearUnit("lb", 0.45359237, kg);
+        Unit lb = uman.get(LinearUnit.class, "lb", 0.45359237, kg);
 
         // === Температура ===
 
         // Градусы Цельсия.
-        BaseUnit C = new BaseUnit("°C");
+        Unit C = uman.get(BaseUnit.class, "°C");
 
         // Градусы Фаренгейта через градусы Цельсия.
         // На самом деле формула tF = 9/5*tC + 32, так что здесь
         // использован конструктор с обратными величинами,
         // т.к. внутри вычисления идут по принципу "сколько градусов
         // Цельсия в одном градусе Фаренгейта".
-        LinearUnit F = new LinearUnit("°F", 9.0/5.0, +32.0, C);
-        LinearUnit K = new LinearUnit("°K", C, -273.15);
+        Unit F = uman.get(LinearUnit.class, "°F", 9.0/5.0, +32.0, C);
+        Unit K = uman.get(LinearUnit.class, "°K", C, -273.15);
 
         // === Время ===
 
         // Секунда — базовая единица времени в СИ.
-        BaseUnit sec = new BaseUnit("sec");
+        Unit sec = uman.get(BaseUnit.class, "sec");
 
         // В минуте 60 секунд.
-        LinearUnit min = new LinearUnit("min", 60, sec);
+        Unit min = uman.get(LinearUnit.class, "min", 60, sec);
         // В часе 60 минут.
-        LinearUnit hour = new LinearUnit("hour", 60, min);
+        Unit hour = uman.get(LinearUnit.class, "hour", 60, min);
         // В дне 24 часа.
-        LinearUnit day = new LinearUnit("day", 24, hour);
+        Unit day = uman.get(LinearUnit.class, "day", 24, hour);
         // В неделе 7 дней.
-        LinearUnit week = new LinearUnit("week", 7, day);
+        Unit week = uman.get(LinearUnit.class, "week", 7, day);
 
         // === Расстояние и длина ===
 
         // Метры — базовая единица длины по СИ.
-        BaseUnit m = new BaseUnit("m");
+        Unit m = uman.get(BaseUnit.class, "m");
         // В километре 1000 метров.
-        LinearUnit km = new UnitPrefix("k", m);
+        Unit km = uman.get(UnitPrefix.class, "km", "k", m);
         // В сантиметре 0.01 метра
-        LinearUnit cm = new UnitPrefix("c", m);
+        Unit cm = uman.get(UnitPrefix.class, "cm", "c", m);
         // В миллиметре 0.001 метра
-        LinearUnit mm = new UnitPrefix("m", m);
+        Unit mm = uman.get(UnitPrefix.class, "mm", "m", m);
 
         // Сухопутная Имперская миля.
-        LinearUnit mile = new LinearUnit("mile", 1.609344, km);
+        Unit mile = uman.get(LinearUnit.class, "mile", 1.609344, km);
         // Дюйм
-        LinearUnit inch = new LinearUnit("inch", 2.54, cm);
+        Unit inch = uman.get(LinearUnit.class, "inch", 2.54, cm);
         // Фут
-        LinearUnit foot = new LinearUnit("foot", 12, inch);
+        Unit foot = uman.get(LinearUnit.class, "foot", 12, inch);
 
         // === Скорость ===
 
         // Обратная секунде величина, частота, герцы.
-        PowerUnit Hz = new PowerUnit("Hz", sec, -1);
-        PowerUnit per_sec = new PowerUnit(sec, -1);
-        PowerUnit per_hour = new PowerUnit(hour, -1);
+        Unit Hz = uman.get(PowerUnit.class, "Hz", sec, -1);
+        Unit per_sec = uman.get(PowerUnit.class, "sec¯¹", sec, -1);
+        Unit per_hour = uman.get(PowerUnit.class, "hour¯¹", hour, -1);
 
         // Километры в час.
-        MultipleUnit kmh = new MultipleUnit(km, per_hour);
+        Unit kmh = uman.get(MultipleUnit.class, "km/h", km, per_hour);
         // Мили в час
-        MultipleUnit mph = new MultipleUnit(mile, per_hour);
+        Unit mph = uman.get(MultipleUnit.class, "miles/h", mile, per_hour);
         // Метры в секунду
-        MultipleUnit mps = new MultipleUnit(m, per_sec);
+        Unit mps = uman.get(MultipleUnit.class, "m/s", m, per_sec);
         // Футы в секунду
-        MultipleUnit fts = new MultipleUnit(foot, per_sec);
+        Unit fts = uman.get(MultipleUnit.class, "ft/s", foot, per_sec);
 
         // === Площадь ===
 
         // Квадратные метры и километры
-        PowerUnit sq_m = new PowerUnit(m, 2);
-        PowerUnit sq_km = new PowerUnit(km, 2);
+        Unit sq_m = uman.get(PowerUnit.class, "m²", m, 2);
+        Unit sq_km = uman.get(PowerUnit.class, "km²", km, 2);
 
-        PowerUnit cu_m = new PowerUnit(m, 3);
-        LinearUnit litre = new LinearUnit("l", 0.001, cu_m);
+        Unit cu_m = uman.get(PowerUnit.class, "m³", m, 3);
+        Unit cu_dm = uman.get(PowerUnit.class, "dm³", uman.get(UnitPrefix.class, "dm", "d", m), 3);
+        Unit litre = uman.get(LinearUnit.class, "l", 0.001, cu_m);
 
 
         //sq_m.to(1000, sq_km);
@@ -94,7 +95,7 @@ class Test {
 
         System.out.println(cm);
         System.out.println(
-        uman.convert(35, litre, new PowerUnit(cm, 3))
+        uman.convert(35, litre, "dm³")
         //(new PowerUnit(m, 3)).to(200, new PowerUnit(inch, 3))
         //(m.to(200, inch))
         );
