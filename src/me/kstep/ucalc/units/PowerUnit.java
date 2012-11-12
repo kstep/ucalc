@@ -1,18 +1,37 @@
 package me.kstep.ucalc.units;
 
+/**
+ * This is a very common and interesting class of `PowerUnit`s.
+ * You will get what I speak about if you consider relation between
+ * *meter*, *square meter* and *cubic meter*.
+ */
 class PowerUnit extends LinearUnit {
 
+    // This is unit's power.
     int power = 1;
 
+    /**
+     * The main constructor, which determines relation between
+     * main unit and derived unit.
+     */
     PowerUnit(String name, Unit targetUnit, int power) {
         super(name, 1.0, targetUnit, 0.0);
         this.power = power;
         this.targetUnit = targetUnit;
     }
 
+    /**
+     * This piece of code converts integer numbers into superscript
+     * representation to autoformat unit name. It uses Unicode
+     * superscript numbers.
+     */
     private static String superscriptInt(int power) {
         StringBuilder name = new StringBuilder();
 
+        /**
+         * We loop through single digits of initial number
+         * and convert them one by one.
+         */
         for (int p = Math.abs(power); p > 0; p /= 10) {
             switch (p % 10) {
             case 0: name.append('⁰'); break;
@@ -27,13 +46,27 @@ class PowerUnit extends LinearUnit {
             case 9: name.append('⁹'); break;
             }
         }
+
+        /**
+         * Here we append superscript minus in case initial number is negative.
+         */
         if (power < 0) {
             name.append('¯');
         }
 
+        /**
+         * We built number from tail to head, so we get its reversed string representation.
+         * We reverse the result string again to get normal representation.
+         */
         return name.reverse().toString();
     }
 
+    /**
+     * This constructor differs from standard constructor above with
+     * absence of `name` argument. It creates unit name by combining
+     * name of derived unit and superscript representation of power
+     * (see `superscriptInt()` method above).
+     */
     PowerUnit(Unit targetUnit, int power) {
         this(targetUnit.name + superscriptInt(power), targetUnit, power);
     }

@@ -1,7 +1,16 @@
 package me.kstep.ucalc.units;
 import java.lang.reflect.Field;
 
+/**
+ * This is a convinient wrapper around `LinearUnit` class.
+ * It determines standard SI prefixes to define unit power, so it allows
+ * very easy definition of derived unit with some SI prefix, like *kilometer*
+ * or *milliliter*.
+ */
 class UnitPrefix extends LinearUnit {
+    /**
+     * Here go prefixes, which define positive powers of 10.
+     */
     final static public double da = 10.0;
     final static public double h = 100.0;
     final static public double k = 1000;
@@ -13,6 +22,10 @@ class UnitPrefix extends LinearUnit {
     final static public double Z = 1e21;
     final static public double Y = 1e24;
 
+    /**
+     * These are relatively new prefixes for positive powers of 2,
+     * usually used in computer science.
+     */
     final static public double Ki = 1024.0;
     final static public double Mi = 1024*1024.0;
     final static public double Gi = 1024*1024*1024.0;
@@ -22,6 +35,9 @@ class UnitPrefix extends LinearUnit {
     final static public double Zi = 1024*1024*1024*1024*1024*1024*1024.0;
     final static public double Yi = 1024*1024*1024*1024*1024*1024*1024*1024.0;
 
+    /**
+     * Now to the prefixes for negative powers of 10.
+     */
     final static public double d = 0.1;
     final static public double c = 0.01;
     final static public double m = 0.001;
@@ -33,10 +49,17 @@ class UnitPrefix extends LinearUnit {
     final static public double z = 1e-21;
     final static public double y = 1e-24;
 
+    /**
+     * We override constructor to define prefixed units conviniently.
+     */
     UnitPrefix(String prefix, Unit targetUnit) {
         super(prefix + targetUnit, prefixToScale(prefix), targetUnit);
     }
 
+    /**
+     * This method is a little magical. It uses introspection to lookup
+     * prefix value in one of class constants above.
+     */
     public static double prefixToScale(String prefix) {
         try {
             Field property = UnitPrefix.class.getField(prefix);

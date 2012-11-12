@@ -1,20 +1,49 @@
+/**
+ * Units manager class is the main single registry class, which stores and controls
+ * all units defined in program. Every unit created in program is registered into the class
+ * instance. Usually you shouldn't even bother instantiating any unit with `new` operator,
+ * consider using `UnitsManager.get()` method instead.
+ */
+
 package me.kstep.ucalc.units;
+
+/**
+ * We use hashmap to store unit name → instance mapping, array list to represent
+ * array of units, collection and set to provide units collection and keys set.
+ */
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
+
+/**
+ * Also we strive to support unit definitions loading from external files,
+ * hence these imports.
+ */
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+/**
+ * Now to the core class itself.
+ */
 class UnitsManager {
+
     HashMap<String, Unit> units;
-    static UnitsManager instance;
+
+    /**
+     * We implement singleton pattern below by defining private static instance
+     * property and locking constructor into private scope.
+     */
+    private static UnitsManager instance;
 
     private UnitsManager() {
         units = new HashMap<String, Unit>();
     }
 
+    /**
+     * So we leave the only hole to get instance: this `getInstance()` method.
+     */
     public static UnitsManager getInstance() {
         if (instance == null) {
             instance = new UnitsManager();
@@ -22,6 +51,10 @@ class UnitsManager {
         return instance;
     }
 
+    /**
+     * I directly delegate `units()` and `names()` calls to fetch collection of
+     * defined units and their names to underlying hashmap storage.
+     */
     public Collection units() {
         return units.values();
     }
@@ -30,11 +63,21 @@ class UnitsManager {
         return units.keySet();
     }
 
+    /**
+     * This method adds unit to manager by the name, defined in the unit itself.
+     */
     public void add(Unit unit) {
+        /**
+         * We don't allow units with the same names, as it leads to ambiguity
+         * and confusion.
+         */
         if (units.containsKey(unit.name)) {
             throw new UnitExistsException(unit, units.get(unit.name));
         }
 
+        /**
+         * Additional check for unit aliases is commented out for now.
+         */
         /*
         for (Unit item: units.values()) {
             if (item.equals(unit)) {
