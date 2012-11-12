@@ -114,8 +114,7 @@ class UnitsManager {
             }
         }
 
-        Unit[] a = {};
-        return result.toArray(a);
+        return result.toArray(new Unit[result.size()]);
     }
 
     public Unit[] findAliases(String name) {
