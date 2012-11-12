@@ -56,6 +56,10 @@ class UnitPrefix extends LinearUnit {
         super(prefix + targetUnit, prefixToScale(prefix), targetUnit);
     }
 
+    UnitPrefix(String name, String prefix, Unit targetUnit) {
+        super(name, prefixToScale(prefix), targetUnit);
+    }
+
     /**
      * This method is a little magical. It uses introspection to lookup
      * prefix value in one of class constants above.
