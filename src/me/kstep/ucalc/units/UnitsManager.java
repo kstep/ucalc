@@ -72,7 +72,7 @@ class UnitsManager {
          * and confusion.
          */
         if (units.containsKey(unit.name)) {
-            throw new UnitExistsException(unit, units.get(unit.name));
+            throw unit.new ExistsException(units.get(unit.name));
         }
 
         /**
@@ -92,7 +92,7 @@ class UnitsManager {
     public Unit get(String name) {
         Unit unit = units.get(name);
         if (unit == null) {
-            throw new UnitNotFoundException(name);
+            throw new Unit.NotFoundException(name);
         }
         return unit;
     }
@@ -137,7 +137,7 @@ class UnitsManager {
 
     public void addAlias(String alias, Unit unit) {
         if (units.containsKey(alias)) {
-            throw new UnitExistsException(alias, unit, units.get(alias));
+            throw unit.new ExistsException(alias, units.get(alias));
         }
 
         units.put(alias, unit);

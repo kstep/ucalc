@@ -16,6 +16,65 @@ package me.kstep.ucalc.units;
  * with other units, but does not determine unit names or coeffitients.
  */
 abstract class Unit {
+
+    static class NotFoundException extends UnitException {
+        final static long serialVersionUID = 3;
+        NotFoundException(String name) {
+            super("Unit not found: `" + name + "'");
+        }
+    }
+
+    public class ConversionException extends UnitException {
+        final static long serialVersionUID = 3;
+
+        private Unit targetUnit;
+
+        public Unit getTargetUnit() {
+            return targetUnit;
+        }
+
+        public Unit getSourceUnit() {
+            return Unit.this;
+        }
+
+        ConversionException(Unit unit) {
+            super("Incorrect conversion: " + Unit.this + " → " + unit);
+            targetUnit = unit;
+        }
+    }
+
+    public class ExistsException extends UnitException {
+        final static long serialVersionUID = 3;
+
+        private Unit existingUnit;
+        private String name;
+
+        public String getName() {
+            return name;
+        }
+
+        public Unit getExistingUnit() {
+            return existingUnit;
+        }
+
+        public Unit getConflictingUnit() {
+            return Unit.this;
+        }
+
+        ExistsException(Unit unit) {
+            super("Unit already exists: `" + unit + "'");
+            name = unit.name;
+            existingUnit = unit;
+        }
+
+        ExistsException(String name, Unit unit) {
+            super("Unit already exists: `" + name + "'");
+            name = name;
+            existingUnit = unit;
+        }
+    }
+
+    // Here come unit name.
     protected String name = "";
 
     /**
