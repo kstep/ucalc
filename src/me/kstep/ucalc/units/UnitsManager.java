@@ -7,6 +7,10 @@
 
 package me.kstep.ucalc.units;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Array;
+import java.lang.reflect.InvocationTargetException;
+
 /**
  * We use hashmap to store unit name → instance mapping, array list to represent
  * array of units, collection and set to provide units collection and keys set.
@@ -224,5 +228,135 @@ class UnitsManager {
             return;
         }
     }
+
+    public static Object[] listToArray(ArrayList<Object> list) {
+        return list.toArray(new Object[list.size()]);
+    }
+
+    public static boolean isVarArgParameters(Class<?>[] paramTypes) {
+        return paramTypes.length > 0 && paramTypes[paramTypes.length - 1].isArray();
+    }
+
+    public static Constructor<?> getCompatibleConstructor(Class<?> cls, Class<?>... argTypes) throws NoSuchMethodException {
+        try {
+            return cls.getDeclaredConstructor(argTypes);
+        } catch (NoSuchMethodException e) {
+        }
+
+        Constructor<?>[] ctors = cls.getDeclaredConstructors();
+        int argsNum = argTypes == null? 0: argTypes.length;
+
+        SEARCH:
+        for (Constructor<?> ctor: ctors) {
+            Class<?>[] paramTypes = ctor.getParameterTypes();
+            int paramsNum = paramTypes.length;
+            boolean isVarArg = isVarArgParameters(paramTypes);
+
+            if (argsNum != paramsNum && (!isVarArg || argsNum < paramsNum - 1))
+                continue;
+
+            Class lastParam = paramTypes[paramsNum - 1].getComponentType();
+
+            for (int i = 0; i < argsNum; i++) {
+                Class<?> param, arg;
+
+                if (!isVarArg) {
+                    param = paramTypes[i];
+                    arg = argTypes[i];
+
+                } else {
+                    param = i >= paramsNum - 1? lastParam: paramTypes[i];
+                    arg = argTypes[i];
+                    if (argsNum == paramsNum && i == paramsNum - 1 && arg.isArray())
+                        arg = arg.getComponentType();
+                }
+
+                if (param.isPrimitive()) {
+                    param = param.equals(Double.TYPE)? Number.class:
+                            param.equals(Float.TYPE)? Number.class:
+                            param.equals(Integer.TYPE)? Number.class:
+                            param.equals(Long.TYPE)? Number.class:
+                            param.equals(Short.TYPE)? Number.class:
+                            param.equals(Byte.TYPE)? Number.class:
+                            param.equals(Boolean.TYPE)? Boolean.class:
+                            param.equals(Character.TYPE)? Character.class:
+                            null;
+                }
+
+                if (param == null || !param.isAssignableFrom(arg)) {
+                    continue SEARCH;
+                }
+            }
+
+            return ctor;
+        }
+
+        throw new NoSuchMethodException(cls.getName() + ".<init>(" + argTypes.toString() + ")");
+    }
+
+
+
+    /**
+     * This is a "silver bullet" method to get/define units.
+     * Use it instead of direct instantiation of any unit.
+     * The call is:
+     *
+     *     Unit unita = uman.get(LinearUnit.class, 'unita', 100.0, unitb);
+     * 
+     * It is equivalent to:
+     *
+     *     LinearUnit unita = new LinearUnit('unita', 100.0, unitb);
+     *
+     * if `unita` doesn't exists, and is equivalent to:
+     *
+     *     Unit unita = uman.get('unita');
+     *
+     * otherwise. Also note, if `unita` already exists, its direct instantiation
+     * will raise `UnitExistsException`.
+     */
+    public Unit get(Class<? extends Unit> cls, String name, Object... args) {
+        if (units.containsKey(name)) {
+            return units.get(name);
+        }
+
+        try {
+            ArrayList<Class> argTypes = new ArrayList<Class>();
+            ArrayList<Object> argValues = new ArrayList<Object>();
+
+            argTypes.add(String.class);
+            argValues.add(name);
+            for (Object arg: args) {
+                argTypes.add(arg.getClass());
+                argValues.add(arg);
+            }
+
+            Constructor ctor = getCompatibleConstructor(cls, argTypes.toArray(new Class[argTypes.size()]));
+            Class<?>[] paramTypes = ctor.getParameterTypes();
+
+            if (isVarArgParameters(paramTypes)) {
+                Class<?> varArgType = paramTypes[paramTypes.length - 1];
+                ArrayList<?> varArgValues = new ArrayList<Object>(argValues.subList(paramTypes.length - 1, args.length + 1));
+
+                argValues.subList(paramTypes.length - 1, args.length + 1).clear();
+                argValues.add(varArgValues.toArray(new Unit[varArgValues.size()]));
+            }
+
+            return cls.cast(ctor.newInstance(listToArray(argValues)));
+
+        } catch (NoSuchMethodException e) {
+            System.out.println(e);
+        } catch (InstantiationException e) {
+            System.out.println(e);
+        } catch (IllegalAccessException e) {
+            System.out.println(e);
+        } catch (InvocationTargetException e) {
+            System.out.println(e);
+        } catch (Unit.ExistsException e) {
+            return e.getExistingUnit();
+        }
+
+        throw new Unit.NotFoundException(name);
+    }
+
 }
 
