@@ -158,7 +158,7 @@ public class UCalcActivity extends Activity {
             if (edit_view.isEditing()) {
 
                 String text = edit_view.getText().toString();
-                int expPos = text.indexOf('e');
+                int expPos = text.lastIndexOf('e');
                 if (expPos == -1) {
                     if (text.charAt(0) == '-') {
                         text = text.substring(1);
