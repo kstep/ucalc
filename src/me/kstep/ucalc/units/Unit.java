@@ -103,5 +103,10 @@ abstract class Unit {
         if (this == other) return NoneUnit.getInstance();
         return new MultipleUnit(this, new PowerUnit(other, -1));
     }
+
+    // Raise this unit to integer power
+    public Unit pow(int pow) {
+        return new PowerUnit(this, pow);
+    }
 }
 

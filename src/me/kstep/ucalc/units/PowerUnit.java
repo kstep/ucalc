@@ -107,5 +107,31 @@ class PowerUnit extends LinearUnit {
         else
             return Math.pow(targetUnit.from(1.0, unit), power) * value;
     }
+
+    public Unit pow(int pow) {
+        return new PowerUnit(targetUnit, power + pow);
+    }
+
+    public Unit div(Unit other) {
+        if (other instanceof PowerUnit) {
+            PowerUnit unit = (PowerUnit) other;
+            if (unit.targetUnit == targetUnit) {
+                return new PowerUnit(targetUnit, power - unit.power);
+            }
+        }
+
+        return super.div(other);
+    }
+
+    public Unit mul(Unit other) {
+        if (other instanceof PowerUnit) {
+            PowerUnit unit = (PowerUnit) other;
+            if (unit.targetUnit == targetUnit) {
+                return new PowerUnit(targetUnit, power + unit.power);
+            }
+        }
+
+        return super.mul(other);
+    }
 }
 
