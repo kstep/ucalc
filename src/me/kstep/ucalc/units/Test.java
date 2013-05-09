@@ -109,6 +109,5 @@ class Test {
         //System.out.println(mph.to(100, mps));
         //System.out.println(mps.to(100, kmh));
         //System.out.println(mph.to(10, kmh));
-
     }
 }

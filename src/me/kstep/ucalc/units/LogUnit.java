@@ -23,7 +23,7 @@ class LogUnit extends Unit {
         return log(Math.pow(a, logax), b);
     }
 
-    public  double convert_log(double logax, double a) {
+    public double convert_log(double logax, double a) {
         return log(Math.pow(a, logax));
     }
 
