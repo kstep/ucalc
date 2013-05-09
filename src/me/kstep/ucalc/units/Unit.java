@@ -17,13 +17,6 @@ package me.kstep.ucalc.units;
  */
 abstract class Unit {
 
-    static class NotFoundException extends UnitException {
-        final static long serialVersionUID = 3;
-        NotFoundException(String name) {
-            super("Unit not found: `" + name + "'");
-        }
-    }
-
     public class ConversionException extends UnitException {
         final static long serialVersionUID = 3;
 
@@ -43,50 +36,11 @@ abstract class Unit {
         }
     }
 
-    public class ExistsException extends UnitException {
-        final static long serialVersionUID = 3;
-
-        private Unit existingUnit;
-        private String name;
-
-        public String getName() {
-            return name;
-        }
-
-        public Unit getExistingUnit() {
-            return existingUnit;
-        }
-
-        public Unit getConflictingUnit() {
-            return Unit.this;
-        }
-
-        ExistsException(Unit unit) {
-            super("Unit already exists: `" + unit + "'");
-            name = unit.name;
-            existingUnit = unit;
-        }
-
-        ExistsException(String name, Unit unit) {
-            super("Unit already exists: `" + name + "'");
-            name = name;
-            existingUnit = unit;
-        }
-    }
-
     // Here come unit name.
     protected String name = "";
 
-    /**
-     * Unit constructor makes sure every unit is registered into UnitsManager
-     * singleton registry object.
-     *
-     * It will also make sure no units with duplicate names are declared to avoid
-     * ambguity and confusion.
-     */
     Unit(String name) {
         this.name = name;
-        UnitsManager.getInstance().add(this);
     }
 
     /**

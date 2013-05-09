@@ -33,6 +33,44 @@ import java.io.IOException;
  */
 class UnitsManager {
 
+    static class UnitNotFoundException extends UnitException {
+        final static long serialVersionUID = 3;
+        UnitNotFoundException(String name) {
+            super("Unit not found: `" + name + "'");
+        }
+    }
+
+    static public class UnitExistsException extends UnitException {
+        final static long serialVersionUID = 3;
+
+        private Unit existingUnit;
+        private String name;
+
+        public String getName() {
+            return name;
+        }
+
+        public Unit getExistingUnit() {
+            return existingUnit;
+        }
+
+        public Unit getConflictingUnit() {
+            return UnitsManager.getInstance().get(name);
+        }
+
+        UnitExistsException(Unit unit) {
+            super("Unit already exists: `" + unit + "'");
+            name = unit.name;
+            existingUnit = unit;
+        }
+
+        UnitExistsException(String name, Unit unit) {
+            super("Unit already exists: `" + name + "'");
+            name = name;
+            existingUnit = unit;
+        }
+    }
+
     HashMap<String, Unit> units;
 
     /**
@@ -70,13 +108,13 @@ class UnitsManager {
     /**
      * This method adds unit to manager by the name, defined in the unit itself.
      */
-    public void add(Unit unit) {
+    public Unit add(Unit unit) {
         /**
          * We don't allow units with the same names, as it leads to ambiguity
          * and confusion.
          */
         if (units.containsKey(unit.name)) {
-            throw unit.new ExistsException(units.get(unit.name));
+            throw new UnitExistsException(units.get(unit.name));
         }
 
         /**
@@ -91,12 +129,13 @@ class UnitsManager {
         */
 
         units.put(unit.name, unit);
+        return unit;
     }
 
     public Unit get(String name) {
         Unit unit = units.get(name);
         if (unit == null) {
-            throw new Unit.NotFoundException(name);
+            throw new UnitNotFoundException(name);
         }
         return unit;
     }
@@ -138,16 +177,17 @@ class UnitsManager {
         removeAliases(units.get(name));
     }
 
-    public void addAlias(String alias, Unit unit) {
+    public Unit addAlias(String alias, Unit unit) {
         if (units.containsKey(alias)) {
-            throw unit.new ExistsException(alias, units.get(alias));
+            throw new UnitExistsException(alias, units.get(alias));
         }
 
         units.put(alias, unit);
+        return unit;
     }
 
-    public void addAlias(String alias, String unit) {
-        addAlias(alias, units.get(unit));
+    public Unit addAlias(String alias, String unit) {
+        return addAlias(alias, units.get(unit));
     }
 
     public double convert(double value, Unit from, Unit to) {
@@ -341,7 +381,7 @@ class UnitsManager {
                 argValues.add(varArgValues.toArray(new Unit[varArgValues.size()]));
             }
 
-            return cls.cast(ctor.newInstance(listToArray(argValues)));
+            return add(cls.cast(ctor.newInstance(listToArray(argValues))));
 
         } catch (NoSuchMethodException e) {
             System.out.println(e);
@@ -351,11 +391,11 @@ class UnitsManager {
             System.out.println(e);
         } catch (InvocationTargetException e) {
             System.out.println(e);
-        } catch (Unit.ExistsException e) {
+        } catch (UnitExistsException e) {
             return e.getExistingUnit();
         }
 
-        throw new Unit.NotFoundException(name);
+        throw new UnitNotFoundException(name);
     }
 
 }
