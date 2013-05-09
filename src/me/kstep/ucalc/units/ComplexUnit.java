@@ -17,14 +17,14 @@ abstract class ComplexUnit extends Unit {
         System.out.println(this + " → " + unit + " " + value);
         if (unit == this) return value;
         if (unit.direct(this)) return unit.from(value, this);
-        throw new UnitConversionException(this, unit);
+        throw this.new ConversionException(unit);
     }
 
     public double from(double value, Unit unit) throws UnitException {
         System.out.println(this + " ← " + unit + " " + value);
         if (unit == this) return value;
         if (unit.direct(this)) return unit.to(value, this);
-        throw new UnitConversionException(unit, this);
+        throw unit.new ConversionException(this);
     }
 
     /**

@@ -16,11 +16,11 @@ final class NoneUnit extends Unit {
 
     public double to(double value, Unit unit) throws UnitException {
         if (this == unit) return value;
-        throw new UnitConversionException(this, unit);
+        throw this.new ConversionException(unit);
     }
     public double from(double value, Unit unit) throws UnitException {
         if (this == unit) return value;
-        throw new UnitConversionException(unit, this);
+        throw unit.new ConversionException(this);
     }
 
     public boolean direct(Unit unit) {

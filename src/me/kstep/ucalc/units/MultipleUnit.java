@@ -10,10 +10,10 @@ class MultipleUnit extends ComplexUnit {
 
     public double to(double value, Unit unit) {
         if (this == unit) return value;
-        if (!(unit instanceof MultipleUnit)) throw new UnitConversionException(this, unit);
+        if (!(unit instanceof MultipleUnit)) throw this.new ConversionException(unit);
         
         MultipleUnit target = (MultipleUnit) unit;
-        if (target.targetUnits.length != this.targetUnits.length) throw new UnitConversionException(this, unit);
+        if (target.targetUnits.length != this.targetUnits.length) throw this.new ConversionException(unit);
 
         double result = value;
 
@@ -26,10 +26,10 @@ class MultipleUnit extends ComplexUnit {
 
     public double from(double value, Unit unit) {
         if (this == unit) return value;
-        if (!(unit instanceof MultipleUnit)) throw new UnitConversionException(unit, this);
+        if (!(unit instanceof MultipleUnit)) throw unit.new ConversionException(this);
         
         MultipleUnit target = (MultipleUnit) unit;
-        if (target.targetUnits.length != this.targetUnits.length) throw new UnitConversionException(unit, this);
+        if (target.targetUnits.length != this.targetUnits.length) throw unit.new ConversionException(this);
 
         double result = value;
 
