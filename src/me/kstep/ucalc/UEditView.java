@@ -22,7 +22,7 @@ class UEditView extends TextView {
     }
 
     // Real stored value
-    private Number value = Float.NaN;
+    private Number value;
     private boolean syncValue = false;
 
     public void setValue(Number newval) {

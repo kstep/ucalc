@@ -1,11 +1,11 @@
 package me.kstep.ucalc.operations;
-import java.util.Stack;
-import java.util.Stack;
+import me.kstep.ucalc.UStack;
+import me.kstep.ucalc.numbers.UFloatNumber;
 
 class CosOp extends UOperation {
     public int arity() { return 1; }
     public CharSequence name() { return "cos"; }
-    public void apply(Stack<Number> stack) {
-        stack.push(Math.cos(stack.pop().doubleValue()));
+    public void apply(UStack stack) {
+        stack.push(new UFloatNumber(Math.cos(stack.pop().doubleValue())));
     }
 }

@@ -12,6 +12,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import java.util.Stack;
+import me.kstep.ucalc.numbers.UNumber;
 
 import com.mobeta.android.dslv.DragSortListView;
 import com.mobeta.android.dslv.DragSortController;
@@ -35,7 +36,7 @@ class UStackFragment extends ListFragment {
         public int getPosition(T item) { return getCount() - super.getPosition(item) - 1; }
     }
 
-    ArrayAdapter<Number> adapter;
+    ArrayAdapter<UNumber> adapter;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceBundle) {
@@ -43,14 +44,14 @@ class UStackFragment extends ListFragment {
 
         UCalcActivity activity = (UCalcActivity) getActivity();
 
-        adapter = new StackAdapter<Number>(activity, R.layout.ustack_item, R.id.stack_item, activity.getStack());
+        adapter = new StackAdapter<UNumber>(activity, R.layout.ustack_item, R.id.stack_item, activity.getStack());
         setListAdapter(adapter);
 
         DragSortListView dslv = (DragSortListView) getListView();
         dslv.setDropListener(new DragSortListView.DropListener() {
             @Override
             public void drop(int from, int to) {
-                Number item = adapter.getItem(from);
+                UNumber item = adapter.getItem(from);
                 adapter.remove(item);
                 adapter.insert(item, to);
                 showToast("Moving " + item.toString() + " to " + new Integer(to).toString());
@@ -59,7 +60,7 @@ class UStackFragment extends ListFragment {
         dslv.setRemoveListener(new DragSortListView.RemoveListener() {
             @Override
             public void remove(int which) {
-                Number item = adapter.getItem(which);
+                UNumber item = adapter.getItem(which);
                 showToast("Removing " + item.toString());
                 adapter.remove(item);
             }

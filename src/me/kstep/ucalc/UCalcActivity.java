@@ -15,6 +15,7 @@ import android.app.FragmentTransaction;
 
 import me.kstep.ucalc.operations.UOperations;
 import me.kstep.ucalc.operations.UOperation;
+import me.kstep.ucalc.numbers.UNumber;
 
 public class UCalcActivity extends Activity {
     private UStack stack;
@@ -138,6 +139,10 @@ public class UCalcActivity extends Activity {
                 pushStack();
                 try {
                     op.apply(stack);
+
+                } catch (UNumber.UnsupportedOperationException e) {
+                    showToast(e.getMessage());
+
                 } catch (EmptyStackException e) {
                     showToast("Stack underflow!");
                 }

@@ -1,0 +1,152 @@
+package me.kstep.ucalc.numbers;
+
+import me.kstep.ucalc.operations.UMath;
+
+public class UComplex extends UNumber {
+    private static final long serialVersionUID = 5L;
+
+    public UReal real;
+    public UReal imag;
+
+    public UComplex (UReal re, UReal im) {
+        real = re;
+        imag = im;
+    }
+
+    public UComplex (Number re, Number im) {
+        this((UReal) UNumber.wrap(re), (UReal) UNumber.wrap(im));
+    }
+
+    public UReal angle() {
+        return UMath.atan2(imag, real);
+    }
+
+    public UComplex (UComplex num) {
+        real = num.real;
+        imag = num.imag;
+    }
+
+    public UComplex (Number re) {
+        real = new UFloat(re);
+        imag = new UFloat(0.0);
+    }
+
+    public boolean isReal() {
+        return imag.doubleValue() == 0.0;
+    }
+
+    public double doubleValue() {
+        return (imag.doubleValue() != 0)? super.doubleValue(): real.doubleValue();
+    }
+
+    public float floatValue() {
+        return (imag.floatValue() != 0)? super.floatValue(): real.floatValue();
+    }
+
+    public long longValue() {
+        return (imag.longValue() != 0)? super.longValue(): real.longValue();
+    }
+
+    public int intValue() {
+        return (imag.intValue() != 0)? super.intValue(): real.intValue();
+    }
+
+    public String toString() {
+        return "(" + real.toString() + " + " + imag.toString() + "j)";
+    }
+
+    public UNumber add(UNumber other) {
+        if (other instanceof UComplex) {
+            UComplex arg = (UComplex) other;
+
+            return new UComplex((UReal) real.add(arg.real), (UReal) imag.add(arg.imag));
+
+        } else {
+            return new UComplex(real.add(other));
+        }
+    }
+
+    public UNumber sub(UNumber other) {
+        if (other instanceof UComplex) {
+            UComplex arg = (UComplex) other;
+
+            return new UComplex((UReal) real.sub(arg.real), (UReal) imag.sub(arg.imag));
+
+        } else {
+            return new UComplex(real.sub(other));
+        }
+    }
+
+    public UNumber conj() {
+        return new UComplex(real, (UReal) imag.neg());
+    }
+
+    public UNumber neg() {
+        return new UComplex((UReal) real.neg(), (UReal) imag.neg());
+    }
+
+    public UNumber mul(UNumber other) {
+        if (other instanceof UComplex) {
+            UComplex arg = (UComplex) other;
+
+            return new UComplex(
+                    (UReal) real.mul(arg.real).sub(imag.mul(arg.imag)),
+                    (UReal) imag.mul(arg.real).add(real.mul(arg.imag)));
+
+        } else {
+            return new UComplex((UReal) real.mul(other), (UReal) imag.mul(other));
+        }
+    }
+
+    public UNumber div(UNumber other) {
+        if (other instanceof UComplex) {
+            UComplex arg = (UComplex) other;
+            UNumber arg_sq = arg.real.mul(arg.real).add(arg.imag.mul(arg.imag));
+
+            return new UComplex(
+                    (UReal) real.mul(arg.real).add(imag.mul(arg.imag)).div(arg_sq),
+                    (UReal) imag.mul(arg.real).sub(real.mul(arg.imag)).div(arg_sq));
+
+        } else {
+            return new UComplex((UReal) real.div(other), (UReal) imag.div(other));
+        }
+    }
+
+    public boolean equals(UNumber other) {
+        return (other instanceof UComplex && real.equals(((UComplex) other).real) && imag.equals(((UComplex) other).imag))
+            || (imag.doubleValue() == 0.0 && real.equals(other));
+    }
+
+    public UNumber abs() {
+        return real.mul(real).add(imag.mul(imag)).root();
+    }
+
+    public UNumber pow(UNumber other) {
+        if (other instanceof UReal) {
+            if (isReal()) {
+                return real.pow(other);
+
+            } else {
+                double newRadius = abs().pow(other).doubleValue();
+                double newAngle = other.mul(angle()).doubleValue();
+                return new UComplex(new UFloat(newRadius * Math.cos(newAngle)), new UFloat(newRadius * Math.sin(newAngle)));
+            }
+
+        } else {
+            return super.pow(other);
+        }
+    }
+
+    public UNumber root(UNumber other) {
+        return pow(other.inv());
+    }
+
+    public UNumber root() {
+        return root(new UFloat(2));
+    }
+
+    public UNumber inv() {
+        UNumber sq = real.mul(real).add(imag.mul(imag));
+        return new UComplex((UReal) real.div(sq), (UReal) imag.neg().div(sq));
+    }
+}

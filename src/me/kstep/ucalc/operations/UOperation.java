@@ -1,9 +1,16 @@
 package me.kstep.ucalc.operations;
-import java.util.Stack;
-import java.util.Stack;
+import me.kstep.ucalc.UStack;
+import me.kstep.ucalc.numbers.UNumber;
 
 abstract public class UOperation {
-    abstract public void apply(Stack<Number> stack);
+    public void apply(UStack stack) {
+        int arity = arity();
+        UNumber[] operands = new UNumber[arity];
+        while (arity > 0) {
+
+        }
+    }
+
     abstract public int arity();
     abstract public CharSequence name();
 

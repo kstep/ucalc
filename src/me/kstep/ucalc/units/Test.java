@@ -89,16 +89,17 @@ class Test {
         Unit cu_dm = uman.get(PowerUnit.class, "dm³", uman.get(UnitPrefix.class, "dm", "d", m), 3);
         Unit litre = uman.get(LinearUnit.class, "l", 0.001, cu_m);
 
+        //System.out.println(sq_m.to(1000, sq_km));
 
-        //sq_m.to(1000, sq_km);
+        System.out.println(new NumberUnit(1000, sq_m).convert(cu_m));
         //sq_km.from(1000, sq_m);
 
-        System.out.println(cm);
-        System.out.println(
-        uman.convert(35, litre, "dm³")
+        //System.out.println(cm);
+        //System.out.println(
+        //uman.convert(35, litre, "dm³")
         //(new PowerUnit(m, 3)).to(200, new PowerUnit(inch, 3))
         //(m.to(200, inch))
-        );
+        //);
 
         //uman.addAlias("km3", "km³");
         //System.out.println(Arrays.toString(uman.findAliases("Hz")));

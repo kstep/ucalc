@@ -1,7 +1,12 @@
 package me.kstep.ucalc;
 
 import java.util.Stack;
+import me.kstep.ucalc.numbers.UNumber;
 
-class UStack extends Stack<Number> {
+public class UStack extends Stack<UNumber> {
     private static final long serialVersionUID = 1L;
+
+    public void push(Number item) {
+        push(UNumber.wrap(item));
+    }
 }

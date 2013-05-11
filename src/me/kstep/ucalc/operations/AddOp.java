@@ -1,11 +1,13 @@
 package me.kstep.ucalc.operations;
-import java.util.Stack;
-import java.util.Stack;
+
+import me.kstep.ucalc.UStack;
+//import android.util.Log;
 
 class AddOp extends UOperation {
     public int arity() { return 2; }
     public CharSequence name() { return "+"; }
-    public void apply(Stack<Number> stack) {
-        stack.push(stack.pop().doubleValue() + stack.pop().doubleValue());
+    public void apply(UStack stack) {
+        //Log.d("ucalc", stack.get(1).getClass().toString() + " + " + stack.get(0).getClass().toString());
+        stack.push(stack.pop().add(stack.pop()));
     }
 }
