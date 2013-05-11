@@ -10,7 +10,7 @@
 
 <TableRow>
 <TextView 
-    android:id="@+id/stack_item"
+    android:id="@+id/list_item"
     android:paddingLeft="20dp"
     android:paddingTop="5dp"
     android:paddingBottom="5dp"

@@ -44,7 +44,7 @@ class UStackFragment extends ListFragment {
 
         UCalcActivity activity = (UCalcActivity) getActivity();
 
-        adapter = new StackAdapter<UNumber>(activity, R.layout.ustack_item, R.id.stack_item, activity.getStack());
+        adapter = new StackAdapter<UNumber>(activity, R.layout.list_item, R.id.list_item, activity.getStack());
         setListAdapter(adapter);
 
         DragSortListView dslv = (DragSortListView) getListView();
@@ -69,7 +69,7 @@ class UStackFragment extends ListFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceBundle) {
-        View view = inflater.inflate(R.layout.ustack_view, null); 
+        View view = inflater.inflate(R.layout.list_view, null); 
         return view;
     }
 
