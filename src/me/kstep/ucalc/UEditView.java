@@ -5,6 +5,8 @@ import android.content.Context;
 import android.view.Gravity;
 import android.util.AttributeSet;
 
+import me.kstep.ucalc.numbers.UNumber;
+
 class UEditView extends TextView {
     // If true, user is editing text now,
     // if false, editing was finished, value is fixed.
@@ -27,7 +29,7 @@ class UEditView extends TextView {
 
     public void setValue(Number newval) {
         value = newval;
-        if (Float.isNaN(newval.floatValue())) {
+        if (UNumber.isNaN(newval)) {
             setText("");
         } else {
             setText(value.toString());
