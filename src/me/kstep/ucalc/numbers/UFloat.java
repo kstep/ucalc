@@ -51,17 +51,17 @@ public class UFloat extends UReal {
 
     public UNumber pow(UNumber other) {
         UFloat num = new UFloat(Math.pow(value, other.doubleValue()));
-        return num.isNaN()? new UComplex(new UFloat(0), new UFloat(Math.pow(-value, other.doubleValue()))): num;
+        return num.isNaN()? new UComplex(0, Math.pow(-value, other.doubleValue())): num;
     }
 
     public UNumber root(UNumber other) {
         UFloat num = new UFloat(Math.pow(value, 1 / other.doubleValue()));
-        return num.isNaN()? new UComplex(new UFloat(0), new UFloat(Math.pow(-value, 1 / other.doubleValue()))): num;
+        return num.isNaN()? new UComplex(0, Math.pow(-value, 1 / other.doubleValue())): num;
     }
 
     public UNumber root() {
         UFloat num = new UFloat(Math.sqrt(value));
-        return num.isNaN()? new UComplex(new Float(0), new UFloat(Math.sqrt(-value))): num;
+        return num.isNaN()? new UComplex(0, Math.sqrt(-value)): num;
     }
 
     public boolean isNaN() {
@@ -69,19 +69,35 @@ public class UFloat extends UReal {
     }
 
     public UNumber add(UNumber other) {
-        return new UFloat(value + other.doubleValue());
+        try {
+            return new UFloat(value + other.doubleValue());
+        } catch (UNumber.ConversionException e) {
+            return super.add(other);
+        }
     }
 
     public UNumber sub(UNumber other) {
-        return new UFloat(value - other.doubleValue());
+        try {
+            return new UFloat(value - other.doubleValue());
+        } catch (UNumber.ConversionException e) {
+            return super.sub(other);
+        }
     }
 
     public UNumber div(UNumber other) {
-        return new UFloat(value / other.doubleValue());
+        try {
+            return new UFloat(value / other.doubleValue());
+        } catch (UNumber.ConversionException e) {
+            return super.div(other);
+        }
     }
 
     public UNumber mul(UNumber other) {
-        return new UFloat(value * other.doubleValue());
+        try {
+            return new UFloat(value * other.doubleValue());
+        } catch (UNumber.ConversionException e) {
+            return super.mul(other);
+        }
     }
 
 }

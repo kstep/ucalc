@@ -8,27 +8,28 @@ public class UComplex extends UNumber {
     public UReal real;
     public UReal imag;
 
-    public UComplex (UReal re, UReal im) {
-        real = re;
-        imag = im;
-    }
-
     public UComplex (Number re, Number im) {
-        this((UReal) UNumber.wrap(re), (UReal) UNumber.wrap(im));
+        real = (re instanceof UReal)? ((UReal) re): (new UFloat(re));
+        imag = (im instanceof UReal)? ((UReal) im): (new UFloat(im));
     }
 
     public UReal angle() {
-        return UMath.atan2(imag, real);
-    }
-
-    public UComplex (UComplex num) {
-        real = num.real;
-        imag = num.imag;
+        return (UReal) UMath.atan2(imag, real);
     }
 
     public UComplex (Number re) {
-        real = new UFloat(re);
-        imag = new UFloat(0.0);
+        if (re instanceof UComplex) {
+            real = ((UComplex) re).real;
+            imag = ((UComplex) re).imag;
+
+        } else if (re instanceof UReal) {
+            real = (UReal) re;
+            imag = new UFloat(0.0);
+
+        } else {
+            real = new UFloat(re);
+            imag = new UFloat(0.0);
+        }
     }
 
     public boolean isReal() {
@@ -69,7 +70,7 @@ public class UComplex extends UNumber {
             return new UComplex((UReal) real.add(arg.real), (UReal) imag.add(arg.imag));
 
         } else {
-            return new UComplex(real.add(other));
+            return new UComplex(real.add(other), imag);
         }
     }
 
@@ -80,7 +81,7 @@ public class UComplex extends UNumber {
             return new UComplex((UReal) real.sub(arg.real), (UReal) imag.sub(arg.imag));
 
         } else {
-            return new UComplex(real.sub(other));
+            return new UComplex(real.sub(other), imag);
         }
     }
 

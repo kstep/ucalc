@@ -7,6 +7,8 @@ import android.content.Context;
 import android.view.Gravity;
 import android.util.AttributeSet;
 
+import me.kstep.ucalc.numbers.UNumber;
+
 class UStackView extends TextView {
     public UStackView(Context context) {
         super(context);
@@ -29,7 +31,7 @@ class UStackView extends TextView {
             return;
         }
 
-        List<Number> visiblePart;
+        List<UNumber> visiblePart;
         if (stackSize > visibleLines) {
             visiblePart = stack.subList(stackSize - visibleLines, stackSize);
         } else {
