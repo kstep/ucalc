@@ -162,4 +162,13 @@ public abstract class UNumber extends Number {
             return new UInteger(num);
         }
     }
+
+    public static boolean isNaN(Number num) {
+        try {
+            return Float.isNaN(num.floatValue());
+
+        } catch (UNumber.ConversionException e) {
+            return false;
+        }
+    }
 }

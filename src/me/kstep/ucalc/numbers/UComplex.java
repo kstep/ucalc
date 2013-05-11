@@ -35,24 +35,31 @@ public class UComplex extends UNumber {
         return imag.doubleValue() == 0.0;
     }
 
+    public boolean isImag() {
+        return real.doubleValue() == 0.0 && imag.doubleValue() != 0.0;
+    }
+
     public double doubleValue() {
-        return (imag.doubleValue() != 0)? super.doubleValue(): real.doubleValue();
+        return !isReal()? super.doubleValue(): real.doubleValue();
     }
 
     public float floatValue() {
-        return (imag.floatValue() != 0)? super.floatValue(): real.floatValue();
+        return !isReal()? super.floatValue(): real.floatValue();
     }
 
     public long longValue() {
-        return (imag.longValue() != 0)? super.longValue(): real.longValue();
+        return !isReal()? super.longValue(): real.longValue();
     }
 
     public int intValue() {
-        return (imag.intValue() != 0)? super.intValue(): real.intValue();
+        return !isReal()? super.intValue(): real.intValue();
     }
 
     public String toString() {
-        return "(" + real.toString() + " + " + imag.toString() + "j)";
+        return
+            isReal()? real.toString(): (
+            isImag()? (imag.toString() + "j"):
+            ("(" + real.toString() + " + " + imag.toString() + "j)"));
     }
 
     public UNumber add(UNumber other) {
@@ -114,7 +121,7 @@ public class UComplex extends UNumber {
 
     public boolean equals(UNumber other) {
         return (other instanceof UComplex && real.equals(((UComplex) other).real) && imag.equals(((UComplex) other).imag))
-            || (imag.doubleValue() == 0.0 && real.equals(other));
+            || (isReal() && real.equals(other));
     }
 
     public UNumber abs() {

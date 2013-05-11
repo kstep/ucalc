@@ -59,6 +59,10 @@ public class URational extends UReal {
         return new URational(numerator < 0? -numerator: numerator, denumerator < 0? -denumerator: denumerator);
     }
 
+    public boolean isInteger() {
+        return denumerator == 1;
+    }
+
     public double doubleValue() {
         return numerator / denumerator;
     }
@@ -76,7 +80,7 @@ public class URational extends UReal {
     }
 
     public String toString() {
-        return "(" + numerator + " / " + denumerator + ")";
+        return isInteger()? "" + numerator: numerator + "/" + denumerator;
     }
 
     public UNumber pow(UNumber other) {
