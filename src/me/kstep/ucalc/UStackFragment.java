@@ -13,9 +13,10 @@ import android.widget.Toast;
 
 import java.util.Stack;
 
-import com.commonsware.cwac.tlv.TouchListView;
+import com.mobeta.android.dslv.DragSortListView;
+import com.mobeta.android.dslv.DragSortController;
 
-class UStackFragment extends ListFragment implements TouchListView.DropListener, TouchListView.RemoveListener {
+class UStackFragment extends ListFragment {
 
     static class StackAdapter<T> extends ArrayAdapter<T> {
         public StackAdapter(Context ctx, int txtresid, Stack<T> objs) { super(ctx, txtresid, objs); }
@@ -31,7 +32,7 @@ class UStackFragment extends ListFragment implements TouchListView.DropListener,
         public void insert(T item, int to) { super.insert(item, getCount() - to); }
 
         @Override
-        public int getPosition(T item) {  return getCount() - super.getPosition(item) - 1; }
+        public int getPosition(T item) { return getCount() - super.getPosition(item) - 1; }
     }
 
     ArrayAdapter<Number> adapter;
@@ -45,28 +46,30 @@ class UStackFragment extends ListFragment implements TouchListView.DropListener,
         adapter = new StackAdapter<Number>(activity, R.layout.ustack_item, R.id.stack_item, activity.getStack());
         setListAdapter(adapter);
 
-        TouchListView tlv = (TouchListView) getListView();
-        tlv.setDropListener(this);
-        tlv.setRemoveListener(this);
+        DragSortListView dslv = (DragSortListView) getListView();
+        dslv.setDropListener(new DragSortListView.DropListener() {
+            @Override
+            public void drop(int from, int to) {
+                Number item = adapter.getItem(from);
+                adapter.remove(item);
+                adapter.insert(item, to);
+                showToast("Moving " + item.toString() + " to " + new Integer(to).toString());
+            }
+        });
+        dslv.setRemoveListener(new DragSortListView.RemoveListener() {
+            @Override
+            public void remove(int which) {
+                Number item = adapter.getItem(which);
+                showToast("Removing " + item.toString());
+                adapter.remove(item);
+            }
+        });
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceBundle) {
         View view = inflater.inflate(R.layout.ustack_view, null); 
         return view;
-    }
-
-    public void drop(int from, int to) {
-        Number item = adapter.getItem(from);
-        adapter.remove(item);
-        adapter.insert(item, to);
-        showToast("Moving " + item.toString() + " to " + new Integer(to).toString());
-    }
-
-    public void remove(int which) {
-        Number item = adapter.getItem(which);
-        showToast("Removing " + item.toString());
-        adapter.remove(item);
     }
 
     private void showToast(Object msg) {
