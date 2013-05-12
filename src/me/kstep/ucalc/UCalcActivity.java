@@ -3,6 +3,7 @@ package me.kstep.ucalc;
 import java.util.EmptyStackException;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Gravity;
@@ -269,32 +270,30 @@ public class UCalcActivity extends Activity {
 
     private UStackFragment stack_fragment;
     public void onStackButtonClick(View view) {
+        if (stack_fragment == null) {
+            stack_fragment = new UStackFragment();
+        }
+
+        startFragment(stack_fragment);
+    }
+
+    private UMemoryFragment memory_fragment;
+    public void onMemoryButtonClick(View view) {
+        if (memory_fragment == null) {
+            memory_fragment = new UMemoryFragment();
+        }
+
+        startFragment(memory_fragment);
+    }
+
+    public void startFragment(Fragment fragment) {
         updateStack();
 
         FragmentManager fragman = getFragmentManager();
         FragmentTransaction txn = fragman.beginTransaction();
 
-        if (stack_fragment == null) {
-            stack_fragment = new UStackFragment();
-        }
-
-        txn.add(R.id.main_layout, stack_fragment);
+        txn.add(R.id.main_layout, fragment);
         txn.addToBackStack(null);
         txn.commit();
     }
-
-    private UMemoryFragment memory_fragment;
-    public void onMemoryButtonClick(View view) {
-        FragmentManager fragman = getFragmentManager();
-        FragmentTransaction txn = fragman.beginTransaction();
-
-        if (memory_fragment == null) {
-            memory_fragment = new UMemoryFragment();
-        }
-
-        txn.add(R.id.main_layout, memory_fragment);
-        txn.addToBackStack(null);
-        txn.commit();
-    }
-
 }
