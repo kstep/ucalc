@@ -26,6 +26,8 @@
         dslv:slide_shuffle_speed="0.3"
         dslv:drag_start_mode="onDown"
         dslv:drag_handle_id="@+id/item_handle"
+        dslv:remove_mode="flingRemove"
+        dslv:remove_enabled="true"
         />
 
     <LinearLayout 
