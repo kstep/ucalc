@@ -4,7 +4,7 @@ import java.util.Stack;
 import me.kstep.ucalc.numbers.UNumber;
 
 public class UStack extends Stack<UNumber> {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 0L;
 
     public void push(Number item) {
         push(UNumber.wrap(item));

@@ -3,7 +3,7 @@ package me.kstep.ucalc.numbers;
 import me.kstep.ucalc.operations.UMath;
 
 public class UComplex extends UNumber {
-    private static final long serialVersionUID = 5L;
+    private static final long serialVersionUID = 0L;
 
     public UReal real;
     public UReal imag;

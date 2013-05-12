@@ -6,14 +6,14 @@ public abstract class UNumber extends Number {
     //abstract public UNumber visitOperation(UOperation operation);
     
     public class ConversionException extends UNumberException {
-        final static long serialVersionUID = 3;
+        final static long serialVersionUID = 0L;
         ConversionException(Class<? extends Number> targetClass) {
             super("Can not convert to " + targetClass);
         }
     }
 
     public class UnsupportedOperationException extends UNumberException {
-        final static long serialVersionUID = 3;
+        final static long serialVersionUID = 0L;
         UnsupportedOperationException(String operationName) {
             super("Unsupported operation " + operationName + " for " + UNumber.this);
         }

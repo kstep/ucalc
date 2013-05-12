@@ -5,7 +5,7 @@ package me.kstep.ucalc.numbers;
  * are represented with double value internally.
  */
 public class UFloat extends UReal {
-    private static final long serialVersionUID = 5L;
+    private static final long serialVersionUID = 0L;
 
     private double value;
 

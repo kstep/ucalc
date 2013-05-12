@@ -1,7 +1,7 @@
 package me.kstep.ucalc.numbers;
 
 public class UInteger extends UReal {
-    private static final long serialVersionUID = 5L;
+    private static final long serialVersionUID = 0L;
 
     private long value;
 

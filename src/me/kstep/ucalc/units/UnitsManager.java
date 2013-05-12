@@ -34,14 +34,14 @@ import java.io.IOException;
 class UnitsManager {
 
     static class UnitNotFoundException extends UnitException {
-        final static long serialVersionUID = 3;
+        final static long serialVersionUID = 0L;
         UnitNotFoundException(String name) {
             super("Unit not found: `" + name + "'");
         }
     }
 
     static public class UnitExistsException extends UnitException {
-        final static long serialVersionUID = 3;
+        final static long serialVersionUID = 0L;
 
         private Unit existingUnit;
         private String name;

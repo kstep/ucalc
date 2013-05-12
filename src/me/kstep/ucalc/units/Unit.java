@@ -18,7 +18,7 @@ package me.kstep.ucalc.units;
 abstract class Unit {
 
     public class ConversionException extends UnitException {
-        final static long serialVersionUID = 3;
+        final static long serialVersionUID = 0L;
 
         private Unit targetUnit;
 

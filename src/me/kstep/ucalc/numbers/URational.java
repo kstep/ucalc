@@ -7,7 +7,7 @@ import java.lang.ArithmeticException;
  * of long integer numbers.
  */
 public class URational extends UReal {
-    private static final long serialVersionUID = 5L;
+    private static final long serialVersionUID = 0L;
 
     public long numerator;
     public long denumerator;

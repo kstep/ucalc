@@ -7,7 +7,7 @@ import me.kstep.ucalc.numbers.UInteger;
 
 
 public class UMemory extends ArrayList<UNumber> {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 0L;
 
     UNumber zero = new UInteger(0);
 

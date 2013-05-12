@@ -1,7 +1,7 @@
 package me.kstep.ucalc.units;
 
 class NumberUnit extends Number {
-    final static long serialVersionUID = 4;
+    final static long serialVersionUID = 0L;
 
     Unit unit;
     Double value;

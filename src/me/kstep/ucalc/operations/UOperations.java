@@ -5,7 +5,7 @@ import java.util.Hashtable;
 import android.util.Log;
 
 public class UOperations extends Hashtable<CharSequence,UOperation> {
-    final static long serialVersionUID = 1L;
+    final static long serialVersionUID = 0L;
 
     public UOperation put(UOperation operation) {
         return put(operation.name(), operation);
