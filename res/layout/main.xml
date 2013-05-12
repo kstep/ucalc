@@ -76,7 +76,7 @@
 
         <TableLayout android:shrinkColumns="*" android:layout_span="5">
             <TableRow>
-                <Button android:text="mem" style="@style/UCBtn.Mod" />
+                <Button android:text="mem" style="@style/UCBtn.Mod" android:onClick="onMemoryButtonClick" />
                 <Button android:text="1" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
                 <Button android:text="2" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
                 <Button android:text="3" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />

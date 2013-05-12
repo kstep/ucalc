@@ -19,6 +19,7 @@ import me.kstep.ucalc.numbers.UNumberException;
 
 public class UCalcActivity extends Activity {
     private UStack stack;
+    private UMemory memory;
     private UConstants constants;
     private UOperations operations;
 
@@ -30,6 +31,7 @@ public class UCalcActivity extends Activity {
 
         constants = new UConstants();
         stack = new UStack();
+        memory = new UMemory();
 
         operations = new UOperations();
         operations.autoFill();
@@ -37,6 +39,10 @@ public class UCalcActivity extends Activity {
 
     public UStack getStack() {
         return stack;
+    }
+
+    public UMemory getMemory() {
+        return memory;
     }
 
     /**
@@ -218,4 +224,19 @@ public class UCalcActivity extends Activity {
         txn.addToBackStack(null);
         txn.commit();
     }
+
+    private UMemoryFragment memory_fragment;
+    public void onMemoryButtonClick(View view) {
+        FragmentManager fragman = getFragmentManager();
+        FragmentTransaction txn = fragman.beginTransaction();
+
+        if (memory_fragment == null) {
+            memory_fragment = new UMemoryFragment();
+        }
+
+        txn.add(R.id.main_layout, memory_fragment);
+        txn.addToBackStack(null);
+        txn.commit();
+    }
+
 }

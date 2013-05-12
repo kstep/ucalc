@@ -9,11 +9,14 @@
     <com.mobeta.android.dslv.DragSortListView
         android:id="@id/android:list"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="#ffffff"
         android:divider="#d8d8d8"
         android:dividerHeight="1dp"
         android:drawSelectorOnTop="false"
+        android:choiceMode="singleChoice"
+        android:listSelector="#aaaaaa"
 
         dslv:drag_enabled="true"
         dslv:collapsed_height="1px"
@@ -24,4 +27,22 @@
         dslv:drag_handle_id="@+id/item_handle"
         />
 
+    <LinearLayout 
+        android:layout_alignParentLeft="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@color/main_bg"
+        android:orientation="horizontal">
+
+        <Button
+            style="@style/UCBtn.Mod"
+            android:id="@+id/stack_copy_button"
+            android:text="Copy" />
+
+        <Button
+            style="@style/UCBtn.Mod"
+            android:id="@+id/stack_paste_button"
+            android:text="Paste" />
+    </LinearLayout>
 </LinearLayout>

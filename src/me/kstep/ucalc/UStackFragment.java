@@ -3,16 +3,19 @@ package me.kstep.ucalc;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.View;
 import android.content.Context;
-
-import android.widget.Toast;
+import android.content.ClipboardManager;
+import android.content.ClipData;
 
 import java.util.Stack;
 import me.kstep.ucalc.numbers.UNumber;
+import me.kstep.ucalc.numbers.UFloat;
 
 import com.mobeta.android.dslv.DragSortListView;
 import com.mobeta.android.dslv.DragSortController;
@@ -42,10 +45,36 @@ class UStackFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceBundle) {
         super.onActivityCreated(savedInstanceBundle);
 
-        UCalcActivity activity = (UCalcActivity) getActivity();
+        final UCalcActivity activity = (UCalcActivity) getActivity();
+        final ClipboardManager clipboard = (ClipboardManager) activity.getSystemService(Context.CLIPBOARD_SERVICE);
 
         adapter = new StackAdapter<UNumber>(activity, R.layout.list_item, R.id.list_item, activity.getStack());
         setListAdapter(adapter);
+
+        ((Button) activity.findViewById(R.id.stack_copy_button)).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                try {
+                    ListView lv = getListView();
+                    int index = lv.getCheckedItemPosition();
+                    clipboard.setPrimaryClip(ClipData.newPlainText(null, adapter.getItem(index).toString()));
+                    lv.setItemChecked(index, false);
+
+                } catch (ArrayIndexOutOfBoundsException e) {
+                }
+            }
+        });
+
+        ((Button) activity.findViewById(R.id.stack_paste_button)).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                try {
+                    UNumber item = new UFloat(Double.valueOf(clipboard.getPrimaryClip().getItemAt(0).coerceToText(activity).toString()));
+                    adapter.insert(item, 0);
+                    getListView().setItemChecked(0, true);
+
+                } catch (NumberFormatException e) {
+                }
+            }
+        });
 
         DragSortListView dslv = (DragSortListView) getListView();
         dslv.setDropListener(new DragSortListView.DropListener() {
@@ -54,14 +83,12 @@ class UStackFragment extends ListFragment {
                 UNumber item = adapter.getItem(from);
                 adapter.remove(item);
                 adapter.insert(item, to);
-                showToast("Moving " + item.toString() + " to " + new Integer(to).toString());
             }
         });
         dslv.setRemoveListener(new DragSortListView.RemoveListener() {
             @Override
             public void remove(int which) {
                 UNumber item = adapter.getItem(which);
-                showToast("Removing " + item.toString());
                 adapter.remove(item);
             }
         });
@@ -69,12 +96,7 @@ class UStackFragment extends ListFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceBundle) {
-        View view = inflater.inflate(R.layout.list_view, null); 
+        View view = inflater.inflate(R.layout.ustack_view, null); 
         return view;
-    }
-
-    private void showToast(Object msg) {
-        Toast toast = Toast.makeText(getActivity(), msg.toString(), Toast.LENGTH_SHORT);
-        toast.show();
     }
 }
