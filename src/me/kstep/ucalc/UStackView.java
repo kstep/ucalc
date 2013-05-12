@@ -2,6 +2,8 @@ package me.kstep.ucalc;
 
 import java.util.List;
 
+import android.util.Log;
+
 import android.widget.TextView;
 import android.content.Context;
 import android.view.Gravity;
@@ -23,6 +25,7 @@ class UStackView extends TextView {
     }
 
     final private int visibleLines = 5;
+    final private int skipLines = 1;
     public void showStack(UStack stack) {
         int stackSize = stack.size();
 
@@ -32,13 +35,13 @@ class UStackView extends TextView {
         }
 
         List<UNumber> visiblePart;
-        if (stackSize > visibleLines) {
-            visiblePart = stack.subList(stackSize - visibleLines, stackSize);
+        if ((stackSize - skipLines) > visibleLines) {
+            visiblePart = stack.subList(stackSize - visibleLines - skipLines, stackSize - skipLines);
         } else {
-            visiblePart = stack;
+            visiblePart = stack.subList(0, stackSize - skipLines);
         }
 
-        int i = visiblePart.size() + 1;
+        int i = visiblePart.size() + skipLines;
 
         StringBuilder result = new StringBuilder();
         for (Number item : visiblePart) {

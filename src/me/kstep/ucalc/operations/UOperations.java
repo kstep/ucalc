@@ -23,6 +23,7 @@ public class UOperations extends Hashtable<CharSequence,UOperation> {
         SquereOp.class,
         SubstructOp.class,
         InvertOp.class,
+        NegateOp.class,
         DivideOp.class,
         PowerOp.class,
     };

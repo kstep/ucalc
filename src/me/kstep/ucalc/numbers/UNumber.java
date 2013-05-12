@@ -163,7 +163,15 @@ public abstract class UNumber extends Number {
         }
     }
 
+    public boolean isNaN() {
+        return isNaN(this);
+    }
+
     public static boolean isNaN(Number num) {
+        if (num == null) {
+            return true;
+        }
+
         try {
             return Float.isNaN(num.floatValue());
 

@@ -14,11 +14,11 @@ import android.widget.Toast;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ActionBar;
-import android.content.Intent;
 
 import me.kstep.ucalc.operations.UOperations;
 import me.kstep.ucalc.operations.UOperation;
 import me.kstep.ucalc.numbers.UNumberException;
+import me.kstep.ucalc.numbers.UNumber;
 
 public class UCalcActivity extends Activity {
     private UStack stack;
@@ -48,10 +48,10 @@ public class UCalcActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
         case android.R.id.home:
-            Intent parentActivityIntent = new Intent(this, UCalcActivity.class);
-            parentActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(parentActivityIntent);
-            finish();
+            FragmentManager fragman = getFragmentManager();
+            fragman.popBackStack();
+            getActionBar().setHomeButtonEnabled(false);
+            showStack();
             break;
 
         default:
@@ -72,33 +72,51 @@ public class UCalcActivity extends Activity {
     /**
      * Push value from input view onto stack
      */
-    private void pushStack() {
-        UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
-        UStackView stack_view = (UStackView) findViewById(R.id.view_stack);
-
-        if (!edit_view.isEmpty()) {
-            edit_view.stopEditing();
-            stack.push(edit_view.getValue());
-            stack_view.showStack(stack);
+    private void pushStack(Number value) {
+        if (!UNumber.isNaN(value)) {
+            stack.push(value);
+            showStack();
         }
+    }
+    private void pushStack() {
+        pushStack(((UEditView) findViewById(R.id.view_edit)).getValue());
     }
 
     /**
      * Pop value from stack into input view
      */
-    private void popStack() {
+    private UNumber popStack() {
+        UNumber item = null;
+
+        try {
+            item = stack.pop();
+        } catch (EmptyStackException e) {
+        }
+
+        showStack();
+        return item;
+    }
+
+    private void showStack() {
         UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
         UStackView stack_view = (UStackView) findViewById(R.id.view_stack);
-
         edit_view.stopEditing();
 
         try {
-            edit_view.setValue(stack.pop());
+            stack_view.showStack(stack);
+            edit_view.setValue(stack.peek());
+
         } catch (EmptyStackException e) {
             edit_view.setValue(Float.NaN);
         }
+    }
 
-        stack_view.showStack(stack);
+    public void updateStack() {
+        UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
+        Number value = edit_view.getValue();
+
+        popStack();
+        pushStack(value);
     }
 
     public void showToast(CharSequence ch) {
@@ -131,15 +149,15 @@ public class UCalcActivity extends Activity {
         UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
 
         if (constants.containsKey(name)) {
-            pushStack();
-            edit_view.setValue(constants.get(name));
+            pushStack(constants.get(name));
         }
     }
 
     public void onEnterButtonClick(View view) {
         UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
+
         if (edit_view.isEditing()) {
-            edit_view.stopEditing();
+            updateStack();
         } else {
             pushStack();
         }
@@ -166,7 +184,6 @@ public class UCalcActivity extends Activity {
             if (stack.size() < op.arity() - 1) {
                 showToast("Not enough operands!");
             } else {
-                pushStack();
                 try {
                     op.apply(stack);
 
@@ -176,11 +193,11 @@ public class UCalcActivity extends Activity {
                 } catch (EmptyStackException e) {
                     showToast("Stack underflow!");
                 }
-                popStack();
             }
         } else {
             showToast("Operation not found!");
         }
+        showStack();
     }
 
     public void onUndoButtonClick(View view) {
@@ -215,8 +232,8 @@ public class UCalcActivity extends Activity {
 
                 edit_view.setText(text);
 
-            } else {
-                edit_view.setValue(-edit_view.getValue().doubleValue());
+            } else if (!stack.empty()) {
+                pushStack(popStack().neg());
             }
         }
     }
@@ -231,12 +248,13 @@ public class UCalcActivity extends Activity {
 
     public void onClearButtonClick(View view) {
         stack.clear();
-        ((UEditView) findViewById(R.id.view_edit)).setValue(Float.NaN);
-        ((UStackView) findViewById(R.id.view_stack)).setText("");
+        showStack();
     }
 
     private UStackFragment stack_fragment;
     public void onStackButtonClick(View view) {
+        updateStack();
+
         FragmentManager fragman = getFragmentManager();
         FragmentTransaction txn = fragman.beginTransaction();
 
