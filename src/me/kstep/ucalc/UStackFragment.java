@@ -48,6 +48,8 @@ class UStackFragment extends ListFragment {
         final UCalcActivity activity = (UCalcActivity) getActivity();
         final ClipboardManager clipboard = (ClipboardManager) activity.getSystemService(Context.CLIPBOARD_SERVICE);
 
+        activity.getActionBar().setHomeButtonEnabled(true);
+
         adapter = new StackAdapter<UNumber>(activity, R.layout.list_item, R.id.list_item, activity.getStack());
         setListAdapter(adapter);
 

@@ -6,12 +6,15 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ActionBar;
+import android.content.Intent;
 
 import me.kstep.ucalc.operations.UOperations;
 import me.kstep.ucalc.operations.UOperation;
@@ -35,6 +38,27 @@ public class UCalcActivity extends Activity {
 
         operations = new UOperations();
         operations.autoFill();
+
+        ActionBar ab = getActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
+        ab.setHomeButtonEnabled(false);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case android.R.id.home:
+            Intent parentActivityIntent = new Intent(this, UCalcActivity.class);
+            parentActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(parentActivityIntent);
+            finish();
+            break;
+
+        default:
+            return false;
+        }
+
+        return true;
     }
 
     public UStack getStack() {

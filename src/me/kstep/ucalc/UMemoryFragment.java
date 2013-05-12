@@ -24,6 +24,8 @@ class UMemoryFragment extends ListFragment {
         super.onActivityCreated(savedInstanceBundle);
 
         final UCalcActivity activity = (UCalcActivity) getActivity();
+
+        activity.getActionBar().setHomeButtonEnabled(true);
  
         adapter = new ArrayAdapter<UNumber>(activity, R.layout.list_item, R.id.list_item, activity.getMemory());
         setListAdapter(adapter);
