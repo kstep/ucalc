@@ -67,8 +67,13 @@ public class UCalcActivity extends Activity {
         case android.R.id.home:
             FragmentManager fragman = getFragmentManager();
             fragman.popBackStack();
-            getActionBar().setHomeButtonEnabled(false);
+
+            ActionBar ab = getActionBar();
+            ab.setHomeButtonEnabled(false);
+            ab.setTitle("UCalc");
+
             showStack();
+
             break;
 
         default:

@@ -3,6 +3,7 @@ package me.kstep.ucalc;
 import java.util.EmptyStackException;
 
 import android.app.ListFragment;
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,7 +26,9 @@ class UMemoryFragment extends ListFragment {
 
         final UCalcActivity activity = (UCalcActivity) getActivity();
 
-        activity.getActionBar().setHomeButtonEnabled(true);
+        ActionBar ab = activity.getActionBar();
+        ab.setHomeButtonEnabled(true);
+        ab.setTitle("Memory");
  
         adapter = new ArrayAdapter<UNumber>(activity, R.layout.list_item, R.id.list_item, activity.getMemory());
         setListAdapter(adapter);

@@ -1,6 +1,7 @@
 package me.kstep.ucalc;
 
 import android.app.ListFragment;
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -48,7 +49,9 @@ class UStackFragment extends ListFragment {
         final UCalcActivity activity = (UCalcActivity) getActivity();
         final ClipboardManager clipboard = (ClipboardManager) activity.getSystemService(Context.CLIPBOARD_SERVICE);
 
-        activity.getActionBar().setHomeButtonEnabled(true);
+        ActionBar ab = activity.getActionBar();
+        ab.setHomeButtonEnabled(true);
+        ab.setTitle("Stack");
 
         adapter = new StackAdapter<UNumber>(activity, R.layout.list_item, R.id.list_item, activity.getStack());
         setListAdapter(adapter);
