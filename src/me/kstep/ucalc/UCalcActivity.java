@@ -197,10 +197,11 @@ public class UCalcActivity extends Activity {
     public void onOperationApply(CharSequence name) {
         UOperation op = operations.get(name);
 
-        updateStack();
-
         if (op != null) {
-            if (stack.size() < op.arity() - 1) {
+
+            updateStack();
+
+            if (stack.size() < op.arity()) {
                 showToast("Not enough operands!");
             } else {
                 try {
@@ -213,11 +214,12 @@ public class UCalcActivity extends Activity {
                     showToast("Stack underflow!");
                 }
             }
+
+            showStack();
+
         } else {
             showToast("Operation not found!");
         }
-
-        showStack();
     }
 
     public void onUndoButtonClick(View view) {
