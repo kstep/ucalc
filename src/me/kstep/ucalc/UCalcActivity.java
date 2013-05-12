@@ -45,6 +45,22 @@ public class UCalcActivity extends Activity {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+
+        savedInstanceState.putSerializable("stack", stack);
+        savedInstanceState.putSerializable("memory", memory);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        stack = (UStack) savedInstanceState.getSerializable("stack");
+        memory = (UMemory) savedInstanceState.getSerializable("memory");
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
         case android.R.id.home:
