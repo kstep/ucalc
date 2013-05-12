@@ -43,7 +43,7 @@ public abstract class UNumber extends Number {
      * Addition
      */
     public UNumber add(UNumber other) throws UnsupportedOperationException {
-        Pair<?,?> pair = coerse(other);
+        Pair<?,?> pair = coerce(other);
         return pair.first.add(pair.second);
     }
 
@@ -51,7 +51,7 @@ public abstract class UNumber extends Number {
      * Substruction
      */
     public UNumber sub(UNumber other) throws UnsupportedOperationException {
-        Pair<?,?> pair = coerse(other);
+        Pair<?,?> pair = coerce(other);
         return pair.first.sub(pair.second);
     }
 
@@ -59,7 +59,7 @@ public abstract class UNumber extends Number {
      * Modulus
      */
     public UNumber mod(UNumber other) throws UnsupportedOperationException {
-        Pair<?,?> pair = coerse(other);
+        Pair<?,?> pair = coerce(other);
         return pair.first.mod(pair.second);
     }
 
@@ -67,7 +67,7 @@ public abstract class UNumber extends Number {
      * Multiplication
      */
     public UNumber mul(UNumber other) throws UnsupportedOperationException {
-        Pair<?,?> pair = coerse(other);
+        Pair<?,?> pair = coerce(other);
         return pair.first.mul(pair.second);
     }
 
@@ -75,7 +75,7 @@ public abstract class UNumber extends Number {
      * Division
      */
     public UNumber div(UNumber other) throws UnsupportedOperationException {
-        Pair<?,?> pair = coerse(other);
+        Pair<?,?> pair = coerce(other);
         return pair.first.div(pair.second);
     }
 
@@ -83,7 +83,7 @@ public abstract class UNumber extends Number {
      * Power
      */
     public UNumber pow(UNumber other) throws UnsupportedOperationException {
-        Pair<?,?> pair = coerse(other);
+        Pair<?,?> pair = coerce(other);
         return pair.first.pow(pair.second);
     }
 
@@ -91,7 +91,7 @@ public abstract class UNumber extends Number {
      * Root
      */
     public UNumber root(UNumber other) throws UnsupportedOperationException {
-        Pair<?,?> pair = coerse(other);
+        Pair<?,?> pair = coerce(other);
         return pair.first.root(pair.second);
     }
 
@@ -130,7 +130,7 @@ public abstract class UNumber extends Number {
         return this == other;
     }
 
-    public static Pair<?,?> coerse(UNumber num1, UNumber num2) {
+    public static Pair<?,?> coerce(UNumber num1, UNumber num2) {
         if (num1 instanceof UComplex || num2 instanceof UComplex) {
             return new Pair<UComplex, UComplex>(new UComplex(num1), new UComplex(num2));
 
@@ -145,12 +145,12 @@ public abstract class UNumber extends Number {
         }
     }
 
-    public static Pair<?,?> coerse(Pair<?,?> args) {
-        return coerse(args.first, args.second);
+    public static Pair<?,?> coerce(Pair<?,?> args) {
+        return coerce(args.first, args.second);
     }
 
-    public Pair<?,?> coerse(UNumber other) {
-        return coerse(this, other);
+    public Pair<?,?> coerce(UNumber other) {
+        return coerce(this, other);
     }
 
     public static UNumber wrap(Number num) {
