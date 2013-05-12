@@ -197,6 +197,8 @@ public class UCalcActivity extends Activity {
     public void onOperationApply(CharSequence name) {
         UOperation op = operations.get(name);
 
+        updateStack();
+
         if (op != null) {
             if (stack.size() < op.arity() - 1) {
                 showToast("Not enough operands!");
@@ -214,6 +216,7 @@ public class UCalcActivity extends Activity {
         } else {
             showToast("Operation not found!");
         }
+
         showStack();
     }
 
