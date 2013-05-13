@@ -73,39 +73,23 @@ public class UFloat extends UReal {
     }
 
     public UNumber add(UNumber other) {
-        try {
-            return new UFloat(value + other.doubleValue());
-        } catch (UNumber.ConversionException e) {
-            return super.add(other);
-        }
+        return new UFloat(value + other.doubleValue());
     }
 
     public UNumber sub(UNumber other) {
-        try {
-            return new UFloat(value - other.doubleValue());
-        } catch (UNumber.ConversionException e) {
-            return super.sub(other);
-        }
+        return new UFloat(value - other.doubleValue());
     }
 
     public UNumber div(UNumber other) {
-        try {
-            return new UFloat(value / other.doubleValue());
-        } catch (UNumber.ConversionException e) {
-            return super.div(other);
-        }
+        return new UFloat(value / other.doubleValue());
     }
 
     public UNumber mul(UNumber other) {
-        try {
-            return new UFloat(value * other.doubleValue());
-        } catch (UNumber.ConversionException e) {
-            return super.mul(other);
-        }
+        return new UFloat(value * other.doubleValue());
     }
 
     public UNumber mod(UNumber other) {
-        return new UFloat(doubleValue() % other.doubleValue());
+        return new UFloat(value % other.doubleValue());
     }
 }
 
