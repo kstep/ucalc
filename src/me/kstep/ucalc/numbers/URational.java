@@ -9,62 +9,96 @@ import java.lang.ArithmeticException;
 public class URational extends UReal {
     private static final long serialVersionUID = 0L;
 
+    final private static long PRECISION_BASE = 100000L;
+
     public long numerator;
-    public long denumerator;
+    public long denomenator;
 
-    public URational(long num, long denum) {
-        if (denum == 0) {
-            throw new ArithmeticException("/ by zero");
+    public URational() {
+        numerator = 0L;
+        denomenator = 1L;
+    }
+
+    public URational(Number num) {
+        if (num instanceof URational) {
+            numerator = ((URational) num).numerator;
+            denomenator = ((URational) num).denomenator;
+
+        } else if (isFloat(num)) {
+            numerator = Math.round(num.doubleValue() * PRECISION_BASE);
+            denomenator = PRECISION_BASE;
+
+        } else {
+            numerator = num.longValue();
+            denomenator = 1L;
         }
-
-        if (denum < 0) {
-            num = -num;
-            denum = -denum;
-        }
-
-        numerator = num;
-        denumerator = denum;
 
         simplify();
     }
 
-    public URational(long num) {
-        numerator = num;
-        denumerator = 1;
+    public URational(CharSequence val) throws NumberFormatException {
+        String value = val.toString();
+        int divisor = value.indexOf('/');
+
+        if (divisor == -1) {
+            numerator = Long.valueOf(value);
+            denomenator = 1L;
+
+        } else {
+            numerator = Long.valueOf(value.substring(0, divisor));
+            denomenator = Long.valueOf(value.substring(divisor + 1));
+
+            fix();
+            simplify();
+        }
     }
 
     public URational(Number num, Number denum) {
-        this(num.longValue(), denum.longValue());
+        if (!isFloat(num) || !isFloat(denum)) {
+            numerator = num.longValue();
+            denomenator = denum.longValue();
+        } else {
+            numerator = Math.round(num.doubleValue() * PRECISION_BASE);
+            denomenator = Math.round(denum.doubleValue() * PRECISION_BASE);
+        }
+
+        fix();
+        simplify();
     }
 
-    public URational(UFloat num, int precision) {
-        this(
-                Math.round(num.doubleValue() * Math.pow(10, precision)),
-                Math.round(Math.pow(10, precision)));
+    public static boolean isFloat(Number num) {
+        return num instanceof Double || num instanceof Float || num instanceof UFloat;
     }
 
-    public URational(Number num) {
-        this(num, 1000000);
+    private void fix() {
+        if (denomenator == 0) {
+            throw new ArithmeticException("/ by zero");
+        }
+
+        if (denomenator < 0) {
+            numerator = -numerator;
+            denomenator = -denomenator;
+        }
     }
 
     public UNumber neg() {
-        return new URational(-numerator, denumerator);
+        return new URational(-numerator, denomenator);
     }
 
     public UNumber inv() {
-        return new URational(denumerator, numerator);
+        return new URational(denomenator, numerator);
     }
 
     public UNumber abs() {
-        return new URational(numerator < 0? -numerator: numerator, denumerator < 0? -denumerator: denumerator);
+        return new URational(numerator < 0? -numerator: numerator, denomenator < 0? -denomenator: denomenator);
     }
 
     public boolean isInteger() {
-        return denumerator == 1;
+        return denomenator == 1;
     }
 
     public double doubleValue() {
-        return numerator / denumerator;
+        return numerator / denomenator;
     }
 
     public float floatValue() {
@@ -80,7 +114,7 @@ public class URational extends UReal {
     }
 
     public String toString() {
-        return isInteger()? "" + numerator: numerator + "/" + denumerator;
+        return isInteger()? "" + numerator: numerator + "/" + denomenator;
     }
 
     public UNumber pow(UNumber other) {
@@ -106,17 +140,17 @@ public class URational extends UReal {
     }
 
     public URational simplify() {
-        long base = gcd(numerator, denumerator);
+        long base = gcd(numerator, denomenator);
         numerator /= base;
-        denumerator /= base;
+        denomenator /= base;
         return this;
     }
 
     public UNumber add(UNumber other) {
         if (other instanceof URational) {
             URational arg = (URational) other;
-            long base = denumerator * arg.denumerator;
-            return new URational(numerator * arg.denumerator + arg.numerator * denumerator, base);
+            long base = denomenator * arg.denomenator;
+            return new URational(numerator * arg.denomenator + arg.numerator * denomenator, base);
 
         } else {
             return super.add(other);
@@ -126,8 +160,8 @@ public class URational extends UReal {
     public UNumber sub(UNumber other) {
         if (other instanceof URational) {
             URational arg = (URational) other;
-            long base = denumerator * arg.denumerator;
-            return new URational(numerator * arg.denumerator - arg.numerator * denumerator, base);
+            long base = denomenator * arg.denomenator;
+            return new URational(numerator * arg.denomenator - arg.numerator * denomenator, base);
 
         } else {
             return super.sub(other);
@@ -137,7 +171,7 @@ public class URational extends UReal {
     public UNumber mul(UNumber other) {
         if (other instanceof URational) {
             URational arg = (URational) other;
-            return new URational(numerator * arg.numerator, denumerator * arg.denumerator);
+            return new URational(numerator * arg.numerator, denomenator * arg.denomenator);
 
         } else {
             return super.mul(other);
@@ -147,7 +181,7 @@ public class URational extends UReal {
     public UNumber div(UNumber other) {
         if (other instanceof URational) {
             URational arg = (URational) other;
-            return new URational(numerator * arg.denumerator, denumerator * arg.numerator);
+            return new URational(numerator * arg.denomenator, denomenator * arg.numerator);
 
         } else {
             return super.div(other);

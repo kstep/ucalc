@@ -5,8 +5,16 @@ public class UInteger extends UReal {
 
     private long value;
 
-    public UInteger (Number val) {
+    public UInteger() {
+        value = 0L;
+    }
+
+    public UInteger(Number val) {
         value = val.longValue();
+    }
+
+    public UInteger(CharSequence val) throws NumberFormatException {
+        value = Long.valueOf(val.toString());
     }
 
     public double doubleValue() {

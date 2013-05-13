@@ -2,8 +2,27 @@ package me.kstep.ucalc.numbers;
 
 import me.kstep.ucalc.operations.UOperation;
 
+/**
+ * A number with some defined basic operations like addition, substruction,
+ * multiplication and division.
+ *
+ * All derived classes must have at least three constructors by convention:
+ *    - constructor w/o arguments,
+ *    - constructor with (Number) signature,
+ *    - constructor with (CharSequence) signature.
+ *
+ * First kind of constructor (zero arguments) should produce number with
+ * value of `0`.
+ *
+ * Second kind of constructor should be able to get the same argument class
+ * as this same concrete class and produce a copy of this value, for other
+ * argument classes it should produce best available approximation of the
+ * concrete class.
+ *
+ * Third kind of constructor should be able to parse at least string in format,
+ * produced by `toString()` method of this same class.
+ */
 public abstract class UNumber extends Number {
-    //abstract public UNumber visitOperation(UOperation operation);
     
     public class ConversionException extends UNumberException {
         final static long serialVersionUID = 0L;

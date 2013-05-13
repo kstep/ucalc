@@ -8,16 +8,12 @@ public class UComplex extends UNumber {
     public UReal real;
     public UReal imag;
 
-    public UComplex (Number re, Number im) {
-        real = (re instanceof UReal)? ((UReal) re): (new UFloat(re));
-        imag = (im instanceof UReal)? ((UReal) im): (new UFloat(im));
+    public UComplex() {
+        real = new UFloat(0.0);
+        imag = new UFloat(0.0);
     }
 
-    public UReal angle() {
-        return (UReal) UMath.atan2(imag, real);
-    }
-
-    public UComplex (Number re) {
+    public UComplex(Number re) {
         if (re instanceof UComplex) {
             real = ((UComplex) re).real;
             imag = ((UComplex) re).imag;
@@ -30,6 +26,39 @@ public class UComplex extends UNumber {
             real = new UFloat(re);
             imag = new UFloat(0.0);
         }
+    }
+
+    public UComplex(CharSequence val) throws NumberFormatException {
+        String value = val.toString();
+
+        if (value.endsWith("j")) { // pure imaginary
+            int j = value.indexOf('j');
+            real = new UFloat(0.0);
+            imag = new UFloat(value.substring(0, j));
+
+        } else if (value.startsWith("(") && value.endsWith(")")) {
+            int j = value.indexOf('j');
+            int split = value.indexOf(" + ");
+            if (j == -1 || split == -1) {
+                throw new NumberFormatException("For input string: \"" + value + "\"");
+            }
+
+            real = new UFloat(value.substring(1, split));
+            imag = new UFloat(value.substring(split + 3, j));
+
+        } else {
+            real = new UFloat(value);
+            imag = new UFloat(0.0);
+        }
+    }
+
+    public UComplex(Number re, Number im) {
+        real = (re instanceof UReal)? ((UReal) re): (new UFloat(re));
+        imag = (im instanceof UReal)? ((UReal) im): (new UFloat(im));
+    }
+
+    public UReal angle() {
+        return (UReal) UMath.atan2(imag, real);
     }
 
     public boolean isReal() {

@@ -10,11 +10,15 @@ public class UFloat extends UReal {
     private double value;
 
     public UFloat() {
-        value = Float.NaN;
+        value = 0.0;
     }
 
-    public UFloat (Number val) {
+    public UFloat(Number val) {
         value = val.doubleValue();
+    }
+
+    public UFloat(CharSequence val) throws NumberFormatException {
+        value = Double.valueOf(val.toString());
     }
 
     public double doubleValue() {
