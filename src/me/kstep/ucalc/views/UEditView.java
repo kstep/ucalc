@@ -1,4 +1,4 @@
-package me.kstep.ucalc;
+package me.kstep.ucalc.views;
 
 import android.widget.TextView;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 
 import me.kstep.ucalc.numbers.UNumber;
 
-class UEditView extends TextView {
+public class UEditView extends TextView {
     // If true, user is editing text now,
     // if false, editing was finished, value is fixed.
     private boolean editing = false;

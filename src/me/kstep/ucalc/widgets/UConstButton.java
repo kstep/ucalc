@@ -1,8 +1,10 @@
-package me.kstep.ucalc;
+package me.kstep.ucalc.widgets;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+
+import me.kstep.ucalc.UCalcActivity;
 
 class UConstButton extends UButton {
     public UConstButton(Context context) {

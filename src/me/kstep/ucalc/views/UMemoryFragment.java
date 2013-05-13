@@ -1,4 +1,4 @@
-package me.kstep.ucalc;
+package me.kstep.ucalc.views;
 
 import java.util.EmptyStackException;
 
@@ -15,9 +15,12 @@ import android.view.ViewGroup;
 import com.mobeta.android.dslv.DragSortListView;
 import com.mobeta.android.dslv.DragSortController;
 
+import me.kstep.ucalc.UCalcActivity;
 import me.kstep.ucalc.numbers.UNumber;
 
-class UMemoryFragment extends ListFragment {
+import me.kstep.ucalc.R;
+
+public class UMemoryFragment extends ListFragment {
     ArrayAdapter<UNumber> adapter;
 
     @Override

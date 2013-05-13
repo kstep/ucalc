@@ -1,4 +1,4 @@
-package me.kstep.ucalc;
+package me.kstep.ucalc.widgets;
 
 import android.widget.Button;
 import android.content.Context;

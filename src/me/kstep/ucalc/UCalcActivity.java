@@ -16,6 +16,11 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ActionBar;
 
+import me.kstep.ucalc.views.UEditView;
+import me.kstep.ucalc.views.UStackView;
+import me.kstep.ucalc.views.UStackFragment;
+import me.kstep.ucalc.views.UMemoryFragment;
+
 import me.kstep.ucalc.operations.UOperations;
 import me.kstep.ucalc.operations.UOperation;
 import me.kstep.ucalc.numbers.UNumberException;
@@ -120,22 +125,22 @@ public class UCalcActivity extends Activity {
     }
 
     private void showStack() {
-        UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
-        UStackView stack_view = (UStackView) findViewById(R.id.view_stack);
-        edit_view.stopEditing();
+        UEditView editView = (UEditView) findViewById(R.id.view_edit);
+        UStackView stackView = (UStackView) findViewById(R.id.view_stack);
+        editView.stopEditing();
 
         try {
-            stack_view.showStack(stack);
-            edit_view.setValue(stack.peek());
+            stackView.showStack(stack);
+            editView.setValue(stack.peek());
 
         } catch (EmptyStackException e) {
-            edit_view.setValue(Float.NaN);
+            editView.setValue(Float.NaN);
         }
     }
 
     public void updateStack() {
-        UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
-        Number value = edit_view.getValue();
+        UEditView editView = (UEditView) findViewById(R.id.view_edit);
+        Number value = editView.getValue();
 
         popStack();
         pushStack(value);
@@ -149,26 +154,26 @@ public class UCalcActivity extends Activity {
 
     public void onDigitButtonClick(View view) {
         Button button = (Button) view;
-        UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
-        if (!edit_view.isEditing()) {
+        UEditView editView = (UEditView) findViewById(R.id.view_edit);
+        if (!editView.isEditing()) {
             pushStack();
-            edit_view.setValue(Float.NaN);
-            edit_view.startEditing();
+            editView.setValue(Float.NaN);
+            editView.startEditing();
         }
 
-        edit_view.append(button.getText());
+        editView.append(button.getText());
     }
 
     public void onDotButtonClick(View view) {
-        UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
-        String text = edit_view.getText().toString();
-        if (!edit_view.isEditing() || !text.contains(".")) {
+        UEditView editView = (UEditView) findViewById(R.id.view_edit);
+        String text = editView.getText().toString();
+        if (!editView.isEditing() || !text.contains(".")) {
             onDigitButtonClick(view);
         }
     }
 
     public void onConstantPush(CharSequence name) {
-        UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
+        UEditView editView = (UEditView) findViewById(R.id.view_edit);
 
         if (constants.containsKey(name)) {
             pushStack(constants.get(name));
@@ -176,9 +181,9 @@ public class UCalcActivity extends Activity {
     }
 
     public void onEnterButtonClick(View view) {
-        UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
+        UEditView editView = (UEditView) findViewById(R.id.view_edit);
 
-        if (edit_view.isEditing()) {
+        if (editView.isEditing()) {
             updateStack();
         } else {
             pushStack();
@@ -186,11 +191,11 @@ public class UCalcActivity extends Activity {
     }
 
     public void onBackspaceButtonClick(View view) {
-        UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
-        if (!edit_view.isEmpty()) {
-            if (edit_view.isEditing()) {
-                edit_view.chop();
-                if (edit_view.isEmpty()) {
+        UEditView editView = (UEditView) findViewById(R.id.view_edit);
+        if (!editView.isEmpty()) {
+            if (editView.isEditing()) {
+                editView.chop();
+                if (editView.isEmpty()) {
                     popStack();
                 }
             } else {
@@ -232,11 +237,11 @@ public class UCalcActivity extends Activity {
     }
 
     public void onSignToggleButtonClick(View view) {
-        UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
-        if (!edit_view.isEmpty()) {
-            if (edit_view.isEditing()) {
+        UEditView editView = (UEditView) findViewById(R.id.view_edit);
+        if (!editView.isEmpty()) {
+            if (editView.isEditing()) {
 
-                String text = edit_view.getText().toString();
+                String text = editView.getText().toString();
                 int expPos = text.lastIndexOf('e');
                 if (expPos == -1) {
                     if (text.charAt(0) == '-') {
@@ -257,7 +262,7 @@ public class UCalcActivity extends Activity {
                     }
                 }
 
-                edit_view.setText(text);
+                editView.setText(text);
 
             } else if (!stack.empty()) {
                 pushStack(popStack().neg());
@@ -266,10 +271,10 @@ public class UCalcActivity extends Activity {
     }
 
     public void onExponentButtonClick(View view) {
-        UEditView edit_view = (UEditView) findViewById(R.id.view_edit);
-        String text = edit_view.getText().toString();
-        if (!edit_view.isEditing() || !text.contains("e")) {
-            edit_view.append("e");
+        UEditView editView = (UEditView) findViewById(R.id.view_edit);
+        String text = editView.getText().toString();
+        if (!editView.isEditing() || !text.contains("e")) {
+            editView.append("e");
         }
     }
 

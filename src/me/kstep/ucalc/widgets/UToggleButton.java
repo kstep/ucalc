@@ -1,10 +1,12 @@
-package me.kstep.ucalc;
+package me.kstep.ucalc.widgets;
 
 import android.widget.CompoundButton;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.graphics.Typeface;
+
+import me.kstep.ucalc.UCalcActivity;
 
 class UToggleButton extends CompoundButton implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
@@ -32,8 +34,6 @@ class UToggleButton extends CompoundButton implements View.OnClickListener, Comp
 
     private void initialize() {
         setClickable(true);
-        //setOnCheckedChangeListener(this);
-        //setOnClickListener(this);
     }
 }
 

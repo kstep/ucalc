@@ -1,4 +1,4 @@
-package me.kstep.ucalc;
+package me.kstep.ucalc.views;
 
 import android.app.ListFragment;
 import android.app.ActionBar;
@@ -15,13 +15,16 @@ import android.content.ClipboardManager;
 import android.content.ClipData;
 
 import java.util.Stack;
+import me.kstep.ucalc.UCalcActivity;
 import me.kstep.ucalc.numbers.UNumber;
 import me.kstep.ucalc.numbers.UFloat;
 
 import com.mobeta.android.dslv.DragSortListView;
 import com.mobeta.android.dslv.DragSortController;
 
-class UStackFragment extends ListFragment {
+import me.kstep.ucalc.R;
+
+public class UStackFragment extends ListFragment {
 
     static class StackAdapter<T> extends ArrayAdapter<T> {
         public StackAdapter(Context ctx, int txtresid, Stack<T> objs) { super(ctx, txtresid, objs); }

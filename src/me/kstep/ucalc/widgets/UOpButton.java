@@ -1,8 +1,10 @@
-package me.kstep.ucalc;
+package me.kstep.ucalc.widgets;
 
 import android.content.Context;
 import android.view.View;
 import android.util.AttributeSet;
+
+import me.kstep.ucalc.UCalcActivity;
 
 class UOpButton extends UButton {
     public UOpButton(Context context) {

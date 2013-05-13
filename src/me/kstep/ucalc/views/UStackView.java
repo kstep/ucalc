@@ -1,4 +1,4 @@
-package me.kstep.ucalc;
+package me.kstep.ucalc.views;
 
 import java.util.List;
 
@@ -10,8 +10,9 @@ import android.view.Gravity;
 import android.util.AttributeSet;
 
 import me.kstep.ucalc.numbers.UNumber;
+import me.kstep.ucalc.UStack;
 
-class UStackView extends TextView {
+public class UStackView extends TextView {
     public UStackView(Context context) {
         super(context);
     }
