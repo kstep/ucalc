@@ -6,92 +6,29 @@
         android:layout_height="fill_parent"
         android:id="@+id/main_layout">
 
-<TableLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:shrinkColumns="*">
+<LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <TableRow>
-        <me.kstep.ucalc.views.UEditView android:layout_span="5" android:id="@+id/view_edit" style="@style/UCText.Edit" android:ellipsize="start" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+        <me.kstep.ucalc.views.UEditView android:id="@+id/view_edit" style="@style/UCText.Edit" android:ellipsize="start" android:layout_weight="5.5" />
         <Button android:text="help" style="@style/UCBtn.Opt" />
-    </TableRow>
+    </LinearLayout>
 
-    <TableRow>
-        <me.kstep.ucalc.views.UStackView android:layout_span="4" android:id="@+id/view_stack" style="@style/UCText.Stack" />
-        <TableLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:shrinkColumns="*" android:layout_span="2">
-            <TableRow>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+        <me.kstep.ucalc.views.UStackView android:id="@+id/view_stack" style="@style/UCText.Stack" android:layout_weight="4" />
+
+        <LinearLayout android:layout_weight="2" android:layout_height="wrap_content" android:layout_width="0dp" android:orientation="vertical">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
                 <Button android:text="stack" style="@style/UCBtn.Mod" android:onClick="onStackButtonClick" />
                 <Button android:text="clear" android:onClick="onClearButtonClick" style="@style/UCBtn.Mod" />
-            </TableRow>
-            <TableRow>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
                 <Button android:text="undo" android:onClick="onUndoButtonClick" style="@style/UCBtn.Mod" />
                 <Button android:text="←" android:onClick="onBackspaceButtonClick" android:textSize="24sp" style="@style/UCBtn.Mod" />
-            </TableRow>      	
-        </TableLayout>
-    </TableRow>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 
-    <TableRow>
-        <Button android:text="time" style="@style/UCBtn.Act" />
-        <me.kstep.ucalc.widgets.UToggleButton android:text="dist" style="@style/UCBtn.Act" />
-        <me.kstep.ucalc.widgets.UToggleButton android:text="vol" style="@style/UCBtn.Act" />
-        <me.kstep.ucalc.widgets.UToggleButton android:text="weight" android:textSize="14sp" style="@style/UCBtn.Act" />
-        <me.kstep.ucalc.widgets.UToggleButton android:text="elec" style="@style/UCBtn.Act" />
-        <me.kstep.ucalc.widgets.UToggleButton android:text="misc" style="@style/UCBtn.Act" />
-    </TableRow>
-    <TableRow>
-        <Button android:text="per" style="@style/UCBtn.Act" />
-        <me.kstep.ucalc.widgets.UOpButton android:text="ln" style="@style/UCBtn.Fun" />
-        <me.kstep.ucalc.widgets.UOpButton android:text="log" style="@style/UCBtn.Fun" />
-        <me.kstep.ucalc.widgets.UOpButton android:text="y^x" style="@style/UCBtn.Fun" />
-        <me.kstep.ucalc.widgets.UOpButton android:text="x²" style="@style/UCBtn.Fun" />
-        <me.kstep.ucalc.widgets.UOpButton android:text="√x" style="@style/UCBtn.Fun" />
-    </TableRow>
-    <TableRow>
-        <me.kstep.ucalc.widgets.UToggleButton android:text="prefix" style="@style/UCBtn.Act" />
-        <Button android:text="deg" style="@style/UCBtn.Fun" />
-        <me.kstep.ucalc.widgets.UOpButton android:text="sin" style="@style/UCBtn.Fun" />
-        <me.kstep.ucalc.widgets.UOpButton android:text="cos" style="@style/UCBtn.Fun" />
-        <me.kstep.ucalc.widgets.UOpButton android:text="tan" style="@style/UCBtn.Fun" />
-        <me.kstep.ucalc.widgets.UOpButton android:text="1/x" style="@style/UCBtn.Fun" />
-    </TableRow>
-    <TableRow>
-        <Button android:text="conv" style="@style/UCBtn.Fun" />
-        <me.kstep.ucalc.widgets.UConstButton android:text="π" style="@style/UCBtn.Sym" />
-        <Button android:text="7" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
-        <Button android:text="8" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
-        <Button android:text="9" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
-        <me.kstep.ucalc.widgets.UOpButton android:text="÷" android:textSize="24sp" style="@style/UCBtn.Fun" />
-    </TableRow>
-    <TableRow>
-        <Button android:text="float" style="@style/UCBtn.Mod" />
-        <Button android:text="EEX" android:onClick="onExponentButtonClick" style="@style/UCBtn.Sym" />
-        <Button android:text="4" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
-        <Button android:text="5" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
-        <Button android:text="6" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
-        <me.kstep.ucalc.widgets.UOpButton android:text="×" android:textSize="24sp" style="@style/UCBtn.Fun" />
-    </TableRow>
-
-    <TableRow>
-        <Button android:text="enter" style="@style/UCBtn.Act" android:onClick="onEnterButtonClick" android:layout_height="match_parent" />
-
-        <TableLayout android:shrinkColumns="*" android:layout_span="5">
-            <TableRow>
-                <Button android:text="mem" style="@style/UCBtn.Mod" android:onClick="onMemoryButtonClick" />
-                <Button android:text="1" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
-                <Button android:text="2" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
-                <Button android:text="3" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
-                <me.kstep.ucalc.widgets.UOpButton android:text="−" android:textSize="24sp" style="@style/UCBtn.Fun" />
-            </TableRow>
-
-            <TableRow>
-                <me.kstep.ucalc.widgets.UToggleButton android:text="alt" style="@style/UCBtn.Mod" />
-                <Button android:text="0" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
-                <Button android:text="." android:onClick="onDotButtonClick" style="@style/UCBtn.Sym" />
-                <Button android:text="+/−" android:onClick="onSignToggleButtonClick" style="@style/UCBtn.Sym" />
-                <me.kstep.ucalc.widgets.UOpButton android:text="+" android:textSize="24sp" style="@style/UCBtn.Fun" />
-            </TableRow>
-        </TableLayout>
-    </TableRow>
+    <me.kstep.ucalc.views.UKeypadView android:layout_width="match_parent" android:layout_height="match_parent" />
 
     <!-- TODO: nice dotted pager for different modes switching
 <android.support.v4.view.ViewPager
@@ -101,6 +38,6 @@
  />
  -->
 
-</TableLayout>
+</LinearLayout>
 
 </FrameLayout>
