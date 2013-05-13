@@ -1,5 +1,7 @@
 package me.kstep.ucalc.units;
 
+import me.kstep.ucalc.numbers.UNumber;
+
 /**
  * This is a base unit class, which determines main Unit interface
  * and common behavior.
@@ -15,7 +17,7 @@ package me.kstep.ucalc.units;
  * Unit class is a rule, which determines a way given kind of units interact
  * with other units, but does not determine unit names or coeffitients.
  */
-abstract class Unit {
+public abstract class Unit {
 
     public class ConversionException extends UnitException {
         final static long serialVersionUID = 0L;
@@ -49,7 +51,7 @@ abstract class Unit {
      * @param value is the numeric value unit to convert
      * @param unit is the the unit to convert to
      */
-    abstract public double to(double value, Unit unit) throws UnitException;
+    abstract public UNumber to(UNumber value, Unit unit) throws UnitException;
 
     /**
      * Reverse conversion from other to this unit.
@@ -57,7 +59,7 @@ abstract class Unit {
      * @param value is the numeric value to convert
      * @param unit is the unit of given numeric value
      */
-    abstract public double from(double value, Unit unit) throws UnitException;
+    abstract public UNumber from(UNumber value, Unit unit) throws UnitException;
 
     /**
      * Each unit has a name, which is its string representation.
@@ -107,6 +109,14 @@ abstract class Unit {
     // Raise this unit to integer power
     public Unit pow(int pow) {
         return new PowerUnit(this, pow);
+    }
+
+    public Unit inv() {
+        return new PowerUnit(this, -1);
+    }
+
+    public static Unit none() {
+        return NoneUnit.getInstance();
     }
 }
 

@@ -1,5 +1,8 @@
 package me.kstep.ucalc.units;
 
+import me.kstep.ucalc.numbers.UNumber;
+import me.kstep.ucalc.numbers.UFloat;
+
 /**
  * This class represents logarithmic units like dB.
  */
@@ -34,14 +37,14 @@ class LogUnit extends Unit {
         return Math.log(value) / this.logbase;
     }
 
-    LogUnit(String name, double coeff, double base) {
+    LogUnit(String name, Number coeff, Number base) {
         super(name);
-        this.base = base;
-        this.coeff = coeff;
-        this.logbase = Math.log(base);
+        this.base = base.doubleValue();
+        this.coeff = coeff.doubleValue();
+        this.logbase = Math.log(base.doubleValue());
     }
 
-    LogUnit(String name, double base) {
+    LogUnit(String name, Number base) {
         this(name, 1.0, base);
     }
 
@@ -51,20 +54,20 @@ class LogUnit extends Unit {
             && ((LogUnit) other).coeff == this.coeff;
     }
 
-    public double from(double value, Unit unit) {
+    public UNumber from(UNumber value, Unit unit) {
         if (unit instanceof LogUnit) {
             LogUnit other = (LogUnit) unit;
-            return this.equals(unit)? value: this.coeff * convert_log(value / other.coeff, other.base);
+            return this.equals(unit)? value: new UFloat(this.coeff * convert_log(value.doubleValue() / other.coeff, other.base));
         } else {
-            return this.coeff * log(value);
+            return new UFloat(this.coeff * log(value.doubleValue()));
         }
     }
 
-    public double to(double value, Unit unit) {
+    public UNumber to(UNumber value, Unit unit) {
         if (unit instanceof LogUnit) {
             return unit.from(value, this);
         } else {
-            return Math.pow(this.base, value / this.coeff);
+            return new UFloat(Math.pow(this.base, value.doubleValue() / this.coeff));
         }
     }
 }

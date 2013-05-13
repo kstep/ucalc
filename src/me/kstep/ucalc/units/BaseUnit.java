@@ -1,5 +1,7 @@
 package me.kstep.ucalc.units;
 
+import me.kstep.ucalc.numbers.UNumber;
+
 /**
  * This is a base unit class, which defines basic measure units, which
  * know nothing about other units.
@@ -17,13 +19,13 @@ class BaseUnit extends Unit {
      * As far as base units knows nothing about other units, `to()`
      * and `from()` methods just delegate conversion to other unit.
      */
-    public double to(double value, Unit unit) throws UnitException {
+    public UNumber to(UNumber value, Unit unit) throws UnitException {
         System.out.println(this + " → " + unit + " " + value);
         if (unit == this) return value;
         return unit.from(value, this);
     }
 
-    public double from(double value, Unit unit) throws UnitException {
+    public UNumber from(UNumber value, Unit unit) throws UnitException {
         System.out.println(this + " ← " + unit + " " + value);
         if (unit == this) return value;
         return unit.to(value, this);

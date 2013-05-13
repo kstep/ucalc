@@ -1,5 +1,9 @@
 package me.kstep.ucalc.units;
 
+import me.kstep.ucalc.numbers.UNumber;
+import me.kstep.ucalc.numbers.UFloat;
+import me.kstep.ucalc.numbers.UInteger;
+
 /**
  * This is a very common and interesting class of `PowerUnit`s.
  * You will get what I speak about if you consider relation between
@@ -8,15 +12,15 @@ package me.kstep.ucalc.units;
 class PowerUnit extends LinearUnit {
 
     // This is unit's power.
-    int power = 1;
+    UInteger power = new UInteger(1);
 
     /**
      * The main constructor, which determines relation between
      * main unit and derived unit.
      */
-    PowerUnit(String name, Unit targetUnit, int power) {
+    PowerUnit(String name, Unit targetUnit, Number power) {
         super(name, 1.0, targetUnit, 0.0);
-        this.power = power;
+        this.power = new UInteger(power);
         this.targetUnit = targetUnit;
     }
 
@@ -67,8 +71,8 @@ class PowerUnit extends LinearUnit {
      * name of derived unit and superscript representation of power
      * (see `superscriptInt()` method above).
      */
-    PowerUnit(Unit targetUnit, int power) {
-        this(targetUnit.name + superscriptInt(power), targetUnit, power);
+    PowerUnit(Unit targetUnit, Number power) {
+        this(targetUnit.name + superscriptInt(power.intValue()), targetUnit, power);
     }
 
     public boolean direct(Unit unit) {
@@ -90,33 +94,33 @@ class PowerUnit extends LinearUnit {
             && targetUnit.equals(unit.targetUnit);
     }
 
-    public double to(double value, Unit unit) {
+    public UNumber to(UNumber value, Unit unit) {
         System.out.println(this + " → " + unit + " " + value);
         if (this == unit) return value;
         if (unit instanceof PowerUnit)
-            return Math.pow(targetUnit.to(1.0, ((PowerUnit) unit).targetUnit), power) * value;
+            return targetUnit.to(new UFloat(1.0), ((PowerUnit) unit).targetUnit).pow(power).mul(value);
         else
-            return Math.pow(targetUnit.to(1.0, unit), power) * value;
+            return targetUnit.to(new UFloat(1.0), unit).pow(power).mul(value);
     }
 
-    public double from(double value, Unit unit) {
+    public UNumber from(UNumber value, Unit unit) {
         System.out.println(this + " ← " + unit + " " + value);
         if (this == unit) return value;
         if (unit instanceof PowerUnit)
-            return Math.pow(targetUnit.from(1.0, ((PowerUnit) unit).targetUnit), power) * value;
+            return targetUnit.from(new UFloat(1.0), ((PowerUnit) unit).targetUnit).pow(power).mul(value);
         else
-            return Math.pow(targetUnit.from(1.0, unit), power) * value;
+            return targetUnit.from(new UFloat(1.0), unit).pow(power).mul(value);
     }
 
-    public Unit pow(int pow) {
-        return new PowerUnit(targetUnit, power + pow);
+    public Unit pow(UNumber pow) {
+        return new PowerUnit(targetUnit, power.add(pow));
     }
 
     public Unit div(Unit other) {
         if (other instanceof PowerUnit) {
             PowerUnit unit = (PowerUnit) other;
             if (unit.targetUnit == targetUnit) {
-                return new PowerUnit(targetUnit, power - unit.power);
+                return new PowerUnit(targetUnit, power.sub(unit.power));
             }
         }
 
@@ -127,7 +131,7 @@ class PowerUnit extends LinearUnit {
         if (other instanceof PowerUnit) {
             PowerUnit unit = (PowerUnit) other;
             if (unit.targetUnit == targetUnit) {
-                return new PowerUnit(targetUnit, power + unit.power);
+                return new PowerUnit(targetUnit, power.add(unit.power));
             }
         }
 

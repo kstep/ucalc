@@ -1,5 +1,7 @@
 package me.kstep.ucalc.units;
 
+import me.kstep.ucalc.numbers.UNumber;
+
 final class NoneUnit extends Unit {
     private NoneUnit() {
         super("");
@@ -14,11 +16,11 @@ final class NoneUnit extends Unit {
         return instance;
     }
 
-    public double to(double value, Unit unit) throws UnitException {
+    public UNumber to(UNumber value, Unit unit) throws UnitException {
         if (this == unit) return value;
         throw this.new ConversionException(unit);
     }
-    public double from(double value, Unit unit) throws UnitException {
+    public UNumber from(UNumber value, Unit unit) throws UnitException {
         if (this == unit) return value;
         throw unit.new ConversionException(this);
     }

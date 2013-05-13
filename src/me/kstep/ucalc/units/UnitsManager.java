@@ -28,6 +28,8 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+import me.kstep.ucalc.numbers.UNumber;
+
 /**
  * Now to the core class itself.
  */
@@ -190,16 +192,16 @@ class UnitsManager {
         return addAlias(alias, units.get(unit));
     }
 
-    public double convert(double value, Unit from, Unit to) {
+    public UNumber convert(UNumber value, Unit from, Unit to) {
         return from.to(value, to);
     }
-    public double convert(double value, String from, Unit to) {
+    public UNumber convert(UNumber value, String from, Unit to) {
         return convert(value, get(from), to);
     }
-    public double convert(double value, Unit from, String to) {
+    public UNumber convert(UNumber value, Unit from, String to) {
         return convert(value, from, get(to));
     }
-    public double convert(double value, String from, String to) {
+    public UNumber convert(UNumber value, String from, String to) {
         return convert(value, get(from), get(to));
     }
 

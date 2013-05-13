@@ -1,5 +1,7 @@
 package me.kstep.ucalc.units;
 
+import me.kstep.ucalc.numbers.UNumber;
+
 /**
  * This is a base class for all complex (or derived) units.
  */
@@ -13,14 +15,14 @@ abstract class ComplexUnit extends Unit {
      * so it just drops in default conversion logic by delegating conversion
      * to other side unit.
      */
-    public double to(double value, Unit unit) throws UnitException {
+    public UNumber to(UNumber value, Unit unit) throws UnitException {
         System.out.println(this + " → " + unit + " " + value);
         if (unit == this) return value;
         if (unit.direct(this)) return unit.from(value, this);
         throw this.new ConversionException(unit);
     }
 
-    public double from(double value, Unit unit) throws UnitException {
+    public UNumber from(UNumber value, Unit unit) throws UnitException {
         System.out.println(this + " ← " + unit + " " + value);
         if (unit == this) return value;
         if (unit.direct(this)) return unit.to(value, this);

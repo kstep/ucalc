@@ -1,5 +1,7 @@
 package me.kstep.ucalc.units;
 
+import me.kstep.ucalc.numbers.UNumber;
+
 class MultipleUnit extends ComplexUnit {
     Unit[] targetUnits;
 
@@ -8,14 +10,14 @@ class MultipleUnit extends ComplexUnit {
         targetUnits = units;
     }
 
-    public double to(double value, Unit unit) {
+    public UNumber to(UNumber value, Unit unit) {
         if (this == unit) return value;
         if (!(unit instanceof MultipleUnit)) throw this.new ConversionException(unit);
         
         MultipleUnit target = (MultipleUnit) unit;
         if (target.targetUnits.length != this.targetUnits.length) throw this.new ConversionException(unit);
 
-        double result = value;
+        UNumber result = value;
 
         for (int i = 0; i < targetUnits.length; i++) {
             result = targetUnits[i].to(result, target.targetUnits[i]);
@@ -24,14 +26,14 @@ class MultipleUnit extends ComplexUnit {
         return result;
     }
 
-    public double from(double value, Unit unit) {
+    public UNumber from(UNumber value, Unit unit) {
         if (this == unit) return value;
         if (!(unit instanceof MultipleUnit)) throw unit.new ConversionException(this);
         
         MultipleUnit target = (MultipleUnit) unit;
         if (target.targetUnits.length != this.targetUnits.length) throw unit.new ConversionException(this);
 
-        double result = value;
+        UNumber result = value;
 
         for (int i = 0; i < targetUnits.length; i++) {
             result = targetUnits[i].from(result, target.targetUnits[i]);

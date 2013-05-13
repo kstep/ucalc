@@ -1,5 +1,7 @@
 package me.kstep.ucalc.units;
 
+import me.kstep.ucalc.numbers.UNumber;
+
 /**
  * This is a class for complex units which define linear rules of conversion.
  * Actually most derived units are linear units which determined by simple
@@ -8,18 +10,18 @@ package me.kstep.ucalc.units;
  */
 class LinearUnit extends Unit {
     protected Unit targetUnit;
-    protected double scale;
-    protected double offset;
+    protected UNumber scale;
+    protected UNumber offset;
 
     /**
      * This is a main constructor, it defines natural order of arguments,
      * resembling initial relation formula from above:
      * `name = scale * targetUnit + offset`.
      */
-    LinearUnit(String name, double scale, Unit targetUnit, double offset) {
+    LinearUnit(String name, Number scale, Unit targetUnit, Number offset) {
         super(name);
-        this.scale = scale;
-        this.offset = offset;
+        this.scale = UNumber.wrap(scale);
+        this.offset = UNumber.wrap(offset);
         this.targetUnit = targetUnit;
     }
 
@@ -37,7 +39,7 @@ class LinearUnit extends Unit {
      * Here's scale only relation (*y = ax*), which is a very common case.
      * Just think about *1 tonn = 1000 kg* or *1 inch = 2.54 cm* etc.
      */
-    LinearUnit(String name, double scale, Unit targetUnit) {
+    LinearUnit(String name, Number scale, Unit targetUnit) {
         this(name, scale, targetUnit, 0.0);
     }
 
@@ -45,7 +47,7 @@ class LinearUnit extends Unit {
      * Less common case is offset only relation (*y = x + b*). The first
      * example which comes to my mind is *Celius = Kelvin - 273.15*.
      */
-    LinearUnit(String name, Unit targetUnit, double offset) {
+    LinearUnit(String name, Unit targetUnit, Number offset) {
         this(name, 1.0, targetUnit, offset);
     }
 
@@ -60,14 +62,14 @@ class LinearUnit extends Unit {
      *
      * which resembles normal math equation, and thus more convinient here.
      */
-    LinearUnit(String name, double r_scale, double r_offset, Unit targetUnit) {
-        this(name, 1.0 / r_scale, targetUnit, -r_offset / r_scale);
+    LinearUnit(String name, Number r_scale, Number r_offset, Unit targetUnit) {
+        this(name, UNumber.wrap(r_scale).inv(), targetUnit, UNumber.wrap(r_offset).neg().div(UNumber.wrap(r_scale)));
     }
 
     /**
      * Now to real conversion rules.
      */
-    public double from(double value, Unit unit) throws UnitException {
+    public UNumber from(UNumber value, Unit unit) throws UnitException {
         System.out.println(this + " ← " + unit + " " + value);
         // First we check if we need conversion at all.
         if (this == unit) return value;
@@ -78,7 +80,7 @@ class LinearUnit extends Unit {
          * actually the core of the `LinearUnit` class).
          */
         if (this.direct(unit)) {
-            return (value - this.offset) / this.scale;
+            return value.sub(this.offset).div(this.scale);
 
         /**
          * Reverse direct convertsions we delegate to counterpart unit.
@@ -106,12 +108,12 @@ class LinearUnit extends Unit {
      * The conversion from this to other unit. All the comments on `from()`
      * method above also apply here.
      */
-    public double to(double value, Unit unit) throws UnitException {
+    public UNumber to(UNumber value, Unit unit) throws UnitException {
         System.out.println(this + " → " + unit + " " + value);
         if (this == unit) return value;
 
         if (this.direct(unit)) {
-            return this.scale * value + this.offset;
+            return this.scale.mul(value).add(this.offset);
 
         } else if (unit.direct(this)) {
             return unit.from(value, this);
