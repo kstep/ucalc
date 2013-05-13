@@ -76,4 +76,8 @@ public class UInteger extends UReal {
     public UNumber mul(UNumber other) {
         return (other instanceof UInteger)? new UInteger(value * other.longValue()): super.mul(other);
     }
+
+    public UNumber mod(UNumber other) {
+        return other instanceof UInteger? new UInteger(value % other.longValue()): super.mod(other);
+    }
 }

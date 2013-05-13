@@ -104,5 +104,8 @@ public class UFloat extends UReal {
         }
     }
 
+    public UNumber mod(UNumber other) {
+        return new UFloat(doubleValue() % other.doubleValue());
+    }
 }
 

@@ -187,4 +187,8 @@ public class URational extends UReal {
             return super.div(other);
         }
     }
+
+    public UNumber mod(UNumber other) {
+        return other instanceof URational? new URational(doubleValue() % other.doubleValue()): super.mod(other);
+    }
 }
