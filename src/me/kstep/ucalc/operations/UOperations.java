@@ -25,7 +25,10 @@ public class UOperations extends Hashtable<CharSequence,UOperation> {
         InvertOp.class,
         NegateOp.class,
         DivideOp.class,
+        RemainderOp.class,
         PowerOp.class,
+        AndOp.class,
+        OrOp.class,
     };
 
     public int autoFill() {
