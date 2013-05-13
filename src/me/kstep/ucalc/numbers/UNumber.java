@@ -182,6 +182,22 @@ public abstract class UNumber extends Number {
         }
     }
 
+    public static UNumber wrap(CharSequence val) throws NumberFormatException {
+        try {
+            return new UInteger(val);
+        } catch (NumberFormatException e0) {
+            try {
+                return new URational(val);
+            } catch (NumberFormatException e1) {
+                try {
+                    return new UFloat(val);
+                } catch (NumberFormatException e2) {
+                    return new UComplex(val);
+                }
+            }
+        }
+    }
+
     public boolean isNaN() {
         return isNaN(this);
     }
