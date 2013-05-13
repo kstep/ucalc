@@ -2,18 +2,18 @@ package me.kstep.ucalc.numbers;
 
 import me.kstep.ucalc.units.Unit;
 
-class UUnitNum extends UNumber {
+public class UUnitNum extends UNumber {
     final static long serialVersionUID = 0L;
 
     public UNumber value;
     public Unit unit;
 
-    UUnitNum() {
+    public UUnitNum() {
         value = new UFloat(0.0);
         unit = Unit.none();
     }
 
-    UUnitNum(Number val) {
+    public UUnitNum(Number val) {
         if (val instanceof UUnitNum) {
             value = ((UUnitNum) val).value;
             unit = ((UUnitNum) val).unit;
@@ -23,12 +23,12 @@ class UUnitNum extends UNumber {
         }
     }
 
-    UUnitNum(CharSequence val) {
+    public UUnitNum(CharSequence val) {
         value = UNumber.wrap(val);
         unit = Unit.none();
     }
 
-    UUnitNum(Number val, Unit u) {
+    public UUnitNum(Number val, Unit u) {
         if (val instanceof UUnitNum) {
             value = ((UUnitNum) val).convert(u).value;
         } else {

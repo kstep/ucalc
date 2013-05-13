@@ -1,6 +1,8 @@
 package me.kstep.ucalc.units;
 import java.util.Arrays;
 
+import me.kstep.ucalc.numbers.UUnitNum;
+
 class Test {
     public static void main(String argv[]) {
         UnitsManager uman = UnitsManager.getInstance();
@@ -91,7 +93,7 @@ class Test {
 
         //System.out.println(sq_m.to(1000, sq_km));
 
-        System.out.println(new NumberUnit(1000, sq_m).convert(cu_m));
+        System.out.println(new UUnitNum(1000, sq_m).convert(cu_m));
         //sq_km.from(1000, sq_m);
 
         //System.out.println(cm);
