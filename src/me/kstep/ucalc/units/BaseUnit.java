@@ -34,7 +34,7 @@ class BaseUnit extends Unit {
     /**
      * The `direct()` method here is very naive, it just tells us
      * base unit can be directly converted to itself only (or that it's
-     * an end vertice of units graph).
+     * an end vertex of units graph).
      */
     public boolean direct(Unit unit) {
         return unit == this;

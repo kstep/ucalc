@@ -99,12 +99,24 @@ class UnitsManager {
      * I directly delegate `units()` and `names()` calls to fetch collection of
      * defined units and their names to underlying hashmap storage.
      */
-    public Collection units() {
+    public Collection<Unit> units() {
         return units.values();
     }
 
-    public Set names() {
+    public Set<String> names() {
         return units.keySet();
+    }
+
+    public Collection<Unit> units(Unit.Category category) {
+        ArrayList<Unit> result = new ArrayList<Unit>();
+
+        for (Unit u: units.values()) {
+            if (u.category == category) {
+                result.add(u);
+            }
+        }
+
+        return result;
     }
 
     /**

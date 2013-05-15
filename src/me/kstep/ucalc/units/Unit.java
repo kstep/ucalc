@@ -15,9 +15,21 @@ import me.kstep.ucalc.numbers.UNumber;
  * existing units.
  *
  * Unit class is a rule, which determines a way given kind of units interact
- * with other units, but does not determine unit names or coeffitients.
+ * with other units, but does not determine unit names or coefficients.
+ * .
  */
 public abstract class Unit {
+
+    public enum Category {
+        TIME,
+        DISTANCE,
+        VOLUME,
+        WEIGHT,
+        ELECTRIC,
+        MISCELLANEOUS
+    }
+
+    final public Category category;
 
     public class ConversionException extends UnitException {
         final static long serialVersionUID = 0L;
@@ -41,15 +53,20 @@ public abstract class Unit {
     // Here come unit name.
     protected String name = "";
 
-    Unit(String name) {
+    Unit(String name, Category category) {
         this.name = name;
+        this.category = category;
+    }
+
+    Unit(String name) {
+        this(name, Category.MISCELLANEOUS);
     }
 
     /**
      * Direct conversion from this to other unit.
      *
      * @param value is the numeric value unit to convert
-     * @param unit is the the unit to convert to
+     * @param unit is the unit to convert to
      */
     abstract public UNumber to(UNumber value, Unit unit) throws UnitException;
 
