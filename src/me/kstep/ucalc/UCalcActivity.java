@@ -205,7 +205,7 @@ public class UCalcActivity extends Activity {
         UEditView editView = (UEditView) findViewById(R.id.view_edit);
 
         if (constants.containsKey(name)) {
-            pushStack(constants.get(name));
+            pushStack(constants.get(name).value);
         }
     }
 
