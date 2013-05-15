@@ -23,7 +23,11 @@ import me.kstep.ucalc.operations.UOperation;
  * produced by `toString()` method of this same class.
  */
 public abstract class UNumber extends Number {
-    
+
+    public UNumber() {}
+    public UNumber(Number value) {}
+    public UNumber(CharSequence value) {}
+
     public class ConversionException extends UNumberException {
         final static long serialVersionUID = 0L;
         ConversionException(Class<? extends Number> targetClass) {
