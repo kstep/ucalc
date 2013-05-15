@@ -1,6 +1,15 @@
 package me.kstep.ucalc;
 
 import java.util.EmptyStackException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.Serializable;
+
+import android.util.Log;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -32,38 +41,59 @@ public class UCalcActivity extends Activity {
     private UConstants constants;
     private UOperations operations;
 
+    private void restoreState(Bundle state) {
+        stack = (UStack) loadFromFile("stack.bin", new UStack());
+        memory = (UMemory) loadFromFile("memory.bin", new UMemory());
+    }
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        constants = new UConstants();
-        stack = new UStack();
-        memory = new UMemory();
+        restoreState(savedInstanceState);
 
+        constants = new UConstants();
         operations = new UOperations();
         operations.autoFill();
 
         ActionBar ab = getActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setHomeButtonEnabled(false);
+
+        showStack();
     }
 
     @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        super.onSaveInstanceState(savedInstanceState);
+    public void onPause() {
+        super.onPause();
 
-        savedInstanceState.putSerializable("stack", stack);
-        savedInstanceState.putSerializable("memory", memory);
+        updateStack();
+        saveToFile("stack.bin", stack);
+        saveToFile("memory.bin", memory);
     }
 
-    @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
+    private void saveToFile(String filename, Serializable object) {
+        try {
+            ObjectOutputStream io = new ObjectOutputStream(openFileOutput(filename, MODE_PRIVATE));
+            io.writeObject(object);
 
-        stack = (UStack) savedInstanceState.getSerializable("stack");
-        memory = (UMemory) savedInstanceState.getSerializable("memory");
+        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
+        }
+    }
+
+    private Object loadFromFile(String filename, Object fallback) {
+        try {
+            ObjectInputStream io = new ObjectInputStream(openFileInput(filename));
+            return io.readObject();
+
+        } catch (ClassNotFoundException e) {
+        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
+        }
+        return fallback;
     }
 
     @Override
