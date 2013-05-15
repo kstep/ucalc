@@ -31,6 +31,11 @@ public class UOperations extends Hashtable<CharSequence,UOperation> {
         OrOp.class,
     };
 
+    public UOperations() {
+        super();
+        autoFill();
+    }
+
     public int autoFill() {
         int loaded = 0;
         for (Class c : OPERATIONS) {

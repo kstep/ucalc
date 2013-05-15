@@ -56,7 +56,6 @@ public class UCalcActivity extends Activity {
 
         constants = new UConstants();
         operations = new UOperations();
-        operations.autoFill();
 
         ActionBar ab = getActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
