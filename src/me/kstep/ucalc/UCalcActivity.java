@@ -104,7 +104,7 @@ public class UCalcActivity extends Activity {
 
             ActionBar ab = getActionBar();
             ab.setHomeButtonEnabled(false);
-            ab.setTitle("UCalc");
+            ab.setTitle(R.string.app_name);
 
             showStack();
 
