@@ -57,10 +57,6 @@ public class UCalcActivity extends Activity {
         constants = new UConstants();
         operations = new UOperations();
 
-        ActionBar ab = getActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setHomeButtonEnabled(false);
-
         showStack();
     }
 
@@ -99,15 +95,7 @@ public class UCalcActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
         case android.R.id.home:
-            FragmentManager fragman = getFragmentManager();
-            fragman.popBackStack();
-
-            ActionBar ab = getActionBar();
-            ab.setHomeButtonEnabled(false);
-            ab.setTitle(R.string.app_name);
-
-            showStack();
-
+            onBackPressed();
             break;
 
         default:
@@ -115,6 +103,17 @@ public class UCalcActivity extends Activity {
         }
 
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        FragmentManager fragman = getFragmentManager();
+        if (fragman.popBackStackImmediate()) {
+            resetActionBarTitle();
+            showStack();
+        } else {
+            finish();
+        }
     }
 
     public UStack getStack() {
@@ -339,5 +338,19 @@ public class UCalcActivity extends Activity {
         txn.add(R.id.main_layout, fragment);
         txn.addToBackStack(null);
         txn.commit();
+    }
+
+    public void setActionBarTitle(String title) {
+        ActionBar ab = getActionBar();
+        ab.setHomeButtonEnabled(true);
+        ab.setDisplayHomeAsUpEnabled(true);
+        ab.setTitle(title);
+    }
+
+    public void resetActionBarTitle() {
+        ActionBar ab = getActionBar();
+        ab.setHomeButtonEnabled(false);
+        ab.setDisplayHomeAsUpEnabled(false);
+        ab.setTitle(R.string.app_name);
     }
 }
