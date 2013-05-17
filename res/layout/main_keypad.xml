@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:shrinkColumns="*">
-    <TableRow>
+    <TableRow android:layout_weight="1">
         <me.kstep.ucalc.widgets.UToggleButton android:text="time" style="@style/UCBtn.Act" />
         <me.kstep.ucalc.widgets.UToggleButton android:text="dist" style="@style/UCBtn.Act" />
         <me.kstep.ucalc.widgets.UToggleButton android:text="vol" style="@style/UCBtn.Act" />
@@ -14,7 +14,7 @@
         <me.kstep.ucalc.widgets.UToggleButton android:text="misc" style="@style/UCBtn.Act" />
     </TableRow>
 
-    <TableRow>
+    <TableRow android:layout_weight="1">
         <Button android:text="per" style="@style/UCBtn.Act" />
         <me.kstep.ucalc.widgets.UOpButton android:text="ln" style="@style/UCBtn.Fun" />
         <me.kstep.ucalc.widgets.UOpButton android:text="log" style="@style/UCBtn.Fun" />
@@ -23,7 +23,7 @@
         <me.kstep.ucalc.widgets.UOpButton android:text="√x" style="@style/UCBtn.Fun" />
     </TableRow>
 
-    <TableRow>
+    <TableRow android:layout_weight="1">
         <me.kstep.ucalc.widgets.UToggleButton android:text="prefix" style="@style/UCBtn.Act" />
         <Button android:text="deg" style="@style/UCBtn.Fun" />
         <me.kstep.ucalc.widgets.UOpButton android:text="sin" style="@style/UCBtn.Fun" />
@@ -32,7 +32,7 @@
         <me.kstep.ucalc.widgets.UOpButton android:text="1/x" style="@style/UCBtn.Fun" />
     </TableRow>
 
-    <TableRow>
+    <TableRow android:layout_weight="1">
         <Button android:text="conv" style="@style/UCBtn.Fun" />
         <me.kstep.ucalc.widgets.UConstButton android:text="π" style="@style/UCBtn.Sym" />
         <Button android:text="7" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
@@ -41,7 +41,7 @@
         <me.kstep.ucalc.widgets.UOpButton android:text="÷" android:textSize="24sp" style="@style/UCBtn.Fun" />
     </TableRow>
 
-    <TableRow>
+    <TableRow android:layout_weight="1">
         <Button android:text="float" style="@style/UCBtn.Mod" />
         <Button android:text="EEX" android:onClick="onExponentButtonClick" style="@style/UCBtn.Sym" />
         <Button android:text="4" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
@@ -51,10 +51,10 @@
     </TableRow>
 
 
-    <TableRow>
+    <TableRow android:layout_weight="1">
         <Button android:text="enter" style="@style/UCBtn.Act" android:onClick="onEnterButtonClick" />
         <TableLayout android:layout_span="5" android:layout_weight="5">
-            <TableRow>
+            <TableRow android:layout_weight="1">
                 <Button android:text="mem" style="@style/UCBtn.Mod" android:onClick="onMemoryButtonClick" />
                 <Button android:text="1" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
                 <Button android:text="2" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
@@ -62,7 +62,7 @@
                 <me.kstep.ucalc.widgets.UOpButton android:text="−" android:textSize="24sp" style="@style/UCBtn.Fun" />
             </TableRow>
 
-            <TableRow>
+            <TableRow android:layout_weight="1">
                 <me.kstep.ucalc.widgets.UToggleButton android:text="alt" style="@style/UCBtn.Mod" />
                 <Button android:text="0" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
                 <Button android:text="." android:onClick="onDotButtonClick" style="@style/UCBtn.Sym" />
