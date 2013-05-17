@@ -58,6 +58,7 @@ public class UCalcActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        resetActionBarTitle();
 
         restoreState(savedInstanceState);
 
@@ -352,6 +353,7 @@ public class UCalcActivity extends Activity {
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle(title);
+        ab.show();
     }
 
     public void resetActionBarTitle() {
@@ -359,5 +361,6 @@ public class UCalcActivity extends Activity {
         ab.setHomeButtonEnabled(false);
         ab.setDisplayHomeAsUpEnabled(false);
         ab.setTitle(R.string.app_name);
+        ab.hide();
     }
 }
