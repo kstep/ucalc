@@ -8,27 +8,27 @@
 
 <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
         <me.kstep.ucalc.views.UEditView android:id="@+id/view_edit" style="@style/UCText.Edit" android:ellipsize="start" android:layout_weight="5.5" />
         <Button android:text="help" style="@style/UCBtn.Opt" />
     </LinearLayout>
 
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="2">
         <me.kstep.ucalc.views.UStackView android:id="@+id/view_stack" style="@style/UCText.Stack" android:layout_weight="3.9" />
 
         <LinearLayout android:layout_weight="2" android:layout_height="wrap_content" android:layout_width="0dp" android:orientation="vertical">
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
                 <Button android:text="stack" style="@style/UCBtn.Mod" android:onClick="onStackButtonClick" />
                 <Button android:text="clear" android:onClick="onClearButtonClick" style="@style/UCBtn.Mod" />
             </LinearLayout>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
                 <Button android:text="undo" android:onClick="onUndoButtonClick" style="@style/UCBtn.Mod" />
                 <Button android:text="←" android:onClick="onBackspaceButtonClick" android:textSize="24sp" style="@style/UCBtn.Mod" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
-    <me.kstep.ucalc.views.UKeypadView android:layout_width="match_parent" android:layout_height="match_parent" />
+    <me.kstep.ucalc.views.UKeypadView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="7" />
 
     <!-- TODO: nice dotted pager for different modes switching
 <android.support.v4.view.ViewPager
