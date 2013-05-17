@@ -6,6 +6,7 @@
         <item name="android:padding">5dp</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:text"></item>
+        <item name="android:singleLine">false</item>
     </style>
     <style name="UCText.Stack">
         <item name="android:gravity">left</item>
