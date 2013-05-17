@@ -35,15 +35,22 @@ import me.kstep.ucalc.operations.UOperation;
 import me.kstep.ucalc.numbers.UNumberException;
 import me.kstep.ucalc.numbers.UNumber;
 
+import me.kstep.ucalc.units.Units;
+import me.kstep.ucalc.units.UnitsManager;
+
 public class UCalcActivity extends Activity {
     private UStack stack;
     private UMemory memory;
     private UConstants constants;
     private UOperations operations;
+    private UnitsManager units;
 
     private void restoreState(Bundle state) {
         stack = (UStack) loadFromFile("stack.bin", new UStack());
         memory = (UMemory) loadFromFile("memory.bin", new UMemory());
+
+        units = UnitsManager.getInstance();
+        Units.load(units);
     }
 
     /** Called when the activity is first created. */

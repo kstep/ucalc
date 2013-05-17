@@ -33,9 +33,9 @@ import me.kstep.ucalc.numbers.UNumber;
 /**
  * Now to the core class itself.
  */
-class UnitsManager {
+public class UnitsManager {
 
-    static class UnitNotFoundException extends UnitException {
+    static public class UnitNotFoundException extends UnitException {
         final static long serialVersionUID = 0L;
         UnitNotFoundException(String name) {
             super("Unit not found: `" + name + "'");
