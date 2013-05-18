@@ -71,10 +71,14 @@ public class UStackFragment extends ListFragment {
         ((Button) activity.findViewById(R.id.stack_paste_button)).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 try {
-                    UNumber item = new UFloat(Double.valueOf(clipboard.getPrimaryClip().getItemAt(0).coerceToText(activity).toString()));
-                    adapter.insert(item, 0);
-                    getListView().setItemChecked(0, true);
+                    Double value = Double.valueOf(clipboard.getPrimaryClip().getItemAt(0).coerceToText(activity).toString());
+                    if (value != null) {
+                        UNumber item = new UFloat(value);
+                        adapter.insert(item, 0);
+                        getListView().setItemChecked(0, true);
+                    }
 
+                } catch (NullPointerException e) {
                 } catch (NumberFormatException e) {
                 }
             }
