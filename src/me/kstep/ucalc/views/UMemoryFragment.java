@@ -29,8 +29,6 @@ public class UMemoryFragment extends ListFragment {
 
         final UCalcActivity activity = (UCalcActivity) getActivity();
 
-        activity.setActionBarTitle("Memory");
- 
         adapter = new ArrayAdapter<UNumber>(activity, R.layout.list_item, R.id.list_item, activity.getMemory());
         setListAdapter(adapter);
 

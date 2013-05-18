@@ -13,6 +13,7 @@ import android.util.Log;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentBreadCrumbs;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Gravity;
@@ -58,7 +59,6 @@ public class UCalcActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        resetActionBarTitle();
 
         restoreState(savedInstanceState);
 
@@ -66,6 +66,18 @@ public class UCalcActivity extends Activity {
         operations = new UOperations();
 
         showStack();
+
+        FragmentBreadCrumbs bc = new FragmentBreadCrumbs(this);
+        bc.setActivity(this);
+        bc.setMaxVisible(1);
+
+        ActionBar ab = getActionBar();
+        ab.setCustomView(bc);
+        ab.setDisplayShowCustomEnabled(true);
+        ab.setHomeButtonEnabled(true);
+        ab.setDisplayHomeAsUpEnabled(true);
+        ab.setDisplayShowTitleEnabled(false);
+        ab.hide();
     }
 
     @Override
@@ -117,7 +129,7 @@ public class UCalcActivity extends Activity {
     public void onBackPressed() {
         FragmentManager fragman = getFragmentManager();
         if (fragman.popBackStackImmediate()) {
-            resetActionBarTitle();
+            getActionBar().hide();
             showStack();
         } else {
             finish();
@@ -325,7 +337,7 @@ public class UCalcActivity extends Activity {
             stack_fragment = new UStackFragment();
         }
 
-        startFragment(stack_fragment);
+        startFragment(stack_fragment, "Stack");
     }
 
     private UMemoryFragment memory_fragment;
@@ -334,33 +346,20 @@ public class UCalcActivity extends Activity {
             memory_fragment = new UMemoryFragment();
         }
 
-        startFragment(memory_fragment);
+        startFragment(memory_fragment, "Memory");
     }
 
-    public void startFragment(Fragment fragment) {
+    public void startFragment(Fragment fragment, String title) {
         updateStack();
 
         FragmentManager fragman = getFragmentManager();
         FragmentTransaction txn = fragman.beginTransaction();
 
+        txn.setBreadCrumbTitle(title);
         txn.add(R.id.main_layout, fragment);
         txn.addToBackStack(null);
         txn.commit();
-    }
 
-    public void setActionBarTitle(String title) {
-        ActionBar ab = getActionBar();
-        ab.setHomeButtonEnabled(true);
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setTitle(title);
-        ab.show();
-    }
-
-    public void resetActionBarTitle() {
-        ActionBar ab = getActionBar();
-        ab.setHomeButtonEnabled(false);
-        ab.setDisplayHomeAsUpEnabled(false);
-        ab.setTitle(R.string.app_name);
-        ab.hide();
+        getActionBar().show();
     }
 }
