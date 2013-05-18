@@ -146,6 +146,11 @@ public class UnitsManager {
         return unit;
     }
 
+    public Unit add(Unit unit, Unit.Category category) {
+        unit.category = category;
+        return add(unit);
+    }
+
     public Unit get(String name) {
         Unit unit = units.get(name);
         if (unit == null) {

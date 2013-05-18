@@ -29,7 +29,7 @@ public abstract class Unit {
         MISCELLANEOUS
     }
 
-    final public Category category;
+    public Category category;
 
     public class ConversionException extends UnitException {
         final static long serialVersionUID = 0L;
