@@ -30,7 +30,7 @@ import me.kstep.ucalc.views.UStackView;
 
 import me.kstep.ucalc.views.UStackFragment;
 import me.kstep.ucalc.views.UMemoryFragment;
-import me.kstep.ucalc.views.UModesFragment;
+import me.kstep.ucalc.views.URadicesFragment;
 
 import me.kstep.ucalc.operations.UOperations;
 import me.kstep.ucalc.operations.UOperation;
@@ -121,11 +121,7 @@ public class UCalcActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        FragmentManager fragman = getFragmentManager();
-        if (fragman.popBackStackImmediate()) {
-            getActionBar().hide();
-            showStack();
-        } else {
+        if (!finishFragment()) {
             finish();
         }
     }
@@ -136,6 +132,24 @@ public class UCalcActivity extends Activity {
 
     public UMemory getMemory() {
         return memory;
+    }
+
+    private int radix;
+    public int getRadix() {
+        return radix;
+    }
+
+    public void setRadix(int value) {
+        radix = value;
+
+        ((Button) findViewById(R.id.radix_button)).setText(
+            radix == 0? "float":
+            radix == 16? "hex":
+            radix == 10? "dec":
+            radix == 8? "oct":
+            radix == 2? "bin":
+            "rad" + String.valueOf(radix)
+        );
     }
 
     /**
@@ -343,13 +357,13 @@ public class UCalcActivity extends Activity {
         startFragment(memory_fragment, "Memory");
     }
 
-    private UModesFragment modes_fragment;
-    public void onSelectModeButtonClick(View view) {
-        if (modes_fragment == null) {
-            modes_fragment = new UModesFragment();
+    private URadicesFragment radices_fragment;
+    public void onSelectRadixButtonClick(View view) {
+        if (radices_fragment == null) {
+            radices_fragment = new URadicesFragment();
         }
 
-        startFragment(modes_fragment, "Mode");
+        startFragment(radices_fragment, null);
     }
 
     public void startFragment(Fragment fragment, String title) {
@@ -362,8 +376,21 @@ public class UCalcActivity extends Activity {
         txn.addToBackStack(null);
         txn.commit();
 
-        ActionBar ab = getActionBar();
-        ab.setTitle(title);
-        ab.show();
+        if (title != null) {
+            ActionBar ab = getActionBar();
+            ab.setTitle(title);
+            ab.show();
+        }
+    }
+
+    public boolean finishFragment() {
+        FragmentManager fragman = getFragmentManager();
+        if (fragman.popBackStackImmediate()) {
+            getActionBar().hide();
+            showStack();
+            return true;
+        }
+
+        return false;
     }
 }
