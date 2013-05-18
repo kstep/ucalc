@@ -55,6 +55,9 @@ public class Units {
             uman.add(new LinearUnit("cal", 4.1868, uman.get("J")));
             uman.add(new LinearUnit("dyn", 0.01, new MultipleUnit(uman.get("g"), uman.get("m"), new PowerUnit(uman.get("s"), -2))));
             uman.add(new LinearUnit("erg", 1e-7, uman.get("J")));
+
+            uman.add(new BaseUnit("rad"));
+            uman.add(new LinearUnit("deg", 180.0 / Math.PI, uman.get("rad")));
             // TODO
 
             // Electric
