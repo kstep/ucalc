@@ -5,6 +5,9 @@ import android.content.Context;
 import android.view.Gravity;
 import android.util.AttributeSet;
 
+import android.text.Html;
+import android.text.Spanned;
+
 import me.kstep.ucalc.numbers.UNumber;
 
 public class UEditView extends TextView {
@@ -27,12 +30,34 @@ public class UEditView extends TextView {
     private Number value;
     private boolean syncValue = false;
 
+    public static Spanned unicodeToHtml(CharSequence value) {
+        return Html.fromHtml(
+               value.toString()
+                    .replace("\n", "<br />")
+                    .replace("⁰", "<sup><small>0</small></sup>")
+                    .replace("¹", "<sup><small>1</small></sup>")
+                    .replace("²", "<sup><small>2</small></sup>")
+                    .replace("³", "<sup><small>3</small></sup>")
+                    .replace("⁴", "<sup><small>4</small></sup>")
+                    .replace("⁵", "<sup><small>5</small></sup>")
+                    .replace("⁶", "<sup><small>6</small></sup>")
+                    .replace("⁷", "<sup><small>7</small></sup>")
+                    .replace("⁸", "<sup><small>8</small></sup>")
+                    .replace("⁹", "<sup><small>9</small></sup>")
+                    .replace("¯", "<sup><small>−</small></sup>")
+                    .replace("</small></sup><sup><small>", ""));
+    }
+
+    public void setHtml(CharSequence value) {
+        setText(unicodeToHtml(value));
+    }
+
     public void setValue(Number newval) {
         value = newval;
         if (UNumber.isNaN(newval)) {
             setText("");
         } else {
-            setText(value.toString());
+            setHtml(value.toString());
         }
         syncValue = true;
     }
@@ -63,7 +88,7 @@ public class UEditView extends TextView {
      */
     public void chop(int chars) {
         CharSequence text = getText();
-        setText(text.subSequence(0, text.length() - chars));
+        setHtml(text.subSequence(0, text.length() - chars));
     }
     public void chop() {
         chop(1);

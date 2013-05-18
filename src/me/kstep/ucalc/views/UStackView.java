@@ -51,6 +51,6 @@ public class UStackView extends TextView {
             result.insert(0, "· ");
             result.insert(0, i--);
         }
-        setText(result.toString());
+        setText(UEditView.unicodeToHtml(result));
     }
 }
