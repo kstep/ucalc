@@ -1,7 +1,6 @@
 package me.kstep.ucalc.views;
 
 import android.app.ListFragment;
-import android.app.ActionBar;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
