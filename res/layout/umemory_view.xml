@@ -3,12 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"    
     xmlns:dslv="http://schemas.android.com/apk/res/me.kstep.ucalc"
     android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <com.mobeta.android.dslv.DragSortListView
         android:id="@id/android:list"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="#ffffff"
@@ -32,7 +32,7 @@
 
     <LinearLayout 
         android:layout_alignParentLeft="true"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:background="@color/main_bg"

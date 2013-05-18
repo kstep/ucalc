@@ -5,8 +5,8 @@
     android:stretchColumns="0"
     android:shrinkColumns="1"
     android:gravity="bottom"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 <TableRow>
 <TextView 
@@ -20,7 +20,7 @@
 
 <ImageView
     android:src="@drawable/list_item_handle"
-    android:layout_height="fill_parent"
+    android:layout_height="match_parent"
     android:paddingRight="20dp"
     android:id="@+id/item_handle"
     />

@@ -42,7 +42,7 @@
     </TableRow>
 
     <TableRow android:layout_weight="1">
-        <Button android:text="float" style="@style/UCBtn.Mod" />
+        <Button android:text="float" style="@style/UCBtn.Mod" android:onClick="onSelectModeButtonClick" />
         <Button android:text="EEX" android:onClick="onExponentButtonClick" style="@style/UCBtn.Sym" />
         <Button android:text="4" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
         <Button android:text="5" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
