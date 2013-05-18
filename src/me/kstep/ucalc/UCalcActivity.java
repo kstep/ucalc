@@ -13,7 +13,6 @@ import android.util.Log;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentBreadCrumbs;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Gravity;
@@ -67,16 +66,9 @@ public class UCalcActivity extends Activity {
 
         showStack();
 
-        FragmentBreadCrumbs bc = new FragmentBreadCrumbs(this);
-        bc.setActivity(this);
-        bc.setMaxVisible(1);
-
         ActionBar ab = getActionBar();
-        ab.setCustomView(bc);
-        ab.setDisplayShowCustomEnabled(true);
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
-        ab.setDisplayShowTitleEnabled(false);
         ab.hide();
     }
 
@@ -355,11 +347,12 @@ public class UCalcActivity extends Activity {
         FragmentManager fragman = getFragmentManager();
         FragmentTransaction txn = fragman.beginTransaction();
 
-        txn.setBreadCrumbTitle(title);
         txn.add(R.id.main_layout, fragment);
         txn.addToBackStack(null);
         txn.commit();
 
-        getActionBar().show();
+        ActionBar ab = getActionBar();
+        ab.setTitle(title);
+        ab.show();
     }
 }
