@@ -55,7 +55,7 @@ public class UUnitNum extends UNumber {
     }
 
     public String toString() {
-        return value.toString() + unit.toString();
+        return value.toString() + " " + unit.toString();
     }
 
     public UUnitNum convert(Unit unit) {
