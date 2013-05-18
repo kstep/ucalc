@@ -339,6 +339,14 @@ public class UCalcActivity extends Activity {
         showStack();
     }
 
+    private Unit angleUnit;
+    public void onAngleUnitButtonClick(View view) {
+        angleUnit = angleUnit == units.get("rad")?
+            units.get("deg"):
+            units.get("rad");
+        ((Button) view).setText(angleUnit.toString());
+    }
+
     private UStackFragment stack_fragment;
     public void onStackButtonClick(View view) {
         if (stack_fragment == null) {
