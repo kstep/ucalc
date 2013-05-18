@@ -26,9 +26,15 @@
     <TableRow android:layout_weight="1">
         <me.kstep.ucalc.widgets.UToggleButton android:text="prefix" style="@style/UCBtn.Act" />
         <Button android:text="deg" android:onClick="onAngleUnitButtonClick" style="@style/UCBtn.Fun" />
-        <me.kstep.ucalc.widgets.UOpButton android:text="sin" style="@style/UCBtn.Fun" />
-        <me.kstep.ucalc.widgets.UOpButton android:text="cos" style="@style/UCBtn.Fun" />
-        <me.kstep.ucalc.widgets.UOpButton android:text="tan" style="@style/UCBtn.Fun" />
+
+        <me.kstep.ucalc.widgets.UOpButton android:id="@+id/sin_button" android:text="sin" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.widgets.UOpButton android:id="@+id/cos_button" android:text="cos" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.widgets.UOpButton android:id="@+id/tan_button" android:text="tan" style="@style/UCBtn.Fun" />
+
+        <me.kstep.ucalc.widgets.UOpButton android:id="@+id/asin_button" android:visibility="gone" android:text="asin" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.widgets.UOpButton android:id="@+id/acos_button" android:visibility="gone" android:text="acos" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.widgets.UOpButton android:id="@+id/atan_button" android:visibility="gone" android:text="atan" style="@style/UCBtn.Fun" />
+
         <me.kstep.ucalc.widgets.UOpButton android:text="1/x" style="@style/UCBtn.Fun" />
     </TableRow>
 
@@ -63,7 +69,7 @@
             </TableRow>
 
             <TableRow android:layout_weight="1">
-                <me.kstep.ucalc.widgets.UToggleButton android:text="alt" style="@style/UCBtn.Mod" />
+                <me.kstep.ucalc.widgets.UToggleButton android:onClick="onAltModeButtonClick" android:text="alt" style="@style/UCBtn.Mod" />
                 <Button android:text="0" android:onClick="onDigitButtonClick" style="@style/UCBtn.Sym" />
                 <Button android:text="." android:onClick="onDotButtonClick" style="@style/UCBtn.Sym" />
                 <Button android:text="+/−" android:onClick="onSignToggleButtonClick" style="@style/UCBtn.Sym" />

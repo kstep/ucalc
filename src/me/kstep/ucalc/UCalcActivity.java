@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ import me.kstep.ucalc.operations.UOperation;
 import me.kstep.ucalc.numbers.UNumberException;
 import me.kstep.ucalc.numbers.UNumber;
 
+import me.kstep.ucalc.units.Unit;
 import me.kstep.ucalc.units.Units;
 import me.kstep.ucalc.units.UnitsManager;
 
@@ -345,6 +347,26 @@ public class UCalcActivity extends Activity {
             units.get("deg"):
             units.get("rad");
         ((Button) view).setText(angleUnit.toString());
+    }
+
+    public void onAltModeButtonClick(View view) {
+        CompoundButton button = (CompoundButton) view;
+
+        if (button.isChecked()) {
+            for (int id : new int[]{ R.id.sin_button, R.id.cos_button, R.id.tan_button }) {
+                findViewById(id).setVisibility(View.GONE);
+            }
+            for (int id : new int[]{ R.id.asin_button, R.id.acos_button, R.id.atan_button }) {
+                findViewById(id).setVisibility(View.VISIBLE);
+            }
+        } else {
+            for (int id : new int[]{ R.id.sin_button, R.id.cos_button, R.id.tan_button }) {
+                findViewById(id).setVisibility(View.VISIBLE);
+            }
+            for (int id : new int[]{ R.id.asin_button, R.id.acos_button, R.id.atan_button }) {
+                findViewById(id).setVisibility(View.GONE);
+            }
+        }
     }
 
     private UStackFragment stack_fragment;
