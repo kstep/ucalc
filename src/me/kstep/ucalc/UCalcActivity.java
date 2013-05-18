@@ -27,8 +27,10 @@ import android.app.ActionBar;
 
 import me.kstep.ucalc.views.UEditView;
 import me.kstep.ucalc.views.UStackView;
+
 import me.kstep.ucalc.views.UStackFragment;
 import me.kstep.ucalc.views.UMemoryFragment;
+import me.kstep.ucalc.views.UModesFragment;
 
 import me.kstep.ucalc.operations.UOperations;
 import me.kstep.ucalc.operations.UOperation;
@@ -339,6 +341,15 @@ public class UCalcActivity extends Activity {
         }
 
         startFragment(memory_fragment, "Memory");
+    }
+
+    private UModesFragment modes_fragment;
+    public void onSelectModeButtonClick(View view) {
+        if (modes_fragment == null) {
+            modes_fragment = new UModesFragment();
+        }
+
+        startFragment(modes_fragment, "Mode");
     }
 
     public void startFragment(Fragment fragment, String title) {
