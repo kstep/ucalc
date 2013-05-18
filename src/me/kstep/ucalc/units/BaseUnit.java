@@ -48,5 +48,13 @@ class BaseUnit extends Unit {
     public boolean equals(Unit other) {
         return other == this;
     }
+
+    public Unit simplify() {
+        return this;
+    }
+
+    public String represent() {
+        return name;
+    }
 }
 

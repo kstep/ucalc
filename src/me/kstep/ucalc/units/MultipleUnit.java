@@ -2,6 +2,8 @@ package me.kstep.ucalc.units;
 
 import me.kstep.ucalc.numbers.UNumber;
 
+import java.util.ArrayList;
+
 class MultipleUnit extends ComplexUnit {
     Unit[] targetUnits;
 
@@ -84,6 +86,73 @@ class MultipleUnit extends ComplexUnit {
         }
 
         return true;
+    }
+
+    public Unit simplify() {
+        ArrayList<Unit> units = new ArrayList<Unit>();
+
+        // First simplify and flatten all inner units
+        for (Unit unit : targetUnits) {
+            Unit u = unit.simplify();
+
+            if (u instanceof MultipleUnit) {
+                Unit[] subunits = ((MultipleUnit) u).targetUnits;
+                for (Unit subunit : subunits) {
+                    units.add(subunit);
+                }
+            } else {
+                units.add(u);
+            }
+        }
+
+        // Then group units by class
+        // All equal units should be packed into single power unit.
+        // All power units with equal target units should be packed into single
+        // power unit with power equal to sum of folding units powers.
+        /*for (int i = 0; i < units.size(); i++) {
+            Unit unit = units.get(i);
+            if (unit == null) continue;
+
+            for (int j = i + 1; j < units.size(); j++) {
+                Unit other = units.get(j);
+                if (unit.getClass() == other.getClass()) {
+                    if (unit instanceof PowerUnit) {
+                        PowerUnit a = (PowerUnit) unit;
+                        PowerUnit b = (PowerUnit) other;
+
+                        if (a.targetUnit.equals(b.targetUnit)) {
+                            unit = new PowerUnit(a.name, a.targetUnit, a.power.add(b.power));
+                            units.set(j, null);
+                        }
+                    } else if (unit instanceof LinearUnit) {
+                        //LinearUnit a = (LinearUnit) unit;
+                        //LinearUnit b = (LinearUnit) other;
+
+                        //if (a.targetUnit.equals(b.targetUnit)) {
+                            //unit = new LinearUnit(a.name, a.targetUnit, a.power.add(b.power));
+                            //units[i] = null;
+                        //}
+                    } else if (unit instanceof BaseUnit) {
+                        unit = unit.mul(unit);
+                        units.set(j, null);
+                    }
+                }
+            }
+
+            units.set(i, unit);
+        }*/
+
+        return new MultipleUnit(name, units.toArray(targetUnits));
+    }
+
+    public String represent() {
+        StringBuilder name = new StringBuilder(targetUnits.length * 2 - 1);
+        for (Unit unit: targetUnits) {
+            name.append(unit.represent() + "·");
+        }
+
+        name.setLength(name.length() - 1);
+        return name.toString();
     }
 }
 

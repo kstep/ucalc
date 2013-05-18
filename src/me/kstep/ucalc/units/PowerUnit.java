@@ -137,5 +137,13 @@ class PowerUnit extends LinearUnit {
 
         return super.mul(other);
     }
+
+    public Unit simplify() {
+        Unit unit = targetUnit.simplify();
+        if (unit instanceof PowerUnit) {
+            return new PowerUnit(name, ((PowerUnit) unit).targetUnit, ((PowerUnit) unit).power.mul(power));
+        }
+        return new PowerUnit(name, unit, power);
+    }
 }
 

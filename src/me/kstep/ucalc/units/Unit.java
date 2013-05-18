@@ -135,5 +135,8 @@ public abstract class Unit {
     public static Unit none() {
         return NoneUnit.getInstance();
     }
+
+    abstract public Unit simplify();
+    abstract public String represent();
 }
 

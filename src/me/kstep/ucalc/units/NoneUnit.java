@@ -32,5 +32,13 @@ final class NoneUnit extends Unit {
     public boolean equals(Unit other) {
         return other == instance;
     }
+
+    public Unit simplify() {
+        return this;
+    }
+
+    public String represent() {
+        return "";
+    }
 }
 

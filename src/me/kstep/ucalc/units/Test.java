@@ -91,26 +91,47 @@ class Test {
         Unit cu_dm = uman.get(PowerUnit.class, "dm³", uman.get(UnitPrefix.class, "dm", "d", m), 3);
         Unit litre = uman.get(LinearUnit.class, "l", 0.001, cu_m);
 
-        //System.out.println(sq_m.to(1000, sq_km));
 
-        System.out.println(new UUnitNum(1000, sq_m).convert(cu_m));
+
+        //println(sq_m.to(1000, sq_km));
+        Unit x = new BaseUnit("x");
+
+        Unit t;
+        
+        //t = new PowerUnit(new PowerUnit(x, 2), 3);
+        //println(t);
+        //println(t.simplify());
+
+        t = new UnitPrefix("k", new LinearUnit("yy", 6, new LinearUnit("y", 10, x, 5), 9));
+        println(((LinearUnit) t).represent());
+        println(((LinearUnit) t.simplify()).represent());
+
+        t = new MultipleUnit(x, x, x);
+        println(t.represent());
+        println(t.simplify().represent());
+
+        //println(new UUnitNum(1000, sq_m).convert(cu_m));
         //sq_km.from(1000, sq_m);
 
-        //System.out.println(cm);
-        //System.out.println(
+        //println(cm);
+        //println(
         //uman.convert(35, litre, "dm³")
         //(new PowerUnit(m, 3)).to(200, new PowerUnit(inch, 3))
         //(m.to(200, inch))
         //);
 
         //uman.addAlias("km3", "km³");
-        //System.out.println(Arrays.toString(uman.findAliases("Hz")));
+        //println(Arrays.toString(uman.findAliases("Hz")));
 
-        //System.out.println(mile.to(100, m));
+        //println(mile.to(100, m));
 
-        //System.out.println(uman.convert(60, mph, sec));
-        //System.out.println(mph.to(100, mps));
-        //System.out.println(mps.to(100, kmh));
-        //System.out.println(mph.to(10, kmh));
+        //println(uman.convert(60, mph, sec));
+        //println(mph.to(100, mps));
+        //println(mps.to(100, kmh));
+        //println(mph.to(10, kmh));
+    }
+
+    private static void println(Object o) {
+        System.out.println(o.toString());
     }
 }

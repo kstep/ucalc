@@ -150,4 +150,15 @@ class LinearUnit extends Unit {
         return this.name;
     }
 
+    public Unit simplify() {
+        Unit unit = targetUnit.simplify();
+        if (unit instanceof LinearUnit) {
+            return new LinearUnit(name, ((LinearUnit) unit).scale.mul(scale), ((LinearUnit) unit).targetUnit, ((LinearUnit) unit).offset.mul(scale).add(offset));
+        }
+        return new LinearUnit(name, scale, unit, offset);
+    }
+
+    public String represent() {
+        return "(" + scale + "·" + targetUnit.represent() + " + " + offset + ")";
+    }
 }

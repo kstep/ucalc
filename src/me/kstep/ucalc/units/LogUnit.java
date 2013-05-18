@@ -70,4 +70,12 @@ class LogUnit extends Unit {
             return new UFloat(Math.pow(this.base, value.doubleValue() / this.coeff));
         }
     }
+
+    public String represent() {
+        return name;
+    }
+
+    public Unit simplify() {
+        return this;
+    }
 }
