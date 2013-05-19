@@ -9,4 +9,8 @@ public class UStack extends Stack<UNumber> {
     public void push(Number item) {
         push(UNumber.wrap(item));
     }
+
+    public UStack clone() {
+        return (UStack) super.clone();
+    }
 }

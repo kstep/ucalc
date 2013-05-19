@@ -44,6 +44,7 @@ import me.kstep.ucalc.units.UnitsManager;
 
 public class UCalcActivity extends Activity {
     private UStack stack;
+    private UUndoStack undos;
     private UMemory memory;
     private UConstants constants;
     private UOperations operations;
@@ -67,6 +68,7 @@ public class UCalcActivity extends Activity {
 
         constants = new UConstants();
         operations = new UOperations();
+        undos = new UUndoStack();
 
         showStack();
 
@@ -160,6 +162,7 @@ public class UCalcActivity extends Activity {
     private void pushStack(Number value) {
         if (!UNumber.isNaN(value)) {
             stack.push(value);
+            undos.push(stack.clone());
             showStack();
         }
     }
@@ -291,7 +294,11 @@ public class UCalcActivity extends Activity {
     }
 
     public void onUndoButtonClick(View view) {
-        // TODO
+        try {
+            stack = undos.pop();
+            showStack();
+        } catch (EmptyStackException e) {
+        }
     }
 
     public void onSignToggleButtonClick(View view) {
@@ -337,6 +344,7 @@ public class UCalcActivity extends Activity {
     }
 
     public void onClearButtonClick(View view) {
+        undos.push(stack.clone());
         stack.clear();
         showStack();
     }
