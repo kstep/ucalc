@@ -11,11 +11,15 @@ public class Pair<A extends UNumber, B extends UNumber> {
         second = b;
     }
 
-    public Pair<UUnitNum, UUnitNum> withUnits(Unit unit1, Unit unit2) {
-        return new Pair<UUnitNum, UUnitNum>(new UUnitNum(first, unit1), new UUnitNum(second, unit2));
+    public Pair<? extends UNumber, ? extends UNumber> withUnits(Unit unit1, Unit unit2) {
+        if (unit1 == Unit.NONE && unit2 == Unit.NONE) {
+            return this;
+        } else {
+            return new Pair<UUnitNum, UUnitNum>(new UUnitNum(first, unit1), new UUnitNum(second, unit2));
+        }
     }
 
-    public Pair<UUnitNum, UUnitNum> withUnits(Unit unit) {
+    public Pair<? extends UNumber, ? extends UNumber> withUnits(Unit unit) {
         return withUnits(unit, unit);
     }
 }
