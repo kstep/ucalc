@@ -1,6 +1,7 @@
 package me.kstep.ucalc.numbers;
 
 import me.kstep.ucalc.operations.UOperation;
+import me.kstep.ucalc.units.Unit;
 
 /**
  * A number with some defined basic operations like addition, substruction,
@@ -154,7 +155,17 @@ public abstract class UNumber extends Number {
     }
 
     public static Pair<?,?> coerce(UNumber num1, UNumber num2) {
-        if (num1 instanceof UComplex || num2 instanceof UComplex) {
+
+        if (num1 instanceof UUnitNum && num2 instanceof UUnitNum) {
+            return coerce(((UUnitNum) num1).value, ((UUnitNum) num2).value).withUnits(((UUnitNum) num1).unit, ((UUnitNum) num2).unit);
+
+        } else if (num1 instanceof UUnitNum) {
+            return coerce(((UUnitNum) num1).value, num2).withUnits(((UUnitNum) num1).unit, Unit.NONE);
+
+        } else if (num2 instanceof UUnitNum) {
+            return coerce(num1, ((UUnitNum) num2).value).withUnits(Unit.NONE, ((UUnitNum) num2).unit);
+
+        } else if (num1 instanceof UComplex || num2 instanceof UComplex) {
             return new Pair<UComplex, UComplex>(new UComplex(num1), new UComplex(num2));
 
         } else if (num1 instanceof UFloat || num2 instanceof UFloat) {
