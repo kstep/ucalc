@@ -10,7 +10,7 @@ public class UUnitNum extends UNumber {
 
     public UUnitNum() {
         value = new UFloat(0.0);
-        unit = Unit.none();
+        unit = Unit.NONE;
     }
 
     public UUnitNum(Number val) {
@@ -19,13 +19,13 @@ public class UUnitNum extends UNumber {
             unit = ((UUnitNum) val).unit;
         } else {
             value = UNumber.wrap(val);
-            unit = Unit.none();
+            unit = Unit.NONE;
         }
     }
 
     public UUnitNum(CharSequence val) {
         value = UNumber.wrap(val);
-        unit = Unit.none();
+        unit = Unit.NONE;
     }
 
     public UUnitNum(Number val, Unit u) {

@@ -3,6 +3,7 @@ package me.kstep.ucalc.units;
 import me.kstep.ucalc.numbers.UNumber;
 import me.kstep.ucalc.numbers.UFloat;
 import me.kstep.ucalc.numbers.UInteger;
+import me.kstep.ucalc.units.Unit;
 
 /**
  * This is a very common and interesting class of `PowerUnit`s.
@@ -12,7 +13,7 @@ import me.kstep.ucalc.numbers.UInteger;
 class PowerUnit extends LinearUnit {
 
     // This is unit's power.
-    UInteger power = new UInteger(1);
+    UInteger power;
 
     /**
      * The main constructor, which determines relation between
@@ -112,38 +113,24 @@ class PowerUnit extends LinearUnit {
             return targetUnit.from(new UFloat(1.0), unit).pow(power).mul(value);
     }
 
-    public Unit pow(UNumber pow) {
-        return new PowerUnit(targetUnit, power.add(pow));
-    }
-
-    public Unit div(Unit other) {
-        if (other instanceof PowerUnit) {
-            PowerUnit unit = (PowerUnit) other;
-            if (unit.targetUnit == targetUnit) {
-                return new PowerUnit(targetUnit, power.sub(unit.power));
-            }
-        }
-
-        return super.div(other);
-    }
-
-    public Unit mul(Unit other) {
-        if (other instanceof PowerUnit) {
-            PowerUnit unit = (PowerUnit) other;
-            if (unit.targetUnit == targetUnit) {
-                return new PowerUnit(targetUnit, power.add(unit.power));
-            }
-        }
-
-        return super.mul(other);
-    }
-
     public Unit simplify() {
         Unit unit = targetUnit.simplify();
         if (unit instanceof PowerUnit) {
-            return new PowerUnit(name, ((PowerUnit) unit).targetUnit, ((PowerUnit) unit).power.mul(power));
+            PowerUnit other = (PowerUnit) unit;
+            UInteger newpower = (UInteger) other.power.mul(power);
+
+            switch (newpower.intValue()) {
+                case 0:
+                    return Unit.NONE;
+                case 1:
+                    return other.targetUnit;
+                default:
+                    return new PowerUnit(name, other.targetUnit, newpower);
+            }
+        } else {
+            return new PowerUnit(name, unit, power);
         }
-        return new PowerUnit(name, unit, power);
     }
+
 }
 

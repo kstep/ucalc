@@ -72,7 +72,8 @@ class LogUnit extends Unit {
     }
 
     public String represent() {
-        return name;
+        String logexpr = base == Math.E? "ln": base == 10.0? "lg": "log[" + String.valueOf(base) + "]";
+        return coeff == 1.0? logexpr: String.valueOf(coeff) + "·" + logexpr;
     }
 
     public Unit simplify() {

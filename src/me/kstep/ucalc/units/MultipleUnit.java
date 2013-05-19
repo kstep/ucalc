@@ -1,8 +1,10 @@
 package me.kstep.ucalc.units;
 
 import me.kstep.ucalc.numbers.UNumber;
+import me.kstep.ucalc.numbers.UInteger;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 class MultipleUnit extends ComplexUnit {
     Unit[] targetUnits;
@@ -89,60 +91,56 @@ class MultipleUnit extends ComplexUnit {
     }
 
     public Unit simplify() {
-        ArrayList<Unit> units = new ArrayList<Unit>();
+        HashMap<Unit,Long> powers = new HashMap<Unit,Long>(targetUnits.length * 2);
 
         // First simplify and flatten all inner units
         for (Unit unit : targetUnits) {
+            if (unit == null) {
+                continue;
+            }
+
             Unit u = unit.simplify();
 
-            if (u instanceof MultipleUnit) {
+            if (u == Unit.NONE) {
+                continue;
+
+            } else if (u instanceof MultipleUnit) {
                 Unit[] subunits = ((MultipleUnit) u).targetUnits;
                 for (Unit subunit : subunits) {
-                    units.add(subunit);
+                    if (subunit == Unit.NONE) {
+                        continue;
+                    } else if (subunit instanceof PowerUnit) {
+                        PowerUnit other = (PowerUnit) subunit;
+                        powers.put(other.targetUnit, (powers.containsKey(other.targetUnit)? powers.get(other.targetUnit): 0) + other.power.longValue());
+                    } else {
+                        powers.put(subunit, (powers.containsKey(subunit)? powers.get(subunit): 0) + 1);
+                    }
                 }
+
+            } else if (u instanceof PowerUnit) {
+                PowerUnit other = (PowerUnit) u;
+                powers.put(other.targetUnit, (powers.containsKey(other.targetUnit)? powers.get(other.targetUnit): 0) + other.power.longValue());
+
             } else {
-                units.add(u);
+                powers.put(u, (powers.containsKey(u)? powers.get(u): 0) + 1);
             }
         }
 
-        // Then group units by class
-        // All equal units should be packed into single power unit.
-        // All power units with equal target units should be packed into single
-        // power unit with power equal to sum of folding units powers.
-        /*for (int i = 0; i < units.size(); i++) {
-            Unit unit = units.get(i);
-            if (unit == null) continue;
-
-            for (int j = i + 1; j < units.size(); j++) {
-                Unit other = units.get(j);
-                if (unit.getClass() == other.getClass()) {
-                    if (unit instanceof PowerUnit) {
-                        PowerUnit a = (PowerUnit) unit;
-                        PowerUnit b = (PowerUnit) other;
-
-                        if (a.targetUnit.equals(b.targetUnit)) {
-                            unit = new PowerUnit(a.name, a.targetUnit, a.power.add(b.power));
-                            units.set(j, null);
-                        }
-                    } else if (unit instanceof LinearUnit) {
-                        //LinearUnit a = (LinearUnit) unit;
-                        //LinearUnit b = (LinearUnit) other;
-
-                        //if (a.targetUnit.equals(b.targetUnit)) {
-                            //unit = new LinearUnit(a.name, a.targetUnit, a.power.add(b.power));
-                            //units[i] = null;
-                        //}
-                    } else if (unit instanceof BaseUnit) {
-                        unit = unit.mul(unit);
-                        units.set(j, null);
-                    }
-                }
+        ArrayList<Unit> units = new ArrayList<Unit>(powers.size());
+        for (Unit unit : powers.keySet()) {
+            long power = powers.get(unit);
+            if (power == 1) {
+                units.add(unit);
+            } else if (power > 0) {
+                units.add(new PowerUnit(unit, power));
             }
+        }
 
-            units.set(i, unit);
-        }*/
-
-        return new MultipleUnit(name, units.toArray(targetUnits));
+        switch (units.size()) {
+            case 0: return Unit.NONE;
+            case 1: return units.get(0);
+            default: return new MultipleUnit(name, units.toArray(targetUnits));
+        }
     }
 
     public String represent() {

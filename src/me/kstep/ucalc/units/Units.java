@@ -49,7 +49,7 @@ public class Units {
 
             // Miscellaneous
             uman.add(new MultipleUnit("J", uman.get("N"), uman.get("m")));
-            uman.add(new LinearUnit("mol", 6.0221412927e23, Unit.none()));
+            uman.add(new LinearUnit("mol", 6.0221412927e23, Unit.NONE));
             uman.add(new BaseUnit("bit"));
             uman.add(new LinearUnit("byte", 8, uman.get("bit")));
             uman.add(new LinearUnit("cal", 4.1868, uman.get("J")));

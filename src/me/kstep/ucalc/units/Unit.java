@@ -29,6 +29,8 @@ public abstract class Unit {
         MISCELLANEOUS
     }
 
+    final public static Unit NONE = NoneUnit.getInstance();
+
     public Category category;
 
     public class ConversionException extends UnitException {
@@ -113,27 +115,23 @@ public abstract class Unit {
 
     // Multiple this by other
     public Unit mul(Unit other) {
-        if (this == other) return new PowerUnit(this, 2);
-        return new MultipleUnit(this, other);
+        if (this == other) return new PowerUnit(this, 2).simplify();
+        return new MultipleUnit(this, other).simplify();
     }
 
     // Divide this by other
     public Unit div(Unit other) {
-        if (this == other) return NoneUnit.getInstance();
-        return new MultipleUnit(this, new PowerUnit(other, -1));
+        if (this == other) return NONE;
+        return new MultipleUnit(this, new PowerUnit(other, -1)).simplify();
     }
 
     // Raise this unit to integer power
     public Unit pow(int pow) {
-        return new PowerUnit(this, pow);
+        return new PowerUnit(this, pow).simplify();
     }
 
     public Unit inv() {
-        return new PowerUnit(this, -1);
-    }
-
-    public static Unit none() {
-        return NoneUnit.getInstance();
+        return new PowerUnit(this, -1).simplify();
     }
 
     abstract public Unit simplify();
