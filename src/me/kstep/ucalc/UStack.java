@@ -7,7 +7,7 @@ public class UStack extends Stack<UNumber> {
     private static final long serialVersionUID = 0L;
 
     public void push(Number item) {
-        push(UNumber.wrap(item));
+        push(UNumber.valueOf(item));
     }
 
     public UStack clone() {

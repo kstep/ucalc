@@ -165,7 +165,7 @@ public class UComplex extends UNumber {
 
             } else {
                 double newRadius = abs().pow(other).doubleValue();
-                double newAngle = other.mul(angle()).doubleValue();
+                double newAngle = UNumber.valueOf(other).mul(angle()).doubleValue();
                 return new UComplex(new UFloat(newRadius * Math.cos(newAngle)), new UFloat(newRadius * Math.sin(newAngle)));
             }
 

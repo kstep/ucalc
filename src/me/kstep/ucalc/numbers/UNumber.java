@@ -187,7 +187,7 @@ public abstract class UNumber extends Number {
         return coerce(this, other);
     }
 
-    public static UNumber wrap(Number num) {
+    public static UNumber valueOf(Number num) {
         if (num instanceof UNumber) {
             return (UNumber) num;
         } else if (num instanceof Double || num instanceof Float) {
@@ -197,7 +197,7 @@ public abstract class UNumber extends Number {
         }
     }
 
-    public static UNumber wrap(CharSequence val) throws NumberFormatException {
+    public static UNumber valueOf(CharSequence val) throws NumberFormatException {
         try {
             return new UInteger(val);
         } catch (NumberFormatException e0) {

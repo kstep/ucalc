@@ -18,13 +18,13 @@ public class UUnitNum extends UNumber {
             value = ((UUnitNum) val).value;
             unit = ((UUnitNum) val).unit;
         } else {
-            value = UNumber.wrap(val);
+            value = UNumber.valueOf(val);
             unit = Unit.NONE;
         }
     }
 
     public UUnitNum(CharSequence val) {
-        value = UNumber.wrap(val);
+        value = UNumber.valueOf(val);
         unit = Unit.NONE;
     }
 
@@ -32,7 +32,7 @@ public class UUnitNum extends UNumber {
         if (val instanceof UUnitNum) {
             value = ((UUnitNum) val).convert(u).value;
         } else {
-            value = UNumber.wrap(val);
+            value = UNumber.valueOf(val);
         }
 
         unit = u;

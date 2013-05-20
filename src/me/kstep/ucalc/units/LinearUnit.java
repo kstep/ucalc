@@ -20,8 +20,8 @@ class LinearUnit extends Unit {
      */
     LinearUnit(String name, Number scale, Unit targetUnit, Number offset) {
         super(name);
-        this.scale = UNumber.wrap(scale);
-        this.offset = UNumber.wrap(offset);
+        this.scale = UNumber.valueOf(scale);
+        this.offset = UNumber.valueOf(offset);
         this.targetUnit = targetUnit;
     }
 
@@ -63,7 +63,7 @@ class LinearUnit extends Unit {
      * which resembles normal math equation, and thus more convinient here.
      */
     LinearUnit(String name, Number r_scale, Number r_offset, Unit targetUnit) {
-        this(name, UNumber.wrap(r_scale).inv(), targetUnit, UNumber.wrap(r_offset).neg().div(UNumber.wrap(r_scale)));
+        this(name, UNumber.valueOf(r_scale).inv(), targetUnit, UNumber.valueOf(r_offset).neg().div(UNumber.valueOf(r_scale)));
     }
 
     /**
