@@ -17,6 +17,8 @@ class PowerUnit extends Unit {
     // This is unit's power.
     int power = 1;
 
+    boolean autoname = false;
+
     /**
      * The main constructor, which determines relation between
      * main unit and derived unit.
@@ -80,6 +82,7 @@ class PowerUnit extends Unit {
      */
     PowerUnit(Unit targetUnit, Number power) {
         this(targetUnit.name + superscriptInt(power.intValue()), targetUnit, power);
+        autoname = true;
     }
 
     public boolean direct(Unit unit) {
@@ -131,10 +134,25 @@ class PowerUnit extends Unit {
                 case 1:
                     return other.targetUnit;
                 default:
-                    return new PowerUnit(name, other.targetUnit, newpower);
+                    if (autoname) {
+                        return new PowerUnit(other.targetUnit, newpower);
+                    } else {
+                        return new PowerUnit(name, other.targetUnit, newpower);
+                    }
             }
         } else {
-            return new PowerUnit(name, unit, power);
+            switch (power) {
+                case 0:
+                    return Unit.NONE;
+                case 1:
+                    return unit;
+                default:
+                    if (autoname) {
+                        return new PowerUnit(unit, power);
+                    } else {
+                        return new PowerUnit(name, unit, power);
+                    }
+            }
         }
     }
 
