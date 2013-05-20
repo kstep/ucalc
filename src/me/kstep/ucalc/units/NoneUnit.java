@@ -40,5 +40,9 @@ final class NoneUnit extends Unit {
     public String represent() {
         return "";
     }
+
+    public int hashCode() {
+        return 0;
+    }
 }
 

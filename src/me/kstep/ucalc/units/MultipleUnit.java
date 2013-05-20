@@ -152,5 +152,13 @@ class MultipleUnit extends ComplexUnit {
         name.setLength(name.length() - 1);
         return name.toString();
     }
+
+    public int hashCode() {
+        int sum = 0;
+        for (Unit unit : targetUnits) {
+            sum = (sum << 2) + unit.hashCode();
+        }
+        return (sum << 2) | 3;
+    }
 }
 

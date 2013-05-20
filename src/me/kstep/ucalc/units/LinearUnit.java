@@ -161,4 +161,8 @@ class LinearUnit extends Unit {
     public String represent() {
         return "(" + scale + "·" + targetUnit.represent() + " + " + offset + ")";
     }
+
+    public int hashCode() {
+        return (((scale.hashCode() << 2) + (offset.hashCode() << 4) + targetUnit.hashCode()) << 3) | 1;
+    }
 }

@@ -79,4 +79,8 @@ class LogUnit extends Unit {
     public Unit simplify() {
         return this;
     }
+
+    public int hashCode() {
+        return ((int) base + ((int) coeff << 4) << 3) | 4;
+    }
 }

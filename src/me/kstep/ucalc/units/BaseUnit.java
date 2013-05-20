@@ -11,8 +11,12 @@ import me.kstep.ucalc.numbers.UNumber;
  */
 class BaseUnit extends Unit {
 
+    private static int seqId = 0;
+    private int id;
+
     BaseUnit(String name) {
         super(name);
+        id = seqId++;
     }
 
     /**
@@ -55,6 +59,10 @@ class BaseUnit extends Unit {
 
     public String represent() {
         return name;
+    }
+
+    public int hashCode() {
+        return id << 3;
     }
 }
 
