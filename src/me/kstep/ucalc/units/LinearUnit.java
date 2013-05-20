@@ -63,7 +63,7 @@ class LinearUnit extends Unit {
      * which resembles normal math equation, and thus more convinient here.
      */
     LinearUnit(String name, Number r_scale, Number r_offset, Unit targetUnit) {
-        this(name, UNumber.valueOf(r_scale).inv(), targetUnit, UNumber.valueOf(r_offset).neg().div(UNumber.valueOf(r_scale)));
+        this(name, UNumber.valueOf(r_scale).inv(), targetUnit, UNumber.valueOf(r_offset).neg().div(r_scale));
     }
 
     /**

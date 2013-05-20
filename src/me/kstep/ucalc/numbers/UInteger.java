@@ -49,11 +49,11 @@ public class UInteger extends UReal {
         return new UInteger(value < 0? -value: value);
     }
 
-    public UNumber pow(UNumber other) {
+    public UNumber pow(Number other) {
         return new UFloat(doubleValue()).pow(other);
     }
 
-    public UNumber root(UNumber other) {
+    public UNumber root(Number other) {
         return new UFloat(doubleValue()).root(other);
     }
 
@@ -61,23 +61,27 @@ public class UInteger extends UReal {
         return new UFloat(doubleValue()).root();
     }
 
-    public UNumber add(UNumber other) {
-        return (other instanceof UInteger)? new UInteger(value + other.longValue()): super.add(other);
+    private static boolean isCompatible(Number other) {
+        return other instanceof UInteger || other instanceof Long || other instanceof Integer || other instanceof Short || other instanceof Byte;
     }
 
-    public UNumber sub(UNumber other) {
-        return (other instanceof UInteger)? new UInteger(value - other.longValue()): super.sub(other);
+    public UNumber add(Number other) {
+        return isCompatible(other)? new UInteger(value + other.longValue()): super.add(other);
     }
 
-    public UNumber div(UNumber other) {
-        return (other instanceof UInteger)? new URational(this, other): super.div(other);
+    public UNumber sub(Number other) {
+        return isCompatible(other)? new UInteger(value - other.longValue()): super.sub(other);
     }
 
-    public UNumber mul(UNumber other) {
-        return (other instanceof UInteger)? new UInteger(value * other.longValue()): super.mul(other);
+    public UNumber div(Number other) {
+        return isCompatible(other)? new URational(this, other): super.div(other);
     }
 
-    public UNumber mod(UNumber other) {
-        return other instanceof UInteger? new UInteger(value % other.longValue()): super.mod(other);
+    public UNumber mul(Number other) {
+        return isCompatible(other)? new UInteger(value * other.longValue()): super.mul(other);
+    }
+
+    public UNumber mod(Number other) {
+        return isCompatible(other)? new UInteger(value % other.longValue()): super.mod(other);
     }
 }

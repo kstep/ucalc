@@ -62,26 +62,26 @@ public class UUnitNum extends UNumber {
         return new UUnitNum(unit.from(this.value, this.unit), unit);
     }
 
-    public UNumber add(UNumber other) {
+    public UNumber add(Number other) {
         UUnitNum result = new UUnitNum(other, unit);
         result.value = value.add(result.value);
         return result;
     }
 
-    public UNumber sub(UNumber other) {
+    public UNumber sub(Number other) {
         UUnitNum result = new UUnitNum(other, unit);
         result.value = value.sub(result.value);
         return result;
     }
 
-    public UNumber mul(UNumber other) {
+    public UNumber mul(Number other) {
         UUnitNum result = new UUnitNum(other);
         result.value = value.mul(result.value);
         result.unit = unit.mul(result.unit);
         return result;
     }
 
-    public UNumber div(UNumber other) {
+    public UNumber div(Number other) {
         UUnitNum result = new UUnitNum(other);
         result.value = value.div(result.value);
         result.unit = unit.div(result.unit);

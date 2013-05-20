@@ -66,7 +66,7 @@ public abstract class UNumber extends Number {
     /**
      * Addition
      */
-    public UNumber add(UNumber other) throws UnsupportedOperationException {
+    public UNumber add(Number other) throws UnsupportedOperationException {
         Pair<?,?> pair = coerce(other);
         return pair.first.add(pair.second);
     }
@@ -74,7 +74,7 @@ public abstract class UNumber extends Number {
     /**
      * Substruction
      */
-    public UNumber sub(UNumber other) throws UnsupportedOperationException {
+    public UNumber sub(Number other) throws UnsupportedOperationException {
         Pair<?,?> pair = coerce(other);
         return pair.first.sub(pair.second);
     }
@@ -82,7 +82,7 @@ public abstract class UNumber extends Number {
     /**
      * Modulus
      */
-    public UNumber mod(UNumber other) throws UnsupportedOperationException {
+    public UNumber mod(Number other) throws UnsupportedOperationException {
         Pair<?,?> pair = coerce(other);
         return pair.first.mod(pair.second);
     }
@@ -90,7 +90,7 @@ public abstract class UNumber extends Number {
     /**
      * Multiplication
      */
-    public UNumber mul(UNumber other) throws UnsupportedOperationException {
+    public UNumber mul(Number other) throws UnsupportedOperationException {
         Pair<?,?> pair = coerce(other);
         return pair.first.mul(pair.second);
     }
@@ -98,7 +98,7 @@ public abstract class UNumber extends Number {
     /**
      * Division
      */
-    public UNumber div(UNumber other) throws UnsupportedOperationException {
+    public UNumber div(Number other) throws UnsupportedOperationException {
         Pair<?,?> pair = coerce(other);
         return pair.first.div(pair.second);
     }
@@ -106,7 +106,7 @@ public abstract class UNumber extends Number {
     /**
      * Power
      */
-    public UNumber pow(UNumber other) throws UnsupportedOperationException {
+    public UNumber pow(Number other) throws UnsupportedOperationException {
         Pair<?,?> pair = coerce(other);
         return pair.first.pow(pair.second);
     }
@@ -114,7 +114,7 @@ public abstract class UNumber extends Number {
     /**
      * Root
      */
-    public UNumber root(UNumber other) throws UnsupportedOperationException {
+    public UNumber root(Number other) throws UnsupportedOperationException {
         Pair<?,?> pair = coerce(other);
         return pair.first.root(pair.second);
     }
@@ -154,7 +154,7 @@ public abstract class UNumber extends Number {
         return this == other;
     }
 
-    public static Pair<?,?> coerce(UNumber num1, UNumber num2) {
+    public static Pair<?,?> coerce(Number num1, Number num2) {
 
         if (num1 instanceof UUnitNum && num2 instanceof UUnitNum) {
             return coerce(((UUnitNum) num1).value, ((UUnitNum) num2).value).withUnits(((UUnitNum) num1).unit, ((UUnitNum) num2).unit);
@@ -168,14 +168,16 @@ public abstract class UNumber extends Number {
         } else if (num1 instanceof UComplex || num2 instanceof UComplex) {
             return new Pair<UComplex, UComplex>(new UComplex(num1), new UComplex(num2));
 
-        } else if (num1 instanceof UFloat || num2 instanceof UFloat) {
+        } else if (num1 instanceof UFloat || num2 instanceof UFloat
+                || num1 instanceof Float || num2 instanceof Float
+                || num1 instanceof Double || num2 instanceof Double) {
             return new Pair<UFloat, UFloat>(new UFloat(num1), new UFloat(num2));
 
         } else if (num1 instanceof URational || num2 instanceof URational) {
             return new Pair<URational, URational>(new URational(num1), new URational(num2));
 
         } else {
-            return new Pair<UInteger, UInteger>((UInteger) num1, (UInteger) num2);
+            return new Pair<UInteger, UInteger>(new UInteger(num1), new UInteger(num2));
         }
     }
 
@@ -183,7 +185,7 @@ public abstract class UNumber extends Number {
         return coerce(args.first, args.second);
     }
 
-    public Pair<?,?> coerce(UNumber other) {
+    public Pair<?,?> coerce(Number other) {
         return coerce(this, other);
     }
 

@@ -53,12 +53,16 @@ public class UFloat extends UReal {
         return new UFloat(value < 0? -value: value);
     }
 
-    public UNumber pow(UNumber other) {
+    private static boolean isCompatible(Number other) {
+        return other instanceof UFloat || other instanceof Double || other instanceof Float;
+    }
+
+    public UNumber pow(Number other) {
         UFloat num = new UFloat(Math.pow(value, other.doubleValue()));
         return num.isNaN()? new UComplex(0, Math.pow(-value, other.doubleValue())): num;
     }
 
-    public UNumber root(UNumber other) {
+    public UNumber root(Number other) {
         UFloat num = new UFloat(Math.pow(value, 1 / other.doubleValue()));
         return num.isNaN()? new UComplex(0, Math.pow(-value, 1 / other.doubleValue())): num;
     }
@@ -72,24 +76,24 @@ public class UFloat extends UReal {
         return Double.isNaN(value);
     }
 
-    public UNumber add(UNumber other) {
-        return other instanceof UFloat? new UFloat(value + other.doubleValue()): super.add(other);
+    public UNumber add(Number other) {
+        return isCompatible(other)? new UFloat(value + other.doubleValue()): super.add(other);
     }
 
-    public UNumber sub(UNumber other) {
-        return other instanceof UFloat? new UFloat(value - other.doubleValue()): super.sub(other);
+    public UNumber sub(Number other) {
+        return isCompatible(other)? new UFloat(value - other.doubleValue()): super.sub(other);
     }
 
-    public UNumber div(UNumber other) {
-        return other instanceof UFloat? new UFloat(value / other.doubleValue()): super.div(other);
+    public UNumber div(Number other) {
+        return isCompatible(other)? new UFloat(value / other.doubleValue()): super.div(other);
     }
 
-    public UNumber mul(UNumber other) {
-        return other instanceof UFloat? new UFloat(value * other.doubleValue()): super.mul(other);
+    public UNumber mul(Number other) {
+        return isCompatible(other)? new UFloat(value * other.doubleValue()): super.mul(other);
     }
 
-    public UNumber mod(UNumber other) {
-        return other instanceof UFloat? new UFloat(value % other.doubleValue()): super.mod(other);
+    public UNumber mod(Number other) {
+        return isCompatible(other)? new UFloat(value % other.doubleValue()): super.mod(other);
     }
 }
 

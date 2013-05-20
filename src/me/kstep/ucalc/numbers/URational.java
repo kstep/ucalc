@@ -117,11 +117,11 @@ public class URational extends UReal {
         return isInteger()? "" + numerator: numerator + "/" + denomenator;
     }
 
-    public UNumber pow(UNumber other) {
+    public UNumber pow(Number other) {
         return new UFloat(doubleValue()).pow(other);
     }
 
-    public UNumber root(UNumber other) {
+    public UNumber root(Number other) {
         return new UFloat(doubleValue()).root(other);
     }
 
@@ -146,7 +146,7 @@ public class URational extends UReal {
         return this;
     }
 
-    public UNumber add(UNumber other) {
+    public UNumber add(Number other) {
         if (other instanceof URational) {
             URational arg = (URational) other;
             long base = denomenator * arg.denomenator;
@@ -157,7 +157,7 @@ public class URational extends UReal {
         }
     }
 
-    public UNumber sub(UNumber other) {
+    public UNumber sub(Number other) {
         if (other instanceof URational) {
             URational arg = (URational) other;
             long base = denomenator * arg.denomenator;
@@ -168,7 +168,7 @@ public class URational extends UReal {
         }
     }
 
-    public UNumber mul(UNumber other) {
+    public UNumber mul(Number other) {
         if (other instanceof URational) {
             URational arg = (URational) other;
             return new URational(numerator * arg.numerator, denomenator * arg.denomenator);
@@ -178,7 +178,7 @@ public class URational extends UReal {
         }
     }
 
-    public UNumber div(UNumber other) {
+    public UNumber div(Number other) {
         if (other instanceof URational) {
             URational arg = (URational) other;
             return new URational(numerator * arg.denomenator, denomenator * arg.numerator);
@@ -188,7 +188,7 @@ public class URational extends UReal {
         }
     }
 
-    public UNumber mod(UNumber other) {
+    public UNumber mod(Number other) {
         return other instanceof URational? new URational(doubleValue() % other.doubleValue()): super.mod(other);
     }
 }

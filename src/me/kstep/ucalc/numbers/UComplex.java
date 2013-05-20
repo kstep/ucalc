@@ -92,7 +92,7 @@ public class UComplex extends UNumber {
             ("(" + real.toString() + " + " + imag.toString() + "j)"));
     }
 
-    public UNumber add(UNumber other) {
+    public UNumber add(Number other) {
         if (other instanceof UComplex) {
             UComplex arg = (UComplex) other;
 
@@ -103,7 +103,7 @@ public class UComplex extends UNumber {
         }
     }
 
-    public UNumber sub(UNumber other) {
+    public UNumber sub(Number other) {
         if (other instanceof UComplex) {
             UComplex arg = (UComplex) other;
 
@@ -122,7 +122,7 @@ public class UComplex extends UNumber {
         return new UComplex((UReal) real.neg(), (UReal) imag.neg());
     }
 
-    public UNumber mul(UNumber other) {
+    public UNumber mul(Number other) {
         if (other instanceof UComplex) {
             UComplex arg = (UComplex) other;
 
@@ -135,7 +135,7 @@ public class UComplex extends UNumber {
         }
     }
 
-    public UNumber div(UNumber other) {
+    public UNumber div(Number other) {
         if (other instanceof UComplex) {
             UComplex arg = (UComplex) other;
             UNumber arg_sq = arg.real.mul(arg.real).add(arg.imag.mul(arg.imag));
@@ -158,7 +158,7 @@ public class UComplex extends UNumber {
         return real.mul(real).add(imag.mul(imag)).root();
     }
 
-    public UNumber pow(UNumber other) {
+    public UNumber pow(Number other) {
         if (other instanceof UReal) {
             if (isReal()) {
                 return real.pow(other);
@@ -174,8 +174,8 @@ public class UComplex extends UNumber {
         }
     }
 
-    public UNumber root(UNumber other) {
-        return pow(other.inv());
+    public UNumber root(Number other) {
+        return pow(UNumber.valueOf(other).inv());
     }
 
     public UNumber root() {
