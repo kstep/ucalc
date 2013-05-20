@@ -111,7 +111,7 @@ class MultipleUnit extends ComplexUnit {
                         continue;
                     } else if (subunit instanceof PowerUnit) {
                         PowerUnit other = (PowerUnit) subunit;
-                        powers.put(other.targetUnit, (powers.containsKey(other.targetUnit)? powers.get(other.targetUnit): 0) + other.power.longValue());
+                        powers.put(other.targetUnit, (powers.containsKey(other.targetUnit)? powers.get(other.targetUnit): 0) + other.power);
                     } else {
                         powers.put(subunit, (powers.containsKey(subunit)? powers.get(subunit): 0) + 1);
                     }
@@ -119,7 +119,7 @@ class MultipleUnit extends ComplexUnit {
 
             } else if (u instanceof PowerUnit) {
                 PowerUnit other = (PowerUnit) u;
-                powers.put(other.targetUnit, (powers.containsKey(other.targetUnit)? powers.get(other.targetUnit): 0) + other.power.longValue());
+                powers.put(other.targetUnit, (powers.containsKey(other.targetUnit)? powers.get(other.targetUnit): 0) + other.power);
 
             } else {
                 powers.put(u, (powers.containsKey(u)? powers.get(u): 0) + 1);

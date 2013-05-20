@@ -10,19 +10,25 @@ import me.kstep.ucalc.units.Unit;
  * You will get what I speak about if you consider relation between
  * *meter*, *square meter* and *cubic meter*.
  */
-class PowerUnit extends LinearUnit {
+class PowerUnit extends Unit {
+
+    Unit targetUnit;
 
     // This is unit's power.
-    UInteger power;
+    int power = 1;
 
     /**
      * The main constructor, which determines relation between
      * main unit and derived unit.
      */
     PowerUnit(String name, Unit targetUnit, Number power) {
-        super(name, 1.0, targetUnit, 0.0);
-        this.power = new UInteger(power);
+        super(name);
+        this.power = power.intValue();
         this.targetUnit = targetUnit;
+    }
+
+    public String represent() {
+        return targetUnit.represent() + superscriptInt(power);
     }
 
     /**
@@ -117,9 +123,9 @@ class PowerUnit extends LinearUnit {
         Unit unit = targetUnit.simplify();
         if (unit instanceof PowerUnit) {
             PowerUnit other = (PowerUnit) unit;
-            UInteger newpower = (UInteger) other.power.mul(power);
+            int newpower = other.power * power;
 
-            switch (newpower.intValue()) {
+            switch (newpower) {
                 case 0:
                     return Unit.NONE;
                 case 1:
