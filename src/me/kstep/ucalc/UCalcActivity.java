@@ -41,6 +41,7 @@ import me.kstep.ucalc.numbers.UNumber;
 import me.kstep.ucalc.units.Unit;
 import me.kstep.ucalc.units.Units;
 import me.kstep.ucalc.units.UnitsManager;
+import me.kstep.ucalc.units.UnitException;
 
 public class UCalcActivity extends Activity {
     private UStack stack;
@@ -279,6 +280,9 @@ public class UCalcActivity extends Activity {
                     op.apply(stack);
 
                 } catch (UNumberException e) {
+                    showToast(e.getMessage());
+
+                } catch (UnitException e) {
                     showToast(e.getMessage());
 
                 } catch (EmptyStackException e) {
