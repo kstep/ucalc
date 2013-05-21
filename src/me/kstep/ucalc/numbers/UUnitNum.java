@@ -1,6 +1,7 @@
 package me.kstep.ucalc.numbers;
 
 import me.kstep.ucalc.units.Unit;
+import me.kstep.ucalc.units.PowerUnit;
 
 public class UUnitNum extends UNumber {
     final static long serialVersionUID = 0L;
@@ -98,5 +99,42 @@ public class UUnitNum extends UNumber {
 
     public UNumber abs() {
         return new UUnitNum(value.abs(), unit);
+    }
+
+    // We can't have PowerUnit with non-integer power, so we must
+    // check our unit and modify its power if present in hope
+    // the result will be integer.
+
+    public UNumber pow(Number other) {
+        if (unit instanceof PowerUnit) {
+            return new UUnitNum(value.pow(other), new PowerUnit(((PowerUnit) unit).targetUnit, ((PowerUnit) unit).power * other.doubleValue()).simplify()).simplify();
+        } else {
+            return new UUnitNum(value.pow(other), new PowerUnit(unit, other).simplify()).simplify();
+        }
+    }
+
+    public UNumber root() {
+        if (unit instanceof PowerUnit) {
+            return new UUnitNum(value.root(), new PowerUnit(((PowerUnit) unit).targetUnit, ((PowerUnit) unit).power >> 1).simplify()).simplify();
+        } else {
+            return value.root();
+        }
+    }
+
+    public UNumber root(Number other) {
+        if (unit instanceof PowerUnit) {
+            return new UUnitNum(value.root(other), new PowerUnit(((PowerUnit) unit).targetUnit, ((PowerUnit) unit).power / other.doubleValue()).simplify()).simplify();
+        } else {
+            return new UUnitNum(value.root(other), new PowerUnit(unit, 1.0 / other.doubleValue()).simplify()).simplify();
+        }
+    }
+
+    public UNumber simplify() {
+        unit = unit.simplify();
+        return unit == Unit.NONE? value: this;
+    }
+
+    public Unit getUnit() {
+        return unit;
     }
 }

@@ -29,9 +29,18 @@ public abstract class UNumber extends Number {
     public UNumber(Number value) {}
     public UNumber(CharSequence value) {}
 
+    public static boolean isFloat(Number num) {
+        return num instanceof UFloat || num instanceof URational || num instanceof Double || num instanceof Float;
+    }
+
+    public static boolean isInteger(Number num) {
+        return num instanceof UInteger || num instanceof Long || num instanceof Integer || num instanceof Short || num instanceof Byte;
+    }
+
+
     public class ConversionException extends UNumberException {
         final static long serialVersionUID = 0L;
-        ConversionException(Class<? extends Number> targetClass) {
+        public ConversionException(Class<? extends Number> targetClass) {
             super("Can not convert to " + targetClass);
         }
     }
