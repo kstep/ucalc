@@ -4,15 +4,13 @@ import java.util.List;
 
 import android.util.Log;
 
-import android.widget.TextView;
 import android.content.Context;
-import android.view.Gravity;
 import android.util.AttributeSet;
 
 import me.kstep.ucalc.numbers.UNumber;
 import me.kstep.ucalc.UStack;
 
-public class UStackView extends TextView {
+public class UStackView extends UTextView {
     public UStackView(Context context) {
         super(context);
     }

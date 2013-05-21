@@ -9,7 +9,7 @@
     android:layout_height="match_parent">
 
 <TableRow>
-<TextView 
+<me.kstep.ucalc.views.UTextView
     android:id="@+id/list_item"
     android:paddingLeft="20dp"
     android:paddingTop="5dp"

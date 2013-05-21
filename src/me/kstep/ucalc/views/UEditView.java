@@ -1,8 +1,6 @@
 package me.kstep.ucalc.views;
 
-import android.widget.TextView;
 import android.content.Context;
-import android.view.Gravity;
 import android.util.AttributeSet;
 
 import android.text.Html;
@@ -10,7 +8,7 @@ import android.text.Spanned;
 
 import me.kstep.ucalc.numbers.UNumber;
 
-public class UEditView extends TextView {
+public class UEditView extends UTextView {
     // If true, user is editing text now,
     // if false, editing was finished, value is fixed.
     private boolean editing = false;
@@ -57,7 +55,7 @@ public class UEditView extends TextView {
         if (UNumber.isNaN(newval)) {
             setText("");
         } else {
-            setHtml(value.toString());
+            setText(value.toString());
         }
         syncValue = true;
     }
@@ -88,7 +86,7 @@ public class UEditView extends TextView {
      */
     public void chop(int chars) {
         CharSequence text = getText();
-        setHtml(text.subSequence(0, text.length() - chars));
+        setText(text.subSequence(0, text.length() - chars));
     }
     public void chop() {
         chop(1);
