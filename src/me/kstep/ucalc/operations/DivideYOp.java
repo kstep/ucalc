@@ -3,12 +3,12 @@ package me.kstep.ucalc.operations;
 import me.kstep.ucalc.UStack;
 import me.kstep.ucalc.numbers.UNumber;
 
-class PowerOp extends UOperation {
+class DivideYOp extends UOperation {
     public int arity() { return 2; }
-    public CharSequence name() { return "y↑x"; }
+    public CharSequence name() { return "÷y"; }
     public void apply(UStack stack) {
         UNumber x = stack.pop();
         UNumber y = stack.pop();
-        stack.push(y.pow(x));
+        stack.push(x.div(y));
     }
 }

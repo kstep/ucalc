@@ -24,14 +24,20 @@ public class UOperations extends Hashtable<CharSequence,UOperation> {
         AddOp.class,
         MultiplyOp.class,
         SquereOp.class,
+        CubeOp.class,
         SubstructOp.class,
+        SubstructYOp.class,
         InvertOp.class,
         NegateOp.class,
         DivideOp.class,
+        DivideYOp.class,
         RemainderOp.class,
         PowerOp.class,
         AndOp.class,
         OrOp.class,
+        CubicRootOp.class,
+        ExponentOp.class,
+        DecimentOp.class,
     };
 
     public UOperations() {
