@@ -40,6 +40,9 @@ class UToggleButton extends CompoundButton implements View.OnClickListener, Comp
     private void initialize(UCalcActivity context, TypedArray attrs) {
         setClickable(true);
 
+        Typeface tf = Typeface.createFromAsset(context.getAssets(), "fonts/DejaVuSans.ttf");
+        setTypeface(tf);
+
         if (attrs != null) {
 
             int mymode = attrs.getInt(R.styleable.UToggleButton_keypad_mode, -1);

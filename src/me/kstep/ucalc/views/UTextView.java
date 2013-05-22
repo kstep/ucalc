@@ -22,7 +22,7 @@ public class UTextView extends TextView {
     }
 
     private void initialize(Context context) {
-        Typeface tf = Typeface.createFromAsset(context.getAssets(), "fonts/FreeSans.otf");
+        Typeface tf = Typeface.createFromAsset(context.getAssets(), "fonts/DejaVuSans.ttf");
         setTypeface(tf);
     }
 }

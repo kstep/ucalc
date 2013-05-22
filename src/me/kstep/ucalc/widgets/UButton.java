@@ -30,6 +30,8 @@ public class UButton extends Button implements UCalcActivity.OnModeChangedListen
     private UCalcActivity.Mode mode = null;
 
     private void initialize(UCalcActivity context, TypedArray attrs) {
+        Typeface tf = Typeface.createFromAsset(context.getAssets(), "fonts/DejaVuSans.ttf");
+        setTypeface(tf);
 
         if (attrs != null) {
 
