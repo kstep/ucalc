@@ -2,30 +2,58 @@ package me.kstep.ucalc.widgets;
 
 import android.widget.Button;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
+import android.graphics.Typeface;
 
-abstract class UButton extends Button implements View.OnClickListener {
+import me.kstep.ucalc.UCalcActivity;
+
+import me.kstep.ucalc.R;
+
+public class UButton extends Button implements UCalcActivity.OnModeChangedListener {
     public UButton(Context context) {
         super(context);
-        initialize();
+        initialize((UCalcActivity) context, null);
     }
 
     public UButton(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initialize();
+        initialize((UCalcActivity) context, context.obtainStyledAttributes(attrs, R.styleable.UButton, 0, 0));
     }
 
     public UButton(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        initialize();
+        initialize((UCalcActivity) context, context.obtainStyledAttributes(attrs, R.styleable.UButton, defStyle, 0));
     }
 
-    private void initialize() {
-        setOnClickListener(this);
+    private UCalcActivity.Mode mode = null;
+
+    private void initialize(UCalcActivity context, TypedArray attrs) {
+
+        if (attrs != null) {
+
+            int mymode = attrs.getInt(R.styleable.UButton_keypad_mode, -1);
+            switch (mymode) {
+                case 0: mode = UCalcActivity.Mode.NORMAL; break;
+                case 1: mode = UCalcActivity.Mode.ALT; break;
+            }
+
+            if (mode != null) {
+                context.addOnModeChangedListener(this);
+            }
+
+            attrs.recycle();
+        }
     }
 
-    abstract public void onClick(View view);
+    public void onModeChanged(UCalcActivity.Mode newmode) {
+        if (mode == newmode) {
+            setVisibility(View.VISIBLE);
+        } else {
+            setVisibility(View.GONE);
+        }
+    }
 }
 
 

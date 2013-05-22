@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <attr name="keypad_mode">
+        <enum name="normal" value="0" />
+        <enum name="alt" value="1" />
+    </attr>
+    <attr name="units_category">
+        <enum name="time" value="0"></enum>
+        <enum name="dist" value="1"></enum>
+        <enum name="vol" value="2"></enum>
+        <enum name="weight" value="3"></enum>
+        <enum name="elec" value="4"></enum>
+        <enum name="misc" value="5"></enum>
+    </attr>
+
+    <declare-styleable name="UButton">
+        <attr name="keypad_mode" />
+    </declare-styleable>
+
+    <declare-styleable name="UToggleButton">
+        <attr name="keypad_mode" />
+    </declare-styleable>
+</resources>
