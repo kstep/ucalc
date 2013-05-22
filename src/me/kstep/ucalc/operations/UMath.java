@@ -65,5 +65,17 @@ final public class UMath {
     public static UNumber log(UNumber value) {
         return new UFloat(Math.log(value.doubleValue()));
     }
+
+    public static UNumber exp(UNumber value) {
+        return new UFloat(Math.exp(value.doubleValue()));
+    }
+
+    public static UNumber cbrt(UNumber value) {
+        return new UFloat(Math.cbrt(value.doubleValue()));
+    }
+
+    public static UNumber sqrt(UNumber value) {
+        return new UFloat(Math.sqrt(value.doubleValue()));
+    }
 }
 
