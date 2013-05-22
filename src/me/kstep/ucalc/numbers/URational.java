@@ -98,7 +98,7 @@ public class URational extends UReal {
     }
 
     public double doubleValue() {
-        return numerator / denomenator;
+        return (double) numerator / denomenator;
     }
 
     public float floatValue() {
