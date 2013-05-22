@@ -136,7 +136,7 @@ public class URational extends UReal {
             a = b;
             b = c;
         }
-        return a;
+        return Math.abs(a);
     }
 
     public URational simplify() {
