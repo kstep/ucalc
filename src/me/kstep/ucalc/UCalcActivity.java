@@ -1,6 +1,7 @@
 package me.kstep.ucalc;
 
 import java.util.EmptyStackException;
+import java.util.ArrayList;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -51,6 +52,39 @@ public class UCalcActivity extends Activity {
     private UOperations operations;
     private UnitsManager units;
 
+    public enum Mode {
+        NORMAL,
+        ALT,
+    }
+
+    public interface OnModeChangedListener {
+        public void onModeChanged(Mode mode);
+    }
+
+    public void addOnModeChangedListener(OnModeChangedListener listener) {
+        if (listener != null) {
+            mode_listeners.add(listener);
+        }
+    }
+
+    private ArrayList<OnModeChangedListener> mode_listeners = new ArrayList<OnModeChangedListener>();
+
+    private Mode mode = null;
+
+    public void setMode(Mode mode) {
+        if (mode != this.mode) {
+            this.mode = mode;
+
+            for (OnModeChangedListener listener : mode_listeners) {
+                listener.onModeChanged(mode);
+            }
+        }
+    }
+
+    public Mode getMode() {
+        return mode;
+    }
+
     private void restoreState(Bundle state) {
         stack = (UStack) loadFromFile("stack.bin", new UStack());
         memory = (UMemory) loadFromFile("memory.bin", new UMemory());
@@ -77,6 +111,8 @@ public class UCalcActivity extends Activity {
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
         ab.hide();
+
+        setMode(Mode.NORMAL);
     }
 
     @Override
@@ -214,8 +250,7 @@ public class UCalcActivity extends Activity {
         toast.show();
     }
 
-    public void onDigitButtonClick(View view) {
-        Button button = (Button) view;
+    public void onDigitEnter(CharSequence ch) {
         UEditView editView = (UEditView) findViewById(R.id.view_edit);
         if (!editView.isEditing()) {
             pushStack();
@@ -223,14 +258,14 @@ public class UCalcActivity extends Activity {
             editView.startEditing();
         }
 
-        editView.append(button.getText());
+        editView.append(ch);
     }
 
     public void onDotButtonClick(View view) {
         UEditView editView = (UEditView) findViewById(R.id.view_edit);
         String text = editView.getText().toString();
         if (!editView.isEditing() || !text.contains(".")) {
-            onDigitButtonClick(view);
+            onDigitEnter(".");
         }
     }
 
@@ -364,21 +399,7 @@ public class UCalcActivity extends Activity {
     public void onAltModeButtonClick(View view) {
         CompoundButton button = (CompoundButton) view;
 
-        if (button.isChecked()) {
-            for (int id : new int[]{ R.id.sin_button, R.id.cos_button, R.id.tan_button }) {
-                findViewById(id).setVisibility(View.GONE);
-            }
-            for (int id : new int[]{ R.id.asin_button, R.id.acos_button, R.id.atan_button }) {
-                findViewById(id).setVisibility(View.VISIBLE);
-            }
-        } else {
-            for (int id : new int[]{ R.id.sin_button, R.id.cos_button, R.id.tan_button }) {
-                findViewById(id).setVisibility(View.VISIBLE);
-            }
-            for (int id : new int[]{ R.id.asin_button, R.id.acos_button, R.id.atan_button }) {
-                findViewById(id).setVisibility(View.GONE);
-            }
-        }
+        setMode(button.isChecked()? Mode.ALT: Mode.NORMAL);
     }
 
     private UStackFragment stack_fragment;
