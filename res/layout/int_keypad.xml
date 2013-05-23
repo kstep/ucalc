@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ucalc="http://schemas.android.com/apk/res/me.kstep.ucalc">
+
+    <LinearLayout android:layout_height="0dp" android:layout_width="match_parent" android:orientation="horizontal" android:layout_weight="1">
+        <me.kstep.ucalc.widgets.UOpButton android:text="«shf" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.widgets.UOpButton android:text="shf»" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.widgets.UOpButton android:text="bswp" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.widgets.UOpButton android:text="xor" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.widgets.UOpButton android:text="not" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.widgets.UOpButton android:text="or" style="@style/UCBtn.Fun" />
+    </LinearLayout>
+
+    <LinearLayout android:layout_height="0dp" android:layout_width="match_parent" android:orientation="horizontal" android:layout_weight="1">
+        <me.kstep.ucalc.widgets.UOpButton android:text="«rot" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.widgets.UOpButton android:text="rot»" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.widgets.UDigitButton android:text="D" style="@style/UCBtn.Sym" />
+        <me.kstep.ucalc.widgets.UDigitButton android:text="E" style="@style/UCBtn.Sym" />
+        <me.kstep.ucalc.widgets.UDigitButton android:text="F" style="@style/UCBtn.Sym" />
+        <me.kstep.ucalc.widgets.UOpButton android:text="and" style="@style/UCBtn.Fun" />
+    </LinearLayout>
+
+    <LinearLayout android:layout_height="0dp" android:layout_width="match_parent" android:orientation="horizontal" android:layout_weight="1">
+        <me.kstep.ucalc.widgets.UOpButton android:text="«msk" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.widgets.UOpButton android:text="msk»" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.widgets.UDigitButton android:text="A" style="@style/UCBtn.Sym" />
+        <me.kstep.ucalc.widgets.UDigitButton android:text="B" style="@style/UCBtn.Sym" />
+        <me.kstep.ucalc.widgets.UDigitButton android:text="C" style="@style/UCBtn.Sym" />
+        <me.kstep.ucalc.widgets.UOpButton android:text="mod" style="@style/UCBtn.Fun" />
+    </LinearLayout>
+
+    <LinearLayout android:layout_height="0dp" android:layout_width="match_parent" android:orientation="horizontal" android:layout_weight="1">
+        <me.kstep.ucalc.widgets.UToggleButton android:text="sign" style="@style/UCBtn.Mod" />
+        <me.kstep.ucalc.widgets.UToggleButton android:text="pad" style="@style/UCBtn.Mod" />
+        <me.kstep.ucalc.widgets.UDigitButton android:text="7" style="@style/UCBtn.Sym" />
+        <me.kstep.ucalc.widgets.UDigitButton android:text="8" style="@style/UCBtn.Sym" />
+        <me.kstep.ucalc.widgets.UDigitButton android:text="9" style="@style/UCBtn.Sym" />
+        <me.kstep.ucalc.widgets.UOpButton android:text="÷" ucalc:keypad_mode="normal" android:textSize="24sp" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.widgets.UOpButton android:text="÷y" ucalc:keypad_mode="alt" android:textSize="24sp" style="@style/UCBtn.Fun" />
+    </LinearLayout>
+
+    <LinearLayout android:layout_height="0dp" android:layout_width="match_parent" android:orientation="horizontal" android:layout_weight="1">
+        <me.kstep.ucalc.widgets.UOpButton android:text="float" style="@style/UCBtn.Mod" android:onClick="onSelectRadixButtonClick" android:id="@+id/radix_button" />
+        <me.kstep.ucalc.widgets.UOpButton android:text="64bit" style="@style/UCBtn.Mod" />
+        <me.kstep.ucalc.widgets.UDigitButton android:text="4" style="@style/UCBtn.Sym" />
+        <me.kstep.ucalc.widgets.UDigitButton android:text="5" style="@style/UCBtn.Sym" />
+        <me.kstep.ucalc.widgets.UDigitButton android:text="6" style="@style/UCBtn.Sym" />
+        <me.kstep.ucalc.widgets.UOpButton android:text="×" android:textSize="24sp" style="@style/UCBtn.Fun" />
+    </LinearLayout>
+
+
+    <LinearLayout android:layout_height="0dp" android:layout_width="match_parent" android:orientation="horizontal" android:layout_weight="2">
+        <me.kstep.ucalc.widgets.UButton android:text="enter" style="@style/UCBtn.Act" android:onClick="onEnterButtonClick" />
+
+        <LinearLayout android:layout_weight="5.6" android:layout_height="match_parent" android:orientation="vertical" android:layout_width="0dp">
+            <LinearLayout android:layout_height="0dp" android:layout_width="match_parent" android:orientation="horizontal" android:layout_weight="1">
+                <me.kstep.ucalc.widgets.UButton android:text="mem" style="@style/UCBtn.Mod" android:onClick="onMemoryButtonClick" />
+                <me.kstep.ucalc.widgets.UDigitButton android:text="1" style="@style/UCBtn.Sym" />
+                <me.kstep.ucalc.widgets.UDigitButton android:text="2" style="@style/UCBtn.Sym" />
+                <me.kstep.ucalc.widgets.UDigitButton android:text="3" style="@style/UCBtn.Sym" />
+                <me.kstep.ucalc.widgets.UOpButton android:text="−" ucalc:keypad_mode="normal" android:textSize="24sp" style="@style/UCBtn.Fun" />
+                <me.kstep.ucalc.widgets.UOpButton android:text="−y" ucalc:keypad_mode="alt" android:textSize="24sp" style="@style/UCBtn.Fun" />
+            </LinearLayout>
+
+            <LinearLayout android:layout_height="0dp" android:layout_width="match_parent" android:orientation="horizontal" android:layout_weight="1">
+                <me.kstep.ucalc.widgets.UToggleButton android:onClick="onAltModeButtonClick" android:text="alt" style="@style/UCBtn.Mod" />
+                <me.kstep.ucalc.widgets.UDigitButton android:text="0" style="@style/UCBtn.Sym" />
+                <me.kstep.ucalc.widgets.UButton android:text="." android:clickable="false" style="@style/UCBtn.Sym" />
+                <me.kstep.ucalc.widgets.UButton android:text="+/−" android:onClick="onSignToggleButtonClick" style="@style/UCBtn.Sym" />
+                <me.kstep.ucalc.widgets.UOpButton android:text="+" android:textSize="24sp" style="@style/UCBtn.Fun" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</merge>
