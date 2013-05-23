@@ -13,17 +13,20 @@ import me.kstep.ucalc.UStack;
 public class UStackView extends UTextView {
     public UStackView(Context context) {
         super(context);
+        setHorizontallyScrolling(true);
     }
 
     public UStackView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setHorizontallyScrolling(true);
     }
 
     public UStackView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        setHorizontallyScrolling(true);
     }
 
-    final private int visibleLines = 5;
+    final private int visibleLines = 6;
     final private int skipLines = 1;
     public void showStack(UStack stack) {
         int stackSize = stack.size();
