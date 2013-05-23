@@ -1,5 +1,8 @@
 package me.kstep.ucalc.widgets;
 
+import java.util.HashMap;
+import java.util.ArrayList;
+
 import android.widget.CompoundButton;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -11,7 +14,9 @@ import me.kstep.ucalc.UCalcActivity;
 
 import me.kstep.ucalc.R;
 
-class UToggleButton extends CompoundButton implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, UCalcActivity.OnModeChangedListener {
+class UToggleButton extends CompoundButton implements CompoundButton.OnCheckedChangeListener, UCalcActivity.OnModeChangedListener {
+
+    private static HashMap<String,ArrayList<UToggleButton>> radio_groups = new HashMap<String,ArrayList<UToggleButton>>();
 
     public UToggleButton(Context context) {
         super(context);
@@ -20,22 +25,26 @@ class UToggleButton extends CompoundButton implements View.OnClickListener, Comp
 
     public UToggleButton(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initialize((UCalcActivity) context, context.obtainStyledAttributes(attrs, R.styleable.UButton, 0, 0));
+        initialize((UCalcActivity) context, context.obtainStyledAttributes(attrs, R.styleable.UToggleButton, 0, 0));
     }
 
     public UToggleButton(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        initialize((UCalcActivity) context, context.obtainStyledAttributes(attrs, R.styleable.UButton, defStyle, 0));
-    }
-
-    public void onClick(View view) {
-        ((UCalcActivity) getContext()).showToast("Clicked!");
+        initialize((UCalcActivity) context, context.obtainStyledAttributes(attrs, R.styleable.UToggleButton, defStyle, 0));
     }
 
     public void onCheckedChanged(CompoundButton button, boolean isChecked) {
+        if (isChecked && radio_group != null && radio_groups.containsKey(radio_group)) {
+            for (UToggleButton btn : radio_groups.get(radio_group)) {
+                if (btn != button) {
+                    btn.setChecked(false);
+                }
+            }
+        }
     }
 
     private UCalcActivity.Mode mode = null;
+    private String radio_group = null;
 
     private void initialize(UCalcActivity context, TypedArray attrs) {
         setClickable(true);
@@ -53,6 +62,15 @@ class UToggleButton extends CompoundButton implements View.OnClickListener, Comp
 
             if (mode != null) {
                 context.addOnModeChangedListener(this);
+            }
+
+            radio_group = attrs.getString(R.styleable.UToggleButton_radio_group);
+            if (radio_group != null) {
+                if (!radio_groups.containsKey(radio_group)) {
+                    radio_groups.put(radio_group, new ArrayList<UToggleButton>());
+                }
+                radio_groups.get(radio_group).add(this);
+                setOnCheckedChangeListener(this);
             }
 
             attrs.recycle();

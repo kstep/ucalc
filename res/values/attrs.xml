@@ -19,5 +19,6 @@
 
     <declare-styleable name="UToggleButton">
         <attr name="keypad_mode" />
+        <attr name="radio_group" format="string" />
     </declare-styleable>
 </resources>
