@@ -139,7 +139,7 @@ class MultipleUnit extends ComplexUnit {
         switch (units.size()) {
             case 0: return Unit.NONE;
             case 1: return units.get(0);
-            default: return new MultipleUnit(name, units.toArray(targetUnits));
+            default: return new MultipleUnit(name, units.toArray(new Unit[units.size()]));
         }
     }
 
