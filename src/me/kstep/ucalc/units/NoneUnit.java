@@ -4,7 +4,7 @@ import me.kstep.ucalc.numbers.UNumber;
 
 final class NoneUnit extends Unit {
     private NoneUnit() {
-        super("");
+        super("1");
     }
 
     private static NoneUnit instance;
