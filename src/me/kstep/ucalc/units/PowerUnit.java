@@ -157,7 +157,7 @@ public class PowerUnit extends Unit {
     }
 
     public int hashCode() {
-        return (((power << 2) + targetUnit.hashCode()) << 3) | 2;
+        return (((power << 4) + targetUnit.hashCode()) << 3) | 2;
     }
 }
 

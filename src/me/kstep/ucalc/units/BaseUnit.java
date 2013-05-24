@@ -11,7 +11,7 @@ import me.kstep.ucalc.numbers.UNumber;
  */
 class BaseUnit extends Unit {
 
-    private static int seqId = 0;
+    private static int seqId = 1;
     private int id;
 
     BaseUnit(String name) {

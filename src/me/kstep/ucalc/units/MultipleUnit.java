@@ -156,9 +156,9 @@ class MultipleUnit extends ComplexUnit {
     public int hashCode() {
         int sum = 0;
         for (Unit unit : targetUnits) {
-            sum = (sum << 2) + unit.hashCode();
+            sum = (sum << 4) + unit.hashCode();
         }
-        return (sum << 2) | 3;
+        return (sum << 3) | 3;
     }
 }
 
