@@ -57,7 +57,7 @@ public class Units {
             uman.add(new LinearUnit("erg", 1e-7, uman.get("J")));
 
             uman.add(new BaseUnit("rad"));
-            uman.add(new LinearUnit("deg", 180.0 / Math.PI, uman.get("rad")));
+            uman.add(new LinearUnit("deg", Math.PI / 180.0, uman.get("rad")));
             uman.add(new BaseUnit("°K"));
             uman.add(new LinearUnit("°C", uman.get("°K"), +273.15));
             uman.add(new LinearUnit("°F", 9.0/5.0, +32, uman.get("°C")));
