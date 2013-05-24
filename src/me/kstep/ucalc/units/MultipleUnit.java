@@ -95,9 +95,9 @@ class MultipleUnit extends ComplexUnit {
 
         // First simplify and flatten all inner units
         for (Unit unit : targetUnits) {
-            if (unit == null) {
-                continue;
-            }
+            //if (unit == null) {
+                //continue;
+            //}
 
             Unit u = unit.simplify();
 
