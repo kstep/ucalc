@@ -96,6 +96,10 @@ public abstract class Unit {
      */
     abstract public boolean equals(Unit other);
 
+    public boolean equals(Object other) {
+        return (other instanceof Unit)? equals((Unit) other): false;
+    }
+
     /**
      * Complex units based on other units determine a graph of units,
      * each vertice of the graph is a unit, and each edge is a conversion
