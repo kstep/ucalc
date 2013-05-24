@@ -18,10 +18,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.FrameLayout;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -33,11 +35,13 @@ import me.kstep.ucalc.views.UStackView;
 import me.kstep.ucalc.views.UStackFragment;
 import me.kstep.ucalc.views.UMemoryFragment;
 import me.kstep.ucalc.views.URadicesFragment;
+import me.kstep.ucalc.views.UUnitsView;
 
 import me.kstep.ucalc.operations.UOperations;
 import me.kstep.ucalc.operations.UOperation;
 import me.kstep.ucalc.numbers.UNumberException;
 import me.kstep.ucalc.numbers.UNumber;
+import me.kstep.ucalc.numbers.UUnitNum;
 
 import me.kstep.ucalc.units.Unit;
 import me.kstep.ucalc.units.Units;
@@ -261,6 +265,30 @@ public class UCalcActivity extends Activity {
         editView.append(ch);
     }
 
+    public void onUnitEnter(CharSequence ch) {
+        UEditView editView = (UEditView) findViewById(R.id.view_edit);
+
+        editView.stopEditing();
+
+        try {
+            Unit unit = units.get(ch.toString());
+            UNumber num = UNumber.valueOf(editView.getValue());
+
+            if (num instanceof UUnitNum) {
+                num = new UUnitNum(((UUnitNum) num).value, ((UUnitNum) num).unit.mul(unit));
+            } else if (UNumber.isNaN(num)) {
+                num = new UUnitNum(1, unit);
+            } else {
+                num = new UUnitNum(num, unit);
+            }
+
+            editView.setValue(num);
+
+        } catch (UnitException e) {
+            showToast(e.getMessage());
+        }
+    }
+
     public void onDotButtonClick(View view) {
         UEditView editView = (UEditView) findViewById(R.id.view_edit);
         String text = editView.getText().toString();
@@ -455,5 +483,34 @@ public class UCalcActivity extends Activity {
         }
 
         return false;
+    }
+
+    private View units_keypad = null;
+
+    public void onUnitCategoryButtonClick(View view) {
+        FrameLayout layout = (FrameLayout) findViewById(R.id.main_layout);
+
+        if (units_keypad == null) {
+            LayoutInflater inflater = getLayoutInflater();
+            units_keypad = inflater.inflate(R.layout.units_keypad, null);
+            layout.addView(units_keypad);
+        }
+
+        if (((CompoundButton) view).isChecked()) {
+
+            String name = ((CompoundButton) view).getText().toString();
+            Unit.Category unit_category = name.equals("time")? Unit.Category.TIME:
+                            name.equals("dist")? Unit.Category.DISTANCE:
+                            name.equals("vol")? Unit.Category.VOLUME:
+                            name.equals("weight")? Unit.Category.WEIGHT:
+                            name.equals("elec")? Unit.Category.ELECTRIC:
+                            Unit.Category.MISCELLANEOUS;
+
+            UUnitsView unitsView = (UUnitsView) units_keypad.findViewById(R.id.units_keypad);
+            unitsView.loadUnitCategory(unit_category);
+            units_keypad.setVisibility(View.VISIBLE);
+        } else {
+            units_keypad.setVisibility(View.GONE);
+        }
     }
 }

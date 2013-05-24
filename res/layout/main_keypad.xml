@@ -5,12 +5,12 @@
     xmlns:ucalc="http://schemas.android.com/apk/res/me.kstep.ucalc">
 
     <LinearLayout android:layout_height="0dp" android:layout_width="match_parent" android:orientation="horizontal" android:layout_weight="1">
-        <me.kstep.ucalc.widgets.UToggleButton ucalc:radio_group="units" android:text="time" style="@style/UCBtn.Act" />
-        <me.kstep.ucalc.widgets.UToggleButton ucalc:radio_group="units" android:text="dist" style="@style/UCBtn.Act" />
-        <me.kstep.ucalc.widgets.UToggleButton ucalc:radio_group="units" android:text="vol" style="@style/UCBtn.Act" />
-        <me.kstep.ucalc.widgets.UToggleButton ucalc:radio_group="units" android:text="weight" android:textSize="14sp" style="@style/UCBtn.Act" />
-        <me.kstep.ucalc.widgets.UToggleButton ucalc:radio_group="units" android:text="elec" style="@style/UCBtn.Act" />
-        <me.kstep.ucalc.widgets.UToggleButton ucalc:radio_group="units" android:text="misc" style="@style/UCBtn.Act" />
+        <me.kstep.ucalc.widgets.UToggleButton android:onClick="onUnitCategoryButtonClick" ucalc:radio_group="units" android:text="time" style="@style/UCBtn.Act" />
+        <me.kstep.ucalc.widgets.UToggleButton android:onClick="onUnitCategoryButtonClick" ucalc:radio_group="units" android:text="dist" style="@style/UCBtn.Act" />
+        <me.kstep.ucalc.widgets.UToggleButton android:onClick="onUnitCategoryButtonClick" ucalc:radio_group="units" android:text="vol" style="@style/UCBtn.Act" />
+        <me.kstep.ucalc.widgets.UToggleButton android:onClick="onUnitCategoryButtonClick" ucalc:radio_group="units" android:text="weight" android:textSize="14sp" style="@style/UCBtn.Act" />
+        <me.kstep.ucalc.widgets.UToggleButton android:onClick="onUnitCategoryButtonClick" ucalc:radio_group="units" android:text="elec" style="@style/UCBtn.Act" />
+        <me.kstep.ucalc.widgets.UToggleButton android:onClick="onUnitCategoryButtonClick" ucalc:radio_group="units" android:text="misc" style="@style/UCBtn.Act" />
     </LinearLayout>
 
     <LinearLayout android:layout_height="0dp" android:layout_width="match_parent" android:orientation="horizontal" android:layout_weight="1">
