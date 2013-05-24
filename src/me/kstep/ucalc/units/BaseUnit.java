@@ -24,13 +24,11 @@ class BaseUnit extends Unit {
      * and `from()` methods just delegate conversion to other unit.
      */
     public UNumber to(UNumber value, Unit unit) throws UnitException {
-        System.out.println(this + " → " + unit + " " + value);
         if (unit == this) return value;
         return unit.from(value, this);
     }
 
     public UNumber from(UNumber value, Unit unit) throws UnitException {
-        System.out.println(this + " ← " + unit + " " + value);
         if (unit == this) return value;
         return unit.to(value, this);
     }

@@ -16,14 +16,12 @@ abstract class ComplexUnit extends Unit {
      * to other side unit.
      */
     public UNumber to(UNumber value, Unit unit) throws UnitException {
-        System.out.println(this + " → " + unit + " " + value);
         if (unit == this) return value;
         if (unit.direct(this)) return unit.from(value, this);
         throw this.new ConversionException(unit);
     }
 
     public UNumber from(UNumber value, Unit unit) throws UnitException {
-        System.out.println(this + " ← " + unit + " " + value);
         if (unit == this) return value;
         if (unit.direct(this)) return unit.to(value, this);
         throw unit.new ConversionException(this);

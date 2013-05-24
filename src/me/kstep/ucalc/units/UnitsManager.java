@@ -245,10 +245,6 @@ public class UnitsManager {
                 if (line.equals("")) continue;
 
                 String[] definition = line.split("\\s+", 2);
-                /*try{
-                System.out.println(definition[1]);
-                System.out.println(definition[1].equals("!"));
-                }catch(ArrayIndexOutOfBoundsException e){}*/
 
                 if (definition.length != 2) {
                     continue;

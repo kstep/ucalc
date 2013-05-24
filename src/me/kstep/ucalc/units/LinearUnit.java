@@ -70,7 +70,6 @@ class LinearUnit extends Unit {
      * Now to real conversion rules.
      */
     public UNumber from(UNumber value, Unit unit) throws UnitException {
-        System.out.println(this + " ← " + unit + " " + value);
         // First we check if we need conversion at all.
         if (this == unit) return value;
 
@@ -109,7 +108,6 @@ class LinearUnit extends Unit {
      * method above also apply here.
      */
     public UNumber to(UNumber value, Unit unit) throws UnitException {
-        System.out.println(this + " → " + unit + " " + value);
         if (this == unit) return value;
 
         if (this.direct(unit)) {
@@ -137,16 +135,13 @@ class LinearUnit extends Unit {
      * and have equal scale and offset values.
      */
     public boolean equals(Unit other) {
-        System.out.println(toString() + " ==? " + other.toString());
         if (this == other) return true;
         if (!(other instanceof LinearUnit)) return false;
 
         LinearUnit unit = (LinearUnit) other;
-        boolean r = scale.equals(unit.scale)
+        return scale.equals(unit.scale)
             && offset.equals(unit.offset)
             && targetUnit.equals(unit.targetUnit);
-        System.out.println(toString() + " == " + other.toString() + " = " + String.valueOf(r));
-        return r;
     }
 
     public String toString() {

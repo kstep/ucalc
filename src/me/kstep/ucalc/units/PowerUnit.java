@@ -91,7 +91,6 @@ public class PowerUnit extends Unit {
                 && targetUnit.direct(((LinearUnit) unit).targetUnit)
                 //&& power == ((PowerUnit) unit).power
                 );
-        System.out.println(this + " ?→ " + unit + " = " + r);
         return r;
     }
 
@@ -105,7 +104,6 @@ public class PowerUnit extends Unit {
     }
 
     public UNumber to(UNumber value, Unit unit) {
-        System.out.println(this + " → " + unit + " " + value);
         if (this == unit) return value;
         if (unit instanceof PowerUnit)
             return targetUnit.to(new UFloat(1.0), ((PowerUnit) unit).targetUnit).pow(power).mul(value);
@@ -114,7 +112,6 @@ public class PowerUnit extends Unit {
     }
 
     public UNumber from(UNumber value, Unit unit) {
-        System.out.println(this + " ← " + unit + " " + value);
         if (this == unit) return value;
         if (unit instanceof PowerUnit)
             return targetUnit.from(new UFloat(1.0), ((PowerUnit) unit).targetUnit).pow(power).mul(value);
