@@ -6,17 +6,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
 >
-    <Space android:layout_weight="4.1" android:layout_width="match_parent" android:layout_height="0dp" />
-    <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="6.1">
-        <Space android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1.1" />
+    <Space android:layout_weight="4" android:layout_width="match_parent" android:layout_height="0dp" android:layout_margin="2dp" />
+    <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="6" android:layout_margin="2dp">
+        <Space android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="1dp" />
         <me.kstep.ucalc.views.UUnitsView
             android:layout_width="0dp"
             android:layout_weight="5"
             android:layout_height="match_parent"
             android:id="@+id/units_keypad"
             android:numColumns="5"
-            android:horizontalSpacing="3dp"
-            android:verticalSpacing="3dp"
+            android:horizontalSpacing="6dp"
+            android:verticalSpacing="6dp"
+            android:background="#000000"
             />
     </LinearLayout>
 </LinearLayout>
