@@ -9,6 +9,8 @@ import java.util.HashMap;
 class MultipleUnit extends ComplexUnit {
     Unit[] targetUnits;
 
+    boolean autoname = false;
+
     MultipleUnit(String name, Unit... units) {
         super(name);
         targetUnits = units;
@@ -58,6 +60,7 @@ class MultipleUnit extends ComplexUnit {
 
     MultipleUnit(Unit... units) {
         this(joinUnitNames(units), units);
+        autoname = true;
     }
 
     public boolean direct(Unit unit) {
@@ -139,7 +142,10 @@ class MultipleUnit extends ComplexUnit {
         switch (units.size()) {
             case 0: return Unit.NONE;
             case 1: return units.get(0);
-            default: return new MultipleUnit(name, units.toArray(new Unit[units.size()]));
+            default:
+                return autoname?
+                    new MultipleUnit(units.toArray(new Unit[units.size()])):
+                    new MultipleUnit(name, units.toArray(new Unit[units.size()]));
         }
     }
 
