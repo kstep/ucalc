@@ -1,5 +1,7 @@
 package me.kstep.ucalc.numbers;
 
+import me.kstep.ucalc.units.UnitNum;
+
 class Test {
     public static void println(Object line) {
         System.out.println(line.toString());

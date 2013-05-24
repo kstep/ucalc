@@ -1,7 +1,7 @@
 package me.kstep.ucalc.units;
 import java.util.Arrays;
 
-import me.kstep.ucalc.numbers.UUnitNum;
+import me.kstep.ucalc.units.UnitNum;
 
 class Test {
     public static void main(String argv[]) {

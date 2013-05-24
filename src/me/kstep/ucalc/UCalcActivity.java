@@ -41,12 +41,12 @@ import me.kstep.ucalc.operations.UOperations;
 import me.kstep.ucalc.operations.UOperation;
 import me.kstep.ucalc.numbers.UNumberException;
 import me.kstep.ucalc.numbers.UNumber;
-import me.kstep.ucalc.numbers.UUnitNum;
 
 import me.kstep.ucalc.units.Unit;
 import me.kstep.ucalc.units.Units;
 import me.kstep.ucalc.units.UnitsManager;
 import me.kstep.ucalc.units.UnitException;
+import me.kstep.ucalc.units.UnitNum;
 
 public class UCalcActivity extends Activity {
     private UStack stack;
@@ -278,12 +278,12 @@ public class UCalcActivity extends Activity {
             Unit unit = units.get(ch.toString());
             UNumber num = UNumber.valueOf(editView.getValue());
 
-            if (num instanceof UUnitNum) {
-                num = new UUnitNum(((UUnitNum) num).value, ((UUnitNum) num).unit.mul(unit));
+            if (num instanceof UnitNum) {
+                num = new UnitNum(((UnitNum) num).value, ((UnitNum) num).unit.mul(unit));
             } else if (UNumber.isNaN(num)) {
-                num = new UUnitNum(1, unit);
+                num = new UnitNum(1, unit);
             } else {
-                num = new UUnitNum(num, unit);
+                num = new UnitNum(num, unit);
             }
 
             editView.setValue(num);

@@ -1,37 +1,37 @@
-package me.kstep.ucalc.numbers;
+package me.kstep.ucalc.units;
 
-import me.kstep.ucalc.units.Unit;
-import me.kstep.ucalc.units.PowerUnit;
+import me.kstep.ucalc.numbers.UNumber;
+import me.kstep.ucalc.numbers.UFloat;
 
-public class UUnitNum extends UNumber {
+public class UnitNum extends UNumber {
     final static long serialVersionUID = 0L;
 
     public UNumber value;
     public Unit unit;
 
-    public UUnitNum() {
+    public UnitNum() {
         value = new UFloat(0.0);
         unit = Unit.NONE;
     }
 
-    public UUnitNum(Number val) {
-        if (val instanceof UUnitNum) {
-            value = ((UUnitNum) val).value;
-            unit = ((UUnitNum) val).unit;
+    public UnitNum(Number val) {
+        if (val instanceof UnitNum) {
+            value = ((UnitNum) val).value;
+            unit = ((UnitNum) val).unit;
         } else {
             value = UNumber.valueOf(val);
             unit = Unit.NONE;
         }
     }
 
-    public UUnitNum(CharSequence val) {
+    public UnitNum(CharSequence val) {
         value = UNumber.valueOf(val);
         unit = Unit.NONE;
     }
 
-    public UUnitNum(Number val, Unit u) {
-        if (val instanceof UUnitNum) {
-            value = ((UUnitNum) val).convert(u).value;
+    public UnitNum(Number val, Unit u) {
+        if (val instanceof UnitNum) {
+            value = ((UnitNum) val).convert(u).value;
         } else {
             value = UNumber.valueOf(val);
         }
@@ -59,46 +59,46 @@ public class UUnitNum extends UNumber {
         return value.toString() + " " + unit.toString();
     }
 
-    public UUnitNum convert(Unit unit) {
-        return new UUnitNum(unit.from(this.value, this.unit), unit);
+    public UnitNum convert(Unit unit) {
+        return new UnitNum(unit.from(this.value, this.unit), unit);
     }
 
     public UNumber add(Number other) {
-        UUnitNum result = new UUnitNum(other, unit);
+        UnitNum result = new UnitNum(other, unit);
         result.value = value.add(result.value);
         return result;
     }
 
     public UNumber sub(Number other) {
-        UUnitNum result = new UUnitNum(other, unit);
+        UnitNum result = new UnitNum(other, unit);
         result.value = value.sub(result.value);
         return result;
     }
 
     public UNumber mul(Number other) {
-        UUnitNum result = new UUnitNum(other);
+        UnitNum result = new UnitNum(other);
         result.value = value.mul(result.value);
         result.unit = unit.mul(result.unit);
         return result;
     }
 
     public UNumber div(Number other) {
-        UUnitNum result = new UUnitNum(other);
+        UnitNum result = new UnitNum(other);
         result.value = value.div(result.value);
         result.unit = unit.div(result.unit);
         return result;
     }
 
     public UNumber neg() {
-        return new UUnitNum(value.neg(), unit);
+        return new UnitNum(value.neg(), unit);
     }
 
     public UNumber inv() {
-        return new UUnitNum(value.inv(), unit.inv());
+        return new UnitNum(value.inv(), unit.inv());
     }
 
     public UNumber abs() {
-        return new UUnitNum(value.abs(), unit);
+        return new UnitNum(value.abs(), unit);
     }
 
     // We can't have PowerUnit with non-integer power, so we must
@@ -107,15 +107,15 @@ public class UUnitNum extends UNumber {
 
     public UNumber pow(Number other) {
         if (unit instanceof PowerUnit) {
-            return new UUnitNum(value.pow(other), new PowerUnit(((PowerUnit) unit).targetUnit, ((PowerUnit) unit).power * other.doubleValue()).simplify()).simplify();
+            return new UnitNum(value.pow(other), new PowerUnit(((PowerUnit) unit).targetUnit, ((PowerUnit) unit).power * other.doubleValue()).simplify()).simplify();
         } else {
-            return new UUnitNum(value.pow(other), new PowerUnit(unit, other).simplify()).simplify();
+            return new UnitNum(value.pow(other), new PowerUnit(unit, other).simplify()).simplify();
         }
     }
 
     public UNumber root() {
         if (unit instanceof PowerUnit) {
-            return new UUnitNum(value.root(), new PowerUnit(((PowerUnit) unit).targetUnit, ((PowerUnit) unit).power >> 1).simplify()).simplify();
+            return new UnitNum(value.root(), new PowerUnit(((PowerUnit) unit).targetUnit, ((PowerUnit) unit).power >> 1).simplify()).simplify();
         } else {
             return value.root();
         }
@@ -123,9 +123,9 @@ public class UUnitNum extends UNumber {
 
     public UNumber root(Number other) {
         if (unit instanceof PowerUnit) {
-            return new UUnitNum(value.root(other), new PowerUnit(((PowerUnit) unit).targetUnit, ((PowerUnit) unit).power / other.doubleValue()).simplify()).simplify();
+            return new UnitNum(value.root(other), new PowerUnit(((PowerUnit) unit).targetUnit, ((PowerUnit) unit).power / other.doubleValue()).simplify()).simplify();
         } else {
-            return new UUnitNum(value.root(other), new PowerUnit(unit, 1.0 / other.doubleValue()).simplify()).simplify();
+            return new UnitNum(value.root(other), new PowerUnit(unit, 1.0 / other.doubleValue()).simplify()).simplify();
         }
     }
 
@@ -143,6 +143,6 @@ public class UUnitNum extends UNumber {
     }
 
     public boolean equals(Number other) {
-        return (other instanceof UUnitNum)? (((UUnitNum) other).value.equals(value) && ((UUnitNum) other).unit.equals(unit)): false;
+        return (other instanceof UnitNum)? (((UnitNum) other).value.equals(value) && ((UnitNum) other).unit.equals(unit)): false;
     }
 }

@@ -2,6 +2,7 @@ package me.kstep.ucalc.numbers;
 
 import me.kstep.ucalc.operations.UOperation;
 import me.kstep.ucalc.units.Unit;
+import me.kstep.ucalc.units.UnitNum;
 
 /**
  * A number with some defined basic operations like addition, substruction,
@@ -167,14 +168,14 @@ public abstract class UNumber extends Number {
 
     public static Pair<?,?> coerce(Number num1, Number num2) {
 
-        if (num1 instanceof UUnitNum && num2 instanceof UUnitNum) {
-            return coerce(((UUnitNum) num1).value, ((UUnitNum) num2).value).withUnits(((UUnitNum) num1).unit, ((UUnitNum) num2).unit);
+        if (num1 instanceof UnitNum && num2 instanceof UnitNum) {
+            return coerce(((UnitNum) num1).value, ((UnitNum) num2).value).withUnits(((UnitNum) num1).unit, ((UnitNum) num2).unit);
 
-        } else if (num1 instanceof UUnitNum) {
-            return coerce(((UUnitNum) num1).value, num2).withUnits(((UUnitNum) num1).unit, Unit.NONE);
+        } else if (num1 instanceof UnitNum) {
+            return coerce(((UnitNum) num1).value, num2).withUnits(((UnitNum) num1).unit, Unit.NONE);
 
-        } else if (num2 instanceof UUnitNum) {
-            return coerce(num1, ((UUnitNum) num2).value).withUnits(Unit.NONE, ((UUnitNum) num2).unit);
+        } else if (num2 instanceof UnitNum) {
+            return coerce(num1, ((UnitNum) num2).value).withUnits(Unit.NONE, ((UnitNum) num2).unit);
 
         } else if (num1 instanceof UComplex || num2 instanceof UComplex) {
             return new Pair<UComplex, UComplex>(new UComplex(num1), new UComplex(num2));

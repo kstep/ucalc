@@ -2,7 +2,7 @@ package me.kstep.ucalc;
 
 import java.util.Hashtable;
 
-import me.kstep.ucalc.numbers.UUnitNum;
+import me.kstep.ucalc.units.UnitNum;
 import me.kstep.ucalc.units.UnitsManager;
 import me.kstep.ucalc.units.Unit;
 
@@ -52,10 +52,10 @@ final class UConstants extends Hashtable<CharSequence,UConstants.Item> {
     }
 
     public void put(String name, String description, Number value, Unit unit) {
-        put(name, description, new UUnitNum(value, unit));
+        put(name, description, new UnitNum(value, unit));
     }
 
     public void put(String name, Number value, Unit unit) {
-        put(name, new UUnitNum(value, unit));
+        put(name, new UnitNum(value, unit));
     }
 }

@@ -10,12 +10,12 @@ import me.kstep.ucalc.units.Unit;
  * You will get what I speak about if you consider relation between
  * *meter*, *square meter* and *cubic meter*.
  */
-public class PowerUnit extends Unit {
+class PowerUnit extends Unit {
 
-    final public Unit targetUnit;
+    Unit targetUnit;
 
     // This is unit's power.
-    final public int power;
+    int power;
 
     boolean autoname = false;
 
@@ -23,7 +23,7 @@ public class PowerUnit extends Unit {
      * The main constructor, which determines relation between
      * main unit and derived unit.
      */
-    public PowerUnit(String name, Unit targetUnit, Number power) {
+    PowerUnit(String name, Unit targetUnit, Number power) {
         super(name);
         this.power = power.intValue();
         this.targetUnit = targetUnit;
@@ -80,7 +80,7 @@ public class PowerUnit extends Unit {
      * name of derived unit and superscript representation of power
      * (see `superscriptInt()` method above).
      */
-    public PowerUnit(Unit targetUnit, Number power) {
+    PowerUnit(Unit targetUnit, Number power) {
         this(targetUnit.name + superscriptInt(power.intValue()), targetUnit, power);
         autoname = true;
     }
