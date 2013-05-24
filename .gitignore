@@ -1,3 +1,8 @@
-bin/*
-gen/*
+/bin
+/gen
+/doc
 *.class
+
+Makefile
+*.apk
+*.keystore
