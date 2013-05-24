@@ -45,7 +45,7 @@
     </LinearLayout>
 
     <LinearLayout android:layout_height="0dp" android:layout_width="match_parent" android:orientation="horizontal" android:layout_weight="1">
-        <me.kstep.ucalc.widgets.UButton android:text="conv" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.widgets.UOpButton android:text="conv" style="@style/UCBtn.Fun" />
         <me.kstep.ucalc.widgets.UConstButton android:text="π" style="@style/UCBtn.Sym" />
         <me.kstep.ucalc.widgets.UDigitButton android:text="7" style="@style/UCBtn.Sym" />
         <me.kstep.ucalc.widgets.UDigitButton android:text="8" style="@style/UCBtn.Sym" />
