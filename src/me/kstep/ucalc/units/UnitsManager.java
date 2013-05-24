@@ -142,13 +142,15 @@ public class UnitsManager {
         }
         */
 
-        units.put(unit.name, unit);
-        return unit;
+        Unit simplifiedUnit = unit.simplify();
+        units.put(unit.name, simplifiedUnit);
+        return simplifiedUnit;
     }
 
     public Unit add(Unit unit, Unit.Category category) {
+        unit = add(unit);
         unit.category = category;
-        return add(unit);
+        return unit;
     }
 
     public Unit get(String name) {
