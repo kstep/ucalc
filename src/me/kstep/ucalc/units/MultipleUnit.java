@@ -132,9 +132,11 @@ class MultipleUnit extends ComplexUnit {
         ArrayList<Unit> units = new ArrayList<Unit>(powers.size());
         for (Unit unit : powers.keySet()) {
             long power = powers.get(unit);
-            if (power == 1) {
+            if (power == 0) {
+                continue;
+            } else if (power == 1) {
                 units.add(unit);
-            } else if (power > 0) {
+            } else {
                 units.add(new PowerUnit(unit, power));
             }
         }
