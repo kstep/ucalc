@@ -25,11 +25,13 @@ class BaseUnit extends Unit {
      */
     public UNumber to(UNumber value, Unit unit) throws UnitException {
         if (unit == this) return value;
+        if (unit instanceof BaseUnit) throw this.new ConversionException(unit);
         return unit.from(value, this);
     }
 
     public UNumber from(UNumber value, Unit unit) throws UnitException {
         if (unit == this) return value;
+        if (unit instanceof BaseUnit) throw unit.new ConversionException(this);
         return unit.to(value, this);
     }
 
