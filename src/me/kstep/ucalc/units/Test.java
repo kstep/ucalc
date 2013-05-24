@@ -95,6 +95,7 @@ class Test {
 
         //println(sq_m.to(1000, sq_km));
         Unit x = new BaseUnit("x");
+        Unit y = new LinearUnit("y", 10, x);
 
         Unit t;
         
@@ -102,13 +103,20 @@ class Test {
         //println(t);
         //println(t.simplify());
 
-        t = new UnitPrefix("k", new LinearUnit("yy", 6, new LinearUnit("y", 10, x, 5), 9));
-        println(((LinearUnit) t).represent());
-        println(((LinearUnit) t.simplify()).represent());
+        //t = new UnitPrefix("k", new LinearUnit("yy", 6, new LinearUnit("y", 10, x, 5), 9));
+        //println(((LinearUnit) t).represent());
+        //println(((LinearUnit) t.simplify()).represent());
 
-        t = new MultipleUnit(x, x, x);
+        PowerUnit p = new PowerUnit(y, 3);
+        println(p.targetUnit.equals(y));
+        println(p.targetUnit.hashCode() == y.hashCode());
+
+        t = p.mul(x).mul(y).mul(y);
         println(t.represent());
         println(t.simplify().represent());
+        println(y.hashCode());
+        println(p.targetUnit.hashCode());
+        println(p.hashCode());
 
         //println(new UUnitNum(1000, sq_m).convert(cu_m));
         //sq_km.from(1000, sq_m);
