@@ -268,7 +268,11 @@ public class UCalcActivity extends Activity {
     public void onUnitEnter(CharSequence ch) {
         UEditView editView = (UEditView) findViewById(R.id.view_edit);
 
-        editView.stopEditing();
+        if (!editView.isEditing()) {
+            pushStack();
+            editView.setValue(Float.NaN);
+            editView.startEditing();
+        }
 
         try {
             Unit unit = units.get(ch.toString());
