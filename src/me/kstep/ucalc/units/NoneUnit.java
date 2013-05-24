@@ -33,6 +33,22 @@ final class NoneUnit extends Unit {
         return other == instance;
     }
 
+    public Unit mul(Unit other) {
+        return other;
+    }
+
+    public Unit div(Unit other) {
+        return new PowerUnit(other, -1).simplify();
+    }
+
+    public Unit pow(int power) {
+        return this;
+    }
+
+    public Unit inv() {
+        return this;
+    }
+
     public Unit simplify() {
         return this;
     }
