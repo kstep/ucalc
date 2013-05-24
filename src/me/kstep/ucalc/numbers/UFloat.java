@@ -95,5 +95,13 @@ public class UFloat extends UReal {
     public UNumber mod(Number other) {
         return isCompatible(other)? new UFloat(value % other.doubleValue()): super.mod(other);
     }
+
+    public int hashCode() {
+        return Double.valueOf(value).hashCode();
+    }
+
+    public boolean equals(Number other) {
+        return other.doubleValue() == value;
+    }
 }
 

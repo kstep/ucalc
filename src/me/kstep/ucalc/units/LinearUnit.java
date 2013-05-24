@@ -137,13 +137,16 @@ class LinearUnit extends Unit {
      * and have equal scale and offset values.
      */
     public boolean equals(Unit other) {
+        System.out.println(toString() + " ==? " + other.toString());
         if (this == other) return true;
         if (!(other instanceof LinearUnit)) return false;
 
         LinearUnit unit = (LinearUnit) other;
-        return scale == unit.scale
-            && offset == unit.offset
+        boolean r = scale.equals(unit.scale)
+            && offset.equals(unit.offset)
             && targetUnit.equals(unit.targetUnit);
+        System.out.println(toString() + " == " + other.toString() + " = " + String.valueOf(r));
+        return r;
     }
 
     public String toString() {
@@ -159,7 +162,7 @@ class LinearUnit extends Unit {
     }
 
     public String represent() {
-        return "(" + scale + "·" + targetUnit.represent() + " + " + offset + ")";
+        return offset.doubleValue() == 0.0? "(" + scale + "·" + targetUnit.represent() + ")": "(" + scale + "·" + targetUnit.represent() + " + " + offset + ")";
     }
 
     public int hashCode() {

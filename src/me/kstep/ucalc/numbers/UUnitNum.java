@@ -137,4 +137,12 @@ public class UUnitNum extends UNumber {
     public Unit getUnit() {
         return unit;
     }
+
+    public int hashCode() {
+        return (value.hashCode() << 16) | unit.hashCode();
+    }
+
+    public boolean equals(Number other) {
+        return (other instanceof UUnitNum)? (((UUnitNum) other).value.equals(value) && ((UUnitNum) other).unit.equals(unit)): false;
+    }
 }

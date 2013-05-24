@@ -84,4 +84,12 @@ public class UInteger extends UReal {
     public UNumber mod(Number other) {
         return isCompatible(other)? new UInteger(value % other.longValue()): super.mod(other);
     }
+
+    public int hashCode() {
+        return Long.valueOf(value).hashCode();
+    }
+
+    public boolean equals(Number other) {
+        return value == other.longValue();
+    }
 }

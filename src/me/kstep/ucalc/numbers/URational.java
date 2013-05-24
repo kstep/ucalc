@@ -191,4 +191,13 @@ public class URational extends UReal {
     public UNumber mod(Number other) {
         return other instanceof URational? new URational(doubleValue() % other.doubleValue()): super.mod(other);
     }
+
+    public int hashCode() {
+        return (int) (numerator << 16 ^ denomenator);
+    }
+
+    public boolean equals(Number other) {
+        return (other instanceof URational && ((URational) other).numerator == numerator && ((URational) other).denomenator == denomenator)
+            || (doubleValue() == other.doubleValue());
+    }
 }

@@ -159,8 +159,10 @@ public abstract class UNumber extends Number {
     /**
      * Equality check
      */
-    public boolean equals(UNumber other) {
-        return this == other;
+    abstract public boolean equals(Number other);
+
+    public boolean equals(Object other) {
+        return (other instanceof Number)? UNumber.valueOf((Number) other).equals(this): false;
     }
 
     public static Pair<?,?> coerce(Number num1, Number num2) {

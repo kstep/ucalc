@@ -149,7 +149,7 @@ public class UComplex extends UNumber {
         }
     }
 
-    public boolean equals(UNumber other) {
+    public boolean equals(Number other) {
         return (other instanceof UComplex && real.equals(((UComplex) other).real) && imag.equals(((UComplex) other).imag))
             || (isReal() && real.equals(other));
     }
@@ -185,5 +185,9 @@ public class UComplex extends UNumber {
     public UNumber inv() {
         UNumber sq = real.mul(real).add(imag.mul(imag));
         return new UComplex((UReal) real.div(sq), (UReal) imag.neg().div(sq));
+    }
+
+    public int hashCode() {
+        return (imag.hashCode() << 16) ^ real.hashCode();
     }
 }
