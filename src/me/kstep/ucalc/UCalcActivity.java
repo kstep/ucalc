@@ -323,7 +323,13 @@ public class UCalcActivity extends Activity {
         UEditView editView = (UEditView) findViewById(R.id.view_edit);
         if (!editView.isEmpty()) {
             if (editView.isEditing()) {
-                editView.chop();
+                Number value = editView.getValue();
+                if (value instanceof UnitNum) {
+                    editView.setValue(((UnitNum) value).value);
+                } else {
+                    editView.chop();
+                }
+
                 if (editView.isEmpty()) {
                     popStack();
                 }
