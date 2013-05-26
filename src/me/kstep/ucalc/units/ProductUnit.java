@@ -133,47 +133,67 @@ class ProductUnit extends ComplexUnit {
         return true;
     }
 
+    private void foldUnits(HashMap<Unit,Integer> powers, Unit unit, int power) {
+        if (unit == Unit.NONE || power == 0) {
+            return;
+        }
+
+        if (unit instanceof ProductUnit) {
+            for (Unit subunit : ((ProductUnit) unit).targetUnits) {
+                foldUnits(powers, subunit, power);
+            }
+
+        } else if (unit instanceof PowerUnit) {
+            foldUnits(powers, ((PowerUnit) unit).targetUnit, ((PowerUnit) unit).power * power);
+
+        } else if (powers.containsKey(unit)) {
+            powers.put(unit, powers.get(unit) + power);
+
+        } else {
+            powers.put(unit, power);
+        }
+    }
+
+    // Insertion sort, very fast for small inputs, which is my case.
+    // Standard merge sort implemented by Arrays.sort() is an overkill for me.
+    private void simpleSort(Unit[] units) {
+        int powera;
+        int powerb;
+        Unit unita;
+        Unit unitb;
+
+        for (int i = 1; i < units.length; i++) {
+            unitb = units[i];
+            powerb = unitb instanceof PowerUnit? ((PowerUnit) unitb).power: 1;
+
+            for (int j = i - 1; j >= 0; j--) {
+                unita = units[j];
+                powera = unita instanceof PowerUnit? ((PowerUnit) unita).power: 1;
+
+                if (powerb <= powera) {
+                    break;
+                }
+
+                units[j + 1] = unita;
+                units[j] = unitb;
+            }
+        }
+    }
+
     public Unit simplify(int depth) {
         if (depth-- < 0) return this;
 
-        HashMap<Unit,Long> powers = new HashMap<Unit,Long>(targetUnits.length * 2);
+        HashMap<Unit,Integer> powers = new HashMap<Unit,Integer>(targetUnits.length * 2);
 
         // First simplify and flatten all inner units
         for (Unit unit : targetUnits) {
-            //if (unit == null) {
-                //continue;
-            //}
-
             Unit u = unit.simplify(depth);
-
-            if (u == Unit.NONE) {
-                continue;
-
-            } else if (u instanceof ProductUnit) {
-                Unit[] subunits = ((ProductUnit) u).targetUnits;
-                for (Unit subunit : subunits) {
-                    if (subunit == Unit.NONE) {
-                        continue;
-                    } else if (subunit instanceof PowerUnit) {
-                        PowerUnit other = (PowerUnit) subunit;
-                        powers.put(other.targetUnit, (powers.containsKey(other.targetUnit)? powers.get(other.targetUnit): 0) + other.power);
-                    } else {
-                        powers.put(subunit, (powers.containsKey(subunit)? powers.get(subunit): 0) + 1);
-                    }
-                }
-
-            } else if (u instanceof PowerUnit) {
-                PowerUnit other = (PowerUnit) u;
-                powers.put(other.targetUnit, (powers.containsKey(other.targetUnit)? powers.get(other.targetUnit): 0) + other.power);
-
-            } else {
-                powers.put(u, (powers.containsKey(u)? powers.get(u): 0) + 1);
-            }
+            foldUnits(powers, unit.simplify(depth), 1);
         }
 
         ArrayList<Unit> units = new ArrayList<Unit>(powers.size());
         for (Unit unit : powers.keySet()) {
-            long power = powers.get(unit);
+            int power = powers.get(unit);
             if (power == 0) {
                 continue;
             } else if (power == 1) {
@@ -187,9 +207,12 @@ class ProductUnit extends ComplexUnit {
             case 0: return Unit.NONE;
             case 1: return units.get(0);
             default:
+                Unit[] newunits = units.toArray(new Unit[units.size()]);
+                simpleSort(newunits);
+
                 Unit unit = autoname?
-                    new ProductUnit(units.toArray(new Unit[units.size()])):
-                    new ProductUnit(name, units.toArray(new Unit[units.size()]));
+                    new ProductUnit(newunits):
+                    new ProductUnit(name, newunits);
 
                 unit.fullname = fullname;
                 unit.description = description;
