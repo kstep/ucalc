@@ -64,6 +64,14 @@ public abstract class Unit {
         this.name = name;
     }
 
+    public UNumber to(Number value, Unit unit) throws UnitException {
+        return to(UNumber.valueOf(value), unit);
+    }
+
+    public UNumber from(Number value, Unit unit) throws UnitException {
+        return from(UNumber.valueOf(value), unit);
+    }
+
     /**
      * Direct conversion from this to other unit.
      *
