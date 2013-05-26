@@ -227,7 +227,7 @@ class ProductUnit extends ComplexUnit {
         }
 
         name.setLength(name.length() - 1);
-        return name.toString();
+        return "(" + name.toString() + ")";
     }
 
     public int hashCode() {
