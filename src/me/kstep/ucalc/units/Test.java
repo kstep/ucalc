@@ -10,7 +10,7 @@ class Test {
         println(new UnitNum(10, uman.get("ohm")).convert(uman.get("S")));
     }
 
-    private static void println(Object... o) {
+    public static void println(Object... o) {
         String result = "";
         for (Object i : o) {
             result = result + '\t' + o.toString();
