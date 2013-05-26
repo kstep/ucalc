@@ -25,8 +25,28 @@ class ProductUnit extends ComplexUnit {
 
         UNumber result = value;
 
+        boolean[] used = new boolean[targetUnits.length];
+
         for (int i = 0; i < targetUnits.length; i++) {
-            result = targetUnits[i].to(result, target.targetUnits[i]);
+            boolean failure = true;
+
+            for (int j = 0; j < target.targetUnits.length; j++) {
+                if (used[j]) continue;
+
+                try {
+                    result = targetUnits[i].to(result, target.targetUnits[j]);
+                } catch (Unit.ConversionException e) {
+                    continue;
+                }
+
+                used[j] = true;
+                failure = false;
+                break;
+            }
+
+            if (failure) {
+                throw this.new ConversionException(unit);
+            }
         }
 
         return result;
@@ -41,8 +61,28 @@ class ProductUnit extends ComplexUnit {
 
         UNumber result = value;
 
+        boolean[] used = new boolean[targetUnits.length];
+
         for (int i = 0; i < targetUnits.length; i++) {
-            result = targetUnits[i].from(result, target.targetUnits[i]);
+            boolean failure = true;
+
+            for (int j = 0; j < target.targetUnits.length; j++) {
+                if (used[j]) continue;
+
+                try {
+                    result = targetUnits[i].from(result, target.targetUnits[j]);
+                } catch (Unit.ConversionException e) {
+                    continue;
+                }
+
+                used[j] = true;
+                failure = false;
+                break;
+            }
+
+            if (failure) {
+                throw unit.new ConversionException(this);
+            }
         }
 
         return result;
