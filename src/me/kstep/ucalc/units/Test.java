@@ -5,17 +5,16 @@ import me.kstep.ucalc.units.UnitNum;
 
 class Test {
     public static void main(String argv[]) {
-        UnitsManager uman = UnitsManager.getInstance();
+        UnitsManager uman = Units.load();
 
-        Units.load(uman);
-
-        Unit inch = uman.get("in");
-        Unit u = inch.mul(inch).mul(inch).mul(inch).simplify();
-        println(u);
-        println(u.represent());
+        println(new UnitNum(10, uman.get("ohm")).convert(uman.get("S")));
     }
 
-    private static void println(Object o) {
-        System.out.println(o.toString());
+    private static void println(Object... o) {
+        String result = "";
+        for (Object i : o) {
+            result = result + '\t' + o.toString();
+        }
+        System.out.println(result);
     }
 }
