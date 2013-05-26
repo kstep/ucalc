@@ -66,7 +66,7 @@ public class Units {
             if (evt != XmlPullParser.START_TAG) { continue; }
 
             if (parser.getName().equals("unit")) {
-                uman.add(inflateUnit(parser, uman), category);
+                uman.add(inflateUnit(parser, uman)).category = category;
 
             } else if (parser.getName().equals("category")) {
                 String categoryName = parser.getAttributeValue(null, "name");
@@ -201,7 +201,7 @@ public class Units {
             unit.fullname = fullName;
             unit.description = description;
         }
-        android.util.Log.d("UCalc", "Inflated unit " + unit.toString() + " (" + unit.represent() + ")");
+        android.util.Log.d("UCalc", "Inflated unit " + unit.toString() + " (" + unit.getDescription() + ")");
 
         return unit;
     }
