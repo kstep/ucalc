@@ -6,21 +6,21 @@ import me.kstep.ucalc.numbers.UInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-class MultipleUnit extends ComplexUnit {
+class ProductUnit extends ComplexUnit {
     Unit[] targetUnits;
 
     boolean autoname = false;
 
-    MultipleUnit(String name, Unit... units) {
+    ProductUnit(String name, Unit... units) {
         super(name);
         targetUnits = units;
     }
 
     public UNumber to(UNumber value, Unit unit) {
         if (this == unit) return value;
-        if (!(unit instanceof MultipleUnit)) throw this.new ConversionException(unit);
+        if (!(unit instanceof ProductUnit)) throw this.new ConversionException(unit);
         
-        MultipleUnit target = (MultipleUnit) unit;
+        ProductUnit target = (ProductUnit) unit;
         if (target.targetUnits.length != this.targetUnits.length) throw this.new ConversionException(unit);
 
         UNumber result = value;
@@ -34,9 +34,9 @@ class MultipleUnit extends ComplexUnit {
 
     public UNumber from(UNumber value, Unit unit) {
         if (this == unit) return value;
-        if (!(unit instanceof MultipleUnit)) throw unit.new ConversionException(this);
+        if (!(unit instanceof ProductUnit)) throw unit.new ConversionException(this);
         
-        MultipleUnit target = (MultipleUnit) unit;
+        ProductUnit target = (ProductUnit) unit;
         if (target.targetUnits.length != this.targetUnits.length) throw unit.new ConversionException(this);
 
         UNumber result = value;
@@ -58,16 +58,16 @@ class MultipleUnit extends ComplexUnit {
         return name.toString();
     }
 
-    MultipleUnit(Unit... units) {
+    ProductUnit(Unit... units) {
         this(joinUnitNames(units), units);
         autoname = true;
     }
 
     public boolean direct(Unit unit) {
         if (this == unit) return true;
-        if (!(unit instanceof MultipleUnit)) return false;
+        if (!(unit instanceof ProductUnit)) return false;
 
-        Unit[] units = ((MultipleUnit) unit).targetUnits;
+        Unit[] units = ((ProductUnit) unit).targetUnits;
         if (units.length != targetUnits.length) return false;
 
         for (int i = 0, l = units.length; i < l; i++) {
@@ -80,9 +80,9 @@ class MultipleUnit extends ComplexUnit {
 
     public boolean equals(Unit other) {
         if (this == other) return true;
-        if (!(other instanceof MultipleUnit)) return false;
+        if (!(other instanceof ProductUnit)) return false;
 
-        Unit[] units = ((MultipleUnit) other).targetUnits;
+        Unit[] units = ((ProductUnit) other).targetUnits;
         if (units.length != targetUnits.length) return false;
 
         for (int i = 0, l = units.length; i < l; i++) {
@@ -107,8 +107,8 @@ class MultipleUnit extends ComplexUnit {
             if (u == Unit.NONE) {
                 continue;
 
-            } else if (u instanceof MultipleUnit) {
-                Unit[] subunits = ((MultipleUnit) u).targetUnits;
+            } else if (u instanceof ProductUnit) {
+                Unit[] subunits = ((ProductUnit) u).targetUnits;
                 for (Unit subunit : subunits) {
                     if (subunit == Unit.NONE) {
                         continue;
@@ -146,8 +146,8 @@ class MultipleUnit extends ComplexUnit {
             case 1: return units.get(0);
             default:
                 return autoname?
-                    new MultipleUnit(units.toArray(new Unit[units.size()])):
-                    new MultipleUnit(name, units.toArray(new Unit[units.size()]));
+                    new ProductUnit(units.toArray(new Unit[units.size()])):
+                    new ProductUnit(name, units.toArray(new Unit[units.size()]));
         }
     }
 

@@ -180,9 +180,9 @@ public class Units {
             android.util.Log.d("UCalc", "Product unit");
 
             if (unitName != null) {
-                unit = new MultipleUnit(unitName, deriveUnits.toArray(new Unit[deriveUnits.size()]));
+                unit = new ProductUnit(unitName, deriveUnits.toArray(new Unit[deriveUnits.size()]));
             } else {
-                unit = new MultipleUnit(deriveUnits.toArray(new Unit[deriveUnits.size()]));
+                unit = new ProductUnit(deriveUnits.toArray(new Unit[deriveUnits.size()]));
             }
         } else if (className.equals("prefix")) {
             android.util.Log.d("UCalc", "Prefix unit");
@@ -227,12 +227,12 @@ public class Units {
             uman.add(new UnitPrefix("m", uman.get("m")), "Millimeter", Unit.Category.DISTANCE);
             uman.add(new UnitPrefix("c", uman.get("m")), "Centimeter",  Unit.Category.DISTANCE);
             uman.add(new UnitPrefix("k", uman.get("m")), "Kilometer", Unit.Category.DISTANCE);
-            uman.add(new MultipleUnit("km/hr", uman.get("km"), new PowerUnit(uman.get("hr"), -1)), "Kilometers per hour", Unit.Category.DISTANCE);
+            uman.add(new ProductUnit("km/hr", uman.get("km"), new PowerUnit(uman.get("hr"), -1)), "Kilometers per hour", Unit.Category.DISTANCE);
             uman.add(new LinearUnit("in", 25.4, uman.get("mm")), "Imperial inch", Unit.Category.DISTANCE);
             uman.add(new LinearUnit("ft", 12, uman.get("in")), "Imperial foot", Unit.Category.DISTANCE);
             uman.add(new LinearUnit("yd", 3, uman.get("ft")), "Imperial yard", Unit.Category.DISTANCE);
             uman.add(new LinearUnit("mi", 1760, uman.get("yd")), "Imperial mile", Unit.Category.DISTANCE);
-            uman.add(new MultipleUnit("mi/hr", uman.get("mi"), new PowerUnit(uman.get("hr"), -1)), "Miles per hour", Unit.Category.DISTANCE);
+            uman.add(new ProductUnit("mi/hr", uman.get("mi"), new PowerUnit(uman.get("hr"), -1)), "Miles per hour", Unit.Category.DISTANCE);
             // TODO
 
             // Volume
@@ -247,12 +247,12 @@ public class Units {
             uman.add(new LinearUnit("t", 1000, uman.get("kg")), "Metric tons", Unit.Category.WEIGHT);
             uman.add(new LinearUnit("st", 907.185, uman.get("kg")), "Short tons", Unit.Category.WEIGHT);
             uman.add(new LinearUnit("lt", 1016.05, uman.get("kg")), "Long tons", Unit.Category.WEIGHT);
-            uman.add(new MultipleUnit("N", uman.get("kg"), uman.get("m"), new PowerUnit(uman.get("s"), -2)), "Newton",
+            uman.add(new ProductUnit("N", uman.get("kg"), uman.get("m"), new PowerUnit(uman.get("s"), -2)), "Newton",
                     "Force to accelerate 1 kg of mass by 1 m/s per second", Unit.Category.WEIGHT);
             // TODO
 
             // Miscellaneous
-            uman.add(new MultipleUnit("J", uman.get("N"), uman.get("m")), "Joule",
+            uman.add(new ProductUnit("J", uman.get("N"), uman.get("m")), "Joule",
                     "A work applied by force of 1 N through a distance of 1 meter");
             uman.add(new LinearUnit("mol", 6.0221412927e23, Unit.NONE), "Mole",
                     "Amount of substance which contains as many elementary entities as 12 grams of pure ¹²C");
@@ -260,7 +260,7 @@ public class Units {
             uman.add(new LinearUnit("byte", 8, uman.get("bit")), "Byte, a set of 8 bits");
             uman.add(new LinearUnit("cal", 4.1868, uman.get("J")), "Calorie",
                     "Amount of energy to raise temperator of 1 gram of water by 1°C");
-            uman.add(new LinearUnit("dyn", 0.01, new MultipleUnit(uman.get("g"), uman.get("cm"), new PowerUnit(uman.get("s"), -2))), "Dyne",
+            uman.add(new LinearUnit("dyn", 0.01, new ProductUnit(uman.get("g"), uman.get("cm"), new PowerUnit(uman.get("s"), -2))), "Dyne",
                     "A CGS force unit, force to accelerate 1 g of mass by 1 cm/s per second");
             uman.add(new LinearUnit("erg", 1e-7, uman.get("J")), "Erg", "Mechanical work unit in CGS, a work of force of 1 dyne through distance of 1 cm");
 
@@ -275,13 +275,13 @@ public class Units {
 
             // Electric
             uman.add(new BaseUnit("A"), "Ampere", Unit.Category.ELECTRIC);
-            uman.add(new MultipleUnit("W", uman.get("J"), new PowerUnit(uman.get("s"), -1)), "Watt",
+            uman.add(new ProductUnit("W", uman.get("J"), new PowerUnit(uman.get("s"), -1)), "Watt",
                     "A work of 1 Joule per 1 second", Unit.Category.ELECTRIC);
-            uman.add(new MultipleUnit("V", uman.get("W"), new PowerUnit(uman.get("A"), -1)), "Volt",
+            uman.add(new ProductUnit("V", uman.get("W"), new PowerUnit(uman.get("A"), -1)), "Volt",
                     "An electric potential when current of 1 A dissipates energy of 1 Watt", Unit.Category.ELECTRIC);
-            uman.add(new MultipleUnit("ohm", uman.get("V"), new PowerUnit(uman.get("A"), -1)),
+            uman.add(new ProductUnit("ohm", uman.get("V"), new PowerUnit(uman.get("A"), -1)),
                     "Ohm, a resistance of a conductor if potential of 1 V applied to it produces current of 1 A", Unit.Category.ELECTRIC);
-            uman.add(new MultipleUnit("S", uman.get("A"), new PowerUnit(uman.get("V"), -1)),
+            uman.add(new ProductUnit("S", uman.get("A"), new PowerUnit(uman.get("V"), -1)),
                     "Siemens, a conductance of a conductor if being under current of 1 A it has potential diffirence of 1 V on its ends", Unit.Category.ELECTRIC);
             uman.add(new PowerUnit("Hz", uman.get("s"), -1),
                     "Herz, number of occilations per second", Unit.Category.ELECTRIC);

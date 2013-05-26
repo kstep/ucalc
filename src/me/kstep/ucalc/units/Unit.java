@@ -129,14 +129,14 @@ public abstract class Unit {
     public Unit mul(Unit other) {
         if (other == NONE) return this;
         if (this.equals(other)) return new PowerUnit(this, 2).simplify();
-        return new MultipleUnit(this, other).simplify();
+        return new ProductUnit(this, other).simplify();
     }
 
     // Divide this by other
     public Unit div(Unit other) {
         if (other == NONE) return this;
         if (this.equals(other)) return NONE;
-        return new MultipleUnit(this, new PowerUnit(other, -1)).simplify();
+        return new ProductUnit(this, new PowerUnit(other, -1)).simplify();
     }
 
     // Raise this unit to integer power
