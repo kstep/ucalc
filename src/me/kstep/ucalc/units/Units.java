@@ -1,14 +1,14 @@
 package me.kstep.ucalc.units;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
-
-import android.util.Xml;
-import android.util.AttributeSet;
 
 import android.content.Context;
 import android.content.res.XmlResourceParser;
@@ -17,24 +17,53 @@ import me.kstep.ucalc.numbers.UNumber;
 import me.kstep.ucalc.numbers.UInteger;
 
 public class Units {
-    public static void load() {
-        load(UnitsManager.getInstance());
+    public static UnitsManager load() {
+        return load(UnitsManager.getInstance());
     }
 
-    public static void inflate(Context context, int resource) {
-        inflate(context, resource, UnitsManager.getInstance());
+    public static UnitsManager inflate(InputStream in) {
+        return inflate(in, UnitsManager.getInstance());
     }
 
-    public static void inflate(XmlPullParser parser) {
-        inflate(parser, UnitsManager.getInstance());
+    public static UnitsManager inflate(InputStream in, UnitsManager uman) {
+        try {
+            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+            factory.setNamespaceAware(false);
+            XmlPullParser parser = factory.newPullParser();
+            parser.setInput(in, null);
+            return inflate(parser, uman);
+
+        } catch (XmlPullParserException e) {
+            return uman;
+        }
     }
 
-    public static void inflate(Context context, int resource, UnitsManager uman) {
+    public static UnitsManager inflate(String filename) {
+        return inflate(filename, UnitsManager.getInstance());
+    }
+
+    public static UnitsManager inflate(String filename, UnitsManager uman) {
+        try {
+            return inflate(new FileInputStream(filename), uman);
+        } catch (FileNotFoundException e) {
+            return uman;
+        }
+    }
+
+    public static UnitsManager inflate(Context context, int resource) {
+        return inflate(context, resource, UnitsManager.getInstance());
+    }
+
+    public static UnitsManager inflate(Context context, int resource, UnitsManager uman) {
         XmlResourceParser parser = context.getResources().getXml(resource);
-        inflate(parser, uman);
+        return inflate(parser, uman);
     }
 
-    public static void inflate(XmlPullParser parser, UnitsManager uman) {
+    public static UnitsManager inflate(XmlPullParser parser) {
+        return inflate(parser, UnitsManager.getInstance());
+    }
+
+    public static UnitsManager inflate(XmlPullParser parser, UnitsManager uman) {
         uman.clear();
 
         try {
@@ -46,7 +75,7 @@ public class Units {
             }
 
             if (evt != XmlPullParser.START_TAG || !parser.getName().equals("units")) {
-                return;
+                return uman;
             }
 
             rInflate(parser, uman, Unit.Category.MISCELLANEOUS);
@@ -56,6 +85,8 @@ public class Units {
         }
 
         System.gc();
+
+        return uman;
     }
 
     private static void rInflate(XmlPullParser parser, UnitsManager uman, Unit.Category category) throws IOException, XmlPullParserException {
@@ -206,7 +237,7 @@ public class Units {
         return unit;
     }
 
-    public static void load(UnitsManager uman) {
+    public static UnitsManager load(UnitsManager uman) {
         try {
             uman.clear();
 
@@ -289,5 +320,7 @@ public class Units {
 
         } catch (UnitsManager.UnitExistsException e) {
         }
+
+        return uman;
     }
 }

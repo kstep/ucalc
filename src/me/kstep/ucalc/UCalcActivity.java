@@ -93,9 +93,7 @@ public class UCalcActivity extends Activity {
         stack = (UStack) loadFromFile("stack.bin", new UStack());
         memory = (UMemory) loadFromFile("memory.bin", new UMemory());
 
-        units = UnitsManager.getInstance();
-        //Units.load(units);
-        Units.inflate(this, R.xml.units, units);
+        units = Units.inflate(this, R.xml.units);
     }
 
     /** Called when the activity is first created. */
