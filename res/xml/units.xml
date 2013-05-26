@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<units xmlns="http://ucalc.kstep.me/xmlns/units">
+    <category name="time">
+        <unit class="base" name="s" fullname="Second" />
+        <unit class="linear" name="min" fullname="Minute">
+            <derive>s</derive>
+            <scale>60</scale>
+        </unit>
+        <unit class="linear" name="hr" fullname="Hour">
+            <derive>min</derive>
+            <scale>60</scale>
+        </unit>
+        <unit class="linear" name="day" fullname="Day">
+            <derive>hr</derive>
+            <scale>24</scale>
+        </unit>
+        <unit class="linear" name="yr" fullname="Year">
+            <derive>day</derive>
+            <scale>365.24219</scale>
+        </unit>
+        <unit class="linear" name="wk" fullname="Week">
+            <derive>day</derive>
+            <scale>7</scale>
+        </unit>
+        <unit class="linear" name="ftnt" fullname="Fortnight">
+            <derive>wk</derive>
+            <scale>2</scale>
+        </unit>
+        <unit class="linear" name="sday" fullname="Solar day">
+            <derive>hr</derive>
+            <scale>23.934469591898</scale>
+        </unit>
+        <unit class="linear" name="syr" fullname="Solar year">
+            <derive>day</derive>
+            <scale>366.256401862834</scale>
+        </unit>
+        <unit class="linear" name="jyr" fullname="Julian year">
+            <derive>day</derive>
+            <scale>365.25</scale>
+        </unit>
+    </category>
+
+    <category name="dist">
+        <unit class="base" name="m" fullname="Meter" />
+        <unit class="prefix" fullname="Kilometer">
+            <prefix>k</prefix>
+            <derive>m</derive>
+        </unit>
+        <unit class="prefix" fullname="Millimeter">
+            <prefix>m</prefix>
+            <derive>m</derive>
+        </unit>
+        <unit class="prefix" fullname="Centimeter">
+            <prefix>c</prefix>
+            <derive>m</derive>
+        </unit>
+        
+        <unit fullname="Kilometers per hour" name="km/hr" class="product">
+            <derive>km</derive>
+            <derive>
+                <unit class="power">
+                    <derive>hr</derive>
+                    <power>-1</power>
+                </unit>
+            </derive>
+        </unit>
+
+        <unit name="in" fullname="Inch" class="linear">
+            <scale>25.4</scale>
+            <derive>mm</derive>
+        </unit>
+        <unit name="ft" fullname="Foot" class="linear">
+            <scale>12</scale>
+            <derive>in</derive>
+        </unit>
+        <unit name="yd" fullname="Yard" class="linear">
+            <scale>3</scale>
+            <derive>ft</derive>
+        </unit>
+        <unit name="mi" fullname="Mile" class="linear">
+            <scale>1760</scale>
+            <derive>yd</derive>
+        </unit>
+        <unit name="mi/hr" fullname="Miles per hour" class="product">
+            <derive>mi</derive>
+            <derive>
+                <unit class="power">
+                    <derive>hr</derive>
+                    <power>-1</power>
+                </unit>
+            </derive>
+        </unit>
+    </category>
+
+    <category name="vol">
+        <unit class="power" fullname="Cubic meters">
+            <derive>m</derive>
+            <power>3</power>
+        </unit>
+        <unit class="linear" name="l" fullname="Liter">
+            <derive>m³</derive>
+            <scale>0.001</scale>
+        </unit>
+    </category>
+
+    <category name="weight">
+        <unit class="base" name="kg" fullname="Kilogram" />
+        <unit class="linear" name="g" fullname="Gram">
+            <scale>0.001</scale>
+            <derive>kg</derive>
+        </unit>
+        <unit class="prefix" fullname="Milligram">
+            <prefix>m</prefix>
+            <derive>g</derive>
+        </unit>
+        <unit class="linear" name="t" fullname="Metric ton">
+            <scale>1000</scale>
+            <derive>kg</derive>
+        </unit>
+        <unit class="linear" name="st" fullname="Short ton">
+            <scale>907.185</scale>
+            <derive>kg</derive>
+        </unit>
+        <unit class="linear" name="lt" fullname="Long ton">
+            <scale>1016.05</scale>
+            <derive>kg</derive>
+        </unit>
+        <unit class="product" name="N" fullname="Newton">
+            <derive>kg</derive>
+            <derive>m</derive>
+            <derive>
+                <unit class="power">
+                    <derive>s</derive>
+                    <power>-2</power>
+                </unit>
+            </derive>
+            <description>Force to accelerate 1 kg of mass by 1 m/s per second</description>
+        </unit>
+    </category>
+
+    <category name="misc">
+        <unit class="product" name="J" fullname="Joule">
+            <description>A work applied by force of 1 N through a distance of 1 meter</description>
+            <derive>N</derive>
+            <derive>m</derive>
+        </unit>
+        <unit name="mol" class="linear" fullname="Mole">
+            <description>Amount of substance which contains as many elementary entities as 12 grams of pure ¹²C</description>
+            <scale>6.0221412927e23</scale>
+            <derive>@none</derive>
+        </unit>
+
+        <unit name="bit" class="base" fullname="Bit">
+            <description>Binary digit (0 or 1)</description>
+        </unit>
+
+        <unit name="byte" fullname="Byte" class="linear">
+            <scale>8</scale>
+            <derive>bit</derive>
+        </unit>
+
+        <unit class="linear" name="cal" fullname="Calorie">
+            <scale>4.1868</scale>
+            <derive>J</derive>
+            <description>Amount of energy to raise temperator of 1 gram of water by 1°C</description>
+        </unit>
+
+        <unit name="dyn" class="product" fullname="Dyne">
+            <derive>g</derive>
+            <derive>cm</derive>
+            <derive>
+                <unit class="power">
+                    <derive>s</derive>
+                    <power>-2</power>
+                </unit>
+            </derive>
+            <description>A CGS force unit, force to accelerate 1 g of mass by 1 cm/s per second</description>
+        </unit>
+
+        <unit name="erg" fullname="Erg" class="linear">
+            <scale>1e-7</scale>
+            <derive>J</derive>
+            <description>Mechanical work unit in CGS, a work of force of 1 dyne through distance of 1 cm</description>
+        </unit>
+
+        <unit name="rad" fullname="Radian" class="base">
+            <description>Angle cutting an arc from a circle with length equal to circle's radius</description>
+        </unit>
+
+        <unit name="deg" fullname="Angle degree" class="linear">
+            <!--<scale>π/180</scale>-->
+            <scale>0.017453292519943295</scale>
+            <derive>rad</derive>
+            <description>1/360 of full circle</description>
+        </unit>
+
+        <unit class="base" name="°K" fullname="Kelvin">
+            <description>Termodynamic temperature</description>
+        </unit>
+
+        <unit name="°C" fullname="Celsius" class="linear">
+            <offset>+273.15</offset>
+            <derive>°K</derive>
+            <description>A 1/100 of scale between water's freezing and boiling points</description>
+        </unit>
+        <unit name="°F" fullname="Fahrenheit" class="linear">
+            <rscale>9/5</rscale>
+            <roffset>+32</roffset>
+            <derive>°C</derive>
+            <description>A 1/96 of scale between brine's freezing point and normal human body temperature</description>
+        </unit>
+    </category>
+
+    <category name="elec">
+        <unit class="base" fullname="Ampere" name="A" /> 
+        <unit class="product" fullname="Watt" name="W">
+            <derive>J</derive>
+            <derive>
+                <unit class="power">
+                    <derive>s</derive>
+                    <power>-1</power>
+                </unit>
+            </derive>
+            <description>A work of 1 Joule per 1 second</description>
+        </unit>
+
+        <unit name="V" fullname="Volt" class="product">
+            <derive>W</derive>
+            <derive>
+                <unit class="power">
+                    <derive>A</derive>
+                    <power>-1</power>
+                </unit>
+            </derive>
+            <description>An electric potential when current of 1 A dissipates energy of 1 Watt</description>
+        </unit>
+
+        <unit name="ohm" fullname="Ohm" class="product">
+            <derive>V</derive>
+            <derive>
+                <unit class="power">
+                    <derive>A</derive>
+                    <power>-1</power>
+                </unit>
+            </derive>
+            <description>A resistance of a conductor if potential of 1 V applied to it produces current of 1 A</description>
+        </unit>
+
+        <unit name="S" fullname="Siemens" class="product">
+            <derive>A</derive>
+            <derive>
+                <unit class="power">
+                    <derive>V</derive>
+                    <power>-1</power>
+                </unit>
+            </derive>
+            <description>A conductance of a conductor if being under current of 1 A it has potential diffirence of 1 V on its ends</description>
+        </unit>
+
+        <unit name="Hz" fullname="Herz" class="power">
+            <derive>s</derive>
+            <power>-1</power>
+            <description>Herz, number of occilations per second</description>
+        </unit>
+    </category>
+</units>

@@ -147,10 +147,28 @@ public class UnitsManager {
         return simplifiedUnit;
     }
 
-    public Unit add(Unit unit, Unit.Category category) {
+    public Unit add(Unit unit, String fullname, String description, Unit.Category category) {
         unit = add(unit);
         unit.category = category;
+        unit.fullname = fullname;
+        unit.description = description;
         return unit;
+    }
+
+    public Unit add(Unit unit, String fullname, Unit.Category category) {
+        return add(unit, fullname, "", category);
+    }
+
+    public Unit add(Unit unit, String fullname) {
+        return add(unit, fullname, "", Unit.Category.MISCELLANEOUS);
+    }
+
+    public Unit add(Unit unit, Unit.Category category) {
+        return add(unit, unit.name, "", category);
+    }
+
+    public Unit add(Unit unit, String fullname, String description) {
+        return add(unit, fullname, description, Unit.Category.MISCELLANEOUS);
     }
 
     public Unit get(String name) {

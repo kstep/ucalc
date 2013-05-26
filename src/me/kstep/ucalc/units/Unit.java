@@ -31,7 +31,7 @@ public abstract class Unit {
 
     final public static Unit NONE = NoneUnit.getInstance();
 
-    public Category category;
+    Category category;
 
     public class ConversionException extends UnitException {
         final static long serialVersionUID = 0L;
@@ -53,15 +53,15 @@ public abstract class Unit {
     }
 
     // Here come unit name.
-    protected String name = "";
+    String name;
 
-    Unit(String name, Category category) {
-        this.name = name;
-        this.category = category;
-    }
+    // These additional info to be filled by UnitsManager,
+    // as there're too many constructor variants to create.
+    String fullname;
+    String description;
 
     Unit(String name) {
-        this(name, Category.MISCELLANEOUS);
+        this.name = name;
     }
 
     /**
@@ -85,6 +85,14 @@ public abstract class Unit {
      */
     public String toString() {
         return this.name;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     /**
