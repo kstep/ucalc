@@ -132,9 +132,9 @@ class PowerUnit extends Unit {
                     return other.targetUnit;
                 default:
                     if (autoname) {
-                        return new PowerUnit(other.targetUnit, newpower);
+                        unit = new PowerUnit(other.targetUnit, newpower);
                     } else {
-                        return new PowerUnit(name, other.targetUnit, newpower);
+                        unit = new PowerUnit(name, other.targetUnit, newpower);
                     }
             }
         } else {
@@ -145,12 +145,17 @@ class PowerUnit extends Unit {
                     return unit;
                 default:
                     if (autoname) {
-                        return new PowerUnit(unit, power);
+                        unit = new PowerUnit(unit, power);
                     } else {
-                        return new PowerUnit(name, unit, power);
+                        unit = new PowerUnit(name, unit, power);
                     }
             }
         }
+
+        unit.fullname = fullname;
+        unit.description = description;
+
+        return unit;
     }
 
     public int hashCode() {

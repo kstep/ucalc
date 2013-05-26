@@ -150,10 +150,17 @@ class LinearUnit extends Unit {
 
     public Unit simplify() {
         Unit unit = targetUnit.simplify();
+
         if (unit instanceof LinearUnit) {
-            return new LinearUnit(name, ((LinearUnit) unit).scale.mul(scale), ((LinearUnit) unit).targetUnit, ((LinearUnit) unit).offset.mul(scale).add(offset));
+            unit = new LinearUnit(name, ((LinearUnit) unit).scale.mul(scale), ((LinearUnit) unit).targetUnit, ((LinearUnit) unit).offset.mul(scale).add(offset));
+        } else {
+            unit = new LinearUnit(name, scale, unit, offset);
         }
-        return new LinearUnit(name, scale, unit, offset);
+
+        unit.fullname = fullname;
+        unit.description = description;
+
+        return unit;
     }
 
     public String represent() {

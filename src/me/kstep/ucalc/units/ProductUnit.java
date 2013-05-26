@@ -145,9 +145,13 @@ class ProductUnit extends ComplexUnit {
             case 0: return Unit.NONE;
             case 1: return units.get(0);
             default:
-                return autoname?
+                Unit unit = autoname?
                     new ProductUnit(units.toArray(new Unit[units.size()])):
                     new ProductUnit(name, units.toArray(new Unit[units.size()]));
+
+                unit.fullname = fullname;
+                unit.description = description;
+                return unit;
         }
     }
 
