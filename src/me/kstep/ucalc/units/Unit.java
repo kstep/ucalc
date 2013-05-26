@@ -148,7 +148,11 @@ public abstract class Unit {
         return new PowerUnit(this, -1).simplify();
     }
 
-    abstract public Unit simplify();
+    abstract public Unit simplify(int depth);
     abstract public String represent();
+
+    public Unit simplify() {
+        return simplify(Integer.MAX_VALUE);
+    }
 }
 

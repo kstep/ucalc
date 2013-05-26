@@ -93,7 +93,9 @@ class ProductUnit extends ComplexUnit {
         return true;
     }
 
-    public Unit simplify() {
+    public Unit simplify(int depth) {
+        if (depth-- < 0) return this;
+
         HashMap<Unit,Long> powers = new HashMap<Unit,Long>(targetUnits.length * 2);
 
         // First simplify and flatten all inner units
@@ -102,7 +104,7 @@ class ProductUnit extends ComplexUnit {
                 //continue;
             //}
 
-            Unit u = unit.simplify();
+            Unit u = unit.simplify(depth);
 
             if (u == Unit.NONE) {
                 continue;

@@ -119,8 +119,10 @@ class PowerUnit extends Unit {
             return targetUnit.from(new UFloat(1.0), unit).pow(power).mul(value);
     }
 
-    public Unit simplify() {
-        Unit unit = targetUnit.simplify();
+    public Unit simplify(int depth) {
+        if (depth-- < 0) return this;
+
+        Unit unit = targetUnit.simplify(depth);
         if (unit instanceof PowerUnit) {
             PowerUnit other = (PowerUnit) unit;
             int newpower = other.power * power;

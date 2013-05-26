@@ -53,7 +53,7 @@ final class BaseUnit extends Unit {
         return other == this;
     }
 
-    public Unit simplify() {
+    public Unit simplify(int depth) {
         return this;
     }
 

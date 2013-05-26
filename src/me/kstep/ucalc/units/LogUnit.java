@@ -76,7 +76,7 @@ class LogUnit extends Unit {
         return coeff == 1.0? logexpr: String.valueOf(coeff) + "·" + logexpr;
     }
 
-    public Unit simplify() {
+    public Unit simplify(int depth) {
         return this;
     }
 

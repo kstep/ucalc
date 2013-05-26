@@ -148,8 +148,10 @@ class LinearUnit extends Unit {
         return this.name;
     }
 
-    public Unit simplify() {
-        Unit unit = targetUnit.simplify();
+    public Unit simplify(int depth) {
+        if (depth-- < 0) return this;
+
+        Unit unit = targetUnit.simplify(depth);
 
         if (unit instanceof LinearUnit) {
             unit = new LinearUnit(name, ((LinearUnit) unit).scale.mul(scale), ((LinearUnit) unit).targetUnit, ((LinearUnit) unit).offset.mul(scale).add(offset));

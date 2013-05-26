@@ -49,7 +49,7 @@ final class NoneUnit extends Unit {
         return this;
     }
 
-    public Unit simplify() {
+    public Unit simplify(int depth) {
         return this;
     }
 
