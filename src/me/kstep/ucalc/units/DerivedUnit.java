@@ -5,8 +5,8 @@ import me.kstep.ucalc.numbers.UNumber;
 /**
  * This is a base class for all complex (or derived) units.
  */
-abstract class ComplexUnit extends Unit {
-    ComplexUnit(String name) {
+abstract class DerivedUnit extends Unit {
+    DerivedUnit(String name) {
         super(name);
     }
 

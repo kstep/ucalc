@@ -10,7 +10,7 @@ import me.kstep.ucalc.units.Unit;
  * You will get what I speak about if you consider relation between
  * *meter*, *square meter* and *cubic meter*.
  */
-class PowerUnit extends Unit {
+class PowerUnit extends DerivedUnit {
 
     Unit targetUnit;
 

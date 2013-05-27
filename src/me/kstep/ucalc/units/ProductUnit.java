@@ -6,7 +6,7 @@ import me.kstep.ucalc.numbers.UInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-class ProductUnit extends ComplexUnit {
+class ProductUnit extends DerivedUnit {
     Unit[] targetUnits;
 
     boolean autoname = false;
