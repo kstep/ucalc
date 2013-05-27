@@ -136,6 +136,36 @@
             </derive>
             <description>Force to accelerate 1 kg of mass by 1 m/s per second</description>
         </unit>
+
+        <unit name="Pa" fullname="Pascal" class="product">
+            <derive>N</derive>
+            <derive>
+                <unit class="power">
+                    <derive>m</derive>
+                    <power>2</power>
+                </unit>
+            </derive>
+        </unit>
+
+        <unit name="mmHg" class="linear">
+            <scale>133.322387415</scale>
+            <derive>Pa</derive>
+        </unit>
+
+        <unit name="bar" class="linear">
+            <scale>100000</scale>
+            <derive>Pa</derive>
+        </unit>
+
+        <unit name="atm" fullname="Atmosphere" class="linear">
+            <scale>101325</scale>
+            <derive>Pa</derive>
+        </unit>
+
+        <unit name="Torr" class="linear">
+            <scale>1/760</scale>
+            <derive>atm</derive>
+        </unit>
     </category>
 
     <category name="misc">
@@ -151,7 +181,12 @@
         </unit>
 
         <unit name="bit" class="base" fullname="Bit">
-            <description>Binary digit (0 or 1)</description>
+            <description>
+                Binary digit (0 or 1). As an entropy unit of a random variable,
+                is a sum of -p(i)*log2(p(i)) over the finite alphabet, where
+                p(i) is the probability that a random variable takes on the
+                value i.
+            </description>
         </unit>
 
         <unit name="byte" fullname="Byte" class="linear">
@@ -162,7 +197,7 @@
         <unit class="linear" name="cal" fullname="Calorie">
             <scale>4.1868</scale>
             <derive>J</derive>
-            <description>Amount of energy to raise temperator of 1 gram of water by 1°C</description>
+            <description>Amount of energy to raise temperature of 1 gram of water by 1°C</description>
         </unit>
 
         <unit name="dyn" class="product" fullname="Dyne">
@@ -187,6 +222,14 @@
             <description>Angle cutting an arc from a circle with length equal to circle's radius</description>
         </unit>
 
+        <unit name="sr" fullname="Steradian" class="base">
+            <description>
+                Solid angle which cuts off an area of the surface of the sphere
+                equal to that of a square with sides of length equal to the
+                radius of the sphere
+            </description>
+        </unit>
+
         <unit name="deg" fullname="Angle degree" class="linear">
             <!--<scale>π/180</scale>-->
             <scale>0.017453292519943295</scale>
@@ -195,11 +238,11 @@
         </unit>
 
         <unit class="base" name="°K" fullname="Kelvin">
-            <description>Termodynamic temperature</description>
+            <description>1/273.16 of thermodynamic temperature of the triple point of water</description>
         </unit>
 
         <unit name="°C" fullname="Celsius" class="linear">
-            <offset>+273.15</offset>
+            <offset>+273.16</offset>
             <derive>°K</derive>
             <description>A 1/100 of scale between water's freezing and boiling points</description>
         </unit>
@@ -261,6 +304,17 @@
             <derive>s</derive>
             <power>-1</power>
             <description>Herz, number of occilations per second</description>
+        </unit>
+
+        <unit name="cd" fullname="candela" class="base">
+            <description>
+                Luminous intensity in a given direction of a source which emits
+                monoschromatic radiation at 540e12 Hz with radiant intensity
+                1/683 W/steradian. (This differs from raidant intensity
+                W/sr in that it is adjusted for the human perceptual dependence
+                on wavelength. The frequency of 540e12 Hz (yellow) is where
+                human perception is most efficient.)
+            </description> 
         </unit>
     </category>
 </units>
