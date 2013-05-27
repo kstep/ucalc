@@ -105,18 +105,24 @@ class PowerUnit extends DerivedUnit {
 
     public UNumber to(UNumber value, Unit unit) {
         if (this == unit) return value;
-        if (unit instanceof PowerUnit)
-            return targetUnit.to(new UFloat(1.0), ((PowerUnit) unit).targetUnit).pow(power).mul(value);
-        else
-            return targetUnit.to(new UFloat(1.0), unit).pow(power).mul(value);
+        if (unit instanceof PowerUnit) {
+            UNumber result = targetUnit.to(new UFloat(1.0), ((PowerUnit) unit).targetUnit).pow(power).mul(value);
+            return (power ^ ((PowerUnit) unit).power) >= 0? result: result.inv();
+        } else {
+            UNumber result = targetUnit.to(new UFloat(1.0), unit).pow(power).mul(value);
+            return (power < 0 && targetUnit.equals(unit))? result.inv(): result;
+        }
     }
 
     public UNumber from(UNumber value, Unit unit) {
         if (this == unit) return value;
-        if (unit instanceof PowerUnit)
-            return targetUnit.from(new UFloat(1.0), ((PowerUnit) unit).targetUnit).pow(power).mul(value);
-        else
-            return targetUnit.from(new UFloat(1.0), unit).pow(power).mul(value);
+        if (unit instanceof PowerUnit) {
+            UNumber result = targetUnit.from(new UFloat(1.0), ((PowerUnit) unit).targetUnit).pow(power).mul(value);
+            return (power ^ ((PowerUnit) unit).power) >= 0? result: result.inv();
+        } else {
+            UNumber result = targetUnit.from(new UFloat(1.0), unit).pow(power).mul(value);
+            return (power < 0 && targetUnit.equals(unit))? result.inv(): result;
+        }
     }
 
     public Unit simplify(int depth) {
