@@ -200,4 +200,8 @@ public class URational extends UReal {
         return (other instanceof URational && ((URational) other).numerator == numerator && ((URational) other).denomenator == denomenator)
             || (doubleValue() == other.doubleValue());
     }
+
+    public UNumber.Sign sign() {
+        return UNumber.Sign.valueOf((int) numerator);
+    }
 }

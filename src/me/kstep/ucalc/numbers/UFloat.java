@@ -103,5 +103,9 @@ public class UFloat extends UReal {
     public boolean equals(Number other) {
         return other.doubleValue() == value;
     }
+
+    public UNumber.Sign sign() {
+        return Sign.valueOf((float) value);
+    }
 }
 

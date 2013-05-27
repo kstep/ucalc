@@ -190,4 +190,8 @@ public class UComplex extends UNumber {
     public int hashCode() {
         return (imag.hashCode() << 16) ^ real.hashCode();
     }
+
+    public UNumber.Sign sign() {
+        return isReal()? real.sign(): UNumber.Sign.UNDEFINED;
+    }
 }

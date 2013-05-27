@@ -145,4 +145,8 @@ public class UnitNum extends UNumber {
     public boolean equals(Number other) {
         return (other instanceof UnitNum)? (((UnitNum) other).value.equals(value) && ((UnitNum) other).unit.equals(unit)): false;
     }
+
+    public UNumber.Sign sign() {
+        return value.sign();
+    }
 }

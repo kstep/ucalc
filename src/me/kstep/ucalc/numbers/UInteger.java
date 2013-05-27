@@ -92,4 +92,8 @@ public class UInteger extends UReal {
     public boolean equals(Number other) {
         return value == other.longValue();
     }
+
+    public UNumber.Sign sign() {
+        return Sign.valueOf((int) value);
+    }
 }

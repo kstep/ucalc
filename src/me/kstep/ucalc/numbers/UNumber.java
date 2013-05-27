@@ -26,6 +26,42 @@ import me.kstep.ucalc.units.UnitNum;
  */
 public abstract class UNumber extends Number {
 
+    public enum Sign {
+        NEGATIVE (-1),
+        ZERO (0),
+        UNDEFINED (0),
+        POSITIVE (1);
+
+        private int value;
+        Sign(int value) {
+            this.value = value;
+        }
+
+        public int intValue() {
+            return value;
+        }
+
+        public Sign mul(Sign sign) {
+            return valueOf(value * sign.intValue());
+        }
+
+        public Sign add(Sign sign) {
+            return valueOf(value + sign.intValue());
+        }
+
+        public static Sign valueOf(int num) {
+            return num == 0? ZERO:
+                num < 0? NEGATIVE:
+                POSITIVE;
+        }
+
+        public static Sign valueOf(float num) {
+            return num == 0? ZERO:
+                num < 0? NEGATIVE:
+                POSITIVE;
+        }
+    }
+
     public UNumber() {}
     public UNumber(Number value) {}
     public UNumber(CharSequence value) {}
@@ -67,6 +103,10 @@ public abstract class UNumber extends Number {
 
     public long longValue() throws ConversionException {
         throw this.new ConversionException(Long.class);
+    }
+
+    public Sign sign() {
+        throw this.new UnsupportedOperationException("sign");
     }
 
     public String toString() {
