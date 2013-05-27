@@ -19,6 +19,7 @@ class ProductUnit extends DerivedUnit {
     public UNumber to(UNumber value, Unit unit) {
         if (this == unit) return value;
         if (!(unit instanceof ProductUnit)) {
+            if (unit instanceof BaseUnit) throw this.new ConversionException(unit);
             return unit.from(value, this);
         }
         
@@ -57,6 +58,7 @@ class ProductUnit extends DerivedUnit {
     public UNumber from(UNumber value, Unit unit) {
         if (this == unit) return value;
         if (!(unit instanceof ProductUnit)) {
+            if (unit instanceof BaseUnit) throw unit.new ConversionException(this);
             return unit.to(value, this);
         }
         
