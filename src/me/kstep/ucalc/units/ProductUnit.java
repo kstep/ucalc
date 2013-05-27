@@ -18,7 +18,9 @@ class ProductUnit extends ComplexUnit {
 
     public UNumber to(UNumber value, Unit unit) {
         if (this == unit) return value;
-        if (!(unit instanceof ProductUnit)) throw this.new ConversionException(unit);
+        if (!(unit instanceof ProductUnit)) {
+            return unit.from(value, this);
+        }
         
         ProductUnit target = (ProductUnit) unit;
         if (target.targetUnits.length != this.targetUnits.length) throw this.new ConversionException(unit);
@@ -54,7 +56,9 @@ class ProductUnit extends ComplexUnit {
 
     public UNumber from(UNumber value, Unit unit) {
         if (this == unit) return value;
-        if (!(unit instanceof ProductUnit)) throw unit.new ConversionException(this);
+        if (!(unit instanceof ProductUnit)) {
+            return unit.to(value, this);
+        }
         
         ProductUnit target = (ProductUnit) unit;
         if (target.targetUnits.length != this.targetUnits.length) throw unit.new ConversionException(this);
