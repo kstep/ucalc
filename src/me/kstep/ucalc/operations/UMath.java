@@ -77,5 +77,21 @@ final public class UMath {
     public static UNumber sqrt(UNumber value) {
         return new UFloat(Math.sqrt(value.doubleValue()));
     }
+
+    public static int signum(int value) {
+        return value == 0? 0: value < 0? -1: 1;
+    }
+
+    public static int signum(long value) {
+        return value == 0? 0: value < 0? -1: 1;
+    }
+
+    public static int signum(float value) {
+        return value == 0? 0: value < 0? -1: 1;
+    }
+
+    public static int signum(double value) {
+        return value == 0? 0: value < 0? -1: 1;
+    }
 }
 
