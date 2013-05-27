@@ -13,6 +13,8 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import android.content.Context;
 import android.content.res.XmlResourceParser;
 
+import android.util.Log;
+
 import me.kstep.ucalc.numbers.UNumber;
 import me.kstep.ucalc.numbers.UInteger;
 
@@ -81,7 +83,15 @@ public class Units {
             rInflate(parser, uman, Unit.Category.MISCELLANEOUS);
 
         } catch (IOException e) {
+            Log.wtf("UCalc.Units", e);
         } catch (XmlPullParserException e) {
+            Log.wtf("UCalc.Units", e);
+        } catch (NullPointerException e) {
+            Log.wtf("UCalc.Units", e);
+        } catch (IllegalArgumentException e) {
+            Log.wtf("UCalc.Units", e);
+        } catch (ClassNotFoundException e) {
+            Log.wtf("UCalc.Units", e);
         }
 
         System.gc();
@@ -89,7 +99,7 @@ public class Units {
         return uman;
     }
 
-    private static void rInflate(XmlPullParser parser, UnitsManager uman, Unit.Category category) throws IOException, XmlPullParserException {
+    private static void rInflate(XmlPullParser parser, UnitsManager uman, Unit.Category category) throws IOException, XmlPullParserException, ClassNotFoundException {
         final int depth = parser.getDepth();
         int evt;
 
@@ -112,7 +122,7 @@ public class Units {
         }
     }
 
-    private static Unit inflateUnit(XmlPullParser parser, UnitsManager uman) throws IOException, XmlPullParserException {
+    private static Unit inflateUnit(XmlPullParser parser, UnitsManager uman) throws IOException, XmlPullParserException, ClassNotFoundException {
         final int depth = parser.getDepth();
         int evt;
 
@@ -120,7 +130,9 @@ public class Units {
         final String unitName = parser.getAttributeValue(null, "name");
         final String fullName = parser.getAttributeValue(null, "fullname");
 
-        android.util.Log.d("UCalc", "Inflating " + String.valueOf(className) + " " + String.valueOf(unitName));
+        if (className == null) {
+            throw new NullPointerException("Unit class missing");
+        }
 
         String description = "";
         String prefix = null;
@@ -186,20 +198,32 @@ public class Units {
         Unit unit = Unit.NONE;
 
         if (className.equals("base")) {
-            android.util.Log.d("UCalc", "Base unit");
+
+            if (unitName == null) {
+                throw new IllegalArgumentException("Base units must have names");
+            }
+
             unit = new BaseUnit(unitName);
 
         } else if (className.equals("linear")) {
-            android.util.Log.d("UCalc", "Linear unit");
+
+            if (deriveUnits.size() != 1) {
+                throw new IllegalArgumentException("Linear units require single <derive> element");
+            }
 
             if (scale != null || offset != null) {
                 unit = new LinearUnit(unitName, scale == null? 1: scale, deriveUnits.get(0), offset == null? 0: offset);
             } else if (rscale != null || roffset != null) {
                 unit = new LinearUnit(unitName, rscale == null? 1: rscale, roffset == null? 0: roffset, deriveUnits.get(0));
+            } else {
+                throw new IllegalArgumentException("Linear units require either <scale>/<offset> or <rscale>/<roffset> elements");
             }
 
         } else if (className.equals("power")) {
-            android.util.Log.d("UCalc", "Power unit");
+            
+            if (deriveUnits.size() != 1) {
+                throw new IllegalArgumentException("Power units require single <derive> element");
+            }
 
             if (unitName != null) {
                 unit = new PowerUnit(unitName, deriveUnits.get(0), power);
@@ -208,15 +232,26 @@ public class Units {
             }
 
         } else if (className.equals("product")) {
-            android.util.Log.d("UCalc", "Product unit");
+
+            if (deriveUnits.size() == 1) {
+                throw new IllegalArgumentException("Product units require at least one <derive> element");
+            }
 
             if (unitName != null) {
                 unit = new ProductUnit(unitName, deriveUnits.toArray(new Unit[deriveUnits.size()]));
             } else {
                 unit = new ProductUnit(deriveUnits.toArray(new Unit[deriveUnits.size()]));
             }
+
         } else if (className.equals("prefix")) {
-            android.util.Log.d("UCalc", "Prefix unit");
+
+            if (deriveUnits.size() != 1) {
+                throw new IllegalArgumentException("Prefix units require single <derive> element");
+            }
+
+            if (prefix == null) {
+                throw new IllegalArgumentException("Prefix units require <prefix> element");
+            }
 
             if (unitName != null) {
                 unit = new UnitPrefix(unitName, prefix, deriveUnits.get(0));
@@ -225,14 +260,13 @@ public class Units {
             }
 
         } else {
-            android.util.Log.d("UCalc", "Unknown unit class");
+            throw new ClassNotFoundException("Unit class " + className + " is unknown");
         }
 
         if (unit != Unit.NONE) {
             unit.fullname = fullName;
             unit.description = description;
         }
-        android.util.Log.d("UCalc", "Inflated unit " + unit.toString() + " (" + unit.getDescription() + ")");
 
         return unit;
     }

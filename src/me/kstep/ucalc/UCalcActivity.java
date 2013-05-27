@@ -92,7 +92,6 @@ public class UCalcActivity extends Activity {
     private void restoreState(Bundle state) {
         stack = (UStack) loadFromFile("stack.bin", new UStack());
         memory = (UMemory) loadFromFile("memory.bin", new UMemory());
-
         units = Units.inflate(this, R.xml.units);
     }
 
