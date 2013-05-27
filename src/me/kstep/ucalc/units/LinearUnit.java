@@ -170,6 +170,6 @@ class LinearUnit extends Unit {
     }
 
     public int hashCode() {
-        return (((scale.hashCode() << 8) + (offset.hashCode() << 4) + targetUnit.hashCode()) << 3) | 1;
+        return (((scale.hashCode() << 8) ^ (offset.hashCode() << 4) ^ targetUnit.hashCode()) << 3) | 1;
     }
 }

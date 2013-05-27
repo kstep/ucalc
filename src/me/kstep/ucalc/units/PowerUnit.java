@@ -161,7 +161,7 @@ class PowerUnit extends DerivedUnit {
     }
 
     public int hashCode() {
-        return (((power << 4) + targetUnit.hashCode()) << 3) | 2;
+        return (((power << 4) ^ targetUnit.hashCode()) << 3) | 2;
     }
 }
 

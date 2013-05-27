@@ -139,7 +139,7 @@ public class UnitNum extends UNumber {
     }
 
     public int hashCode() {
-        return (value.hashCode() << 16) | unit.hashCode();
+        return (value.hashCode() << 16) ^ unit.hashCode();
     }
 
     public boolean equals(Number other) {

@@ -237,7 +237,7 @@ class ProductUnit extends DerivedUnit {
     public int hashCode() {
         int sum = 0;
         for (Unit unit : targetUnits) {
-            sum = (sum << 4) + unit.hashCode();
+            sum = (sum << 4) ^ unit.hashCode();
         }
         return (sum << 3) | 3;
     }
