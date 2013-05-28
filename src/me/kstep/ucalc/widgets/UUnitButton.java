@@ -42,7 +42,7 @@ public class UUnitButton extends UButton implements View.OnClickListener, View.O
 
         try {
             Unit unit = uman.get(getText().toString());
-            activity.showToast(unit.getFullname() + "\n" + unit.getDescription());
+            activity.showPopup(unit.getFullname(), unit.getDescription());
 
         } catch (UnitException e) {
             activity.showToast(e.getMessage());
