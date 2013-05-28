@@ -1,4 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+Root element in <units>. It can contain any number of <category> and <unit>
+tags. <unit>s that are immediate children of <units> will be in "misc" category
+by default.
+
+Every <unit> must have class attribute, valid values are "base", "product", "power",
+"linear" and "prefix".
+
+All <unit> tags that are immediate children of <category> or <units> must have
+a name attribute and will be loaded into units manager. Exception is <unit>s of
+"power", "product" and "prefix" classes, as their names can be deduced from
+derived unit names. Unit names must be unique.
+
+Also <unit>s can have fullname attribute, and any <unit> can include
+<description> tag with detailed unit description.
+
+Derived unit classes ("power", "linear", "prefix" and "product") must have
+<derive> tags inside. <unit class="product"> must have at least 1 <derive>,
+others must have exactly one <derive>.
+
+Besides:
+    * <unit class="power"> must have <power> tag with integer content,
+    * <unit class="linear"> must have either <scale> and/or <offset> tags
+      or <rscale> and/or <roffset> tags (but not both pairs) with any number
+      inside them,
+    * <unit class="prefix"> must have <prefix> tag with prefix name inside,
+    * <unit class="base"> must have name attribute in any place.
+
+<derive> tags must have either unit name as their content, or anonymous <unit>
+tag (that is, unit without name, so it can not be <unit class="base">). If a
+<derive> tag contains unit name, it must be declared before. If a <derive> tag
+has <unit> tag, the new anonymous unit will be used (most likely
+<unit class="power">).
+
+Special constants π and e are predefined and accessible here.
+They are circle circumference to diameter ratio and base of natural
+logarithm. If present in <scale>, <rscale>, <offset> or <roffset> tags,
+the number before them will be multiplied by the constant.
+E.g. <scale>1/180π</scale> is a valid definition (one radian).
+
+A few examples:
+
+    * base unit:
+        <unit class="base" name="°K" fullname="Kelvin" />
+
+    * linear unit with description:
+        <unit name="°F" fullname="Fahrenheit" class="linear">
+            <rscale>9/5</rscale>
+            <roffset>+32</roffset>
+            <derive>°C</derive>
+            <description>A 1/96 of scale between brine's freezing point and normal human body temperature</description>
+        </unit>
+
+    * product unit:
+        <unit name="m/s" fullname="Meters per second" class="product">
+            <derive>m</derive>
+            <derive>
+                <unit class="power">
+                    <derive>s</derive>
+                    <power>-1</power>
+                </unit>
+            </derive>
+        </unit>
+-->
 <units xmlns="http://ucalc.kstep.me/xmlns/units">
     <category name="time">
         <unit class="base" name="s" fullname="Second" />
