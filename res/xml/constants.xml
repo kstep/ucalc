@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Constants definition
+
+Root node is <constants>. It can have any number of <constant> tag, each
+representing single constant. Each <constant> must have name attribute.
+Optional attribute is fullname. Constant names must be unique.
+
+Each <constant> must contain single <value> tag with actual constant value (any
+number) inside. Optionally <constant> can contain anonymous <unit> tag, as seen
+in units.xml. It can contain either full unit description, or single unit name
+as a text, in which case class attribute is not required, unlike in units.xml.
+The unit names can be any unit name, defined in units.xml.
+
+Special constants π and e are predefined and accessible in units.xml.
+They are circle circumference to diameter ratio and base of natural
+logarithm. They can not be defined here.
+-->
+<constants xmlns="http://ucalc.kstep.me/xmlns/contants">
+    <constant name="G" fullname="Gravitational constant">
+        <value>6.6738480e-11</value>
+        <unit class="product">
+            <derive>N</derive>
+            <derive>
+                <unit class="power">
+                    <derive>m</derive>
+                    <power>2</power>
+                </unit>
+            </derive>
+            <derive>
+                <unit class="power">
+                    <derive>kg</derive>
+                    <power>-2</power>
+                </unit>
+            </derive>
+        </unit>
+    </constant>
+
+    <constant name="h" fullname="Plank constant">
+        <value>4.135667516e-15</value>
+        <unit class="product">
+            <derive>eV</derive>
+            <derive>s</derive>
+        </unit>
+    </constant>
+
+    <constant name="c" fullname="Speed of light in vacuum">
+        <value>2.99792458e8</value>
+        <unit>m/s</unit>
+    </constant>
+
+    <constant name="ec" fullname="Electron charge">
+        <value>1.602176565e-19</value>
+        <unit>C</unit>
+    </constant>
+</constants>
