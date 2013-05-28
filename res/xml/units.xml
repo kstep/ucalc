@@ -129,6 +129,16 @@ A few examples:
             </derive>
         </unit>
 
+        <unit name="m/s" fullname="Meters per second" class="product">
+            <derive>m</derive>
+            <derive>
+                <unit class="power">
+                    <derive>s</derive>
+                    <power>-1</power>
+                </unit>
+            </derive>
+        </unit>
+
         <unit name="in" fullname="Inch" class="linear">
             <scale>25.4</scale>
             <derive>mm</derive>
@@ -295,7 +305,7 @@ A few examples:
         </unit>
 
         <unit name="deg" fullname="Angle degree" class="linear">
-            <!--<scale>π/180</scale>-->
+            <!--<scale>1/180π</scale>-->
             <scale>0.017453292519943295</scale>
             <derive>rad</derive>
             <description>1/360 of full circle</description>
@@ -379,6 +389,21 @@ A few examples:
                 on wavelength. The frequency of 540e12 Hz (yellow) is where
                 human perception is most efficient.)
             </description> 
+        </unit>
+
+        <unit name="C" fullname="Coulomb" class="product">
+            <derive>A</derive>
+            <derive>s</derive>
+        </unit>
+
+        <unit name="eV" fullname="Electron-volt" class="linear">
+            <scale>1.602176565e-19</scale>
+            <derive>
+                <unit class="product">
+                    <derive>C</derive>
+                    <derive>V</derive>
+                </unit>
+            </derive>
         </unit>
     </category>
 </units>
