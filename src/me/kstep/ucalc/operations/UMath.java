@@ -2,12 +2,19 @@ package me.kstep.ucalc.operations;
 
 import me.kstep.ucalc.numbers.UNumber;
 import me.kstep.ucalc.numbers.UFloat;
+import me.kstep.ucalc.numbers.UInteger;
 import me.kstep.ucalc.units.UnitNum;
 import me.kstep.ucalc.units.Unit;
 import me.kstep.ucalc.units.UnitsManager;
 
 final public class UMath {
     final private static Unit radian = UnitsManager.getInstance().get("rad");
+
+    final public static UNumber PI = new UFloat(Math.PI);
+    final public static UNumber E = new UFloat(Math.E);
+
+    final public static UInteger ONE = new UInteger(1);
+    final public static UInteger TEN = new UInteger(10);
 
     public static double angle(UNumber value) {
         if (value instanceof UnitNum) {
