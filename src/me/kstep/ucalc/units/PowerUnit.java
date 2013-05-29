@@ -29,8 +29,9 @@ class PowerUnit extends DerivedUnit {
         this.targetUnit = targetUnit;
     }
 
-    public String represent() {
-        return targetUnit.represent() + superscriptInt(power);
+    public String represent(int depth) {
+        if (depth-- < 0) return name;
+        return targetUnit.represent(depth) + superscriptInt(power);
     }
 
     /**

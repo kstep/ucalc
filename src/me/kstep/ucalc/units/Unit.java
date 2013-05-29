@@ -157,10 +157,14 @@ public abstract class Unit {
     }
 
     abstract public Unit simplify(int depth);
-    abstract public String represent();
+    abstract public String represent(int depth);
 
     public Unit simplify() {
         return simplify(Integer.MAX_VALUE);
+    }
+
+    public String represent() {
+        return represent(0);
     }
 }
 

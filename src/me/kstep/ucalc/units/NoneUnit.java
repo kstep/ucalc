@@ -53,7 +53,7 @@ final class NoneUnit extends Unit {
         return this;
     }
 
-    public String represent() {
+    public String represent(int depth) {
         return "";
     }
 
