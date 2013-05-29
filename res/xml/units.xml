@@ -216,7 +216,7 @@ A few examples:
             <derive>
                 <unit class="power">
                     <derive>m</derive>
-                    <power>2</power>
+                    <power>-2</power>
                 </unit>
             </derive>
         </unit>
