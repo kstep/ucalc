@@ -166,5 +166,9 @@ public abstract class Unit {
     public String represent() {
         return represent(0);
     }
+
+    public boolean isBasic() {
+        return this instanceof BaseUnit;
+    }
 }
 
