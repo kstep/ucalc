@@ -1,9 +1,6 @@
 package me.kstep.ucalc.units;
 
 import me.kstep.ucalc.numbers.UNumber;
-import me.kstep.ucalc.numbers.UFloat;
-import me.kstep.ucalc.numbers.UInteger;
-import me.kstep.ucalc.units.Unit;
 
 /**
  * This is a very common and interesting class of `PowerUnit`s.
@@ -107,10 +104,10 @@ class PowerUnit extends DerivedUnit {
     public UNumber to(UNumber value, Unit unit) {
         if (this == unit) return value;
         if (unit instanceof PowerUnit) {
-            UNumber result = targetUnit.to(new UFloat(1.0), ((PowerUnit) unit).targetUnit).pow(power).mul(value);
+            UNumber result = targetUnit.to(UNumber.ONE, ((PowerUnit) unit).targetUnit).pow(power).mul(value);
             return (power ^ ((PowerUnit) unit).power) >= 0? result: result.inv();
         } else {
-            UNumber result = targetUnit.to(new UFloat(1.0), unit).pow(power).mul(value);
+            UNumber result = targetUnit.to(UNumber.ONE, unit).pow(power).mul(value);
             return (power < 0 && targetUnit.equals(unit))? result.inv(): result;
         }
     }
@@ -118,10 +115,10 @@ class PowerUnit extends DerivedUnit {
     public UNumber from(UNumber value, Unit unit) {
         if (this == unit) return value;
         if (unit instanceof PowerUnit) {
-            UNumber result = targetUnit.from(new UFloat(1.0), ((PowerUnit) unit).targetUnit).pow(power).mul(value);
+            UNumber result = targetUnit.from(UNumber.ONE, ((PowerUnit) unit).targetUnit).pow(power).mul(value);
             return (power ^ ((PowerUnit) unit).power) >= 0? result: result.inv();
         } else {
-            UNumber result = targetUnit.from(new UFloat(1.0), unit).pow(power).mul(value);
+            UNumber result = targetUnit.from(UNumber.ONE, unit).pow(power).mul(value);
             return (power < 0 && targetUnit.equals(unit))? result.inv(): result;
         }
     }
