@@ -86,7 +86,7 @@ public class URational extends UReal {
     }
 
     public UNumber inv() {
-        return new URational(denomenator, numerator);
+        return numerator == 1? new UInteger(denomenator): new URational(denomenator, numerator);
     }
 
     public UNumber abs() {

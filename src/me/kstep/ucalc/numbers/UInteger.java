@@ -42,7 +42,7 @@ public class UInteger extends UReal {
     }
 
     public UNumber inv() {
-        return new URational(1, value);
+        return value == 1? this: new URational(1, value);
     }
 
     public UNumber abs() {
