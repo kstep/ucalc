@@ -433,5 +433,13 @@ public class UnitsManager {
         throw new UnitNotFoundException(name);
     }
 
+    public void simplifyAll() {
+        for (String name : units.keySet()) {
+            units.put(name, units.get(name).simplify());
+        }
+
+        System.gc();
+    }
+
 }
 
