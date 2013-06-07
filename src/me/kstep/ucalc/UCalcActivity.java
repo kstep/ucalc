@@ -253,8 +253,7 @@ public class UCalcActivity extends Activity {
     }
 
     public void showPopup(CharSequence title, CharSequence message) {
-        UNoticeDialog fragment = new UNoticeDialog(title, message);
-        fragment.show(getFragmentManager(), "popup");
+        UNoticeDialog.show(this, title, message);
     }
 
     public void onDigitEnter(CharSequence ch) {
