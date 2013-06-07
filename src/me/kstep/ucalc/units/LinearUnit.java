@@ -32,7 +32,7 @@ class LinearUnit extends Unit {
      * is consistency.
      */
     LinearUnit(String name, Unit targetUnit) {
-        this(name, 1.0, targetUnit, 0.0);
+        this(name, UNumber.ONE, targetUnit, UNumber.ZERO);
     }
 
     /**
@@ -40,7 +40,7 @@ class LinearUnit extends Unit {
      * Just think about *1 tonn = 1000 kg* or *1 inch = 2.54 cm* etc.
      */
     LinearUnit(String name, Number scale, Unit targetUnit) {
-        this(name, scale, targetUnit, 0.0);
+        this(name, scale, targetUnit, UNumber.ZERO);
     }
 
     /**
@@ -48,7 +48,7 @@ class LinearUnit extends Unit {
      * example which comes to my mind is *Celius = Kelvin - 273.15*.
      */
     LinearUnit(String name, Unit targetUnit, Number offset) {
-        this(name, 1.0, targetUnit, offset);
+        this(name, UNumber.ONE, targetUnit, offset);
     }
 
     /**
