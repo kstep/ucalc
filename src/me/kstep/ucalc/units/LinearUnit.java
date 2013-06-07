@@ -23,6 +23,9 @@ class LinearUnit extends Unit {
         this.scale = UNumber.valueOf(scale);
         this.offset = UNumber.valueOf(offset);
         this.targetUnit = targetUnit;
+		if (this.scale.doubleValue() == 0.0) {
+			throw new ArithmeticException("Zero scale coefficient in linear relation");
+		}
     }
 
     /**
