@@ -226,12 +226,12 @@ class ProductUnit extends DerivedUnit {
         }
     }
 
-    public String represent(int depth) {
+    public String getDefinition(int depth) {
         if (depth-- < 0) return name;
 
         StringBuilder name = new StringBuilder(targetUnits.length * 2 - 1);
         for (Unit unit: targetUnits) {
-            name.append(unit.represent(depth) + "·");
+            name.append(unit.getDefinition(depth) + "·");
         }
 
         name.setLength(name.length() - 1);

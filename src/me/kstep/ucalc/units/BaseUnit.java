@@ -57,7 +57,7 @@ final class BaseUnit extends Unit {
         return this;
     }
 
-    public String represent(int depth) {
+    public String getDefinition(int depth) {
         return name;
     }
 

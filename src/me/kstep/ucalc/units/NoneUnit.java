@@ -4,7 +4,7 @@ import me.kstep.ucalc.numbers.UNumber;
 
 final class NoneUnit extends Unit {
     private NoneUnit() {
-        super("1");
+        super("");
     }
 
     private static NoneUnit instance;
@@ -53,8 +53,8 @@ final class NoneUnit extends Unit {
         return this;
     }
 
-    public String represent(int depth) {
-        return "";
+    public String getDefinition(int depth) {
+        return "1";
     }
 
     public int hashCode() {

@@ -157,14 +157,14 @@ public abstract class Unit {
     }
 
     abstract public Unit simplify(int depth);
-    abstract public String represent(int depth);
+    abstract public String getDefinition(int depth);
 
     public Unit simplify() {
         return simplify(Integer.MAX_VALUE);
     }
 
-    public String represent() {
-        return represent(0);
+    public String getDefinition() {
+        return getDefinition(0);
     }
 
     public boolean isBasic() {
