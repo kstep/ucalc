@@ -40,7 +40,6 @@ import me.kstep.ucalc.views.UUnitsView;
 
 import me.kstep.ucalc.operations.UOperations;
 import me.kstep.ucalc.operations.UOperation;
-import me.kstep.ucalc.numbers.UNumberException;
 import me.kstep.ucalc.numbers.UNumber;
 
 import me.kstep.ucalc.units.Unit;
@@ -356,10 +355,7 @@ public class UCalcActivity extends Activity {
                 try {
                     op.apply(stack);
 
-                } catch (UNumberException e) {
-                    showToast(e.getMessage());
-
-                } catch (UnitException e) {
+                } catch (UCalcException e) {
                     showToast(e.getMessage());
 
                 } catch (EmptyStackException e) {
