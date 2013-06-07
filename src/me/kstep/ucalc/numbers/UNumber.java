@@ -25,6 +25,28 @@ import me.kstep.ucalc.units.UnitNum;
  * produced by `toString()` method of this same class.
  */
 public abstract class UNumber extends Number {
+	
+	static public class Pair<A extends UNumber, B extends UNumber> {
+		final public A first;
+		final public B second;
+
+		Pair(A a, B b) {
+			first = a;
+			second = b;
+		}
+
+		Pair<? extends UNumber, ? extends UNumber> withUnits(Unit unit1, Unit unit2) {
+			if (unit1 == Unit.NONE && unit2 == Unit.NONE) {
+				return this;
+			} else {
+				return new Pair<UnitNum, UnitNum>(new UnitNum(first, unit1), new UnitNum(second, unit2));
+			}
+		}
+
+		Pair<? extends UNumber, ? extends UNumber> withUnits(Unit unit) {
+			return withUnits(unit, unit);
+		}
+	}
 
     public enum Sign {
         NEGATIVE (-1),
