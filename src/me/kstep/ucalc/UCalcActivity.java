@@ -32,6 +32,7 @@ import android.app.ActionBar;
 import me.kstep.ucalc.views.UEditView;
 import me.kstep.ucalc.views.UStackView;
 import me.kstep.ucalc.views.UNoticeDialog;
+import me.kstep.ucalc.views.UToast;
 
 import me.kstep.ucalc.views.UStackFragment;
 import me.kstep.ucalc.views.UMemoryFragment;
@@ -247,9 +248,7 @@ public class UCalcActivity extends Activity {
     }
 
     public void showToast(CharSequence ch) {
-        Toast toast = Toast.makeText(this, ch, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 30);
-        toast.show();
+		UToast.show(this, ch);
     }
 
     public void showPopup(CharSequence title, CharSequence message) {
