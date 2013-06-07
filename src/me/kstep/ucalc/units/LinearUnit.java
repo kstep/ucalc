@@ -167,7 +167,11 @@ class LinearUnit extends Unit {
 
     public String getDefinition(int depth) {
         if (depth-- < 0) return name;
-        return offset.doubleValue() == 0.0? "(" + scale + "·" + targetUnit.getDefinition(depth) + ")": "(" + scale + "·" + targetUnit.getDefinition(depth) + " + " + offset + ")";
+        return "(" +
+		    (scale.doubleValue() == 1.0? "": scale + "·") +
+			targetUnit.getDefinition(depth) +
+			(offset.doubleValue() == 0.0? "": " + " + offset) + 
+			")";
     }
 
     public int hashCode() {
