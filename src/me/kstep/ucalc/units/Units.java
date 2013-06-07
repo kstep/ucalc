@@ -163,7 +163,7 @@ public class Units {
 
                 } else if (name.equals("description")) {
                     if (parser.next() == XmlPullParser.TEXT) {
-                        description = parser.getText().replaceAll("\n *", " ");
+                        description = parser.getText().trim().replaceAll("\n *", " ");
                     }
 
                 } else if (name.equals("scale")) {
