@@ -15,7 +15,7 @@ import java.lang.reflect.InvocationTargetException;
  * We use hashmap to store unit name → instance mapping, array list to represent
  * array of units, collection and set to provide units collection and keys set.
  */
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
@@ -73,7 +73,7 @@ public class UnitsManager {
         }
     }
 
-    HashMap<String, Unit> units;
+    LinkedHashMap<String, Unit> units;
 
     /**
      * We implement singleton pattern below by defining private static instance
@@ -82,7 +82,7 @@ public class UnitsManager {
     private static UnitsManager instance;
 
     private UnitsManager() {
-        units = new HashMap<String, Unit>();
+        units = new LinkedHashMap<String, Unit>();
     }
 
     /**
