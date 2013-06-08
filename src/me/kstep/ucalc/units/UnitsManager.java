@@ -62,14 +62,14 @@ public class UnitsManager {
 
         UnitExistsException(Unit unit) {
             super("Unit already exists: `" + unit + "'");
-            name = unit.name;
-            existingUnit = unit;
+            this.name = unit.name;
+            this.existingUnit = unit;
         }
 
         UnitExistsException(String name, Unit unit) {
             super("Unit already exists: `" + name + "'");
-            name = name;
-            existingUnit = unit;
+            this.name = name;
+            this.existingUnit = unit;
         }
     }
 
