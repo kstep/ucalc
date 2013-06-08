@@ -33,7 +33,7 @@ public class UUnitsView extends GridView {
 			int numRows = uview.getNumRows();
 
 			if (numRows > 0) {
-		    	int height = uview.getMeasuredHeight() - numRows * (view.getPaddingTop() + view.getPaddingBottom()) - uview.getPaddingTop() - uview.getPaddingBottom();
+		    	int height = uview.getMeasuredHeight() - numRows * (1 + view.getPaddingTop() + view.getPaddingBottom()) - uview.getPaddingTop() - uview.getPaddingBottom();
 		    	view.setMinimumHeight(height / numRows);
 			}
 

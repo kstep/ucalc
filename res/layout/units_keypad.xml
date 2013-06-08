@@ -16,8 +16,8 @@
             android:layout_height="match_parent"
             android:id="@+id/units_keypad"
             android:numColumns="5"
-            android:horizontalSpacing="6dp"
-            android:verticalSpacing="6dp"
+            android:horizontalSpacing="7dp"
+            android:verticalSpacing="7dp"
             android:background="#000000"
 			ucalc:numRows="6"
             />
