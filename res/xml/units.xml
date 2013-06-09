@@ -257,7 +257,7 @@ A few examples:
         <unit name="bit" class="base" fullname="Bit">
             <description>
                 Binary digit (0 or 1). As an entropy unit of a random variable,
-                is a sum of -p(i)*log2(p(i)) over the finite alphabet, where
+                is a sum of -p(i)*log₂(p(i)) over the finite alphabet, where
                 p(i) is the probability that a random variable takes on the
                 value i.
             </description>
