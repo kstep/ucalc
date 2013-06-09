@@ -1,21 +1,20 @@
 package me.kstep.ucalc.views;
 
-import android.app.ListFragment;
-import android.content.Context;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.AdapterView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import me.kstep.ucalc.UCalcActivity;
 
-import me.kstep.ucalc.R;
+public class URadixDialog extends DialogFragment implements DialogInterface.OnClickListener {
 
-public class URadicesFragment extends ListFragment {
+	public void onClick(DialogInterface dialog, int id) {
+		if (id > -1) {
+	    	((UCalcActivity) getActivity()).setRadix(indexToRadix(id));
+		}
+	}
 
     ArrayAdapter<String> adapter;
 
@@ -86,29 +85,14 @@ public class URadicesFragment extends ListFragment {
             radix - 1;
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceBundle) {
-        super.onActivityCreated(savedInstanceBundle);
+	@Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        final UCalcActivity activity = (UCalcActivity) getActivity();
+        builder.setTitle("Choose radix");
+		builder.setItems(RADIX_NAMES, this);
+        builder.setNegativeButton("Cancel", this);
 
-        adapter = new ArrayAdapter<String>(activity, R.layout.simple_list_item, RADIX_NAMES);
-        setListAdapter(adapter);
-
-        final ListView lv = getListView();
-        lv.setSelection(radixToIndex(activity.getRadix()));
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener () {
-            public void onItemClick(AdapterView parent, View view, int position, long id) {
-                activity.setRadix(indexToRadix(position));
-                activity.finishFragment();                
-            }
-        });
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceBundle) {
-        View view = inflater.inflate(R.layout.uradices_view, null); 
-        return view;
+        return builder.create();
     }
 }

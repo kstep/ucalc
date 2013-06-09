@@ -36,7 +36,7 @@ import me.kstep.ucalc.views.UToast;
 
 import me.kstep.ucalc.views.UStackFragment;
 import me.kstep.ucalc.views.UMemoryFragment;
-import me.kstep.ucalc.views.URadicesFragment;
+import me.kstep.ucalc.views.URadixDialog;
 import me.kstep.ucalc.views.UUnitsView;
 
 import me.kstep.ucalc.operations.UOperations;
@@ -456,13 +456,9 @@ public class UCalcActivity extends Activity {
         startFragment(memory_fragment, "Memory");
     }
 
-    private URadicesFragment radices_fragment;
     public void onSelectRadixButtonClick(View view) {
-        if (radices_fragment == null) {
-            radices_fragment = new URadicesFragment();
-        }
-
-        startFragment(radices_fragment, null);
+		URadixDialog dialog = new URadixDialog();
+		dialog.show(getFragmentManager(), "popup");
     }
 
     public void startFragment(Fragment fragment, String title) {
