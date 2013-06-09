@@ -409,6 +409,16 @@ A few examples:
             <derive>A</derive>
             <derive>s</derive>
         </unit>
+		
+		<unit name="F" fullname="Farad" class="product">
+			<derive>C</derive>
+			<derive>
+				<unit class="power">
+					<derive>V</derive>
+					<power>-1</power>
+				</unit>
+			</derive>
+		</unit>
 
         <unit name="eV" fullname="Electron-volt" class="linear">
             <scale>1.602176565e-19</scale>
