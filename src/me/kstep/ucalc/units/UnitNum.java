@@ -1,5 +1,7 @@
 package me.kstep.ucalc.units;
 
+import java.text.Format;
+
 import me.kstep.ucalc.numbers.UNumber;
 import me.kstep.ucalc.numbers.UFloat;
 
@@ -58,6 +60,10 @@ public class UnitNum extends UNumber {
     public String toString() {
         return value.toString() + " " + unit.toString();
     }
+
+	public String format(Format formatter) {
+		return value.format(formatter) + " " + unit.toString();
+	}
 
     public UnitNum convert(Unit unit) {
         return new UnitNum(unit.from(this.value, this.unit), unit);

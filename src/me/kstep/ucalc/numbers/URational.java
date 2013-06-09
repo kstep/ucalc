@@ -1,6 +1,6 @@
 package me.kstep.ucalc.numbers;
 
-import java.lang.ArithmeticException;
+import java.text.Format;
 
 /**
  * Exact rational numbers are represented with a pair
@@ -116,6 +116,10 @@ public class URational extends UReal {
     public String toString() {
         return isInteger()? "" + numerator: numerator + "/" + denomenator;
     }
+
+	public String format(Format formatter) {
+	    return isInteger()? formatter.format(numerator): formatter.format(numerator) + "/" + formatter.format(denomenator);
+	}
 
     public UNumber pow(Number other) {
         return new UFloat(doubleValue()).pow(other);

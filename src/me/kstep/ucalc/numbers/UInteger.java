@@ -1,5 +1,7 @@
 package me.kstep.ucalc.numbers;
 
+import java.text.Format;
+
 public class UInteger extends UReal {
     private static final long serialVersionUID = 0L;
 
@@ -36,6 +38,10 @@ public class UInteger extends UReal {
     public String toString() {
         return "" + value;
     }
+
+	public String format(Format formatter) {
+		return formatter.format(value);
+	}
 
     public UNumber neg() {
         return new UInteger(-value);

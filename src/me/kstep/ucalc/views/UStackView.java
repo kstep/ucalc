@@ -48,7 +48,7 @@ public class UStackView extends UTextView {
         StringBuilder result = new StringBuilder();
         for (Number item : visiblePart) {
             result.insert(0, "\n");
-            result.insert(0, item);
+            result.insert(0, UNumber.format(item, formatter));
             result.insert(0, "· ");
             result.insert(0, i--);
         }

@@ -1,5 +1,7 @@
 package me.kstep.ucalc.numbers;
 
+import java.text.Format;
+
 /**
  * Inexact real numbers (floating point numbers)
  * are represented with double value internally.
@@ -40,6 +42,10 @@ public class UFloat extends UReal {
     public String toString() {
         return "" + value;
     }
+
+	public String format(Format formatter) {
+		return formatter.format(value);
+	}
 
     public UNumber neg() {
         return new UFloat(-value);

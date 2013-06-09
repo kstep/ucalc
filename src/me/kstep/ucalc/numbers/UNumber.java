@@ -1,5 +1,7 @@
 package me.kstep.ucalc.numbers;
 
+import java.text.Format;
+
 import me.kstep.ucalc.operations.UOperation;
 import me.kstep.ucalc.units.Unit;
 import me.kstep.ucalc.units.UnitNum;
@@ -128,6 +130,12 @@ public abstract class UNumber extends Number {
 
     public long longValue() throws ConversionException {
         throw this.new ConversionException(Long.class);
+    }
+	
+	abstract public String format(Format formatter);
+    public static String format(Number number, Format formatter) {
+        return valueOf(number).format(formatter);
+        
     }
 
     public Sign sign() {

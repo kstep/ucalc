@@ -1,5 +1,8 @@
 package me.kstep.ucalc.views;
 
+import java.text.DecimalFormat;
+import java.text.Format;
+
 import android.content.Context;
 import android.util.AttributeSet;
 
@@ -30,14 +33,13 @@ public class UEditView extends UTextView {
         if (UNumber.isNaN(newval)) {
             setText("");
         } else {
-            setText(value.toString());
+            setText(UNumber.format(value, formatter));
         }
         syncValue = true;
     }
 
     public Number getValue() {
         if (!syncValue) {
-            String text = getText().toString();
             try {
                 setValue(UNumber.valueOf(getText()));
             } catch (NumberFormatException e) {

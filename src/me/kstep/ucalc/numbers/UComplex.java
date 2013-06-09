@@ -1,5 +1,7 @@
 package me.kstep.ucalc.numbers;
 
+import java.text.Format;
+
 import me.kstep.ucalc.operations.UMath;
 
 public class UComplex extends UNumber {
@@ -91,6 +93,13 @@ public class UComplex extends UNumber {
             isImag()? (imag.toString() + "j"):
             ("(" + real.toString() + " + " + imag.toString() + "j)"));
     }
+
+	public String format(Format formatter) {
+		return
+		    isReal()? real.format(formatter):
+			isImag()? imag.format(formatter) + "j":
+			"(" + real.format(formatter) + " + " + imag.format(formatter) + "j)";
+	}
 
     public UNumber add(Number other) {
         if (other instanceof UComplex) {

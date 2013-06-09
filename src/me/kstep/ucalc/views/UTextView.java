@@ -1,5 +1,8 @@
 package me.kstep.ucalc.views;
 
+import java.text.Format;
+import java.text.DecimalFormat;
+
 import android.widget.TextView;
 import android.content.Context;
 import android.util.AttributeSet;
@@ -27,6 +30,8 @@ public class UTextView extends TextView {
     private void initialize(Context context) {
         Typeface tf = Typeface.createFromAsset(context.getAssets(), "fonts/DejaVuSans.ttf");
         setTypeface(tf);
+		
+		setFormat("###0.#######");
     }
 
     public static Spanned unicodeToHtml(CharSequence value) {
@@ -50,5 +55,14 @@ public class UTextView extends TextView {
     public void setHtml(CharSequence value) {
         setText(unicodeToHtml(value));
     }
+	
+	protected Format formatter;
 
+	public void setFormat(String format) {
+		formatter = new DecimalFormat(format);
+	}
+
+	public void setFormat(Format format) {
+		formatter = format;
+	}
 }
