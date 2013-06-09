@@ -13,7 +13,7 @@
         <enum name="misc" value="5"></enum>
     </attr>
 	
-	<declare-styleable name="UUnitsView">
+	<declare-styleable name="TableView">
 		<attr name="numRows" format="integer" />
 	</declare-styleable>
 
