@@ -2,6 +2,7 @@ package me.kstep.ucalc.views;
 
 import java.text.DecimalFormat;
 import java.text.Format;
+import java.text.ParseException;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -41,10 +42,12 @@ public class UEditView extends UTextView {
     public Number getValue() {
         if (!syncValue) {
             try {
-                setValue(UNumber.valueOf(getText()));
+                setValue((Number) formatter.parseObject(getText().toString()));
             } catch (NumberFormatException e) {
                 setValue(Float.NaN);
-            }
+            } catch (ParseException e) {
+				setValue(Float.NaN);
+			}
         }
         return value;
     }

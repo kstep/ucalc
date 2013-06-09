@@ -2,6 +2,7 @@ package me.kstep.ucalc.views;
 
 import java.text.Format;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 
 import android.widget.TextView;
 import android.content.Context;
@@ -31,7 +32,9 @@ public class UTextView extends TextView {
         Typeface tf = Typeface.createFromAsset(context.getAssets(), "fonts/DejaVuSans.ttf");
         setTypeface(tf);
 		
-		setFormat("###0.#######");
+		DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+		symbols.setMinusSign('−');
+		setFormat(new DecimalFormat("###0.#######;−#", symbols));
     }
 
     public static Spanned unicodeToHtml(CharSequence value) {

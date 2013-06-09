@@ -384,21 +384,21 @@ public class UCalcActivity extends Activity {
                 String text = editView.getText().toString();
                 int expPos = text.lastIndexOf('e');
                 if (expPos == -1) {
-                    if (text.charAt(0) == '-') {
+                    if (text.charAt(0) == '−') {
                         text = text.substring(1);
                     } else {
-                        text = "-" + text;
+                        text = "−" + text;
                     }
 
                 } else { // Exponent entered
                     try {
-                        if (text.charAt(expPos + 1) == '-') {
+                        if (text.charAt(expPos + 1) == '−') {
                             text = text.substring(0, expPos) + "e" + text.substring(expPos + 2);
                         } else {
-                            text = text.substring(0, expPos) + "e-" + text.substring(expPos + 1);
+                            text = text.substring(0, expPos) + "e−" + text.substring(expPos + 1);
                         }
                     } catch (StringIndexOutOfBoundsException e) {
-                        text = text + "-";
+                        text = text + "−";
                     }
                 }
 
