@@ -66,7 +66,7 @@ public class UnitPrefix extends LinearUnit {
      */
     public static double prefixToScale(String prefix) {
         try {
-            Field property = UnitPrefix.class.getField(prefix);
+            Field property = UnitPrefix.class.getDeclaredField(prefix);
             return property.getDouble(null);
 
         } catch (IllegalAccessException e) {
@@ -78,13 +78,13 @@ public class UnitPrefix extends LinearUnit {
     }
 	
 	public static String[] getPrefixes() {
-		Field[] fields = UnitPrefix.class.getFields();
+		Field[] fields = UnitPrefix.class.getDeclaredFields();
 		String[] result = new String[fields.length];
-		
+
 		for (int i = 0; i < fields.length; i++) {
 			result[i] = fields[i].getName();
 		}
-		
+
 		return result;
 	}
 }
