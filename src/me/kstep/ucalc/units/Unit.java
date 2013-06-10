@@ -136,24 +136,24 @@ public abstract class Unit {
     // Multiple this by other
     public Unit mul(Unit other) {
         if (other == NONE) return this;
-        if (this.equals(other)) return new PowerUnit(this, 2).simplify();
-        return new ProductUnit(this, other).simplify();
+        if (this.equals(other)) return new PowerUnit(this, 2).simplify(0);
+        return new ProductUnit(this, other).simplify(0);
     }
 
     // Divide this by other
     public Unit div(Unit other) {
         if (other == NONE) return this;
         if (this.equals(other)) return NONE;
-        return new ProductUnit(this, new PowerUnit(other, -1)).simplify();
+        return new ProductUnit(this, new PowerUnit(other, -1)).simplify(0);
     }
 
     // Raise this unit to integer power
     public Unit pow(int pow) {
-        return new PowerUnit(this, pow).simplify();
+        return new PowerUnit(this, pow).simplify(0);
     }
 
     public Unit inv() {
-        return new PowerUnit(this, -1).simplify();
+        return new PowerUnit(this, -1).simplify(0);
     }
 
     abstract public Unit simplify(int depth);

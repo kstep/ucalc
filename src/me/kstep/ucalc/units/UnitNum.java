@@ -121,7 +121,7 @@ public class UnitNum extends UNumber {
 
     public UNumber root() {
         if (unit instanceof PowerUnit) {
-            return new UnitNum(value.root(), new PowerUnit(((PowerUnit) unit).targetUnit, ((PowerUnit) unit).power >> 1).simplify()).simplify();
+            return new UnitNum(value.root(), new PowerUnit(((PowerUnit) unit).targetUnit, ((PowerUnit) unit).power >> 1)).simplify();
         } else {
             return value.root();
         }
@@ -129,9 +129,9 @@ public class UnitNum extends UNumber {
 
     public UNumber root(Number other) {
         if (unit instanceof PowerUnit) {
-            return new UnitNum(value.root(other), new PowerUnit(((PowerUnit) unit).targetUnit, ((PowerUnit) unit).power / other.doubleValue()).simplify()).simplify();
+            return new UnitNum(value.root(other), new PowerUnit(((PowerUnit) unit).targetUnit, ((PowerUnit) unit).power / other.doubleValue())).simplify();
         } else {
-            return new UnitNum(value.root(other), new PowerUnit(unit, 1.0 / other.doubleValue()).simplify()).simplify();
+            return new UnitNum(value.root(other), new PowerUnit(unit, 1.0 / other.doubleValue())).simplify();
         }
     }
 
