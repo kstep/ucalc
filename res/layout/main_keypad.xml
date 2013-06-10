@@ -29,7 +29,7 @@
     </LinearLayout>
 
     <LinearLayout android:layout_height="0dp" android:layout_width="match_parent" android:orientation="horizontal" android:layout_weight="1">
-        <me.kstep.ucalc.widgets.UToggleButton android:text="prefix" style="@style/UCBtn.Act" />
+        <me.kstep.ucalc.widgets.UToggleButton android:text="prefix" android:onClick="onUnitCategoryButtonClick" style="@style/UCBtn.Act" />
 
         <me.kstep.ucalc.widgets.UButton android:text="deg" ucalc:keypad_mode="normal" android:onClick="onAngleUnitButtonClick" style="@style/UCBtn.Fun" />
         <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode="normal" android:text="sin" style="@style/UCBtn.Fun" />

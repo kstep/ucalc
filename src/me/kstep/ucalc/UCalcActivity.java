@@ -503,15 +503,21 @@ public class UCalcActivity extends Activity {
         if (((CompoundButton) view).isChecked()) {
 
             String name = ((CompoundButton) view).getText().toString();
-            Unit.Category unit_category = name.equals("time")? Unit.Category.TIME:
-                            name.equals("dist")? Unit.Category.DISTANCE:
-                            name.equals("vol")? Unit.Category.VOLUME:
-                            name.equals("weight")? Unit.Category.WEIGHT:
-                            name.equals("elec")? Unit.Category.ELECTRIC:
-                            Unit.Category.MISCELLANEOUS;
+			UUnitsView unitsView = (UUnitsView) units_keypad.findViewById(R.id.units_keypad);
 
-            UUnitsView unitsView = (UUnitsView) units_keypad.findViewById(R.id.units_keypad);
-            unitsView.loadUnitCategory(unit_category);
+			if (name.equals("prefix")) {
+				unitsView.loadUnitPrefixes();
+			} else {
+				Unit.Category unit_category = name.equals("time") ? Unit.Category.TIME:
+					name.equals("dist") ? Unit.Category.DISTANCE:
+					name.equals("vol") ? Unit.Category.VOLUME:
+					name.equals("weight") ? Unit.Category.WEIGHT:
+					name.equals("elec") ? Unit.Category.ELECTRIC:
+					Unit.Category.MISCELLANEOUS;
+            
+                unitsView.loadUnitCategory(unit_category);
+			}
+
             units_keypad.setVisibility(View.VISIBLE);
         } else {
             units_keypad.setVisibility(View.GONE);
