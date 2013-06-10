@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 
 import me.kstep.ucalc.units.Unit;
 import me.kstep.ucalc.units.UnitsManager;
+import me.kstep.ucalc.units.UnitPrefix;
 
 import me.kstep.ucalc.UCalcActivity;
 
@@ -15,7 +16,7 @@ import me.kstep.ucalc.R;
 
 public class UUnitsView extends TableView {
 
-    private KeypadAdapter<Unit> adapter;
+    private KeypadAdapter<String> adapter;
 
     public UUnitsView(Context context) {
         super(context);
@@ -33,12 +34,17 @@ public class UUnitsView extends TableView {
     }
 
     private void initialize(Context context) {
-        adapter = new KeypadAdapter<Unit>(context, R.layout.button_list_item, new ArrayList<Unit>());
+        adapter = new KeypadAdapter<String>(context, R.layout.button_list_item, new ArrayList<String>());
         setAdapter(adapter);
     }
 
     public void loadUnitCategory(Unit.Category category) {
         adapter.clear();
-        adapter.addAll(UnitsManager.getInstance().units(category));
+        adapter.addAll(UnitsManager.getInstance().names(category));
     }
+	
+	public void loadUnitPrefixes() {
+		adapter.clear();
+		adapter.addAll(UnitPrefix.getPrefixes());
+	}
 }

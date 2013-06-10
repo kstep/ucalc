@@ -7,7 +7,7 @@ import java.lang.reflect.Field;
  * very easy definition of derived unit with some SI prefix, like *kilometer*
  * or *milliliter*.
  */
-class UnitPrefix extends LinearUnit {
+public class UnitPrefix extends LinearUnit {
     /**
      * Here go prefixes, which define positive powers of 10.
      */
@@ -76,5 +76,16 @@ class UnitPrefix extends LinearUnit {
             return 0.0;
         }
     }
+	
+	public static String[] getPrefixes() {
+		Field[] fields = UnitPrefix.class.getFields();
+		String[] result = new String[fields.length];
+		
+		for (int i = 0; i < fields.length; i++) {
+			result[i] = fields[i].getName();
+		}
+		
+		return result;
+	}
 }
 
