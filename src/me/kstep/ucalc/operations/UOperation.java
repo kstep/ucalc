@@ -1,15 +1,10 @@
 package me.kstep.ucalc.operations;
 import me.kstep.ucalc.UStack;
 import me.kstep.ucalc.numbers.UNumber;
+import me.kstep.ucalc.UCalcActivity;
 
 abstract public class UOperation {
-    public void apply(UStack stack) {
-        int arity = arity();
-        UNumber[] operands = new UNumber[arity];
-        while (arity > 0) {
-
-        }
-    }
+    abstract public void apply(UCalcActivity state, UStack stack);
 
     abstract public int arity();
     abstract public CharSequence name();

@@ -351,7 +351,7 @@ public class UCalcActivity extends Activity {
                 showToast("Not enough operands!");
             } else {
                 try {
-                    op.apply(stack);
+                    op.apply(this, stack);
 
                 } catch (UCalcException e) {
                     showToast(e.getMessage());
@@ -431,6 +431,10 @@ public class UCalcActivity extends Activity {
             units.get("rad");
         ((Button) view).setText(angleUnit.toString());
     }
+	
+	public Unit getAngleUnit() {
+		return angleUnit;
+	}
 
     public void onAltModeButtonClick(View view) {
         CompoundButton button = (CompoundButton) view;
