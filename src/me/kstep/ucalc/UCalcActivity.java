@@ -94,6 +94,7 @@ public class UCalcActivity extends Activity {
         stack = (UStack) loadFromFile("stack.bin", new UStack());
         memory = (UMemory) loadFromFile("memory.bin", new UMemory());
         units = Units.inflate(this, R.xml.units);
+		setAngleUnit(units.get("deg"));
     }
 
     /** Called when the activity is first created. */
@@ -431,6 +432,10 @@ public class UCalcActivity extends Activity {
             units.get("rad");
         ((Button) view).setText(angleUnit.toString());
     }
+	
+	public void setAngleUnit(Unit unit) {
+		angleUnit = unit;
+	}
 	
 	public Unit getAngleUnit() {
 		return angleUnit;
