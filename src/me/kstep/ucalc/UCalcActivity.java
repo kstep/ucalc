@@ -56,6 +56,7 @@ public class UCalcActivity extends Activity {
     private UConstants constants;
     private UOperations operations;
     private UnitsManager units;
+	private UState state;
 
     public enum Mode {
         NORMAL,
@@ -90,11 +91,11 @@ public class UCalcActivity extends Activity {
         return mode;
     }
 
-    private void restoreState(Bundle state) {
+    private void restoreState(Bundle savedState) {
         stack = (UStack) loadFromFile("stack.bin", new UStack());
         memory = (UMemory) loadFromFile("memory.bin", new UMemory());
         units = Units.inflate(this, R.xml.units);
-		setAngleUnit(units.get("deg"));
+		state = new UState();
     }
 
     /** Called when the activity is first created. */
@@ -179,22 +180,9 @@ public class UCalcActivity extends Activity {
         return memory;
     }
 
-    private int radix;
-    public int getRadix() {
-        return radix;
-    }
-
     public void setRadix(int value) {
-        radix = value;
-
-        ((Button) findViewById(R.id.radix_button)).setText(
-            radix == 0? "float":
-            radix == 16? "hex":
-            radix == 10? "dec":
-            radix == 8? "oct":
-            radix == 2? "bin":
-            "rad" + String.valueOf(radix)
-        );
+        state.setRadix(value);
+        ((Button) findViewById(R.id.radix_button)).setText(state.getRadixName());
     }
 
     /**
@@ -352,7 +340,7 @@ public class UCalcActivity extends Activity {
                 showToast("Not enough operands!");
             } else {
                 try {
-                    op.apply(this, stack);
+                    op.apply(state, stack);
 
                 } catch (UCalcException e) {
                     showToast(e.getMessage());
@@ -425,21 +413,12 @@ public class UCalcActivity extends Activity {
         showStack();
     }
 
-    private Unit angleUnit;
     public void onAngleUnitButtonClick(View view) {
-        angleUnit = angleUnit == units.get("rad")?
+		state.setAngleUnit(state.getAngleUnit() == units.get("rad")?
             units.get("deg"):
-            units.get("rad");
-        ((Button) view).setText(angleUnit.toString());
+            units.get("rad"));
+        ((Button) view).setText(state.getAngleUnit().toString());
     }
-	
-	public void setAngleUnit(Unit unit) {
-		angleUnit = unit;
-	}
-	
-	public Unit getAngleUnit() {
-		return angleUnit;
-	}
 
     public void onAltModeButtonClick(View view) {
         CompoundButton button = (CompoundButton) view;
