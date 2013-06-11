@@ -268,7 +268,7 @@ public class Units {
             unit.description = description;
         }
 
-        return unit;
+        return unit.simplify();
     }
 
     public static UnitsManager load(UnitsManager uman) {
