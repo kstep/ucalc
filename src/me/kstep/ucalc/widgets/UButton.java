@@ -7,11 +7,10 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.graphics.Typeface;
 
+import me.kstep.ucalc.views.FontFitter;
 import me.kstep.ucalc.UCalcActivity;
 
 import me.kstep.ucalc.R;
-import android.graphics.Paint;
-import me.kstep.ucalc.views.FontFitter;
 
 public class UButton extends Button implements UCalcActivity.OnModeChangedListener {
     public UButton(Context context) {
