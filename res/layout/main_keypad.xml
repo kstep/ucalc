@@ -8,7 +8,7 @@
         <me.kstep.ucalc.widgets.UToggleButton android:onClick="onUnitCategoryButtonClick" ucalc:radio_group="units" android:text="time" style="@style/UCBtn.Act" />
         <me.kstep.ucalc.widgets.UToggleButton android:onClick="onUnitCategoryButtonClick" ucalc:radio_group="units" android:text="dist" style="@style/UCBtn.Act" />
         <me.kstep.ucalc.widgets.UToggleButton android:onClick="onUnitCategoryButtonClick" ucalc:radio_group="units" android:text="vol" style="@style/UCBtn.Act" />
-        <me.kstep.ucalc.widgets.UToggleButton android:onClick="onUnitCategoryButtonClick" ucalc:radio_group="units" android:text="weight" android:textSize="14sp" style="@style/UCBtn.Act" />
+        <me.kstep.ucalc.widgets.UToggleButton android:onClick="onUnitCategoryButtonClick" ucalc:radio_group="units" android:text="weight" style="@style/UCBtn.Act" />
         <me.kstep.ucalc.widgets.UToggleButton android:onClick="onUnitCategoryButtonClick" ucalc:radio_group="units" android:text="elec" style="@style/UCBtn.Act" />
         <me.kstep.ucalc.widgets.UToggleButton android:onClick="onUnitCategoryButtonClick" ucalc:radio_group="units" android:text="misc" style="@style/UCBtn.Act" />
     </LinearLayout>
