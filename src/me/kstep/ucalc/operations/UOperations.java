@@ -1,11 +1,25 @@
 package me.kstep.ucalc.operations;
-import java.util.Stack;
 
 import java.util.Hashtable;
 import android.util.Log;
 
 public class UOperations extends Hashtable<CharSequence,UOperation> {
     final static long serialVersionUID = 0L;
+	
+	static public class UOperationNotFoundException extends UOperationException {
+		UOperationNotFoundException(CharSequence name) {
+			super("Operation not found: `" + name + "'");
+		}
+	}
+	
+	public UOperation get(CharSequence name) {
+		UOperation op = super.get(name.toString());
+		if (op == null) {
+			throw new UOperationNotFoundException(name);
+		}
+		
+		return op;
+	}
 
     public UOperation put(UOperation operation) {
         return put(operation.name(), operation);
@@ -41,11 +55,21 @@ public class UOperations extends Hashtable<CharSequence,UOperation> {
         ConvertOp.class,
     };
 
-    public UOperations() {
+    private UOperations() {
         super();
         autoFill();
     }
+	
+	private static UOperations instance = null;
 
+	static public UOperations getInstance() {
+		if (instance == null) {
+			instance = new UOperations();
+		}
+		
+		return instance;
+	}
+	
     public int autoFill() {
         int loaded = 0;
         for (Class c : OPERATIONS) {

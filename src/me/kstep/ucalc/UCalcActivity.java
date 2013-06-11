@@ -107,7 +107,7 @@ public class UCalcActivity extends Activity {
         restoreState(savedInstanceState);
 
         constants = new UConstants();
-        operations = new UOperations();
+        operations = UOperations.getInstance();
         undos = new UUndoStack();
 
         showStack();
@@ -323,32 +323,24 @@ public class UCalcActivity extends Activity {
         }
     }
 
-    public void onOperationApply(CharSequence name) {
-        UOperation op = operations.get(name);
+    public void onOperationApply(UOperation op) {
+		updateStack();
 
-        if (op != null) {
+		if (stack.size() < op.arity()) {
+			showToast("Not enough operands!");
+		} else {
+			try {
+				op.apply(state, stack);
 
-            updateStack();
+			} catch (UCalcException e) {
+				showToast(e.getMessage());
 
-            if (stack.size() < op.arity()) {
-                showToast("Not enough operands!");
-            } else {
-                try {
-                    op.apply(state, stack);
+			} catch (EmptyStackException e) {
+				showToast("Stack underflow!");
+			}
+		}
 
-                } catch (UCalcException e) {
-                    showToast(e.getMessage());
-
-                } catch (EmptyStackException e) {
-                    showToast("Stack underflow!");
-                }
-            }
-
-            showStack();
-
-        } else {
-            showToast("Operation not found!");
-        }
+		showStack();
     }
 
     public void onUndoButtonClick(View view) {

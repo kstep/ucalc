@@ -5,6 +5,8 @@ import android.view.View;
 import android.util.AttributeSet;
 
 import me.kstep.ucalc.UCalcActivity;
+import me.kstep.ucalc.operations.UOperations;
+import me.kstep.ucalc.operations.UOperationException;
 
 class UOpButton extends UButton implements View.OnClickListener {
     public UOpButton(Context context) {
@@ -21,7 +23,12 @@ class UOpButton extends UButton implements View.OnClickListener {
     }
 
     public void onClick(View view) {
-        ((UCalcActivity) getContext()).onOperationApply(this.getText());
+		UCalcActivity activity = (UCalcActivity) getContext();
+		try {
+            activity.onOperationApply(UOperations.getInstance().get(this.getText()));
+        } catch (UOperationException e) {
+			activity.showToast(e.getMessage());
+		}
     }
 }
 
