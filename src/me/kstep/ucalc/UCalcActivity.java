@@ -255,7 +255,7 @@ public class UCalcActivity extends Activity {
         editView.append(ch);
     }
 
-    public void onUnitEnter(CharSequence ch) {
+    public void onUnitEnter(Unit unit) {
         UEditView editView = (UEditView) findViewById(R.id.view_edit);
 
         if (!editView.isEditing()) {
@@ -264,23 +264,17 @@ public class UCalcActivity extends Activity {
             editView.startEditing();
         }
 
-        try {
-            Unit unit = units.get(ch.toString());
-            UNumber num = UNumber.valueOf(editView.getValue());
+	    UNumber num = UNumber.valueOf(editView.getValue());
 
-            if (num instanceof UnitNum) {
-                num = new UnitNum(((UnitNum) num).value, ((UnitNum) num).unit.mul(unit));
-            } else if (UNumber.isNaN(num)) {
-                num = new UnitNum(1, unit);
-            } else {
-                num = new UnitNum(num, unit);
-            }
+		if (num instanceof UnitNum) {
+			num = new UnitNum(((UnitNum) num).value, ((UnitNum) num).unit.mul(unit));
+		} else if (UNumber.isNaN(num)) {
+			num = new UnitNum(UNumber.ONE, unit);
+		} else {
+			num = new UnitNum(num, unit);
+		}
 
-            editView.setValue(num);
-
-        } catch (UnitException e) {
-            showToast(e.getMessage());
-        }
+		editView.setValue(num);
     }
 
     public void onDotButtonClick(View view) {
