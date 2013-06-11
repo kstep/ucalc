@@ -52,9 +52,12 @@ public class UEditView extends UTextView {
         return value;
     }
 
+	@Override
     protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
         super.onTextChanged(text, start, lengthBefore, lengthAfter);
         syncValue = false;
+		setTextSize(24);
+		FontFitter.fitText(this, 16);
     }
 
     public boolean isEmpty() {
