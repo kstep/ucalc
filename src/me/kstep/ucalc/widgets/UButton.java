@@ -11,6 +11,7 @@ import me.kstep.ucalc.UCalcActivity;
 
 import me.kstep.ucalc.R;
 import android.graphics.Paint;
+import me.kstep.ucalc.views.FontFitter;
 
 public class UButton extends Button implements UCalcActivity.OnModeChangedListener {
     public UButton(Context context) {
@@ -58,41 +59,20 @@ public class UButton extends Button implements UCalcActivity.OnModeChangedListen
         }
     }
 	
-	public float measureText(String text) {
-		Paint paint = getPaint();
-		return paint.measureText(text);
-	}
-	
-	public float measureText() {
-		return measureText(getText().toString());
-	}
-	
-	public float getRealTextSize() {
-		float densityMultiplier = getContext().getResources().getDisplayMetrics().density;
-		return getTextSize() / densityMultiplier;
-	}
-	
 	private float originalTextSize = 0;
-	public void fitText() {
+	public void resetToOriginalFontSize() {
 		if (originalTextSize == 0) {
-			originalTextSize = getRealTextSize();
+			originalTextSize = FontFitter.getRealTextSize(this);
 		} else {
 			setTextSize(originalTextSize);
 		}
-		float textWidth = measureText();
-		int width = getMeasuredWidth() - getPaddingLeft() - getPaddingRight() - 1;
-		android.util.Log.d("textsize", "t "+getText()+", tw "+textWidth+", w "+width+", ts "+getTextSize());
-		if (textWidth > width) {
-			float textSize = getRealTextSize() * (width / textWidth);
-			android.util.Log.d("textsize", "ts "+getTextSize()+" -> "+textSize);
-			setTextSize(textSize);
-		}
-	}
-	
+    }
+
 	@Override
 	protected void onMeasure(int widthSpec, int heightSpec) {
 		super.onMeasure(widthSpec, heightSpec);
-		fitText();
+		resetToOriginalFontSize();
+		FontFitter.fitText(this);
 	}
 }
 
