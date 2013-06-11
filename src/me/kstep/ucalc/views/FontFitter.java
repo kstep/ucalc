@@ -18,12 +18,16 @@ public class FontFitter {
 		return view.getTextSize() / densityMultiplier;
 	}
 
-	static public void fitText(TextView view) {
+	static public void fitText(TextView view, float minTextSize) {
 		float textWidth = measureText(view);
 		int width = view.getMeasuredWidth() - view.getPaddingLeft() - view.getPaddingRight() - 1;
 		if (textWidth > width) {
 			float textSize = getRealTextSize(view) * (width / textWidth);
-			view.setTextSize(textSize);
+			view.setTextSize(textSize < minTextSize? minTextSize: textSize);
 		}
+	}
+	
+	static public void fitText(TextView view) {
+		fitText(view, 10);
 	}
 }
