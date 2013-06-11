@@ -37,7 +37,7 @@ public class UnitsManager {
 
     static public class UnitNotFoundException extends UnitException {
         final static long serialVersionUID = 0L;
-        UnitNotFoundException(String name) {
+        UnitNotFoundException(CharSequence name) {
             super("Unit not found: `" + name + "'");
         }
     }
@@ -183,8 +183,8 @@ public class UnitsManager {
         return add(unit, fullname, description, Unit.Category.MISCELLANEOUS);
     }
 
-    public Unit get(String name) {
-        Unit unit = units.get(name);
+    public Unit get(CharSequence name) {
+        Unit unit = units.get(name.toString());
         if (unit == null) {
             throw new UnitNotFoundException(name);
         }
