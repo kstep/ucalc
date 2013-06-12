@@ -56,9 +56,19 @@ public class UEditView extends UTextView {
     protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
         super.onTextChanged(text, start, lengthBefore, lengthAfter);
         syncValue = false;
+		fitText();
+    }
+	
+	@Override
+	protected void onMeasure(int widthSpec, int heightSpec) {
+		super.onMeasure(widthSpec, heightSpec);
+		fitText();
+	}
+
+	private void fitText() {
 		setTextSize(24);
 		FontFitter.fitText(this, 16);
-    }
+	}
 
     public boolean isEmpty() {
         return getText().length() == 0;
