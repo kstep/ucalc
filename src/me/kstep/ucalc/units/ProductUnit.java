@@ -5,6 +5,7 @@ import me.kstep.ucalc.numbers.UInteger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 class ProductUnit extends DerivedUnit {
     Unit[] targetUnits;
@@ -15,6 +16,14 @@ class ProductUnit extends DerivedUnit {
         super(name);
         targetUnits = units;
     }
+	
+	ProductUnit(String name, List<? extends Unit> units) {
+		this(name, units.toArray(new Unit[units.size()]));
+	}
+	
+	ProductUnit(List<? extends Unit> units) {
+		this(units.toArray(new Unit[units.size()]));
+	}
 
     public UNumber to(UNumber value, Unit unit) {
         if (this == unit) return value;
