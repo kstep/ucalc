@@ -21,17 +21,31 @@ import me.kstep.ucalc.numbers.UNumber;
 public abstract class Unit {
 
     public enum Category {
-        TIME,
-        DISTANCE,
-        VOLUME,
-        WEIGHT,
-        ELECTRIC,
-        MISCELLANEOUS
+        TIME("time"),
+        DISTANCE("dist"),
+        VOLUME("vol"),
+        WEIGHT("weight"),
+        ELECTRIC("elec"),
+        MISCELLANEOUS("misc");
+		
+		private String name;
+		
+		Category(String name) {
+			this.name = name;
+		}
+		
+		public String toString() {
+			return name;
+		}
     }
 
     final public static Unit NONE = NoneUnit.getInstance();
 
     Category category;
+	
+	public Category getCategory() {
+		return category;
+	}
 
     public class ConversionException extends UnitException {
         final static long serialVersionUID = 0L;

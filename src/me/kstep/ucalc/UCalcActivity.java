@@ -48,6 +48,8 @@ import me.kstep.ucalc.units.Units;
 import me.kstep.ucalc.units.UnitsManager;
 import me.kstep.ucalc.units.UnitException;
 import me.kstep.ucalc.units.UnitNum;
+import me.kstep.ucalc.widgets.UButton;
+import me.kstep.ucalc.widgets.UToggleButton;
 
 public class UCalcActivity extends Activity {
     private UStack stack;
@@ -257,7 +259,9 @@ public class UCalcActivity extends Activity {
 
     public void onUnitEnter(Unit unit) {
         UEditView editView = (UEditView) findViewById(R.id.view_edit);
-
+		UToggleButton button = (UToggleButton) findViewById(R.id.main_layout).findViewWithTag(unit.getCategory().toString());
+		button.performClick();
+		
         if (!editView.isEditing()) {
             pushStack();
             editView.setValue(Float.NaN);

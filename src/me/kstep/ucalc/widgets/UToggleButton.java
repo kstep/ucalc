@@ -15,7 +15,7 @@ import me.kstep.ucalc.views.FontFitter;
 
 import me.kstep.ucalc.R;
 
-class UToggleButton extends CompoundButton implements CompoundButton.OnCheckedChangeListener, UCalcActivity.OnModeChangedListener {
+public class UToggleButton extends CompoundButton implements CompoundButton.OnCheckedChangeListener, UCalcActivity.OnModeChangedListener {
 
     private static HashMap<String,ArrayList<UToggleButton>> radio_groups = new HashMap<String,ArrayList<UToggleButton>>();
 
