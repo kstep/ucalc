@@ -5,6 +5,11 @@ import java.text.Format;
 import me.kstep.ucalc.operations.UMath;
 
 public class UComplex extends UNumber {
+
+	public UNumber simplify() {
+		return isReal()? real.simplify(): this;
+	}
+
     private static final long serialVersionUID = 0L;
 
     public UReal real;

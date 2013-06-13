@@ -7,6 +7,11 @@ import java.text.Format;
  * are represented with double value internally.
  */
 public class UFloat extends UReal {
+
+	public UNumber simplify() {
+		return this;
+	}
+
     private static final long serialVersionUID = 0L;
 
     private double value;

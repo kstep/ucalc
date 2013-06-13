@@ -316,4 +316,6 @@ public abstract class UNumber extends Number {
             return false;
         }
     }
+	
+	abstract public UNumber simplify();
 }

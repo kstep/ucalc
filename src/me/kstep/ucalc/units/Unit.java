@@ -3,6 +3,7 @@ package me.kstep.ucalc.units;
 import me.kstep.ucalc.numbers.UNumber;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This is a base unit class, which determines main Unit interface
@@ -187,7 +188,7 @@ public abstract class Unit {
         return this instanceof BaseUnit;
     }
 	
-	protected void foldUnits(HashMap<Unit,Integer> powers, Unit unit, int power, boolean deepdive) {
+	protected static void foldUnits(HashMap<Unit,Integer> powers, Unit unit, int power, boolean deepdive) {
         if (unit == Unit.NONE || power == 0) {
             return;
         }
@@ -208,7 +209,7 @@ public abstract class Unit {
         }
     }
 	
-	protected Unit reduceUnitPowers(HashMap<Unit, Integer> powers, String name, boolean sort) {
+	protected static List<? extends Unit> reduceUnitPowers(HashMap<Unit, Integer> powers) {
 		ArrayList<Unit> units = new ArrayList<Unit>(powers.size());
         for (Unit unit : powers.keySet()) {
             int power = powers.get(unit);
@@ -220,7 +221,12 @@ public abstract class Unit {
                 units.add(new PowerUnit(unit, power));
             }
         }
-
+		
+		return units;
+	}
+	
+	protected static Unit reduceUnitPowers(HashMap<Unit, Integer> powers, String name, boolean sort) {
+        List<? extends Unit> units = reduceUnitPowers(powers);
 		switch (units.size()) {
             case 0: return Unit.NONE;
             case 1: return units.get(0);
@@ -234,15 +240,13 @@ public abstract class Unit {
                     new ProductUnit(newunits):
                     new ProductUnit(name, newunits);
 
-                unit.fullname = fullname;
-                unit.description = description;
                 return unit;
         }
 	}
 	
 	// Insertion sort, very fast for small inputs, which is my case.
     // Standard merge sort implemented by Arrays.sort() is an overkill for me.
-    private void simpleSort(Unit[] units) {
+    private static void simpleSort(Unit[] units) {
         int powera;
         int powerb;
         Unit unita;
@@ -265,5 +269,34 @@ public abstract class Unit {
             }
         }
     }
+	
+	public static List<? extends Unit> append(List<? extends Unit> units, Unit unit) {
+		HashMap<Unit,Integer> powers = new HashMap<Unit,Integer>();
+
+		for (Unit u : units) {
+			foldUnits(powers, u, 1, false);
+		}
+		
+		foldUnits(powers, unit, 1, false);
+		return reduceUnitPowers(powers);
+	}
+	
+	public static Unit[] append(Unit[] units, Unit unit) {
+		{
+			HashMap<Unit,Integer> powers = new HashMap<Unit,Integer>();
+
+			for (Unit u : units) {
+				foldUnits(powers, u, 1, false);
+			}
+
+			foldUnits(powers, unit, 1, false);
+			List<? extends Unit> result = reduceUnitPowers(powers);
+			return result.toArray(new Unit[result.size()]);
+		}
+	}
+	
+	public Unit concat(Unit unit) {
+		return new ProductUnit(append(new Unit[]{this}, unit));
+	}
 }
 

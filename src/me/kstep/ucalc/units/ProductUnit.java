@@ -158,7 +158,10 @@ class ProductUnit extends DerivedUnit {
             foldUnits(powers, unit.simplify(depth), 1, true);
         }
 
-        return reduceUnitPowers(powers, autoname? null: name, true);
+		Unit unit = reduceUnitPowers(powers, autoname? null: name, true);
+		unit.fullname = fullname;
+		unit.description = description;
+        return unit;
     }
 
     public String getDefinition(int depth) {
@@ -180,5 +183,9 @@ class ProductUnit extends DerivedUnit {
         }
         return (sum << 3) | 3;
     }
+	
+	public Unit concat(Unit unit) {
+		return new ProductUnit(append(autoname? targetUnits: new Unit[]{this}, unit));
+	}
 }
 

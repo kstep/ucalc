@@ -113,9 +113,9 @@ public class UnitNum extends UNumber {
 
     public UNumber pow(Number other) {
         if (unit instanceof PowerUnit) {
-            return new UnitNum(value.pow(other), new PowerUnit(((PowerUnit) unit).targetUnit, ((PowerUnit) unit).power * other.doubleValue()).simplify()).simplify();
+            return new UnitNum(value.pow(other), new PowerUnit(((PowerUnit) unit).targetUnit, ((PowerUnit) unit).power * other.doubleValue())).simplify();
         } else {
-            return new UnitNum(value.pow(other), new PowerUnit(unit, other).simplify()).simplify();
+            return new UnitNum(value.pow(other), new PowerUnit(unit, other)).simplify();
         }
     }
 

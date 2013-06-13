@@ -3,6 +3,11 @@ package me.kstep.ucalc.numbers;
 import java.text.Format;
 
 public class UInteger extends UReal {
+
+	public UNumber simplify() {
+		return this;
+	}
+
     private static final long serialVersionUID = 0L;
 
     private long value;

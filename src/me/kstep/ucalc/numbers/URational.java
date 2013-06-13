@@ -7,6 +7,11 @@ import java.text.Format;
  * of long integer numbers.
  */
 public class URational extends UReal {
+
+	public UNumber simplify() {
+		return isInteger()? new UInteger(numerator): this;
+	}
+
     private static final long serialVersionUID = 0L;
 
     final private static long PRECISION_BASE = 100000L;
@@ -33,7 +38,7 @@ public class URational extends UReal {
             denomenator = 1L;
         }
 
-        simplify();
+        reduce();
     }
 
     public URational(CharSequence val) throws NumberFormatException {
@@ -49,7 +54,7 @@ public class URational extends UReal {
             denomenator = Long.valueOf(value.substring(divisor + 1));
 
             fix();
-            simplify();
+            reduce();
         }
     }
 
@@ -63,7 +68,7 @@ public class URational extends UReal {
         }
 
         fix();
-        simplify();
+        reduce();
     }
 
     public static boolean isFloat(Number num) {
@@ -143,7 +148,7 @@ public class URational extends UReal {
         return Math.abs(a);
     }
 
-    public URational simplify() {
+    public URational reduce() {
         long base = gcd(numerator, denomenator);
         numerator /= base;
         denomenator /= base;

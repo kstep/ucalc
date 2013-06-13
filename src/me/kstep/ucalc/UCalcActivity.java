@@ -271,7 +271,7 @@ public class UCalcActivity extends Activity {
 	    UNumber num = UNumber.valueOf(editView.getValue());
 
 		if (num instanceof UnitNum) {
-			num = new UnitNum(((UnitNum) num).value, ((UnitNum) num).unit.mul(unit));
+			num = new UnitNum(((UnitNum) num).value, ((UnitNum) num).unit.concat(unit));
 		} else if (UNumber.isNaN(num)) {
 			num = new UnitNum(UNumber.ONE, unit);
 		} else {
