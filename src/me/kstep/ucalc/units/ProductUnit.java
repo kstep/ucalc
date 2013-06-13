@@ -148,53 +148,6 @@ class ProductUnit extends DerivedUnit {
         return true;
     }
 
-    private void foldUnits(HashMap<Unit,Integer> powers, Unit unit, int power, boolean deepdive) {
-        if (unit == Unit.NONE || power == 0) {
-            return;
-        }
-
-        if (deepdive && unit instanceof ProductUnit) {
-            for (Unit subunit : ((ProductUnit) unit).targetUnits) {
-                foldUnits(powers, subunit, power, deepdive);
-            }
-
-        } else if (unit instanceof PowerUnit) {
-            foldUnits(powers, ((PowerUnit) unit).targetUnit, ((PowerUnit) unit).power * power, deepdive);
-
-        } else if (powers.containsKey(unit)) {
-            powers.put(unit, powers.get(unit) + power);
-
-        } else {
-            powers.put(unit, power);
-        }
-    }
-
-    // Insertion sort, very fast for small inputs, which is my case.
-    // Standard merge sort implemented by Arrays.sort() is an overkill for me.
-    private void simpleSort(Unit[] units) {
-        int powera;
-        int powerb;
-        Unit unita;
-        Unit unitb;
-
-        for (int i = 1; i < units.length; i++) {
-            unitb = units[i];
-            powerb = unitb instanceof PowerUnit? ((PowerUnit) unitb).power: 1;
-
-            for (int j = i - 1; j >= 0; j--) {
-                unita = units[j];
-                powera = unita instanceof PowerUnit? ((PowerUnit) unita).power: 1;
-
-                if (powerb <= powera) {
-                    break;
-                }
-
-                units[j + 1] = unita;
-                units[j] = unitb;
-            }
-        }
-    }
-
     public Unit simplify(int depth) {
         if (depth-- < 0) return this;
 
@@ -202,37 +155,10 @@ class ProductUnit extends DerivedUnit {
 
         // First simplify and flatten all inner units
         for (Unit unit : targetUnits) {
-            Unit u = unit.simplify(depth);
             foldUnits(powers, unit.simplify(depth), 1, true);
         }
 
-        ArrayList<Unit> units = new ArrayList<Unit>(powers.size());
-        for (Unit unit : powers.keySet()) {
-            int power = powers.get(unit);
-            if (power == 0) {
-                continue;
-            } else if (power == 1) {
-                units.add(unit);
-            } else {
-                units.add(new PowerUnit(unit, power));
-            }
-        }
-
-        switch (units.size()) {
-            case 0: return Unit.NONE;
-            case 1: return units.get(0);
-            default:
-                Unit[] newunits = units.toArray(new Unit[units.size()]);
-                simpleSort(newunits);
-
-                Unit unit = autoname?
-                    new ProductUnit(newunits):
-                    new ProductUnit(name, newunits);
-
-                unit.fullname = fullname;
-                unit.description = description;
-                return unit;
-        }
+        return reduceUnitPowers(powers, autoname? null: name, true);
     }
 
     public String getDefinition(int depth) {
