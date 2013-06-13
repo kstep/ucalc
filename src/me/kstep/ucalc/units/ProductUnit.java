@@ -148,18 +148,18 @@ class ProductUnit extends DerivedUnit {
         return true;
     }
 
-    private void foldUnits(HashMap<Unit,Integer> powers, Unit unit, int power) {
+    private void foldUnits(HashMap<Unit,Integer> powers, Unit unit, int power, boolean deepdive) {
         if (unit == Unit.NONE || power == 0) {
             return;
         }
 
-        if (unit instanceof ProductUnit) {
+        if (deepdive && unit instanceof ProductUnit) {
             for (Unit subunit : ((ProductUnit) unit).targetUnits) {
-                foldUnits(powers, subunit, power);
+                foldUnits(powers, subunit, power, deepdive);
             }
 
         } else if (unit instanceof PowerUnit) {
-            foldUnits(powers, ((PowerUnit) unit).targetUnit, ((PowerUnit) unit).power * power);
+            foldUnits(powers, ((PowerUnit) unit).targetUnit, ((PowerUnit) unit).power * power, deepdive);
 
         } else if (powers.containsKey(unit)) {
             powers.put(unit, powers.get(unit) + power);
@@ -203,7 +203,7 @@ class ProductUnit extends DerivedUnit {
         // First simplify and flatten all inner units
         for (Unit unit : targetUnits) {
             Unit u = unit.simplify(depth);
-            foldUnits(powers, unit.simplify(depth), 1);
+            foldUnits(powers, unit.simplify(depth), 1, true);
         }
 
         ArrayList<Unit> units = new ArrayList<Unit>(powers.size());
