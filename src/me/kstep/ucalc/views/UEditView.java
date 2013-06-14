@@ -116,7 +116,7 @@ public class UEditView extends UTextView {
 				cursorX = maxCursorX;
 			}
 
-			canvas.drawLine(cursorX, 2 * getPaddingTop(), cursorX, getHeight() - 2 * getPaddingBottom(), cursorPaint);
+			canvas.drawLine(cursorX, 2 + getPaddingTop(), cursorX, getHeight() - 2 - getPaddingBottom(), cursorPaint);
 		}
 	}
 }
