@@ -1,18 +1,17 @@
 package me.kstep.ucalc.views;
 
-import java.text.DecimalFormat;
-import java.text.Format;
-import java.text.ParseException;
-
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.util.AttributeSet;
-
+import java.text.ParseException;
 import me.kstep.ucalc.numbers.UNumber;
 
 public class UEditView extends UTextView {
     // If true, user is editing text now,
     // if false, editing was finished, value is fixed.
     private boolean editing = false;
+	private Paint cursorPaint;
 
     public void stopEditing() {
         editing = false;
@@ -20,6 +19,7 @@ public class UEditView extends UTextView {
     }
     public void startEditing() {
         editing = true;
+		invalidate();
     }
     public boolean isEditing() {
         return editing;
@@ -87,14 +87,36 @@ public class UEditView extends UTextView {
 
     public UEditView(Context context) {
         super(context);
+		initialize();
     }
 
     public UEditView(Context context, AttributeSet attrs) {
         super(context, attrs);
+		initialize();
     }
 
     public UEditView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+		initialize();
     }
+	
+	private void initialize() {
+		cursorPaint = new Paint();
+		cursorPaint.setColor(getTextColors().getDefaultColor());
+		cursorPaint.setStrokeWidth(2);
+	}
 
+	@Override
+	protected void onDraw(Canvas canvas) {
+		super.onDraw(canvas);
+		if (editing) {
+			float cursorX = FontFitter.measureText(this) + getPaddingLeft();
+			float maxCursorX = getWidth() - getPaddingRight();
+			if (cursorX > maxCursorX) {
+				cursorX = maxCursorX;
+			}
+
+			canvas.drawLine(cursorX, 2 * getPaddingTop(), cursorX, getHeight() - 2 * getPaddingBottom(), cursorPaint);
+		}
+	}
 }
