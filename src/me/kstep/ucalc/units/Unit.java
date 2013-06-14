@@ -4,6 +4,7 @@ import me.kstep.ucalc.numbers.UNumber;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This is a base unit class, which determines main Unit interface
@@ -188,7 +189,7 @@ public abstract class Unit {
         return this instanceof BaseUnit;
     }
 	
-	protected static void foldUnits(HashMap<Unit,Integer> powers, Unit unit, int power, boolean deepdive) {
+	protected static void foldUnits(Map<Unit,Integer> powers, Unit unit, int power, boolean deepdive) {
         if (unit == Unit.NONE || power == 0) {
             return;
         }
@@ -209,7 +210,7 @@ public abstract class Unit {
         }
     }
 	
-	protected static List<? extends Unit> reduceUnitPowers(HashMap<Unit, Integer> powers) {
+	protected static List<? extends Unit> reduceUnitPowers(Map<Unit, Integer> powers) {
 		ArrayList<Unit> units = new ArrayList<Unit>(powers.size());
         for (Unit unit : powers.keySet()) {
             int power = powers.get(unit);
@@ -225,7 +226,7 @@ public abstract class Unit {
 		return units;
 	}
 	
-	protected static Unit reduceUnitPowers(HashMap<Unit, Integer> powers, String name, boolean sort) {
+	protected static Unit reduceUnitPowers(Map<Unit, Integer> powers, String name, boolean sort) {
         List<? extends Unit> units = reduceUnitPowers(powers);
 		switch (units.size()) {
             case 0: return Unit.NONE;
