@@ -1,10 +1,11 @@
 package me.kstep.ucalc.units;
 
 import me.kstep.ucalc.numbers.UNumber;
-import java.util.HashMap;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.LinkedHashMap;
 
 /**
  * This is a base unit class, which determines main Unit interface
@@ -272,7 +273,7 @@ public abstract class Unit {
     }
 	
 	public static List<? extends Unit> append(List<? extends Unit> units, Unit unit) {
-		HashMap<Unit,Integer> powers = new HashMap<Unit,Integer>();
+		LinkedHashMap<Unit,Integer> powers = new LinkedHashMap<Unit,Integer>();
 
 		for (Unit u : units) {
 			foldUnits(powers, u, 1, false);
@@ -283,17 +284,15 @@ public abstract class Unit {
 	}
 	
 	public static Unit[] append(Unit[] units, Unit unit) {
-		{
-			HashMap<Unit,Integer> powers = new HashMap<Unit,Integer>();
+		LinkedHashMap<Unit,Integer> powers = new LinkedHashMap<Unit,Integer>();
 
-			for (Unit u : units) {
-				foldUnits(powers, u, 1, false);
-			}
-
-			foldUnits(powers, unit, 1, false);
-			List<? extends Unit> result = reduceUnitPowers(powers);
-			return result.toArray(new Unit[result.size()]);
+		for (Unit u : units) {
+			foldUnits(powers, u, 1, false);
 		}
+
+		foldUnits(powers, unit, 1, false);
+		List<? extends Unit> result = reduceUnitPowers(powers);
+		return result.toArray(new Unit[result.size()]);
 	}
 	
 	public Unit concat(Unit unit) {
