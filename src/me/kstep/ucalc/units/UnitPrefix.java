@@ -76,30 +76,39 @@ public class UnitPrefix extends LinearUnit {
             return 0.0;
         }
     }
+
+	public static Unit[] getPrefixes() {
+	//	if (PREFIXES == null) {
+			Field[] fields = UnitPrefix.class.getDeclaredFields();
+			Unit[] PREFIXES = new Unit[fields.length];
+
+			for (int i = 0; i < fields.length; i++) {
+				try {
+					double v = fields[i].getDouble(null);
+					String n = fields[i].getName();
+
+					int j = (int) Math.round(Math.log10(v));
+					if (-3 > j || j > 3) {
+						j = j / 3 + (j < 0 ? -2: 2);
+					}
+					j += j < 0 ? 10: (n.length() == 2 && n.charAt(1) == 'i' ? 17: 9);
+
+					android.util.Log.d("unitprefix", fields[i].getName()+" goes to "+j+" ("+((long)v%1024)+")");
+					PREFIXES[j] = new UnitPrefix(n + "-", n, Unit.NONE);
+
+				} catch (IllegalAccessException e) {
+				} catch (IllegalArgumentException e) {}
+			}
+	//	}
+
+		return PREFIXES;
+	}
 	
-	public static String[] getPrefixes() {
-		Field[] fields = UnitPrefix.class.getDeclaredFields();
-		String[] result = new String[fields.length];
-
-		for (int i = 0; i < fields.length; i++) {
-			try {
-				double v = fields[i].getDouble(null);
-				String n = fields[i].getName();
-
-				int j = (int) Math.round(Math.log10(v));
-				if (-3 > j || j > 3) {
-					j = j / 3 + (j < 0? -2: 2);
-				}
-				j += j < 0? 10: (n.length() == 2 && n.charAt(1) == 'i'? 17: 9);
-
-				//android.util.Log.d("unitprefix", fields[i].getName()+" goes to "+j+" ("+((long)v%1024)+")");
-			    result[j] = n;
-
-			} catch (IllegalAccessException e) {
-			} catch (IllegalArgumentException e) {}
+	public Unit concat(Unit unit) {
+		if (targetUnit == Unit.NONE) {
+			return new UnitPrefix(name.replace("-", ""), unit);
 		}
-
-		return result;
+		return super.concat(unit);
 	}
 }
 

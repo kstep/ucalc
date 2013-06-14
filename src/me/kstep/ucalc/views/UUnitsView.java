@@ -16,7 +16,7 @@ import me.kstep.ucalc.R;
 
 public class UUnitsView extends TableView {
 
-    private KeypadAdapter<String> adapter;
+    private KeypadAdapter<Unit> adapter;
 
     public UUnitsView(Context context) {
         super(context);
@@ -34,17 +34,12 @@ public class UUnitsView extends TableView {
     }
 
     private void initialize(Context context) {
-        adapter = new KeypadAdapter<String>(context, R.layout.button_list_item, new ArrayList<String>());
+        adapter = new KeypadAdapter<Unit>(context, R.layout.button_list_item, new ArrayList<Unit>());
         setAdapter(adapter);
     }
 
     public void loadUnitCategory(Unit.Category category) {
         adapter.clear();
-        adapter.addAll(UnitsManager.getInstance().names(category));
+        adapter.addAll(UnitsManager.getInstance().units(category));
     }
-	
-	public void loadUnitPrefixes() {
-		adapter.clear();
-		adapter.addAll(UnitPrefix.getPrefixes());
-	}
 }

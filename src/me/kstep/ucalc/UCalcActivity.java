@@ -96,7 +96,7 @@ public class UCalcActivity extends Activity {
     private void restoreState(Bundle savedState) {
         stack = (UStack) loadFromFile("stack.bin", new UStack());
         memory = (UMemory) loadFromFile("memory.bin", new UMemory());
-        units = Units.inflate(this, R.xml.units);
+        units = Units.loadPrefixes(Units.inflate(this, R.xml.units));
 		state = new UState();
     }
 
@@ -483,18 +483,15 @@ public class UCalcActivity extends Activity {
             String name = ((CompoundButton) view).getText().toString();
 			UUnitsView unitsView = (UUnitsView) units_keypad.findViewById(R.id.units_keypad);
 
-			if (name.equals("prefix")) {
-				unitsView.loadUnitPrefixes();
-			} else {
-				Unit.Category unit_category = name.equals("time") ? Unit.Category.TIME:
-					name.equals("dist") ? Unit.Category.DISTANCE:
-					name.equals("vol") ? Unit.Category.VOLUME:
-					name.equals("weight") ? Unit.Category.WEIGHT:
-					name.equals("elec") ? Unit.Category.ELECTRIC:
-					Unit.Category.MISCELLANEOUS;
-            
-                unitsView.loadUnitCategory(unit_category);
-			}
+			Unit.Category unit_category = name.equals("time") ? Unit.Category.TIME:
+				name.equals("dist") ? Unit.Category.DISTANCE:
+				name.equals("vol") ? Unit.Category.VOLUME:
+				name.equals("weight") ? Unit.Category.WEIGHT:
+				name.equals("elec") ? Unit.Category.ELECTRIC:
+				name.equals("prefix") ? Unit.Category.PREFIX:
+				Unit.Category.MISCELLANEOUS;
+
+			unitsView.loadUnitCategory(unit_category);
 
             units_keypad.setVisibility(View.VISIBLE);
         } else {

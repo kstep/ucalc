@@ -31,7 +31,8 @@ public abstract class Unit {
         VOLUME("vol"),
         WEIGHT("weight"),
         ELECTRIC("elec"),
-        MISCELLANEOUS("misc");
+        MISCELLANEOUS("misc"),
+		PREFIX("prefix");
 		
 		private String name;
 		
@@ -189,6 +190,10 @@ public abstract class Unit {
     public boolean isBasic() {
         return this instanceof BaseUnit;
     }
+	
+	public boolean isPrefix() {
+		return this instanceof UnitPrefix && ((UnitPrefix) this).targetUnit == Unit.NONE;
+	}
 	
 	protected static void foldUnits(Map<Unit,Integer> powers, Unit unit, int power, boolean deepdive) {
         if (unit == Unit.NONE || power == 0) {

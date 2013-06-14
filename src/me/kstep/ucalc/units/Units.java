@@ -17,8 +17,21 @@ import android.util.Log;
 
 import me.kstep.ucalc.numbers.UNumber;
 import me.kstep.ucalc.numbers.UInteger;
+import java.lang.reflect.Field;
 
 public class Units {
+    public static UnitsManager loadPrefixes() {
+		return loadPrefixes(UnitsManager.getInstance());
+	}
+	
+	public static UnitsManager loadPrefixes(UnitsManager uman) {
+		Unit[] units = UnitPrefix.getPrefixes();
+		for (Unit unit : units) {
+			uman.add(unit, Unit.Category.PREFIX);
+		}
+		return uman;
+	}
+
     public static UnitsManager load() {
         return load(UnitsManager.getInstance());
     }
