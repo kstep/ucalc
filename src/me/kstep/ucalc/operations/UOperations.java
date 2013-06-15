@@ -53,6 +53,7 @@ public class UOperations extends Hashtable<CharSequence,UOperation> {
         ExponentOp.class,
         DecimentOp.class,
         ConvertOp.class,
+		SwapOp.class,
     };
 
     private UOperations() {

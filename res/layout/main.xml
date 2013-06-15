@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"    
+        xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:ucalc="http://schemas.android.com/apk/res/me.kstep.ucalc"
         android:background="#000000"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -19,8 +20,9 @@
 
         <LinearLayout android:layout_weight="2" android:layout_height="match_parent" android:layout_width="0dp" android:orientation="vertical">
             <LinearLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
-                <me.kstep.ucalc.widgets.UButton android:text="stack" style="@style/UCBtn.Mod" android:onClick="onStackButtonClick" />
-                <me.kstep.ucalc.widgets.UButton android:text="clear" android:onClick="onClearButtonClick" style="@style/UCBtn.Mod" />
+                <me.kstep.ucalc.widgets.UButton ucalc:keypad_mode="normal" android:text="stack" style="@style/UCBtn.Mod" android:onClick="onStackButtonClick" />
+                <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode="alt" android:text="swap" style="@style/UCBtn.Mod" />
+				<me.kstep.ucalc.widgets.UButton android:text="clear" android:onClick="onClearButtonClick" style="@style/UCBtn.Mod" />
             </LinearLayout>
             <LinearLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
                 <me.kstep.ucalc.widgets.UButton android:text="undo" android:onClick="onUndoButtonClick" style="@style/UCBtn.Mod" />
