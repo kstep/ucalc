@@ -175,6 +175,18 @@ A few examples:
             <derive>m³</derive>
             <scale>0.001</scale>
         </unit>
+		<unit class="prefix" name="ml" fullname="Milliliter">
+			<prefix>m</prefix>
+			<derive>l</derive>
+		</unit>
+		<unit class="linear" name="floz" fullname="Fluid ounce">
+			<scale>28.413063</scale>
+			<derive>ml</derive>
+		</unit>
+		<unit class="linear" name="USfloz" fullname="Fluid ounce (US)">
+			<scale>29.573531</scale>
+			<derive>ml</derive>
+		</unit>
     </category>
 
     <category name="weight">
@@ -210,7 +222,32 @@ A few examples:
             </derive>
             <description>Force to accelerate 1 kg of mass by 1 m/s per second</description>
         </unit>
+		
+		<unit name="gr" fullname="Grain" class="linear">
+			<scale>0.06479891</scale>
+			<derive>g</derive>
+		</unit>
+		
+		<unit name="lb" fullname="Pound" class="linear">
+			<scale>7000</scale>
+			<derive>gr</derive>
+		</unit>
 
+		<unit name="t.lb" fullname="Troy pound" class="linear">
+			<scale>5760</scale>
+			<derive>gr</derive>
+		</unit>
+		
+		<unit name="oz" fullname="Ounce" class="linear">
+            <scale>1/16</scale>
+			<derive>lb</derive>
+		</unit>
+		
+		<unit name="t.oz" fullname="Troy ounce" class="linear">
+            <scale>1/12</scale>
+			<derive>t.lb</derive>
+		</unit>
+		
         <unit name="Pa" fullname="Pascal" class="product">
             <derive>N</derive>
             <derive>
