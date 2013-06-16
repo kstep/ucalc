@@ -34,7 +34,9 @@ public class UTextView extends TextView {
 		
 		DecimalFormatSymbols symbols = new DecimalFormatSymbols();
 		symbols.setMinusSign('−');
-		setFormat(new DecimalFormat("###0.#######;−#", symbols));
+		symbols.setDecimalSeparator('.');
+		symbols.setGroupingSeparator(',');
+		setFormat(new DecimalFormat("#,##0.#######;−#", symbols));
     }
 
     public static Spanned unicodeToHtml(CharSequence value) {
