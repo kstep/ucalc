@@ -188,6 +188,7 @@ class ProductUnit extends DerivedUnit {
 		if (targetUnits[targetUnits.length - 1].isPrefix()) {
 			Unit prefix = targetUnits[targetUnits.length - 1];
 			targetUnits[targetUnits.length - 1] = prefix.concat(unit);
+			name = joinUnitNames(targetUnits);
 			return this;
 		}
 		return new ProductUnit(append(autoname? targetUnits: new Unit[]{this}, unit));
