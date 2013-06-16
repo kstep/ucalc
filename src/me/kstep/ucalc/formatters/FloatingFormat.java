@@ -18,7 +18,8 @@ public class FloatingFormat extends DecimalFormat {
 	}
 	
 	public StringBuffer format(double value, StringBuffer buffer, FieldPosition field) {
-        if (1e-6 > value || value > 1e12) {
+        double absval = Math.abs(value);
+        if (1e-6 > absval || absval > 1e12) {
 			applyPattern(expFormat);
 		} else {
 			applyPattern(bigFormat);
@@ -27,7 +28,7 @@ public class FloatingFormat extends DecimalFormat {
 	}
 
 	public StringBuffer format(long value, StringBuffer buffer, FieldPosition field) {
-		if (value > 1e12) {
+		if (Math.abs(value) > 1e12) {
 			applyPattern(expFormat);
 		} else {
 			applyPattern(bigFormat);
