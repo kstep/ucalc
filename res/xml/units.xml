@@ -248,6 +248,26 @@ A few examples:
 			<derive>t.lb</derive>
 		</unit>
 		
+		<unit name="gn" fullname="Free fall acceleration" class="linear">
+			<scale>9.80665</scale>
+			<derive>
+				<unit class="product">
+					<derive>m</derive>
+					<derive>
+						<unit class="power">
+							<derive>s</derive>
+							<power>-2</power>
+						</unit>
+					</derive>
+				</unit>
+			</derive>
+		</unit>
+		
+		<unit class="product" name="lbf" fullname="Pound-force">
+			<derive>lb</derive>
+			<derive>gn</derive>
+		</unit>
+		
         <unit name="Pa" fullname="Pascal" class="product">
             <derive>N</derive>
             <derive>
