@@ -6,7 +6,7 @@ import me.kstep.ucalc.UState;
 
 class PowerOp extends UOperation {
     public int arity() { return 2; }
-    public CharSequence name() { return "y↑x"; }
+    public CharSequence name() { return "yˣ"; }
     public void apply(UState state, UStack stack) {
         UNumber x = stack.pop();
         UNumber y = stack.pop();

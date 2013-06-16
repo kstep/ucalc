@@ -17,10 +17,10 @@
         <me.kstep.ucalc.widgets.UButton android:text="per" style="@style/UCBtn.Act" />
         <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode="normal" android:text="ln" style="@style/UCBtn.Fun" />
         <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode="normal" android:text="log" style="@style/UCBtn.Fun" />
-        <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode="alt" android:text="e↑x" style="@style/UCBtn.Fun" />
-        <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode="alt" android:text="10↑x" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode="alt" android:text="eˣ" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode="alt" android:text="10ˣ" style="@style/UCBtn.Fun" />
 
-        <me.kstep.ucalc.widgets.UOpButton android:text="y↑x" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.widgets.UOpButton android:text="yˣ" style="@style/UCBtn.Fun" />
 
         <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode="normal" android:text="x²" style="@style/UCBtn.Fun" />
         <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode="normal" android:text="√x" style="@style/UCBtn.Fun" />

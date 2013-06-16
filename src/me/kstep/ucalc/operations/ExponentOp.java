@@ -5,7 +5,7 @@ import me.kstep.ucalc.UState;
 
 class ExponentOp extends UOperation {
     public int arity() { return 1; }
-    public CharSequence name() { return "e↑x"; }
+    public CharSequence name() { return "eˣ"; }
     public void apply(UState state, UStack stack) {
         stack.push(UMath.exp(stack.pop()));
     }

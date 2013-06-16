@@ -8,7 +8,7 @@ class DecimentOp extends UOperation {
     final private UInteger TEN = new UInteger(10);
 
     public int arity() { return 1; }
-    public CharSequence name() { return "10↑x"; }
+    public CharSequence name() { return "10ˣ"; }
     public void apply(UState state, UStack stack) {
         stack.push(TEN.pow(stack.pop()));
     }
