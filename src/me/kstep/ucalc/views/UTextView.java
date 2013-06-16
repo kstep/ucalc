@@ -11,6 +11,7 @@ import android.graphics.Typeface;
 
 import android.text.Html;
 import android.text.Spanned;
+import me.kstep.ucalc.formatters.FloatingFormat;
 
 public class UTextView extends TextView {
     public UTextView(Context context) {
@@ -36,7 +37,8 @@ public class UTextView extends TextView {
 		symbols.setMinusSign('−');
 		symbols.setDecimalSeparator('.');
 		symbols.setGroupingSeparator(',');
-		setFormat(new DecimalFormat("#,##0.#######;−#", symbols));
+		symbols.setExponentSeparator("e");
+		setFormat(new FloatingFormat("#,##0.#######", "##0.#######E+0", symbols));
     }
 
     public static Spanned unicodeToHtml(CharSequence value) {
