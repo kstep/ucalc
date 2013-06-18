@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceCategory android:title="Numbers format" android:key="format">
+	<EditTextPreference android:key="precision" android:title="Decimal precision" android:digits="0123456789" android:defaultValue="7" />
+    <ListPreference android:key="group_separator" android:title="Group separator" android:entryValues="@array/group_separators" android:entries="@array/group_separator_names" android:defaultValue="." />
+	<ListPreference android:key="decimal_separator" android:title="Decimal separator" android:entryValues="@array/decimal_separators" android:entries="@array/decimal_separator_names" android:defaultValue="," />
+</PreferenceCategory>
+<PreferenceCategory android:title="Calculations" android:key="calculations">
+	<CheckBoxPreference android:key="show_ratios" android:title="Show ratios if possible" />
+</PreferenceCategory>
+</PreferenceScreen>

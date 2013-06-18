@@ -50,6 +50,9 @@ import me.kstep.ucalc.units.UnitException;
 import me.kstep.ucalc.units.UnitNum;
 import me.kstep.ucalc.widgets.UButton;
 import me.kstep.ucalc.widgets.UToggleButton;
+import android.preference.PreferenceFragment;
+import android.content.SharedPreferences;
+import android.view.ViewGroup;
 
 public class UCalcActivity extends Activity {
     private UStack stack;
@@ -181,6 +184,29 @@ public class UCalcActivity extends Activity {
     public UMemory getMemory() {
         return memory;
     }
+	
+	private PreferenceFragment preference_fragment = null;
+	public void onOptionsButtonClick(View view) {
+	    SharedPreferences prefs = getPreferences(0);
+		if (preference_fragment == null) {
+	        preference_fragment = new PreferenceFragment() {
+			    @Override
+				public void onCreate(Bundle savedState) {
+					super.onCreate(savedState);
+					addPreferencesFromResource(R.xml.preferences);
+				}
+				
+				@Override
+				public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle savedState) {
+					View view = super.onCreateView(inflater, group, savedState);
+					view.setBackgroundResource(R.color.main_bg);
+					return view;
+				}
+	    	};
+		}
+
+		startFragment(preference_fragment, "Preferences");
+	}
 
     public void setRadix(int value) {
         state.setRadix(value);
