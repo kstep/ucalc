@@ -248,7 +248,7 @@ A few examples:
 			<derive>t.lb</derive>
 		</unit>
 		
-		<unit name="gn" fullname="Free fall acceleration" class="linear">
+		<unit name="gᶠ" fullname="Free fall acceleration" class="linear">
 			<scale>9.80665</scale>
 			<derive>
 				<unit class="product">
@@ -265,7 +265,7 @@ A few examples:
 		
 		<unit class="product" name="lbf" fullname="Pound-force">
 			<derive>lb</derive>
-			<derive>gn</derive>
+			<derive>gᶠ</derive>
 		</unit>
 		
         <unit name="Pa" fullname="Pascal" class="product">
