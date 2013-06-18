@@ -18,7 +18,7 @@
             android:numColumns="5"
             android:horizontalSpacing="7dp"
             android:verticalSpacing="7dp"
-            android:background="#000000"
+            android:background="@color/main_bg"
 			ucalc:numRows="6"
             />
     </LinearLayout>

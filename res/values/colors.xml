@@ -5,7 +5,8 @@
   for details.
   -->
 <resources>
-    <color name="main_bg">#595a6f</color>
+    <!--<color name="main_bg">#595a6f</color>-->
+	<color name="main_bg">#000000</color>
 
     <color name="txtf_e">#e5e9c6</color>
     <color name="txtf_c">#e1eab1</color>
