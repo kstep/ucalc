@@ -8,4 +8,7 @@
 <PreferenceCategory android:title="Calculations" android:key="calculations">
 	<CheckBoxPreference android:key="show_ratios" android:title="Show ratios if possible" />
 </PreferenceCategory>
+<PreferenceCategory android:title="Units" android:key="units">
+	<CheckBoxPreference android:key="simplify" android:title="Simplify units on calculations" />
+</PreferenceCategory>
 </PreferenceScreen>

@@ -36,6 +36,7 @@ import me.kstep.ucalc.views.UToast;
 
 import me.kstep.ucalc.views.UStackFragment;
 import me.kstep.ucalc.views.UMemoryFragment;
+import me.kstep.ucalc.views.USettingsFragment;
 import me.kstep.ucalc.views.URadixDialog;
 import me.kstep.ucalc.views.UUnitsView;
 
@@ -50,9 +51,6 @@ import me.kstep.ucalc.units.UnitException;
 import me.kstep.ucalc.units.UnitNum;
 import me.kstep.ucalc.widgets.UButton;
 import me.kstep.ucalc.widgets.UToggleButton;
-import android.preference.PreferenceFragment;
-import android.content.SharedPreferences;
-import android.view.ViewGroup;
 
 public class UCalcActivity extends Activity {
     private UStack stack;
@@ -185,27 +183,13 @@ public class UCalcActivity extends Activity {
         return memory;
     }
 	
-	private PreferenceFragment preference_fragment = null;
+	private USettingsFragment settings_fragment = null;
 	public void onOptionsButtonClick(View view) {
-	    SharedPreferences prefs = getPreferences(0);
-		if (preference_fragment == null) {
-	        preference_fragment = new PreferenceFragment() {
-			    @Override
-				public void onCreate(Bundle savedState) {
-					super.onCreate(savedState);
-					addPreferencesFromResource(R.xml.preferences);
-				}
-				
-				@Override
-				public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle savedState) {
-					View view = super.onCreateView(inflater, group, savedState);
-					view.setBackgroundResource(R.color.main_bg);
-					return view;
-				}
-	    	};
+		if (settings_fragment == null) {
+	        settings_fragment = new USettingsFragment();
 		}
 
-		startFragment(preference_fragment, "Preferences");
+		startFragment(settings_fragment, "Settings");
 	}
 
     public void setRadix(int value) {
