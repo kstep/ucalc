@@ -118,7 +118,7 @@ A few examples:
             <prefix>c</prefix>
             <derive>m</derive>
         </unit>
-        
+ 
         <unit fullname="Kilometers per hour" name="km/hr" class="product">
             <derive>km</derive>
             <derive>
@@ -164,6 +164,29 @@ A few examples:
                 </unit>
             </derive>
         </unit>
+
+		<unit class="linear" name="ac" fullname="Acre">
+			<scale>1/640</scale>
+			<derive>
+				<unit class="power">
+					<derive>mi</derive>
+					<power>2</power>
+				</unit>
+			</derive>
+		</unit>
+		<unit class="linear" name="a" fullname="Are">
+			<scale>100</scale>
+			<derive>
+				<unit class="power">
+					<derive>m</derive>
+					<power>2</power>
+				</unit>
+			</derive>
+		</unit>
+		<unit class="linear" name="ha" fullname="Hectare">
+			<scale>100</scale>
+			<derive>a</derive>
+		</unit>
     </category>
 
     <category name="vol">
