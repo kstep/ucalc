@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 <PreferenceCategory android:title="Numbers format" android:key="format">
-	<EditTextPreference android:key="decimal_digits" android:title="Decimal precision" android:digits="0123456789" android:defaultValue="7" />
+	<EditTextPreference android:key="decimal_digits" android:title="Decimal digits" android:digits="0123456789" android:defaultValue="7" />
     <ListPreference android:key="group_separator" android:title="Group separator" android:entryValues="@array/group_separators" android:entries="@array/group_separator_names" android:defaultValue="." />
 	<ListPreference android:key="decimal_separator" android:title="Decimal separator" android:entryValues="@array/decimal_separators" android:entries="@array/decimal_separator_names" android:defaultValue="," />
+    <CheckBoxPreference android:key="show_ratios" android:title="Show ratios as is if possible" android:summary="Show 1/3 instead of 0.333333" />
 </PreferenceCategory>
 <PreferenceCategory android:title="Calculations" android:key="calculations">
-	<CheckBoxPreference android:key="show_ratios" android:title="Show ratios if possible" />
-	<CheckBoxPreference android:key="append_angle_unit" android:title="Append angle unit to arc-functions results" />
+	<CheckBoxPreference android:key="use_ratios" android:title="Use ratios if possible" android:summary="Some calculations are more precise, but a little slower" />
+	<CheckBoxPreference android:key="append_angle_unit" android:title="Append angle unit" android:summary="Reverse triginometric function results will have units" />
 	<CheckBoxPreference android:key="simplify" android:title="Simplify units on calculations" />
 </PreferenceCategory>
 </PreferenceScreen>
