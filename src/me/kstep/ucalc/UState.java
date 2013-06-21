@@ -3,8 +3,9 @@ package me.kstep.ucalc;
 import java.util.ArrayList;
 import me.kstep.ucalc.units.Unit;
 import me.kstep.ucalc.units.UnitsManager;
+import java.io.Serializable;
 
-public class UState {
+public class UState implements Serializable {
 
     UState() {
 		setAngleUnit(UnitsManager.getInstance().get("deg"));

@@ -51,6 +51,9 @@ import me.kstep.ucalc.units.UnitException;
 import me.kstep.ucalc.units.UnitNum;
 import me.kstep.ucalc.widgets.UButton;
 import me.kstep.ucalc.widgets.UToggleButton;
+import android.content.SharedPreferences;
+import me.kstep.ucalc.views.UTextView;
+import me.kstep.ucalc.formatters.FloatingFormat;
 
 public class UCalcActivity extends Activity {
     private UStack stack;
@@ -95,24 +98,38 @@ public class UCalcActivity extends Activity {
     }
 
     private void restoreState(Bundle savedState) {
-        stack = (UStack) loadFromFile("stack.bin", new UStack());
+		stack = (UStack) loadFromFile("stack.bin", new UStack());
         memory = (UMemory) loadFromFile("memory.bin", new UMemory());
-        units = Units.loadPrefixes(Units.inflate(this, R.xml.units));
-		state = new UState();
+		state = (UState) loadFromFile("state.bin", new UState());
     }
+	
+	private void applyPreferences(SharedPreferences preferences) {
+		UTextView.setGlobalFormat(new FloatingFormat(
+		    preferences.getInt("decimal_digits", 7),
+			preferences.getInt("group_size", 3),
+			preferences.getString("decimal_separator", ".").charAt(0),
+			preferences.getString("group_separator", ",").charAt(0)));
+	}
+	
+	private void applyPreferences() {
+		applyPreferences(getPreferences(MODE_PRIVATE));
+	}
 
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
 
+		units = Units.loadPrefixes(Units.inflate(this, R.xml.units));
+		constants = new UConstants();
         restoreState(savedInstanceState);
 
-        constants = new UConstants();
         operations = UOperations.getInstance();
         undos = new UUndoStack();
-
+		
+		applyPreferences();
+		
+		setContentView(R.layout.main);
         showStack();
 
         ActionBar ab = getActionBar();
@@ -130,6 +147,7 @@ public class UCalcActivity extends Activity {
         updateStack();
         saveToFile("stack.bin", stack);
         saveToFile("memory.bin", memory);
+		saveToFile("state.bin", state);
     }
 
     private void saveToFile(String filename, Serializable object) {
