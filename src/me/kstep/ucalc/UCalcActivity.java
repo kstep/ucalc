@@ -109,6 +109,8 @@ public class UCalcActivity extends Activity {
 			preferences.getInt("group_size", 3),
 			preferences.getString("decimal_separator", ".").charAt(0),
 			preferences.getString("group_separator", ",").charAt(0)));
+			
+		state.setAppendAngleUnit(preferences.getBoolean("append_angle_unit", true));
 	}
 	
 	private void applyPreferences() {

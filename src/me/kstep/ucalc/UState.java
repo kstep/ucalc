@@ -13,15 +13,24 @@ public class UState implements Serializable {
 	}
 
 	private Unit angleUnit = null;
+	private boolean appendAngleUnit = true;
 	
 	public Unit getAngleUnit() {
 		return angleUnit;
+	}
+	
+	public boolean isAppendAngleUnit() {
+		return appendAngleUnit;
 	}
 	
 	public void setAngleUnit(Unit angleUnit) {
 		if (this.angleUnit != angleUnit) {
 			this.angleUnit = angleUnit;
 		}
+	}
+	
+	public void setAppendAngleUnit(boolean value) {
+		appendAngleUnit = value;
 	}
 	
 	private int radix = 0;
