@@ -27,4 +27,7 @@
     <style name="UCBtn.Fun">
         <item name="android:background">@drawable/fun_btn</item>
     </style>
+    <style name="UCBtn.Unit">
+        <item name="android:background">@drawable/unit_btn</item>
+    </style>
 </resources>

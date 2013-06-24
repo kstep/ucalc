@@ -38,5 +38,10 @@
     <color name="opt_btn_c">#485f7f</color>
     <color name="opt_btn_s">#627691</color>
     <color name="opt_btn_b">#617085</color>
+
+    <color name="unit_btn_e">#9d4d4e</color>
+    <color name="unit_btn_c">#bc6365</color>
+    <color name="unit_btn_s">#ca8384</color>
+    <color name="unit_btn_b">#b98081</color>
 </resources>
 
