@@ -12,10 +12,10 @@
         <enum name="elec" value="4"></enum>
         <enum name="misc" value="5"></enum>
     </attr>
-	
-	<declare-styleable name="TableView">
-		<attr name="numRows" format="integer" />
-	</declare-styleable>
+
+    <declare-styleable name="TableView">
+        <attr name="numRows" format="integer" />
+    </declare-styleable>
 
     <declare-styleable name="UButton">
         <attr name="keypad_mode" />

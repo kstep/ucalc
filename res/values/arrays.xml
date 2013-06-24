@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<array name="group_separators">
-		<item>,</item>
-		<item>.</item>
-		<item> </item>
-	</array>
-	<array name="group_separator_names">
+    <array name="group_separators">
+        <item>,</item>
+        <item>.</item>
+        <item> </item>
+    </array>
+    <array name="group_separator_names">
         <item>Comma (,)</item>
-		<item>Dot (.)</item>
-		<item>Space ( )</item>
-	</array>
+        <item>Dot (.)</item>
+        <item>Space ( )</item>
+    </array>
 
-	<array name="decimal_separators">
-		<item>.</item>
-		<item>,</item>
-	</array>
-	<array name="decimal_separator_names">
-		<item>Dot (.)</item>
-		<item>Comma (,)</item>
-	</array>
+    <array name="decimal_separators">
+        <item>.</item>
+        <item>,</item>
+    </array>
+    <array name="decimal_separator_names">
+        <item>Dot (.)</item>
+        <item>Comma (,)</item>
+    </array>
 </resources>

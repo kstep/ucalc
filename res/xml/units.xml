@@ -118,7 +118,7 @@ A few examples:
             <prefix>c</prefix>
             <derive>m</derive>
         </unit>
- 
+
         <unit fullname="Kilometers per hour" name="km/hr" class="product">
             <derive>km</derive>
             <derive>
@@ -165,28 +165,28 @@ A few examples:
             </derive>
         </unit>
 
-		<unit class="linear" name="ac" fullname="Acre">
-			<scale>1/640</scale>
-			<derive>
-				<unit class="power">
-					<derive>mi</derive>
-					<power>2</power>
-				</unit>
-			</derive>
-		</unit>
-		<unit class="linear" name="a" fullname="Are">
-			<scale>100</scale>
-			<derive>
-				<unit class="power">
-					<derive>m</derive>
-					<power>2</power>
-				</unit>
-			</derive>
-		</unit>
-		<unit class="linear" name="ha" fullname="Hectare">
-			<scale>100</scale>
-			<derive>a</derive>
-		</unit>
+        <unit class="linear" name="ac" fullname="Acre">
+            <scale>1/640</scale>
+            <derive>
+                <unit class="power">
+                    <derive>mi</derive>
+                    <power>2</power>
+                </unit>
+            </derive>
+        </unit>
+        <unit class="linear" name="a" fullname="Are">
+            <scale>100</scale>
+            <derive>
+                <unit class="power">
+                    <derive>m</derive>
+                    <power>2</power>
+                </unit>
+            </derive>
+        </unit>
+        <unit class="linear" name="ha" fullname="Hectare">
+            <scale>100</scale>
+            <derive>a</derive>
+        </unit>
     </category>
 
     <category name="vol">
@@ -198,18 +198,18 @@ A few examples:
             <derive>m³</derive>
             <scale>0.001</scale>
         </unit>
-		<unit class="prefix" name="ml" fullname="Milliliter">
-			<prefix>m</prefix>
-			<derive>l</derive>
-		</unit>
-		<unit class="linear" name="floz" fullname="Fluid ounce">
-			<scale>28.413063</scale>
-			<derive>ml</derive>
-		</unit>
-		<unit class="linear" name="USfloz" fullname="Fluid ounce (US)">
-			<scale>29.573531</scale>
-			<derive>ml</derive>
-		</unit>
+        <unit class="prefix" name="ml" fullname="Milliliter">
+            <prefix>m</prefix>
+            <derive>l</derive>
+        </unit>
+        <unit class="linear" name="floz" fullname="Fluid ounce">
+            <scale>28.413063</scale>
+            <derive>ml</derive>
+        </unit>
+        <unit class="linear" name="USfloz" fullname="Fluid ounce (US)">
+            <scale>29.573531</scale>
+            <derive>ml</derive>
+        </unit>
     </category>
 
     <category name="weight">
@@ -245,52 +245,52 @@ A few examples:
             </derive>
             <description>Force to accelerate 1 kg of mass by 1 m/s per second</description>
         </unit>
-		
-		<unit name="gr" fullname="Grain" class="linear">
-			<scale>0.06479891</scale>
-			<derive>g</derive>
-		</unit>
-		
-		<unit name="lb" fullname="Pound" class="linear">
-			<scale>7000</scale>
-			<derive>gr</derive>
-		</unit>
 
-		<unit name="t.lb" fullname="Troy pound" class="linear">
-			<scale>5760</scale>
-			<derive>gr</derive>
-		</unit>
-		
-		<unit name="oz" fullname="Ounce" class="linear">
+        <unit name="gr" fullname="Grain" class="linear">
+            <scale>0.06479891</scale>
+            <derive>g</derive>
+        </unit>
+
+        <unit name="lb" fullname="Pound" class="linear">
+            <scale>7000</scale>
+            <derive>gr</derive>
+        </unit>
+
+        <unit name="t.lb" fullname="Troy pound" class="linear">
+            <scale>5760</scale>
+            <derive>gr</derive>
+        </unit>
+
+        <unit name="oz" fullname="Ounce" class="linear">
             <scale>1/16</scale>
-			<derive>lb</derive>
-		</unit>
-		
-		<unit name="t.oz" fullname="Troy ounce" class="linear">
+            <derive>lb</derive>
+        </unit>
+
+        <unit name="t.oz" fullname="Troy ounce" class="linear">
             <scale>1/12</scale>
-			<derive>t.lb</derive>
-		</unit>
-		
-		<unit name="gᶠ" fullname="Free fall acceleration" class="linear">
-			<scale>9.80665</scale>
-			<derive>
-				<unit class="product">
-					<derive>m</derive>
-					<derive>
-						<unit class="power">
-							<derive>s</derive>
-							<power>-2</power>
-						</unit>
-					</derive>
-				</unit>
-			</derive>
-		</unit>
-		
-		<unit class="product" name="lbf" fullname="Pound-force">
-			<derive>lb</derive>
-			<derive>gᶠ</derive>
-		</unit>
-		
+            <derive>t.lb</derive>
+        </unit>
+
+        <unit name="gᶠ" fullname="Free fall acceleration" class="linear">
+            <scale>9.80665</scale>
+            <derive>
+                <unit class="product">
+                    <derive>m</derive>
+                    <derive>
+                        <unit class="power">
+                            <derive>s</derive>
+                            <power>-2</power>
+                        </unit>
+                    </derive>
+                </unit>
+            </derive>
+        </unit>
+
+        <unit class="product" name="lbf" fullname="Pound-force">
+            <derive>lb</derive>
+            <derive>gᶠ</derive>
+        </unit>
+
         <unit name="Pa" fullname="Pascal" class="product">
             <derive>N</derive>
             <derive>
@@ -406,24 +406,24 @@ A few examples:
             <derive>°C</derive>
             <description>A 1/96 of scale between brine's freezing point and normal human body temperature</description>
         </unit>
-		
-		<unit class="base" name="USD" fullname="United States Dollar" />
-		<unit class="linear" name="UAH" fullname="Ukranian Hryvna">
-			<derive>USD</derive>
-			<rscale>8.10</rscale>
-		</unit>
-		<unit class="linear" name="BYR" fullname="Belarusian Ruble">
-			<derive>USD</derive>
-			<rscale>8650</rscale>
-		</unit>
-		<unit class="linear" name="RUR" fullname="Russian Ruble">
-			<derive>USD</derive>
-			<rscale>30</rscale>
-		</unit>
+
+        <unit class="base" name="USD" fullname="United States Dollar" />
+        <unit class="linear" name="UAH" fullname="Ukranian Hryvna">
+            <derive>USD</derive>
+            <rscale>8.10</rscale>
+        </unit>
+        <unit class="linear" name="BYR" fullname="Belarusian Ruble">
+            <derive>USD</derive>
+            <rscale>8650</rscale>
+        </unit>
+        <unit class="linear" name="RUR" fullname="Russian Ruble">
+            <derive>USD</derive>
+            <rscale>30</rscale>
+        </unit>
     </category>
 
     <category name="elec">
-        <unit class="base" fullname="Ampere" name="A" /> 
+        <unit class="base" fullname="Ampere" name="A" />
         <unit class="product" fullname="Watt" name="W">
             <derive>J</derive>
             <derive>
@@ -482,23 +482,23 @@ A few examples:
                 W/sr in that it is adjusted for the human perceptual dependence
                 on wavelength. The frequency of 540e12 Hz (yellow) is where
                 human perception is most efficient.)
-            </description> 
+            </description>
         </unit>
 
         <unit name="C" fullname="Coulomb" class="product">
             <derive>A</derive>
             <derive>s</derive>
         </unit>
-		
-		<unit name="F" fullname="Farad" class="product">
-			<derive>C</derive>
-			<derive>
-				<unit class="power">
-					<derive>V</derive>
-					<power>-1</power>
-				</unit>
-			</derive>
-		</unit>
+
+        <unit name="F" fullname="Farad" class="product">
+            <derive>C</derive>
+            <derive>
+                <unit class="power">
+                    <derive>V</derive>
+                    <power>-1</power>
+                </unit>
+            </derive>
+        </unit>
 
         <unit name="eV" fullname="Electron-volt" class="linear">
             <scale>1.602176565e-19</scale>
