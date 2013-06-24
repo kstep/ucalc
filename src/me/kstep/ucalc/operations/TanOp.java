@@ -10,9 +10,9 @@ class TanOp extends UOperation {
     public CharSequence name() { return "tan"; }
     public void apply(UState state, UStack stack) {
         UNumber x = stack.pop();
-		if (!(x instanceof UnitNum)) {
-			x = new UnitNum(x, state.getAngleUnit());
-		}
-		stack.push(UMath.tan(x));
+        if (!(x instanceof UnitNum)) {
+            x = new UnitNum(x, state.getAngleUnit());
+        }
+        stack.push(UMath.tan(x));
     }
 }

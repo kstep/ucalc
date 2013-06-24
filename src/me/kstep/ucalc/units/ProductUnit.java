@@ -16,14 +16,14 @@ class ProductUnit extends DerivedUnit {
         super(name);
         targetUnits = units;
     }
-	
-	ProductUnit(String name, List<? extends Unit> units) {
-		this(name, units.toArray(new Unit[units.size()]));
-	}
-	
-	ProductUnit(List<? extends Unit> units) {
-		this(units.toArray(new Unit[units.size()]));
-	}
+
+    ProductUnit(String name, List<? extends Unit> units) {
+        this(name, units.toArray(new Unit[units.size()]));
+    }
+
+    ProductUnit(List<? extends Unit> units) {
+        this(units.toArray(new Unit[units.size()]));
+    }
 
     public UNumber to(UNumber value, Unit unit) {
         if (this == unit) return value;
@@ -31,7 +31,7 @@ class ProductUnit extends DerivedUnit {
             if (unit instanceof BaseUnit) throw this.new ConversionException(unit);
             return unit.from(value, this);
         }
-        
+
         ProductUnit target = (ProductUnit) unit;
         if (target.targetUnits.length != this.targetUnits.length) throw this.new ConversionException(unit);
 
@@ -70,7 +70,7 @@ class ProductUnit extends DerivedUnit {
             if (unit instanceof BaseUnit) throw unit.new ConversionException(this);
             return unit.to(value, this);
         }
-        
+
         ProductUnit target = (ProductUnit) unit;
         if (target.targetUnits.length != this.targetUnits.length) throw unit.new ConversionException(this);
 
@@ -158,9 +158,9 @@ class ProductUnit extends DerivedUnit {
             foldUnits(powers, unit.simplify(depth), 1, true);
         }
 
-		Unit unit = reduceUnitPowers(powers, autoname? null: name, true);
-		unit.fullname = fullname;
-		unit.description = description;
+        Unit unit = reduceUnitPowers(powers, autoname? null: name, true);
+        unit.fullname = fullname;
+        unit.description = description;
         return unit;
     }
 
@@ -183,15 +183,15 @@ class ProductUnit extends DerivedUnit {
         }
         return (sum << 3) | 3;
     }
-	
-	public Unit concat(Unit unit) {
-		if (targetUnits[targetUnits.length - 1].isPrefix()) {
-			Unit prefix = targetUnits[targetUnits.length - 1];
-			targetUnits[targetUnits.length - 1] = prefix.concat(unit);
-			name = joinUnitNames(targetUnits);
-			return this;
-		}
-		return new ProductUnit(append(autoname? targetUnits: new Unit[]{this}, unit));
-	}
+
+    public Unit concat(Unit unit) {
+        if (targetUnits[targetUnits.length - 1].isPrefix()) {
+            Unit prefix = targetUnits[targetUnits.length - 1];
+            targetUnits[targetUnits.length - 1] = prefix.concat(unit);
+            name = joinUnitNames(targetUnits);
+            return this;
+        }
+        return new ProductUnit(append(autoname? targetUnits: new Unit[]{this}, unit));
+    }
 }
 

@@ -23,12 +23,12 @@ class UOpButton extends UButton implements View.OnClickListener {
     }
 
     public void onClick(View view) {
-		UCalcActivity activity = (UCalcActivity) getContext();
-		try {
+        UCalcActivity activity = (UCalcActivity) getContext();
+        try {
             activity.onOperationApply(UOperations.getInstance().get(this.getText()));
         } catch (UOperationException e) {
-			activity.showToast(e.getMessage());
-		}
+            activity.showToast(e.getMessage());
+        }
     }
 }
 

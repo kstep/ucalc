@@ -6,9 +6,9 @@ import me.kstep.ucalc.operations.UMath;
 
 public class UComplex extends UNumber {
 
-	public UNumber simplify() {
-		return isReal()? real.simplify(): this;
-	}
+    public UNumber simplify() {
+        return isReal()? real.simplify(): this;
+    }
 
     private static final long serialVersionUID = 0L;
 
@@ -99,12 +99,12 @@ public class UComplex extends UNumber {
             ("(" + real.toString() + " + " + imag.toString() + "j)"));
     }
 
-	public String format(Format formatter) {
-		return
-		    isReal()? real.format(formatter):
-			isImag()? imag.format(formatter) + "j":
-			"(" + real.format(formatter) + " + " + imag.format(formatter) + "j)";
-	}
+    public String format(Format formatter) {
+        return
+            isReal()? real.format(formatter):
+            isImag()? imag.format(formatter) + "j":
+            "(" + real.format(formatter) + " + " + imag.format(formatter) + "j)";
+    }
 
     public UNumber add(Number other) {
         if (other instanceof UComplex) {

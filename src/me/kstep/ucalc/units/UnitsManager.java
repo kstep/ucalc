@@ -118,18 +118,18 @@ public class UnitsManager {
 
         return result;
     }
-	
-	public Collection<String> names(Unit.Category category) {
-		ArrayList<String> result = new ArrayList<String>();
 
-		for (Unit u: units.values()) {
+    public Collection<String> names(Unit.Category category) {
+        ArrayList<String> result = new ArrayList<String>();
+
+        for (Unit u: units.values()) {
             if (u.category == category) {
                 result.add(u.name);
             }
         }
 
-		return result;
-	}
+        return result;
+    }
 
     /**
      * This method adds unit to manager by the name, defined in the unit itself.
@@ -389,7 +389,7 @@ public class UnitsManager {
      * The call is:
      *
      *     Unit unita = uman.get(LinearUnit.class, 'unita', 100.0, unitb);
-     * 
+     *
      * It is equivalent to:
      *
      *     LinearUnit unita = new LinearUnit('unita', 100.0, unitb);

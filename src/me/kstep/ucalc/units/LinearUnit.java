@@ -23,9 +23,9 @@ class LinearUnit extends Unit {
         this.scale = UNumber.valueOf(scale);
         this.offset = UNumber.valueOf(offset);
         this.targetUnit = targetUnit;
-		if (this.scale.doubleValue() == 0.0) {
-			throw new ArithmeticException("Zero scale coefficient in linear relation");
-		}
+        if (this.scale.doubleValue() == 0.0) {
+            throw new ArithmeticException("Zero scale coefficient in linear relation");
+        }
     }
 
     /**
@@ -171,10 +171,10 @@ class LinearUnit extends Unit {
     public String getDefinition(int depth) {
         if (depth-- < 0) return name;
         return "(" +
-		    (scale.doubleValue() == 1.0? "": scale + "·") +
-			targetUnit.getDefinition(depth) +
-			(offset.doubleValue() == 0.0? "": " + " + offset) + 
-			")";
+            (scale.doubleValue() == 1.0? "": scale + "·") +
+            targetUnit.getDefinition(depth) +
+            (offset.doubleValue() == 0.0? "": " + " + offset) +
+            ")";
     }
 
     public int hashCode() {

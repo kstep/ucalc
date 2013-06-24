@@ -10,9 +10,9 @@ class CosOp extends UOperation {
     public CharSequence name() { return "cos"; }
     public void apply(UState state, UStack stack) {
         UNumber x = stack.pop();
-		if (!(x instanceof UnitNum)) {
-			x = new UnitNum(x, state.getAngleUnit());
-		}
-		stack.push(UMath.cos(x));
+        if (!(x instanceof UnitNum)) {
+            x = new UnitNum(x, state.getAngleUnit());
+        }
+        stack.push(UMath.cos(x));
     }
 }

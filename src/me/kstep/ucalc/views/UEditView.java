@@ -11,7 +11,7 @@ public class UEditView extends UTextView {
     // If true, user is editing text now,
     // if false, editing was finished, value is fixed.
     private boolean editing = false;
-	private Paint cursorPaint;
+    private Paint cursorPaint;
 
     public void stopEditing() {
         editing = false;
@@ -19,7 +19,7 @@ public class UEditView extends UTextView {
     }
     public void startEditing() {
         editing = true;
-		invalidate();
+        invalidate();
     }
     public boolean isEditing() {
         return editing;
@@ -46,29 +46,29 @@ public class UEditView extends UTextView {
             } catch (NumberFormatException e) {
                 setValue(Float.NaN);
             } catch (ParseException e) {
-				setValue(Float.NaN);
-			}
+                setValue(Float.NaN);
+            }
         }
         return value;
     }
 
-	@Override
+    @Override
     protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
         super.onTextChanged(text, start, lengthBefore, lengthAfter);
         syncValue = false;
-		fitText();
+        fitText();
     }
-	
-	@Override
-	protected void onMeasure(int widthSpec, int heightSpec) {
-		super.onMeasure(widthSpec, heightSpec);
-		fitText();
-	}
 
-	private void fitText() {
-		setTextSize(24);
-		FontFitter.fitText(this, 16);
-	}
+    @Override
+    protected void onMeasure(int widthSpec, int heightSpec) {
+        super.onMeasure(widthSpec, heightSpec);
+        fitText();
+    }
+
+    private void fitText() {
+        setTextSize(24);
+        FontFitter.fitText(this, 16);
+    }
 
     public boolean isEmpty() {
         return getText().length() == 0;
@@ -87,36 +87,36 @@ public class UEditView extends UTextView {
 
     public UEditView(Context context) {
         super(context);
-		initialize();
+        initialize();
     }
 
     public UEditView(Context context, AttributeSet attrs) {
         super(context, attrs);
-		initialize();
+        initialize();
     }
 
     public UEditView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-		initialize();
+        initialize();
     }
-	
-	private void initialize() {
-		cursorPaint = new Paint();
-		cursorPaint.setColor(getTextColors().getDefaultColor());
-		cursorPaint.setStrokeWidth(2);
-	}
 
-	@Override
-	protected void onDraw(Canvas canvas) {
-		super.onDraw(canvas);
-		if (editing) {
-			float cursorX = FontFitter.measureText(this) + getPaddingLeft();
-			float maxCursorX = getWidth() - getPaddingRight();
-			if (cursorX > maxCursorX) {
-				cursorX = maxCursorX;
-			}
+    private void initialize() {
+        cursorPaint = new Paint();
+        cursorPaint.setColor(getTextColors().getDefaultColor());
+        cursorPaint.setStrokeWidth(2);
+    }
 
-			canvas.drawLine(cursorX, 2 + getPaddingTop(), cursorX, getHeight() - 2 - getPaddingBottom(), cursorPaint);
-		}
-	}
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        if (editing) {
+            float cursorX = FontFitter.measureText(this) + getPaddingLeft();
+            float maxCursorX = getWidth() - getPaddingRight();
+            if (cursorX > maxCursorX) {
+                cursorX = maxCursorX;
+            }
+
+            canvas.drawLine(cursorX, 2 + getPaddingTop(), cursorX, getHeight() - 2 - getPaddingBottom(), cursorPaint);
+        }
+    }
 }

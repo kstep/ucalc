@@ -10,10 +10,10 @@ public class UStack extends Stack<UNumber> {
     public UNumber push(Number item) {
         return push(UNumber.valueOf(item));
     }
-	
-	public UNumber push(UNumber item) {
-		return super.push(item.simplify());
-	}
+
+    public UNumber push(UNumber item) {
+        return super.push(item.simplify());
+    }
 
     public UStack clone() {
         return (UStack) super.clone();

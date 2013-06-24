@@ -8,9 +8,9 @@ import java.text.Format;
  */
 public class URational extends UReal {
 
-	public UNumber simplify() {
-		return isInteger()? new UInteger(numerator): this;
-	}
+    public UNumber simplify() {
+        return isInteger()? new UInteger(numerator): this;
+    }
 
     private static final long serialVersionUID = 0L;
 
@@ -122,9 +122,9 @@ public class URational extends UReal {
         return isInteger()? "" + numerator: numerator + "/" + denomenator;
     }
 
-	public String format(Format formatter) {
-	    return isInteger()? formatter.format(numerator): formatter.format(numerator) + "/" + formatter.format(denomenator);
-	}
+    public String format(Format formatter) {
+        return isInteger()? formatter.format(numerator): formatter.format(numerator) + "/" + formatter.format(denomenator);
+    }
 
     public UNumber pow(Number other) {
         return new UFloat(doubleValue()).pow(other);

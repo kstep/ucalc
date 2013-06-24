@@ -78,7 +78,7 @@ public class UMemoryFragment extends ListFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceBundle) {
-        View view = inflater.inflate(R.layout.umemory_view, null); 
+        View view = inflater.inflate(R.layout.umemory_view, null);
         return view;
     }
 }

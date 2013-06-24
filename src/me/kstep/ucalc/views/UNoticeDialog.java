@@ -11,11 +11,11 @@ public class UNoticeDialog extends DialogFragment implements DialogInterface.OnC
     private CharSequence title;
     private CharSequence message;
 
-	public static void show(Activity context, CharSequence title, CharSequence message) {
-		UNoticeDialog dialog = new UNoticeDialog(title, message);
-		dialog.show(context.getFragmentManager(), "popup");
-	}
-	
+    public static void show(Activity context, CharSequence title, CharSequence message) {
+        UNoticeDialog dialog = new UNoticeDialog(title, message);
+        dialog.show(context.getFragmentManager(), "popup");
+    }
+
     public UNoticeDialog(CharSequence title, CharSequence message) {
         super();
         this.title = title;

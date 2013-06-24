@@ -9,16 +9,16 @@ import me.kstep.ucalc.R;
 
 public class USettingsFragment extends PreferenceFragment {
 
-	@Override
-	public void onCreate(Bundle savedState) {
-		super.onCreate(savedState);
-		addPreferencesFromResource(R.xml.preferences);
-	}
+    @Override
+    public void onCreate(Bundle savedState) {
+        super.onCreate(savedState);
+        addPreferencesFromResource(R.xml.preferences);
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle savedState) {
-		View view = super.onCreateView(inflater, group, savedState);
-		view.setBackgroundResource(R.color.main_bg);
-		return view;
-	}
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle savedState) {
+        View view = super.onCreateView(inflater, group, savedState);
+        view.setBackgroundResource(R.color.main_bg);
+        return view;
+    }
 }

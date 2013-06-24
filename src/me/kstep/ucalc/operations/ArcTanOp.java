@@ -10,7 +10,7 @@ class ArcTanOp extends UOperation {
     public CharSequence name() { return "atan"; }
     public void apply(UState state, UStack stack) {
         UNumber result = UMath.atan(stack.pop(), state.getAngleUnit());
-		stack.push(!state.isAppendAngleUnit() && result instanceof UnitNum?
-				   ((UnitNum) result).value: result);
-	}
+        stack.push(!state.isAppendAngleUnit() && result instanceof UnitNum?
+                   ((UnitNum) result).value: result);
+    }
 }

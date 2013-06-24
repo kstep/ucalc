@@ -32,18 +32,18 @@ public class UTextView extends TextView {
     private void initialize(Context context) {
         Typeface tf = Typeface.createFromAsset(context.getAssets(), "fonts/DejaVuSans.ttf");
         setTypeface(tf);
-		
-		if (getGlobalFormat() == null) {
-			DecimalFormatSymbols symbols = new DecimalFormatSymbols();
-			symbols.setMinusSign('−');
-			symbols.setDecimalSeparator('.');
-			symbols.setGroupingSeparator(',');
-			symbols.setExponentSeparator("e");
-			setGlobalFormat(new FloatingFormat("#,##0.#######", "##0.#######E+0", symbols));
-		}
+
+        if (getGlobalFormat() == null) {
+            DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+            symbols.setMinusSign('−');
+            symbols.setDecimalSeparator('.');
+            symbols.setGroupingSeparator(',');
+            symbols.setExponentSeparator("e");
+            setGlobalFormat(new FloatingFormat("#,##0.#######", "##0.#######E+0", symbols));
+        }
 
         setFormat(getGlobalFormat());
-	}
+    }
 
     public static Spanned unicodeToHtml(CharSequence value) {
         return Html.fromHtml(
@@ -66,31 +66,31 @@ public class UTextView extends TextView {
     public void setHtml(CharSequence value) {
         setText(unicodeToHtml(value));
     }
-	
-	protected static Format globalFormatter = null;
-	protected Format formatter = null;
 
-	public void setFormat(String format) {
-		formatter = new DecimalFormat(format);
-	}
+    protected static Format globalFormatter = null;
+    protected Format formatter = null;
 
-	public void setFormat(Format format) {
-		formatter = format;
-	}
-	
-	public Format getFormat() {
-		return formatter;
-	}
-	
-	public static void setGlobalFormat(Format format) {
-		globalFormatter = format;
-	}
-	
-	public static void setGlobalFormat(String format) {
-		globalFormatter = new DecimalFormat(format);
-	}
-	
-	public static Format getGlobalFormat() {
-		return globalFormatter;
-	}
+    public void setFormat(String format) {
+        formatter = new DecimalFormat(format);
+    }
+
+    public void setFormat(Format format) {
+        formatter = format;
+    }
+
+    public Format getFormat() {
+        return formatter;
+    }
+
+    public static void setGlobalFormat(Format format) {
+        globalFormatter = format;
+    }
+
+    public static void setGlobalFormat(String format) {
+        globalFormatter = new DecimalFormat(format);
+    }
+
+    public static Format getGlobalFormat() {
+        return globalFormatter;
+    }
 }

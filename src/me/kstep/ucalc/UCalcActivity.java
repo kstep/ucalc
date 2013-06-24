@@ -62,7 +62,7 @@ public class UCalcActivity extends Activity {
     private UConstants constants;
     private UOperations operations;
     private UnitsManager units;
-	private UState state;
+    private UState state;
 
     public enum Mode {
         NORMAL,
@@ -98,40 +98,40 @@ public class UCalcActivity extends Activity {
     }
 
     private void restoreState(Bundle savedState) {
-		stack = (UStack) loadFromFile("stack.bin", new UStack());
+        stack = (UStack) loadFromFile("stack.bin", new UStack());
         memory = (UMemory) loadFromFile("memory.bin", new UMemory());
-		state = (UState) loadFromFile("state.bin", new UState());
+        state = (UState) loadFromFile("state.bin", new UState());
     }
-	
-	private void applyPreferences(SharedPreferences preferences) {
-		UTextView.setGlobalFormat(new FloatingFormat(
-		    preferences.getInt("decimal_digits", 7),
-			preferences.getInt("group_size", 3),
-			preferences.getString("decimal_separator", ".").charAt(0),
-			preferences.getString("group_separator", ",").charAt(0)));
-			
-		state.setAppendAngleUnit(preferences.getBoolean("append_angle_unit", true));
-	}
-	
-	private void applyPreferences() {
-		applyPreferences(getPreferences(MODE_PRIVATE));
-	}
+
+    private void applyPreferences(SharedPreferences preferences) {
+        UTextView.setGlobalFormat(new FloatingFormat(
+            preferences.getInt("decimal_digits", 7),
+            preferences.getInt("group_size", 3),
+            preferences.getString("decimal_separator", ".").charAt(0),
+            preferences.getString("group_separator", ",").charAt(0)));
+
+        state.setAppendAngleUnit(preferences.getBoolean("append_angle_unit", true));
+    }
+
+    private void applyPreferences() {
+        applyPreferences(getPreferences(MODE_PRIVATE));
+    }
 
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-		units = Units.loadPrefixes(Units.inflate(this, R.xml.units));
-		constants = new UConstants();
+        units = Units.loadPrefixes(Units.inflate(this, R.xml.units));
+        constants = new UConstants();
         restoreState(savedInstanceState);
 
         operations = UOperations.getInstance();
         undos = new UUndoStack();
-		
-		applyPreferences();
-		
-		setContentView(R.layout.main);
+
+        applyPreferences();
+
+        setContentView(R.layout.main);
         showStack();
 
         ActionBar ab = getActionBar();
@@ -149,7 +149,7 @@ public class UCalcActivity extends Activity {
         updateStack();
         saveToFile("stack.bin", stack);
         saveToFile("memory.bin", memory);
-		saveToFile("state.bin", state);
+        saveToFile("state.bin", state);
     }
 
     private void saveToFile(String filename, Serializable object) {
@@ -202,15 +202,15 @@ public class UCalcActivity extends Activity {
     public UMemory getMemory() {
         return memory;
     }
-	
-	private USettingsFragment settings_fragment = null;
-	public void onOptionsButtonClick(View view) {
-		if (settings_fragment == null) {
-	        settings_fragment = new USettingsFragment();
-		}
 
-		startFragment(settings_fragment, "Settings");
-	}
+    private USettingsFragment settings_fragment = null;
+    public void onOptionsButtonClick(View view) {
+        if (settings_fragment == null) {
+            settings_fragment = new USettingsFragment();
+        }
+
+        startFragment(settings_fragment, "Settings");
+    }
 
     public void setRadix(int value) {
         state.setRadix(value);
@@ -269,7 +269,7 @@ public class UCalcActivity extends Activity {
     }
 
     public void showToast(CharSequence ch) {
-		UToast.show(this, ch);
+        UToast.show(this, ch);
     }
 
     public void showPopup(CharSequence title, CharSequence message) {
@@ -289,26 +289,26 @@ public class UCalcActivity extends Activity {
 
     public void onUnitEnter(Unit unit) {
         UEditView editView = (UEditView) findViewById(R.id.view_edit);
-		UToggleButton button = (UToggleButton) findViewById(R.id.main_layout).findViewWithTag(unit.getCategory().toString());
-		button.performClick();
-		
+        UToggleButton button = (UToggleButton) findViewById(R.id.main_layout).findViewWithTag(unit.getCategory().toString());
+        button.performClick();
+
         if (!editView.isEditing()) {
             pushStack();
             editView.setValue(Float.NaN);
             editView.startEditing();
         }
 
-	    UNumber num = UNumber.valueOf(editView.getValue());
+        UNumber num = UNumber.valueOf(editView.getValue());
 
-		if (num instanceof UnitNum) {
-			num = new UnitNum(((UnitNum) num).value, ((UnitNum) num).unit.concat(unit));
-		} else if (UNumber.isNaN(num)) {
-			num = new UnitNum(UNumber.ONE, unit);
-		} else {
-			num = new UnitNum(num, unit);
-		}
+        if (num instanceof UnitNum) {
+            num = new UnitNum(((UnitNum) num).value, ((UnitNum) num).unit.concat(unit));
+        } else if (UNumber.isNaN(num)) {
+            num = new UnitNum(UNumber.ONE, unit);
+        } else {
+            num = new UnitNum(num, unit);
+        }
 
-		editView.setValue(num);
+        editView.setValue(num);
     }
 
     public void onDotButtonClick(View view) {
@@ -358,23 +358,23 @@ public class UCalcActivity extends Activity {
     }
 
     public void onOperationApply(UOperation op) {
-		updateStack();
+        updateStack();
 
-		if (stack.size() < op.arity()) {
-			showToast("Not enough operands!");
-		} else {
-			try {
-				op.apply(state, stack);
+        if (stack.size() < op.arity()) {
+            showToast("Not enough operands!");
+        } else {
+            try {
+                op.apply(state, stack);
 
-			} catch (UCalcException e) {
-				showToast(e.getMessage());
+            } catch (UCalcException e) {
+                showToast(e.getMessage());
 
-			} catch (EmptyStackException e) {
-				showToast("Stack underflow!");
-			}
-		}
+            } catch (EmptyStackException e) {
+                showToast("Stack underflow!");
+            }
+        }
 
-		showStack();
+        showStack();
     }
 
     public void onUndoButtonClick(View view) {
@@ -434,7 +434,7 @@ public class UCalcActivity extends Activity {
     }
 
     public void onAngleUnitButtonClick(View view) {
-		state.setAngleUnit(state.getAngleUnit() == units.get("rad")?
+        state.setAngleUnit(state.getAngleUnit() == units.get("rad")?
             units.get("deg"):
             units.get("rad"));
         ((Button) view).setText(state.getAngleUnit().toString());
@@ -465,8 +465,8 @@ public class UCalcActivity extends Activity {
     }
 
     public void onSelectRadixButtonClick(View view) {
-		URadixDialog dialog = new URadixDialog();
-		dialog.show(getFragmentManager(), "popup");
+        URadixDialog dialog = new URadixDialog();
+        dialog.show(getFragmentManager(), "popup");
     }
 
     public void startFragment(Fragment fragment, String title) {
@@ -511,17 +511,17 @@ public class UCalcActivity extends Activity {
         if (((CompoundButton) view).isChecked()) {
 
             String name = ((CompoundButton) view).getText().toString();
-			UUnitsView unitsView = (UUnitsView) units_keypad.findViewById(R.id.units_keypad);
+            UUnitsView unitsView = (UUnitsView) units_keypad.findViewById(R.id.units_keypad);
 
-			Unit.Category unit_category = name.equals("time") ? Unit.Category.TIME:
-				name.equals("dist") ? Unit.Category.DISTANCE:
-				name.equals("vol") ? Unit.Category.VOLUME:
-				name.equals("weight") ? Unit.Category.WEIGHT:
-				name.equals("elec") ? Unit.Category.ELECTRIC:
-				name.equals("prefix") ? Unit.Category.PREFIX:
-				Unit.Category.MISCELLANEOUS;
+            Unit.Category unit_category = name.equals("time") ? Unit.Category.TIME:
+                name.equals("dist") ? Unit.Category.DISTANCE:
+                name.equals("vol") ? Unit.Category.VOLUME:
+                name.equals("weight") ? Unit.Category.WEIGHT:
+                name.equals("elec") ? Unit.Category.ELECTRIC:
+                name.equals("prefix") ? Unit.Category.PREFIX:
+                Unit.Category.MISCELLANEOUS;
 
-			unitsView.loadUnitCategory(unit_category);
+            unitsView.loadUnitCategory(unit_category);
 
             units_keypad.setVisibility(View.VISIBLE);
         } else {

@@ -27,28 +27,28 @@ import me.kstep.ucalc.units.UnitNum;
  * produced by `toString()` method of this same class.
  */
 public abstract class UNumber extends Number {
-	
-	static public class Pair<A extends UNumber, B extends UNumber> {
-		final public A first;
-		final public B second;
 
-		Pair(A a, B b) {
-			first = a;
-			second = b;
-		}
+    static public class Pair<A extends UNumber, B extends UNumber> {
+        final public A first;
+        final public B second;
 
-		Pair<? extends UNumber, ? extends UNumber> withUnits(Unit unit1, Unit unit2) {
-			if (unit1 == Unit.NONE && unit2 == Unit.NONE) {
-				return this;
-			} else {
-				return new Pair<UnitNum, UnitNum>(new UnitNum(first, unit1), new UnitNum(second, unit2));
-			}
-		}
+        Pair(A a, B b) {
+            first = a;
+            second = b;
+        }
 
-		Pair<? extends UNumber, ? extends UNumber> withUnits(Unit unit) {
-			return withUnits(unit, unit);
-		}
-	}
+        Pair<? extends UNumber, ? extends UNumber> withUnits(Unit unit1, Unit unit2) {
+            if (unit1 == Unit.NONE && unit2 == Unit.NONE) {
+                return this;
+            } else {
+                return new Pair<UnitNum, UnitNum>(new UnitNum(first, unit1), new UnitNum(second, unit2));
+            }
+        }
+
+        Pair<? extends UNumber, ? extends UNumber> withUnits(Unit unit) {
+            return withUnits(unit, unit);
+        }
+    }
 
     public enum Sign {
         NEGATIVE (-1),
@@ -115,7 +115,7 @@ public abstract class UNumber extends Number {
             super("Unsupported operation " + operationName + " for " + UNumber.this);
         }
     }
-    
+
     public double doubleValue() throws ConversionException {
         throw this.new ConversionException(Double.class);
     }
@@ -131,11 +131,11 @@ public abstract class UNumber extends Number {
     public long longValue() throws ConversionException {
         throw this.new ConversionException(Long.class);
     }
-	
-	abstract public String format(Format formatter);
+
+    abstract public String format(Format formatter);
     public static String format(Number number, Format formatter) {
         return valueOf(number).format(formatter);
-        
+
     }
 
     public Sign sign() {
@@ -316,6 +316,6 @@ public abstract class UNumber extends Number {
             return false;
         }
     }
-	
-	abstract public UNumber simplify();
+
+    abstract public UNumber simplify();
 }

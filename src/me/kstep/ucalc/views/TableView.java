@@ -10,7 +10,7 @@ import me.kstep.ucalc.R;
 public class TableView extends GridView {
     private int numRows;
 
-	public TableView(Context context) {
+    public TableView(Context context) {
         super(context);
     }
 
@@ -25,10 +25,10 @@ public class TableView extends GridView {
     }
 
     private void initialize(TypedArray attrs) {
-		numRows = attrs.getInt(R.styleable.TableView_numRows, 0);
+        numRows = attrs.getInt(R.styleable.TableView_numRows, 0);
     }
-	
+
     public int getNumRows() {
-		return numRows;
-	}
+        return numRows;
+    }
 }

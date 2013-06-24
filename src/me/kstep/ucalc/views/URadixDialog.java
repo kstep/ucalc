@@ -10,11 +10,11 @@ import me.kstep.ucalc.UCalcActivity;
 
 public class URadixDialog extends DialogFragment implements DialogInterface.OnClickListener {
 
-	public void onClick(DialogInterface dialog, int id) {
-		if (id > -1) {
-	    	((UCalcActivity) getActivity()).setRadix(indexToRadix(id));
-		}
-	}
+    public void onClick(DialogInterface dialog, int id) {
+        if (id > -1) {
+            ((UCalcActivity) getActivity()).setRadix(indexToRadix(id));
+        }
+    }
 
     ArrayAdapter<String> adapter;
 
@@ -85,12 +85,12 @@ public class URadixDialog extends DialogFragment implements DialogInterface.OnCl
             radix - 1;
     }
 
-	@Override
+    @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         builder.setTitle("Choose radix");
-		builder.setItems(RADIX_NAMES, this);
+        builder.setItems(RADIX_NAMES, this);
         builder.setNegativeButton("Cancel", this);
 
         return builder.create();

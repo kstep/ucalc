@@ -34,11 +34,11 @@ public class UUnitButton extends UButton implements View.OnClickListener, View.O
 
     public void onClick(View view) {
         UCalcActivity activity = (UCalcActivity) getContext();
-		try {
+        try {
             activity.onUnitEnter(UnitsManager.getInstance().get(getText()));
-		} catch (UnitException e) {
-			activity.showToast(e.getMessage());
-		}
+        } catch (UnitException e) {
+            activity.showToast(e.getMessage());
+        }
     }
 
     public boolean onLongClick(View view) {
@@ -48,9 +48,9 @@ public class UUnitButton extends UButton implements View.OnClickListener, View.O
         try {
             Unit unit = uman.get(getText().toString());
             activity.showPopup(
-			    unit.getFullname() != null? unit.getFullname() + " (" + unit.toString() + ")": unit.toString(),
-			    (unit.getDescription() != ""? unit.getDescription() + "\n\n": "") +
-				(unit.isBasic()? "This is a base unit.": "This unit is defined as: " + unit.getDefinition()));
+                unit.getFullname() != null? unit.getFullname() + " (" + unit.toString() + ")": unit.toString(),
+                (unit.getDescription() != ""? unit.getDescription() + "\n\n": "") +
+                (unit.isBasic()? "This is a base unit.": "This unit is defined as: " + unit.getDefinition()));
 
         } catch (UnitException e) {
             activity.showToast(e.getMessage());

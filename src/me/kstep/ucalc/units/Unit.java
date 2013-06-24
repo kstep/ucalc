@@ -32,26 +32,26 @@ public abstract class Unit {
         WEIGHT("weight"),
         ELECTRIC("elec"),
         MISCELLANEOUS("misc"),
-		PREFIX("prefix");
-		
-		private String name;
-		
-		Category(String name) {
-			this.name = name;
-		}
-		
-		public String toString() {
-			return name;
-		}
+        PREFIX("prefix");
+
+        private String name;
+
+        Category(String name) {
+            this.name = name;
+        }
+
+        public String toString() {
+            return name;
+        }
     }
 
     final public static Unit NONE = NoneUnit.getInstance();
 
     Category category;
-	
-	public Category getCategory() {
-		return category;
-	}
+
+    public Category getCategory() {
+        return category;
+    }
 
     public class ConversionException extends UnitException {
         final static long serialVersionUID = 0L;
@@ -190,12 +190,12 @@ public abstract class Unit {
     public boolean isBasic() {
         return this instanceof BaseUnit;
     }
-	
-	public boolean isPrefix() {
-		return this instanceof UnitPrefix && ((UnitPrefix) this).targetUnit == Unit.NONE;
-	}
-	
-	protected static void foldUnits(Map<Unit,Integer> powers, Unit unit, int power, boolean deepdive) {
+
+    public boolean isPrefix() {
+        return this instanceof UnitPrefix && ((UnitPrefix) this).targetUnit == Unit.NONE;
+    }
+
+    protected static void foldUnits(Map<Unit,Integer> powers, Unit unit, int power, boolean deepdive) {
         if (unit == Unit.NONE || power == 0) {
             return;
         }
@@ -215,9 +215,9 @@ public abstract class Unit {
             powers.put(unit, power);
         }
     }
-	
-	protected static List<? extends Unit> reduceUnitPowers(Map<Unit, Integer> powers) {
-		ArrayList<Unit> units = new ArrayList<Unit>(powers.size());
+
+    protected static List<? extends Unit> reduceUnitPowers(Map<Unit, Integer> powers) {
+        ArrayList<Unit> units = new ArrayList<Unit>(powers.size());
         for (Unit unit : powers.keySet()) {
             int power = powers.get(unit);
             if (power == 0) {
@@ -228,20 +228,20 @@ public abstract class Unit {
                 units.add(new PowerUnit(unit, power));
             }
         }
-		
-		return units;
-	}
-	
-	protected static Unit reduceUnitPowers(Map<Unit, Integer> powers, String name, boolean sort) {
+
+        return units;
+    }
+
+    protected static Unit reduceUnitPowers(Map<Unit, Integer> powers, String name, boolean sort) {
         List<? extends Unit> units = reduceUnitPowers(powers);
-		switch (units.size()) {
+        switch (units.size()) {
             case 0: return Unit.NONE;
             case 1: return units.get(0);
             default:
                 Unit[] newunits = units.toArray(new Unit[units.size()]);
-				if (sort) {
+                if (sort) {
                     simpleSort(newunits);
-				}
+                }
 
                 Unit unit = name == null?
                     new ProductUnit(newunits):
@@ -249,9 +249,9 @@ public abstract class Unit {
 
                 return unit;
         }
-	}
-	
-	// Insertion sort, very fast for small inputs, which is my case.
+    }
+
+    // Insertion sort, very fast for small inputs, which is my case.
     // Standard merge sort implemented by Arrays.sort() is an overkill for me.
     private static void simpleSort(Unit[] units) {
         int powera;
@@ -276,32 +276,32 @@ public abstract class Unit {
             }
         }
     }
-	
-	public static List<? extends Unit> append(List<? extends Unit> units, Unit unit) {
-		LinkedHashMap<Unit,Integer> powers = new LinkedHashMap<Unit,Integer>();
 
-		for (Unit u : units) {
-			foldUnits(powers, u, 1, false);
-		}
-		
-		foldUnits(powers, unit, 1, false);
-		return reduceUnitPowers(powers);
-	}
-	
-	public static Unit[] append(Unit[] units, Unit unit) {
-		LinkedHashMap<Unit,Integer> powers = new LinkedHashMap<Unit,Integer>();
+    public static List<? extends Unit> append(List<? extends Unit> units, Unit unit) {
+        LinkedHashMap<Unit,Integer> powers = new LinkedHashMap<Unit,Integer>();
 
-		for (Unit u : units) {
-			foldUnits(powers, u, 1, false);
-		}
+        for (Unit u : units) {
+            foldUnits(powers, u, 1, false);
+        }
 
-		foldUnits(powers, unit, 1, false);
-		List<? extends Unit> result = reduceUnitPowers(powers);
-		return result.toArray(new Unit[result.size()]);
-	}
-	
-	public Unit concat(Unit unit) {
-		return new ProductUnit(append(new Unit[]{this}, unit));
-	}
+        foldUnits(powers, unit, 1, false);
+        return reduceUnitPowers(powers);
+    }
+
+    public static Unit[] append(Unit[] units, Unit unit) {
+        LinkedHashMap<Unit,Integer> powers = new LinkedHashMap<Unit,Integer>();
+
+        for (Unit u : units) {
+            foldUnits(powers, u, 1, false);
+        }
+
+        foldUnits(powers, unit, 1, false);
+        List<? extends Unit> result = reduceUnitPowers(powers);
+        return result.toArray(new Unit[result.size()]);
+    }
+
+    public Unit concat(Unit unit) {
+        return new ProductUnit(append(new Unit[]{this}, unit));
+    }
 }
 

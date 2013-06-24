@@ -33,8 +33,8 @@ public class UButton extends Button implements UCalcActivity.OnModeChangedListen
     private void initialize(UCalcActivity context, TypedArray attrs) {
         Typeface tf = Typeface.createFromAsset(context.getAssets(), "fonts/DejaVuSans.ttf");
         setTypeface(tf);
-		
-		setEllipsize(null);
+
+        setEllipsize(null);
 
         if (attrs != null) {
 
@@ -59,22 +59,22 @@ public class UButton extends Button implements UCalcActivity.OnModeChangedListen
             setVisibility(View.GONE);
         }
     }
-	
-	private float originalTextSize = 0;
-	public void resetToOriginalFontSize() {
-		if (originalTextSize == 0) {
-			originalTextSize = FontFitter.getRealTextSize(this);
-		} else {
-			setTextSize(originalTextSize);
-		}
+
+    private float originalTextSize = 0;
+    public void resetToOriginalFontSize() {
+        if (originalTextSize == 0) {
+            originalTextSize = FontFitter.getRealTextSize(this);
+        } else {
+            setTextSize(originalTextSize);
+        }
     }
 
-	@Override
-	protected void onMeasure(int widthSpec, int heightSpec) {
-		super.onMeasure(widthSpec, heightSpec);
-		resetToOriginalFontSize();
-		FontFitter.fitText(this);
-	}
+    @Override
+    protected void onMeasure(int widthSpec, int heightSpec) {
+        super.onMeasure(widthSpec, heightSpec);
+        resetToOriginalFontSize();
+        FontFitter.fitText(this);
+    }
 }
 
 

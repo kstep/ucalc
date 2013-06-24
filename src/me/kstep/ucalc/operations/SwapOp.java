@@ -9,8 +9,8 @@ class SwapOp extends UOperation {
     public CharSequence name() { return "swap"; }
     public void apply(UState state, UStack stack) {
         UNumber x = stack.pop();
-		UNumber y = stack.pop();
+        UNumber y = stack.pop();
         stack.push(x);
-		stack.push(y);
+        stack.push(y);
     }
 }

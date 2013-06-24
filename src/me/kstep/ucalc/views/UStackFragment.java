@@ -103,7 +103,7 @@ public class UStackFragment extends ListFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceBundle) {
-        View view = inflater.inflate(R.layout.ustack_view, null); 
+        View view = inflater.inflate(R.layout.ustack_view, null);
         return view;
     }
 }

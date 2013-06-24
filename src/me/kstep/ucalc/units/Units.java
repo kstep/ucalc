@@ -21,16 +21,16 @@ import java.lang.reflect.Field;
 
 public class Units {
     public static UnitsManager loadPrefixes() {
-		return loadPrefixes(UnitsManager.getInstance());
-	}
-	
-	public static UnitsManager loadPrefixes(UnitsManager uman) {
-		Unit[] units = UnitPrefix.getPrefixes();
-		for (Unit unit : units) {
-			uman.add(unit, Unit.Category.PREFIX);
-		}
-		return uman;
-	}
+        return loadPrefixes(UnitsManager.getInstance());
+    }
+
+    public static UnitsManager loadPrefixes(UnitsManager uman) {
+        Unit[] units = UnitPrefix.getPrefixes();
+        for (Unit unit : units) {
+            uman.add(unit, Unit.Category.PREFIX);
+        }
+        return uman;
+    }
 
     public static UnitsManager load() {
         return load(UnitsManager.getInstance());
@@ -233,7 +233,7 @@ public class Units {
             }
 
         } else if (className.equals("power")) {
-            
+
             if (deriveUnits.size() != 1) {
                 throw new IllegalArgumentException("Power units require single <derive> element");
             }

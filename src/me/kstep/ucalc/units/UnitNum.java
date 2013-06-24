@@ -61,9 +61,9 @@ public class UnitNum extends UNumber {
         return value.toString() + " " + unit.toString();
     }
 
-	public String format(Format formatter) {
-		return value.format(formatter) + " " + unit.toString();
-	}
+    public String format(Format formatter) {
+        return value.format(formatter) + " " + unit.toString();
+    }
 
     public UnitNum convert(Unit unit) {
         return new UnitNum(unit.from(this.value, this.unit), unit);
