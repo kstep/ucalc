@@ -35,9 +35,9 @@ class ProductUnit extends DerivedUnit {
         ProductUnit target = (ProductUnit) unit;
         if (target.targetUnits.length != this.targetUnits.length) throw this.new ConversionException(unit);
 
-        UNumber result = value;
-
         boolean[] used = new boolean[targetUnits.length];
+        UNumber vu = value;
+        UNumber result = UNumber.ONE;
 
         for (int i = 0; i < targetUnits.length; i++) {
             boolean failure = true;
@@ -46,7 +46,9 @@ class ProductUnit extends DerivedUnit {
                 if (used[j]) continue;
 
                 try {
-                    result = targetUnits[i].to(result, target.targetUnits[j]);
+                    result = result.mul(targetUnits[i].to(vu, target.targetUnits[j]));
+                    vu = UNumber.ONE;
+
                 } catch (Unit.ConversionException e) {
                     continue;
                 }
@@ -74,9 +76,10 @@ class ProductUnit extends DerivedUnit {
         ProductUnit target = (ProductUnit) unit;
         if (target.targetUnits.length != this.targetUnits.length) throw unit.new ConversionException(this);
 
-        UNumber result = value;
-
         boolean[] used = new boolean[targetUnits.length];
+
+        UNumber result = UNumber.ONE;
+        UNumber vu = value;
 
         for (int i = 0; i < targetUnits.length; i++) {
             boolean failure = true;
@@ -85,7 +88,9 @@ class ProductUnit extends DerivedUnit {
                 if (used[j]) continue;
 
                 try {
-                    result = targetUnits[i].from(result, target.targetUnits[j]);
+                    result = result.mul(targetUnits[i].from(vu, target.targetUnits[j]));
+                    vu = UNumber.ONE;
+
                 } catch (Unit.ConversionException e) {
                     continue;
                 }
