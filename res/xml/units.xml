@@ -349,7 +349,7 @@ A few examples:
         </unit>
 
         <unit class="linear" name="cal" fullname="Calorie">
-            <scale>4.1868</scale>
+            <scale>4.184</scale>
             <derive>J</derive>
             <description>Amount of energy to raise temperature of 1 gram of water by 1°C</description>
         </unit>
