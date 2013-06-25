@@ -28,6 +28,7 @@ import android.widget.FrameLayout;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ActionBar;
+import android.preference.PreferenceManager;
 
 import me.kstep.ucalc.views.UEditView;
 import me.kstep.ucalc.views.UStackView;
@@ -114,7 +115,7 @@ public class UCalcActivity extends Activity {
     }
 
     private void applyPreferences() {
-        applyPreferences(getPreferences(MODE_PRIVATE));
+        applyPreferences(PreferenceManager.getDefaultSharedPreferences(this));
     }
 
     /** Called when the activity is first created. */
