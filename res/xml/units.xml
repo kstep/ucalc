@@ -328,6 +328,7 @@ A few examples:
             <derive>N</derive>
             <derive>m</derive>
         </unit>
+
         <unit name="mol" class="linear" fullname="Mole">
             <description>Amount of substance which contains as many elementary entities as 12 grams of pure ¹²C</description>
             <scale>6.0221412927e23</scale>
@@ -423,7 +424,6 @@ A few examples:
     </category>
 
     <category name="elec">
-        <unit class="base" fullname="Ampere" name="A" />
         <unit class="product" fullname="Watt" name="W">
             <derive>J</derive>
             <derive>
@@ -434,6 +434,18 @@ A few examples:
             </derive>
             <description>A work of 1 Joule per 1 second</description>
         </unit>
+
+        <unit class="product" name="Wh" fullname="Watt-hour">
+            <derive>W</derive>
+            <derive>hr</derive>
+        </unit>
+
+        <unit class="prefix" name="kWh" fullname="Kilowatt-hour">
+            <prefix>k</prefix>
+            <derive>Wh</derive>
+        </unit>
+
+        <unit class="base" fullname="Ampere" name="A" />
 
         <unit name="V" fullname="Volt" class="product">
             <derive>W</derive>
@@ -446,7 +458,7 @@ A few examples:
             <description>An electric potential when current of 1 A dissipates energy of 1 Watt</description>
         </unit>
 
-        <unit name="ohm" fullname="Ohm" class="product">
+        <unit name="Ω" fullname="Ohm" class="product">
             <derive>V</derive>
             <derive>
                 <unit class="power">
