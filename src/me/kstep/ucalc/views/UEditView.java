@@ -5,6 +5,8 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import java.text.ParseException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import me.kstep.ucalc.numbers.UNumber;
 
 public class UEditView extends UTextView {
@@ -118,5 +120,48 @@ public class UEditView extends UTextView {
 
             canvas.drawLine(cursorX, 2 + getPaddingTop(), cursorX, getHeight() - 2 - getPaddingBottom(), cursorPaint);
         }
+    }
+
+    public void appendExponentSeparator() {
+        String exp = ((DecimalFormat) formatter).getDecimalFormatSymbols().getExponentSeparator();
+        if (!getText().toString().contains(exp)) {
+            append(exp);
+        }
+    }
+
+    public void appendDecimalSeparator() {
+        String dot = String.valueOf(((DecimalFormat) formatter).getDecimalFormatSymbols().getDecimalSeparator());
+        if (!getText().toString().contains(dot)) {
+            append(dot);
+        }
+    }
+
+    public void toggleSign() {
+        DecimalFormatSymbols symbols = ((DecimalFormat) formatter).getDecimalFormatSymbols();
+        char minus = symbols.getMinusSign();
+        String exp = symbols.getExponentSeparator();
+        String text = getText().toString();
+
+        int expPos = text.lastIndexOf(exp);
+        if (expPos == -1) {
+            if (text.charAt(0) == minus) {
+                text = text.substring(1);
+            } else {
+                text = minus + text;
+            }
+
+        } else { // Exponent entered
+            try {
+                if (text.charAt(expPos + exp.length()) == minus) {
+                    text = text.substring(0, expPos) + exp + text.substring(expPos + exp.length() + 1);
+                } else {
+                    text = text.substring(0, expPos) + exp + minus + text.substring(expPos + exp.length());
+                }
+            } catch (StringIndexOutOfBoundsException e) {
+                text = text + minus;
+            }
+        }
+
+        setText(text);
     }
 }

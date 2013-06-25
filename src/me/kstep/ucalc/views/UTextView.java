@@ -34,12 +34,7 @@ public class UTextView extends TextView {
         setTypeface(tf);
 
         if (getGlobalFormat() == null) {
-            DecimalFormatSymbols symbols = new DecimalFormatSymbols();
-            symbols.setMinusSign('−');
-            symbols.setDecimalSeparator('.');
-            symbols.setGroupingSeparator(',');
-            symbols.setExponentSeparator("e");
-            setGlobalFormat(new FloatingFormat("#,##0.#######", "##0.#######E+0", symbols));
+            setGlobalFormat(new FloatingFormat(7, 3, '.', ','));
         }
 
         setFormat(getGlobalFormat());

@@ -314,9 +314,13 @@ public class UCalcActivity extends Activity {
     public void onDotButtonClick(View view) {
         UEditView editView = (UEditView) findViewById(R.id.view_edit);
         String text = editView.getText().toString();
-        if (!editView.isEditing() || !text.contains(".")) {
-            onDigitEnter(".");
+        if (!editView.isEditing()) {
+            pushStack();
+            editView.setValue(0);
+            editView.startEditing();
         }
+
+        editView.appendDecimalSeparator();
     }
 
     public void onConstantPush(CharSequence name) {
@@ -389,30 +393,7 @@ public class UCalcActivity extends Activity {
         UEditView editView = (UEditView) findViewById(R.id.view_edit);
         if (!editView.isEmpty()) {
             if (editView.isEditing()) {
-
-                String text = editView.getText().toString();
-                int expPos = text.lastIndexOf('e');
-                if (expPos == -1) {
-                    if (text.charAt(0) == '−') {
-                        text = text.substring(1);
-                    } else {
-                        text = "−" + text;
-                    }
-
-                } else { // Exponent entered
-                    try {
-                        if (text.charAt(expPos + 1) == '−') {
-                            text = text.substring(0, expPos) + "e" + text.substring(expPos + 2);
-                        } else {
-                            text = text.substring(0, expPos) + "e−" + text.substring(expPos + 1);
-                        }
-                    } catch (StringIndexOutOfBoundsException e) {
-                        text = text + "−";
-                    }
-                }
-
-                editView.setText(text);
-
+                editView.toggleSign();
             } else if (!stack.empty()) {
                 pushStack(popStack().neg());
             }
@@ -422,9 +403,13 @@ public class UCalcActivity extends Activity {
     public void onExponentButtonClick(View view) {
         UEditView editView = (UEditView) findViewById(R.id.view_edit);
         String text = editView.getText().toString();
-        if (!editView.isEditing() || !text.contains("e")) {
-            editView.append("e");
+        if (!editView.isEditing()) {
+            pushStack();
+            editView.setValue(1);
+            editView.startEditing();
         }
+
+        editView.appendExponentSeparator();
     }
 
     public void onClearButtonClick(View view) {

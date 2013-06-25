@@ -8,6 +8,8 @@ import java.text.NumberFormat;
 import java.text.DecimalFormatSymbols;
 
 public class FloatingFormat extends DecimalFormat {
+    final static long serialVersionUID = 0L;
+
     private String bigFormat;
     private String expFormat;
 
