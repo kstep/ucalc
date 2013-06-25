@@ -164,7 +164,8 @@ class ProductUnit extends DerivedUnit {
             foldUnits(powers, linear, unit.simplify(depth), 1, true);
         }
 
-        Unit unit = reduceUnitPowers(powers, linear, autoname? null: name, true);
+        final boolean useAutoname = autoname && linear[0].equals(UNumber.ONE) && linear[1].equals(UNumber.ZERO);
+        Unit unit = reduceUnitPowers(powers, linear, useAutoname? null: name, true);
         unit.fullname = fullname;
         unit.description = description;
         return unit;
