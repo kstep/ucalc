@@ -120,6 +120,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
         }
 
         state.setAppendAngleUnit(preferences.getBoolean("append_angle_unit", true));
+        state.setSimplify(preferences.getBoolean("simplify", false));
     }
 
     private void applyPreferences() {

@@ -51,4 +51,13 @@ public class UState implements Serializable {
     public void setRadix(int radix) {
         this.radix = radix;
     }
+
+    private boolean forceSimplification = false;
+    public boolean getSimlify() {
+        return forceSimplification;
+    }
+
+    public void setSimplify(boolean value) {
+        forceSimplification = value;
+    }
 }
