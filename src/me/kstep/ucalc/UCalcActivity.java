@@ -383,6 +383,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
         } else {
             try {
                 op.apply(state, stack);
+                System.gc();
 
             } catch (UCalcException e) {
                 showToast(e.getMessage());
