@@ -56,7 +56,7 @@ import android.content.SharedPreferences;
 import me.kstep.ucalc.views.UTextView;
 import me.kstep.ucalc.formatters.FloatingFormat;
 
-public class UCalcActivity extends Activity {
+public class UCalcActivity extends Activity implements SharedPreferences.OnSharedPreferenceChangeListener {
     private UStack stack;
     private UUndoStack undos;
     private UMemory memory;
@@ -105,11 +105,19 @@ public class UCalcActivity extends Activity {
     }
 
     private void applyPreferences(SharedPreferences preferences) {
-        UTextView.setGlobalFormat(new FloatingFormat(
-            preferences.getInt("decimal_digits", 7),
-            preferences.getInt("group_size", 3),
-            preferences.getString("decimal_separator", ".").charAt(0),
-            preferences.getString("group_separator", ",").charAt(0)));
+        UTextView editView = (UTextView) findViewById(R.id.view_edit);
+        FloatingFormat newFormat = new FloatingFormat(
+                preferences.getInt("decimal_digits", 7),
+                preferences.getInt("group_size", 3),
+                preferences.getString("decimal_separator", ".").charAt(0),
+                preferences.getString("group_separator", ",").charAt(0));
+
+        if (editView == null) {
+            UTextView.setGlobalFormat(newFormat);
+        } else {
+            editView.setFormat(newFormat);
+            ((UTextView) findViewById(R.id.view_stack)).setFormat(newFormat);
+        }
 
         state.setAppendAngleUnit(preferences.getBoolean("append_angle_unit", true));
     }
@@ -130,6 +138,7 @@ public class UCalcActivity extends Activity {
         operations = UOperations.getInstance();
         undos = new UUndoStack();
 
+        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
         applyPreferences();
 
         setContentView(R.layout.main);
@@ -141,6 +150,10 @@ public class UCalcActivity extends Activity {
         ab.hide();
 
         setMode(Mode.NORMAL);
+    }
+
+    public void onSharedPreferenceChanged(SharedPreferences preferences, String key) {
+        applyPreferences(preferences);
     }
 
     @Override
