@@ -158,8 +158,10 @@ class LinearUnit extends Unit {
 
         if (unit instanceof LinearUnit) {
             unit = new LinearUnit(name, ((LinearUnit) unit).scale.mul(scale), ((LinearUnit) unit).targetUnit, ((LinearUnit) unit).offset.mul(scale).add(offset));
-        } else {
+        } else if (!scale.equals(UNumber.ONE) || !offset.equals(UNumber.ZERO)) {
             unit = new LinearUnit(name, scale, unit, offset);
+        } else {
+            return unit;
         }
 
         unit.fullname = fullname;

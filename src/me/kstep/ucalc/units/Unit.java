@@ -195,18 +195,22 @@ public abstract class Unit {
         return this instanceof UnitPrefix && ((UnitPrefix) this).targetUnit == Unit.NONE;
     }
 
-    protected static void foldUnits(Map<Unit,Integer> powers, Unit unit, int power, boolean deepdive) {
+    protected static void foldUnits(Map<Unit,Integer> powers, UNumber[] linear, Unit unit, int power, boolean deepdive) {
         if (unit == Unit.NONE || power == 0) {
             return;
         }
 
         if (deepdive && unit instanceof ProductUnit) {
             for (Unit subunit : ((ProductUnit) unit).targetUnits) {
-                foldUnits(powers, subunit, power, deepdive);
+                foldUnits(powers, linear, subunit, power, deepdive);
             }
 
         } else if (unit instanceof PowerUnit) {
-            foldUnits(powers, ((PowerUnit) unit).targetUnit, ((PowerUnit) unit).power * power, deepdive);
+            foldUnits(powers, linear, ((PowerUnit) unit).targetUnit, ((PowerUnit) unit).power * power, deepdive);
+
+        } else if (linear != null && unit instanceof LinearUnit && ((LinearUnit) unit).offset.equals(UNumber.ZERO)) {
+            linear[0] = ((LinearUnit) unit).scale.mul(linear[0]);
+            foldUnits(powers, linear, ((LinearUnit) unit).targetUnit, power, deepdive);
 
         } else if (powers.containsKey(unit)) {
             powers.put(unit, powers.get(unit) + power);
@@ -220,6 +224,7 @@ public abstract class Unit {
         ArrayList<Unit> units = new ArrayList<Unit>(powers.size());
         for (Unit unit : powers.keySet()) {
             int power = powers.get(unit);
+
             if (power == 0) {
                 continue;
             } else if (power == 1) {
@@ -232,23 +237,30 @@ public abstract class Unit {
         return units;
     }
 
-    protected static Unit reduceUnitPowers(Map<Unit, Integer> powers, String name, boolean sort) {
+    protected static Unit reduceUnitPowers(Map<Unit, Integer> powers, UNumber[] linear, String name, boolean sort) {
         List<? extends Unit> units = reduceUnitPowers(powers);
+        Unit result;
+        final boolean useLinear = !linear[0].equals(UNumber.ONE) || !linear[1].equals(UNumber.ZERO);
+
         switch (units.size()) {
-            case 0: return Unit.NONE;
-            case 1: return units.get(0);
+            case 0: result = Unit.NONE; break;
+            case 1: result = units.get(0); break;
             default:
                 Unit[] newunits = units.toArray(new Unit[units.size()]);
                 if (sort) {
                     simpleSort(newunits);
                 }
 
-                Unit unit = name == null?
+                result = name == null || useLinear?
                     new ProductUnit(newunits):
                     new ProductUnit(name, newunits);
-
-                return unit;
         }
+
+        if (useLinear) {
+            result = new LinearUnit(name == null? result.name: name, linear[0], result, linear[1]);
+        }
+
+        return result;
     }
 
     // Insertion sort, very fast for small inputs, which is my case.
@@ -281,10 +293,10 @@ public abstract class Unit {
         LinkedHashMap<Unit,Integer> powers = new LinkedHashMap<Unit,Integer>();
 
         for (Unit u : units) {
-            foldUnits(powers, u, 1, false);
+            foldUnits(powers, null, u, 1, false);
         }
 
-        foldUnits(powers, unit, 1, false);
+        foldUnits(powers, null, unit, 1, false);
         return reduceUnitPowers(powers);
     }
 
@@ -292,10 +304,10 @@ public abstract class Unit {
         LinkedHashMap<Unit,Integer> powers = new LinkedHashMap<Unit,Integer>();
 
         for (Unit u : units) {
-            foldUnits(powers, u, 1, false);
+            foldUnits(powers, null, u, 1, false);
         }
 
-        foldUnits(powers, unit, 1, false);
+        foldUnits(powers, null, unit, 1, false);
         List<? extends Unit> result = reduceUnitPowers(powers);
         return result.toArray(new Unit[result.size()]);
     }

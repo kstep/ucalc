@@ -157,13 +157,14 @@ class ProductUnit extends DerivedUnit {
         if (depth-- < 0) return this;
 
         HashMap<Unit,Integer> powers = new HashMap<Unit,Integer>(targetUnits.length * 2);
+        UNumber[] linear = new UNumber[] { UNumber.ONE, UNumber.ZERO };
 
         // First simplify and flatten all inner units
         for (Unit unit : targetUnits) {
-            foldUnits(powers, unit.simplify(depth), 1, true);
+            foldUnits(powers, linear, unit.simplify(depth), 1, true);
         }
 
-        Unit unit = reduceUnitPowers(powers, autoname? null: name, true);
+        Unit unit = reduceUnitPowers(powers, linear, autoname? null: name, true);
         unit.fullname = fullname;
         unit.description = description;
         return unit;
