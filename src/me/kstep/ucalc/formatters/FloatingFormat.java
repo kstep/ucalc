@@ -32,7 +32,7 @@ public class FloatingFormat extends DecimalFormat {
         DecimalFormatSymbols symbols = new DecimalFormatSymbols();
         symbols.setDecimalSeparator(decimal_separator);
         symbols.setGroupingSeparator(group_separator);
-        symbols.setExponentSeparator("e");
+        symbols.setExponentSeparator(" e"); // here is "MEDIUM MATHEMATICAL SPACE" U+205F, not simple space U+0020!
         symbols.setMinusSign('−');
         setDecimalFormatSymbols(symbols);
     }
