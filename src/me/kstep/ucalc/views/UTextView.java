@@ -1,6 +1,6 @@
 package me.kstep.ucalc.views;
 
-import java.text.Format;
+import java.text.NumberFormat;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
@@ -62,22 +62,22 @@ public class UTextView extends TextView {
         setText(unicodeToHtml(value));
     }
 
-    protected static Format globalFormatter = null;
-    protected Format formatter = null;
+    protected static NumberFormat globalFormatter = null;
+    protected NumberFormat formatter = null;
 
     public void setFormat(String format) {
         formatter = new DecimalFormat(format);
     }
 
-    public void setFormat(Format format) {
+    public void setFormat(NumberFormat format) {
         formatter = format;
     }
 
-    public Format getFormat() {
+    public NumberFormat getFormat() {
         return formatter;
     }
 
-    public static void setGlobalFormat(Format format) {
+    public static void setGlobalFormat(NumberFormat format) {
         globalFormatter = format;
     }
 
@@ -85,7 +85,7 @@ public class UTextView extends TextView {
         globalFormatter = new DecimalFormat(format);
     }
 
-    public static Format getGlobalFormat() {
+    public static NumberFormat getGlobalFormat() {
         return globalFormatter;
     }
 }

@@ -44,7 +44,7 @@ public class UEditView extends UTextView {
     public Number getValue() {
         if (!syncValue) {
             try {
-                setValue((Number) formatter.parseObject(getText().toString()));
+                setValue(formatter.parse(getText().toString()));
             } catch (NumberFormatException e) {
                 setValue(Float.NaN);
             } catch (ParseException e) {

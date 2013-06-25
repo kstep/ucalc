@@ -1,7 +1,6 @@
 package me.kstep.ucalc.formatters;
 
 import java.text.DecimalFormat;
-import java.text.Format;
 import java.text.FieldPosition;
 import java.text.ParsePosition;
 import java.text.NumberFormat;
@@ -63,10 +62,9 @@ public class FloatingFormat extends DecimalFormat {
         }
         return super.format(value, buffer, field);
     }
-/*
+
     public Number parse(String p1, ParsePosition p2) {
-        // TODO: Implement this method
-        return null;
+        applyPattern(expFormat);
+        return super.parse(p1, p2);
     }
-    */
 }
