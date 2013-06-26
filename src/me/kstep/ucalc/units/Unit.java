@@ -257,7 +257,10 @@ public abstract class Unit {
         }
 
         if (useLinear) {
-            result = new LinearUnit(name == null? result.name: name, linear[0], result, linear[1]);
+            // TODO: use try to find existing unit for our generated unit
+            // for better name, but this can be slow as it requires iteration
+            // over all known units.
+            result = UnitsManager.getInstance().findAlias(new LinearUnit(name == null? result.name: name, linear[0], result, linear[1]));
         }
 
         return result;

@@ -199,6 +199,16 @@ public class UnitsManager {
         return units.containsValue(unit);
     }
 
+    public Unit findAlias(Unit unit) {
+        for (Unit item: units.values()) {
+            if (item.equals(unit)) {
+                return item;
+            }
+        }
+
+        return unit;
+    }
+
     public Unit[] findAliases(Unit unit) {
         ArrayList<Unit> result = new ArrayList<Unit>();
 
