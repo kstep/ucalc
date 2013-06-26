@@ -138,6 +138,12 @@ public class UnitNum extends UNumber {
     public UNumber simplify() {
         unit = unit.simplify();
         value = value.simplify();
+
+        if (unit instanceof LinearUnit && ((LinearUnit) unit).offset.equals(UNumber.ZERO)) {
+            value = ((LinearUnit) unit).scale.mul(value);
+            unit = ((LinearUnit) unit).targetUnit;
+        }
+
         return unit == Unit.NONE? value: this;
     }
 
