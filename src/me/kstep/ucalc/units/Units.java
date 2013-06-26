@@ -316,6 +316,7 @@ public class Units {
             // Volume
             uman.add(new PowerUnit(uman.get("m"), 3), "Cubic meters", Unit.Category.VOLUME);
             uman.add(new LinearUnit("l", 0.001, uman.get("m³")), "Liters", Unit.Category.VOLUME);
+            uman.add(new UnitPrefix("m", uman.get("l")), "Milliliters", Unit.Category.VOLUME);
             // TODO
 
             // Weight
