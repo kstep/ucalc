@@ -137,6 +137,7 @@ public class UnitNum extends UNumber {
 
     public UNumber simplify() {
         unit = unit.simplify();
+        value = value.simplify();
         return unit == Unit.NONE? value: this;
     }
 
