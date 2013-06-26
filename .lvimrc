@@ -1,5 +1,5 @@
 
-let class_path = "/opt/android-sdk/platforms/android-15/android.jar:/home/kstep/workspace/UCalc/src:/home/kstep/workspace/UCalc/gen"
+let class_path = "/opt/android-sdk/platforms/android-15/android.jar:/home/kstep/workspace/UCalc/src:/home/kstep/workspace/UCalc/gen:/home/kstep/workspace/UCalc/tests/src:/usr/share/java/junit.jar"
 
 if (match($CLASSPATH, class_path) == -1)
     let $CLASSPATH=$CLASSPATH . class_path
