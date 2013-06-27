@@ -328,6 +328,10 @@ public class Units {
             uman.add(new LinearUnit("lt", 1016.05, uman.get("kg")), "Long tons", Unit.Category.WEIGHT);
             uman.add(new ProductUnit("N", uman.get("kg"), uman.get("m"), new PowerUnit(uman.get("s"), -2)), "Newton",
                     "Force to accelerate 1 kg of mass by 1 m/s per second", Unit.Category.WEIGHT);
+
+            uman.add(new LinearUnit("lb", 0.45359237, uman.get("kg")), Unit.Category.WEIGHT);
+            uman.add(new LinearUnit("gf", 9.80665, new ProductUnit(uman.get("m"), new PowerUnit(uman.get("s"), -2))), Unit.Category.WEIGHT);
+            uman.add(new ProductUnit("lbf", uman.get("gf"), uman.get("lb")), Unit.Category.WEIGHT);
             // TODO
 
             // Miscellaneous

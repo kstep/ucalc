@@ -36,5 +36,13 @@ public class ConversionTest extends TestCase {
         assertEquals(ml, _);
         assertEquals(ml.toString(), _.toString());
     }
+
+    @Test
+    public void testUnbalancedProductConversion() {
+        Unit lbf = uman.get("lbf");
+        Unit N = uman.get("N");
+
+        assertTrue(22.4808943 - N.to(100, lbf).floatValue() < 0.00001);
+    }
 }
 
