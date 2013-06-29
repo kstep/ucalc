@@ -33,34 +33,38 @@ class ProductUnit extends DerivedUnit {
         }
 
         ProductUnit target = (ProductUnit) unit;
-        if (target.targetUnits.length != this.targetUnits.length) throw this.new ConversionException(unit);
+        if (target.targetUnits.length < this.targetUnits.length)
+            return target.from(value, this);
 
-        boolean[] used = new boolean[targetUnits.length];
+		UnitCombinationsIterator combinations = new UnitCombinationsIterator(target.targetUnits);
+
         UNumber vu = value;
         UNumber result = UNumber.ONE;
 
         for (int i = 0; i < targetUnits.length; i++) {
             boolean failure = true;
 
-            for (int j = 0; j < target.targetUnits.length; j++) {
-                if (used[j]) continue;
+			while (combinations.hasNext()) {
+				Unit targetUnit = combinations.next();
 
-                try {
-                    result = result.mul(targetUnits[i].to(vu, target.targetUnits[j]));
-                    vu = UNumber.ONE;
+				try {
+					result = result.mul(targetUnits[i].to(vu, targetUnit));
+					vu = UNumber.ONE;
 
-                } catch (Unit.ConversionException e) {
-                    continue;
-                }
+				} catch (Unit.ConversionException e) {
+					continue;
+				}
 
-                used[j] = true;
-                failure = false;
-                break;
-            }
+				combinations.remove();
+				failure = false;
+				break;
+			}
 
-            if (failure) {
-                throw this.new ConversionException(unit);
-            }
+			if (failure) {
+				throw this.new ConversionException(unit);
+			}
+
+			combinations.rewind();
         }
 
         return result;
@@ -74,28 +78,29 @@ class ProductUnit extends DerivedUnit {
         }
 
         ProductUnit target = (ProductUnit) unit;
-        if (target.targetUnits.length != this.targetUnits.length) throw unit.new ConversionException(this);
-
-        boolean[] used = new boolean[targetUnits.length];
+        if (target.targetUnits.length < this.targetUnits.length)
+            return target.to(value, this);
 
         UNumber result = UNumber.ONE;
         UNumber vu = value;
+        
+        UnitCombinationsIterator combinations = new UnitCombinationsIterator(target.targetUnits);
 
         for (int i = 0; i < targetUnits.length; i++) {
             boolean failure = true;
 
-            for (int j = 0; j < target.targetUnits.length; j++) {
-                if (used[j]) continue;
+			while (combinations.hasNext()) {
+				Unit targetUnit = combinations.next();
 
                 try {
-                    result = result.mul(targetUnits[i].from(vu, target.targetUnits[j]));
+                    result = result.mul(targetUnits[i].from(vu, targetUnit));
                     vu = UNumber.ONE;
 
                 } catch (Unit.ConversionException e) {
                     continue;
                 }
 
-                used[j] = true;
+				combinations.remove();
                 failure = false;
                 break;
             }
@@ -103,6 +108,8 @@ class ProductUnit extends DerivedUnit {
             if (failure) {
                 throw unit.new ConversionException(this);
             }
+            
+            combinations.rewind();
         }
 
         return result;
@@ -157,14 +164,13 @@ class ProductUnit extends DerivedUnit {
         if (depth-- < 0) return this;
 
         HashMap<Unit,Integer> powers = new HashMap<Unit,Integer>(targetUnits.length * 2);
-        UNumber[] linear = new UNumber[] { UNumber.ONE, UNumber.ZERO };
 
         // First simplify and flatten all inner units
         for (Unit unit : targetUnits) {
-            foldUnits(powers, linear, unit.simplify(depth), 1, true);
+            foldUnits(powers, unit.simplify(depth), 1, true);
         }
 
-        Unit unit = reduceUnitPowers(powers, linear, autoname? null: name, true);
+        Unit unit = reduceUnitPowers(powers, name, autoname, true);
         unit.fullname = fullname;
         unit.description = description;
         return unit;
