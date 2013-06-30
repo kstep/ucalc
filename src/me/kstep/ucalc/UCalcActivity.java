@@ -51,11 +51,12 @@ import me.kstep.ucalc.units.UnitsLoader;
 import me.kstep.ucalc.units.UnitsManager;
 import me.kstep.ucalc.units.UnitException;
 import me.kstep.ucalc.units.UnitNum;
-import me.kstep.ucalc.widgets.UButton;
 import me.kstep.ucalc.widgets.UToggleButton;
 import android.content.SharedPreferences;
+
 import me.kstep.ucalc.views.UTextView;
 import me.kstep.ucalc.formatters.FloatingFormat;
+import me.kstep.ucalc.util.Effects;
 
 public class UCalcActivity extends Activity implements SharedPreferences.OnSharedPreferenceChangeListener {
     private UStack stack;
@@ -124,7 +125,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
 
         UStack.simplfyUnits(preferences.getBoolean("simplify_units", false));
         URational.showAsFloat(!preferences.getBoolean("show_ratios", false));
-        UButton.setFeedback(preferences.getBoolean("haptic_feedback", false), preferences.getBoolean("sound_feedback", false));
+        Effects.setFeedback(preferences.getBoolean("haptic_feedback", false), preferences.getBoolean("sound_feedback", false));
     }
 
     private void applyPreferences() {

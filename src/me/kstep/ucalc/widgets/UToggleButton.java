@@ -12,12 +12,15 @@ import android.graphics.Typeface;
 
 import me.kstep.ucalc.UCalcActivity;
 import me.kstep.ucalc.util.FontFitter;
+import me.kstep.ucalc.util.Effects;
 
 import me.kstep.ucalc.R;
 
-public class UToggleButton extends CompoundButton implements CompoundButton.OnCheckedChangeListener, UCalcActivity.OnModeChangedListener {
+public class UToggleButton extends CompoundButton implements CompoundButton.OnCheckedChangeListener, UCalcActivity.OnModeChangedListener, View.OnClickListener {
 
     private static HashMap<String,ArrayList<UToggleButton>> radio_groups = new HashMap<String,ArrayList<UToggleButton>>();
+
+    private View.OnClickListener superOnClickListener;
 
     public UToggleButton(Context context) {
         super(context);
@@ -76,6 +79,9 @@ public class UToggleButton extends CompoundButton implements CompoundButton.OnCh
 
             attrs.recycle();
         }
+
+        superOnClickListener = Effects.getOnClickListener(this);
+        setOnClickListener(this);
     }
 
     public void onModeChanged(UCalcActivity.Mode newmode) {
@@ -100,6 +106,14 @@ public class UToggleButton extends CompoundButton implements CompoundButton.OnCh
         super.onMeasure(widthSpec, heightSpec);
         resetToOriginalFontSize();
         FontFitter.fitText(this);
+    }
+
+    public void onClick(View view) {
+        Effects.performEffects(this);
+
+        if (superOnClickListener != null) {
+            superOnClickListener.onClick(this);
+        }
     }
 }
 
