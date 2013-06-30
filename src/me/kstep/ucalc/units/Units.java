@@ -337,6 +337,7 @@ public class Units {
             // Miscellaneous
             uman.add(new ProductUnit("J", uman.get("N"), uman.get("m")), "Joule",
                     "A work applied by force of 1 N through a distance of 1 meter");
+
             uman.add(new LinearUnit("mol", 6.0221412927e23, Unit.NONE), "Mole",
                     "Amount of substance which contains as many elementary entities as 12 grams of pure ¹²C");
             uman.add(new BaseUnit("bit"), "Bit", "Binary digit (0 or 1)");
@@ -368,6 +369,9 @@ public class Units {
                     "Siemens, a conductance of a conductor if being under current of 1 A it has potential diffirence of 1 V on its ends", Unit.Category.ELECTRIC);
             uman.add(new PowerUnit("Hz", uman.get("s"), -1),
                     "Herz, number of occilations per second", Unit.Category.ELECTRIC);
+
+            uman.add(new ProductUnit("C", uman.get("A"), uman.get("s")), Unit.Category.ELECTRIC);
+            uman.add(new LinearUnit("eV", 1.602176565e-19, new ProductUnit(uman.get("C"), uman.get("V"))), Unit.Category.ELECTRIC);
             // TODO
 
         } catch (UnitsManager.UnitExistsException e) {
