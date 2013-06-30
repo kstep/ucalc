@@ -6,7 +6,7 @@ import java.util.ListIterator;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-class UnitCombinationsIterator implements Iterator {
+class UnitCombinationsIterator implements Iterator<Unit> {
     public void remove() {
         removeFromAgenda();
         removeFromOrigin();
