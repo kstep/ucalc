@@ -12,10 +12,15 @@ public class UStack extends Stack<UNumber> {
     }
 
     public UNumber push(UNumber item) {
-        return super.push(item.simplify());
+        return super.push(simplfyUnits? item.simplify(): item);
     }
 
     public UStack clone() {
         return (UStack) super.clone();
+    }
+
+    private static boolean simplfyUnits = true;
+    public static void simplfyUnits(boolean value) {
+        simplfyUnits = value;
     }
 }

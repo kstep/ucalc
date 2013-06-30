@@ -43,6 +43,7 @@ import me.kstep.ucalc.views.UUnitsView;
 
 import me.kstep.ucalc.operations.UOperations;
 import me.kstep.ucalc.operations.UOperation;
+import me.kstep.ucalc.numbers.URational;
 import me.kstep.ucalc.numbers.UNumber;
 
 import me.kstep.ucalc.units.Unit;
@@ -107,7 +108,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
     private void applyPreferences(SharedPreferences preferences) {
         UTextView editView = (UTextView) findViewById(R.id.view_edit);
         FloatingFormat newFormat = new FloatingFormat(
-                preferences.getInt("decimal_digits", 7),
+                preferences.getInt("precision", 7),
                 preferences.getInt("group_size", 3),
                 preferences.getString("decimal_separator", ".").charAt(0),
                 preferences.getString("group_separator", ",").charAt(0));
@@ -119,8 +120,11 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
             ((UTextView) findViewById(R.id.view_stack)).setFormat(newFormat);
         }
 
-        state.setAppendAngleUnit(preferences.getBoolean("append_angle_unit", true));
-        state.setSimplify(preferences.getBoolean("simplify", false));
+        state.appendAngleUnit = preferences.getBoolean("inverse_trig_units", true);
+
+        UStack.simplfyUnits(preferences.getBoolean("simplify_units", false));
+        URational.showAsFloat(!preferences.getBoolean("show_ratios", false));
+        UButton.setFeedback(preferences.getBoolean("haptic_feedback", false), preferences.getBoolean("sound_feedback", false));
     }
 
     private void applyPreferences() {
@@ -228,7 +232,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
     }
 
     public void setRadix(int value) {
-        state.setRadix(value);
+        state.radix = value;
         ((Button) findViewById(R.id.radix_button)).setText(state.getRadixName());
     }
 
@@ -435,10 +439,10 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
     }
 
     public void onAngleUnitButtonClick(View view) {
-        state.setAngleUnit(state.getAngleUnit() == units.get("rad")?
+        state.angleUnit = state.angleUnit == units.get("rad")?
             units.get("deg"):
-            units.get("rad"));
-        ((Button) view).setText(state.getAngleUnit().toString());
+            units.get("rad");
+        ((Button) view).setText(state.angleUnit.toString());
     }
 
     public void onAltModeButtonClick(View view) {

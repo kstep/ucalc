@@ -16,6 +16,11 @@ public class URational extends UReal {
 
     final private static long PRECISION_BASE = 100000L;
 
+    private static boolean showAsFloat = false;
+    public static void showAsFloat(boolean value) {
+        showAsFloat = value;
+    }
+
     public long numerator;
     public long denomenator;
 
@@ -123,7 +128,9 @@ public class URational extends UReal {
     }
 
     public String format(Format formatter) {
-        return isInteger()? formatter.format(numerator): formatter.format(numerator) + "/" + formatter.format(denomenator);
+        return isInteger()? formatter.format(numerator):
+            showAsFloat? formatter.format(doubleValue()):
+                formatter.format(numerator) + "/" + formatter.format(denomenator);
     }
 
     public UNumber pow(Number other) {

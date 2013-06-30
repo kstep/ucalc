@@ -11,7 +11,7 @@ class SinOp extends UOperation {
     public void apply(UState state, UStack stack) {
         UNumber x = stack.pop();
         if (!(x instanceof UnitNum)) {
-            x = new UnitNum(x, state.getAngleUnit());
+            x = new UnitNum(x, state.angleUnit);
         }
         stack.push(UMath.sin(x));
     }

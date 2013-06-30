@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-<PreferenceCategory android:title="Numbers format" android:key="format">
-    <me.kstep.ucalc.preferences.IntegerPreference android:key="decimal_digits" android:title="Decimal digits" android:numeric="integer" android:defaultValue="7" />
-    <me.kstep.ucalc.preferences.IntegerPreference android:key="group_size" android:title="Group size" android:numeric="integer" android:defaultValue="3" />
-    <ListPreference android:key="group_separator" android:title="Group separator" android:entryValues="@array/group_separators" android:entries="@array/group_separator_names" android:defaultValue="." />
-    <ListPreference android:key="decimal_separator" android:title="Decimal separator" android:entryValues="@array/decimal_separators" android:entries="@array/decimal_separator_names" android:defaultValue="," />
-    <CheckBoxPreference android:key="show_ratios" android:title="Show ratios as is if possible" android:summary="Show 1/3 instead of 0.333333" android:defaultValue="false" />
-</PreferenceCategory>
-<PreferenceCategory android:title="Calculations" android:key="calculations">
-    <CheckBoxPreference android:key="use_ratios" android:title="Use ratios if possible" android:summary="Some calculations are more precise, but a little slower" android:defaultValue="true" />
-    <CheckBoxPreference android:key="append_angle_unit" android:title="Append angle unit" android:summary="Reverse triginometric function results will have units" android:defaultValue="true" />
-    <CheckBoxPreference android:key="simplify" android:title="Simplify units on calculations" android:defaultValue="true" />
-</PreferenceCategory>
+    <PreferenceCategory android:key="general" android:title="General Settings">
+        <CheckBoxPreference android:key="sound_feedback" android:title="Sound" android:summary="Clicking sound on buttons press" android:defaultValue="false" />
+        <CheckBoxPreference android:key="haptic_feedback" android:title="Haptic feedback" android:summary="Vibrate on buttons press" android:defaultValue="false" />
+
+        <CheckBoxPreference android:key="inverse_trig_units" android:title="Inverse trig units" android:summary="Reverse triginometric function results will have units" android:defaultValue="true" />
+        <CheckBoxPreference android:key="simplify_units" android:title="Simplify units" android:defaultValue="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Display Settings" android:key="display">
+        <me.kstep.ucalc.preferences.IntegerPreference android:key="precision" android:title="Precision" android:numeric="integer" android:defaultValue="7" android:summary="Number of decimal digits to display (calculations always use highest precision available anyway)" />
+
+        <ListPreference android:key="decimal_separator" android:title="Decimal separator" android:entryValues="@array/decimal_separators" android:entries="@array/decimal_separator_names" android:defaultValue="," />
+
+        <ListPreference android:key="group_separator" android:title="Group separator" android:entryValues="@array/group_separators" android:entries="@array/group_separator_names" android:defaultValue="." />
+
+        <me.kstep.ucalc.preferences.IntegerPreference android:key="group_size" android:title="Group size" android:numeric="integer" android:defaultValue="3" />
+
+        <CheckBoxPreference android:key="show_ratios" android:title="Show ratios as is if possible" android:summary="Show 1/3 instead of 0.333333" android:defaultValue="false" />
+    </PreferenceCategory>
 </PreferenceScreen>

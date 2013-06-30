@@ -21,6 +21,7 @@ class UDigitButton extends UButton implements View.OnClickListener {
     }
 
     public void onClick(View view) {
+        super.onClick(view);
         ((UCalcActivity) getContext()).onDigitEnter(this.getText());
     }
 }

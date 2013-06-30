@@ -8,8 +8,8 @@ class ArcSinOp extends UOperation {
     public int arity() { return 1; }
     public CharSequence name() { return "asin"; }
     public void apply(UState state, UStack stack) {
-        UNumber result = UMath.asin(stack.pop(), state.getAngleUnit());
-        stack.push(!state.isAppendAngleUnit() && result instanceof UnitNum?
+        UNumber result = UMath.asin(stack.pop(), state.angleUnit);
+        stack.push(!state.appendAngleUnit && result instanceof UnitNum?
                    ((UnitNum) result).value: result);
     }
 }

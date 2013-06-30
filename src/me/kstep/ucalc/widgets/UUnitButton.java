@@ -33,6 +33,8 @@ public class UUnitButton extends UButton implements View.OnClickListener, View.O
     }
 
     public void onClick(View view) {
+        super.onClick(view);
+
         UCalcActivity activity = (UCalcActivity) getContext();
         try {
             activity.onUnitEnter(UnitsManager.getInstance().get(getText()));
