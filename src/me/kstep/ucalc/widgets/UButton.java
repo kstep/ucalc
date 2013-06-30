@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.graphics.Typeface;
 
-import me.kstep.ucalc.views.FontFitter;
+import me.kstep.ucalc.util.FontFitter;
 import me.kstep.ucalc.UCalcActivity;
 
 import me.kstep.ucalc.R;

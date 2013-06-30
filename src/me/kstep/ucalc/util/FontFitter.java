@@ -1,4 +1,4 @@
-package me.kstep.ucalc.views;
+package me.kstep.ucalc.util;
 
 import android.graphics.Paint;
 import android.widget.TextView;

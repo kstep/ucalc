@@ -12,6 +12,9 @@ import me.kstep.ucalc.units.UnitPrefix;
 
 import me.kstep.ucalc.UCalcActivity;
 
+import me.kstep.ucalc.util.TableView;
+import me.kstep.ucalc.util.KeypadAdapter;
+
 import me.kstep.ucalc.R;
 
 public class UUnitsView extends TableView {

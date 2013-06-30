@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import me.kstep.ucalc.numbers.UNumber;
+import me.kstep.ucalc.util.FontFitter;
 
 public class UEditView extends UTextView {
     // If true, user is editing text now,

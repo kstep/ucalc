@@ -1,4 +1,4 @@
-package me.kstep.ucalc.views;
+package me.kstep.ucalc.util;
 
 import android.content.Context;
 import android.content.res.TypedArray;

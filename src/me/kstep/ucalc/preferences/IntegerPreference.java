@@ -1,4 +1,4 @@
-package me.kstep.ucalc.views;
+package me.kstep.ucalc.preferences;
 
 import android.content.Context;
 import android.util.AttributeSet;

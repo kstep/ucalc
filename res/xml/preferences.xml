@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 <PreferenceCategory android:title="Numbers format" android:key="format">
-    <me.kstep.ucalc.views.IntegerPreference android:key="decimal_digits" android:title="Decimal digits" android:numeric="integer" android:defaultValue="7" />
-    <me.kstep.ucalc.views.IntegerPreference android:key="group_size" android:title="Group size" android:numeric="integer" android:defaultValue="3" />
+    <me.kstep.ucalc.preferences.IntegerPreference android:key="decimal_digits" android:title="Decimal digits" android:numeric="integer" android:defaultValue="7" />
+    <me.kstep.ucalc.preferences.IntegerPreference android:key="group_size" android:title="Group size" android:numeric="integer" android:defaultValue="3" />
     <ListPreference android:key="group_separator" android:title="Group separator" android:entryValues="@array/group_separators" android:entries="@array/group_separator_names" android:defaultValue="." />
     <ListPreference android:key="decimal_separator" android:title="Decimal separator" android:entryValues="@array/decimal_separators" android:entries="@array/decimal_separator_names" android:defaultValue="," />
     <CheckBoxPreference android:key="show_ratios" android:title="Show ratios as is if possible" android:summary="Show 1/3 instead of 0.333333" android:defaultValue="false" />
