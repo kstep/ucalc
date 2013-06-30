@@ -36,7 +36,7 @@ class ProductUnit extends DerivedUnit {
         if (target.targetUnits.length < this.targetUnits.length)
             return target.from(value, this);
 
-		UnitCombinationsIterator combinations = new UnitCombinationsIterator(target.targetUnits);
+        UnitCombinationsIterator combinations = new UnitCombinationsIterator(target.targetUnits);
 
         UNumber vu = value;
         UNumber result = UNumber.ONE;
@@ -44,27 +44,27 @@ class ProductUnit extends DerivedUnit {
         for (int i = 0; i < targetUnits.length; i++) {
             boolean failure = true;
 
-			while (combinations.hasNext()) {
-				Unit targetUnit = combinations.next();
+            while (combinations.hasNext()) {
+                Unit targetUnit = combinations.next();
 
-				try {
-					result = result.mul(targetUnits[i].to(vu, targetUnit));
-					vu = UNumber.ONE;
+                try {
+                    result = result.mul(targetUnits[i].to(vu, targetUnit));
+                    vu = UNumber.ONE;
 
-				} catch (Unit.ConversionException e) {
-					continue;
-				}
+                } catch (Unit.ConversionException e) {
+                    continue;
+                }
 
-				combinations.remove();
-				failure = false;
-				break;
-			}
+                combinations.remove();
+                failure = false;
+                break;
+            }
 
-			if (failure) {
-				throw this.new ConversionException(unit);
-			}
+            if (failure) {
+                throw this.new ConversionException(unit);
+            }
 
-			combinations.rewind();
+            combinations.rewind();
         }
 
         return result;
@@ -83,14 +83,14 @@ class ProductUnit extends DerivedUnit {
 
         UNumber result = UNumber.ONE;
         UNumber vu = value;
-        
+
         UnitCombinationsIterator combinations = new UnitCombinationsIterator(target.targetUnits);
 
         for (int i = 0; i < targetUnits.length; i++) {
             boolean failure = true;
 
-			while (combinations.hasNext()) {
-				Unit targetUnit = combinations.next();
+            while (combinations.hasNext()) {
+                Unit targetUnit = combinations.next();
 
                 try {
                     result = result.mul(targetUnits[i].from(vu, targetUnit));
@@ -100,7 +100,7 @@ class ProductUnit extends DerivedUnit {
                     continue;
                 }
 
-				combinations.remove();
+                combinations.remove();
                 failure = false;
                 break;
             }
@@ -108,7 +108,7 @@ class ProductUnit extends DerivedUnit {
             if (failure) {
                 throw unit.new ConversionException(this);
             }
-            
+
             combinations.rewind();
         }
 
