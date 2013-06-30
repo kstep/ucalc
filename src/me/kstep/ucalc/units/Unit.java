@@ -268,7 +268,7 @@ public abstract class Unit {
                 unita = units[j];
                 powera = unita instanceof PowerUnit? ((PowerUnit) unita).power: 1;
 
-                if (powerb <= powera) {
+                if (powerb < powera || (powerb == powera && unitb.toString().compareTo(unita.toString()) >= 0)) {
                     break;
                 }
 
