@@ -46,7 +46,7 @@ import me.kstep.ucalc.operations.UOperation;
 import me.kstep.ucalc.numbers.UNumber;
 
 import me.kstep.ucalc.units.Unit;
-import me.kstep.ucalc.units.Units;
+import me.kstep.ucalc.units.UnitsLoader;
 import me.kstep.ucalc.units.UnitsManager;
 import me.kstep.ucalc.units.UnitException;
 import me.kstep.ucalc.units.UnitNum;
@@ -132,7 +132,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        units = Units.loadPrefixes(Units.inflate(this, R.xml.units));
+        units = UnitsLoader.loadPrefixes(UnitsLoader.inflate(this, R.xml.units));
         constants = new UConstants();
         restoreState(savedInstanceState);
 

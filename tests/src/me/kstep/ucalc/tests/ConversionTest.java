@@ -1,7 +1,7 @@
 package me.kstep.ucalc.tests;
 
 import me.kstep.ucalc.units.Unit;
-import me.kstep.ucalc.units.Units;
+import me.kstep.ucalc.units.UnitsLoader;
 import me.kstep.ucalc.units.UnitsManager;
 import me.kstep.ucalc.numbers.UNumber;
 
@@ -16,7 +16,7 @@ public class ConversionTest extends TestCase {
     }
 
     protected void setUp() {
-        uman = Units.load();
+        uman = UnitsLoader.load();
         uman.simplifyAll();
     }
 

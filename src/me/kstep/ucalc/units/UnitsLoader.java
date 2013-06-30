@@ -19,7 +19,7 @@ import me.kstep.ucalc.numbers.UNumber;
 import me.kstep.ucalc.numbers.UInteger;
 import java.lang.reflect.Field;
 
-public class Units {
+public class UnitsLoader {
     public static UnitsManager loadPrefixes() {
         return loadPrefixes(UnitsManager.getInstance());
     }
