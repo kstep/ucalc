@@ -62,7 +62,6 @@ public class ConversionTest extends TestCase {
         Unit W = uman.get("W");
 
         UNumber _ = hp.to(1, W);
-        println(_);
 
         assertTrue(745.699872 - _.doubleValue() < 0.00001);
     }
