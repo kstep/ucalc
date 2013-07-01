@@ -55,5 +55,26 @@ public class ConversionTest extends TestCase {
         UNumber _ = eV.to(100, J);
         assertTrue(16.021765e-18 - _.floatValue() < 0.00001);
     }
+
+    @Test
+    public void testDeepUnbalancedConversion() {
+        Unit hp = uman.get("hp");
+        Unit W = uman.get("W");
+
+        UNumber _ = hp.to(1, W);
+        println(_);
+
+        assertTrue(745.699872 - _.doubleValue() < 0.00001);
+    }
+
+    private void println(Object... objs) {
+        StringBuilder sb = new StringBuilder();
+        for (Object obj : objs) {
+            sb.append(obj.toString());
+            sb.append(' ');
+        }
+
+        System.out.println(sb.toString());
+    }
 }
 

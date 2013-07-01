@@ -374,6 +374,8 @@ public class UnitsLoader {
             uman.add(new LinearUnit("eV", 1.602176565e-19, new ProductUnit(uman.get("C"), uman.get("V"))), Unit.Category.ELECTRIC);
             // TODO
 
+            uman.add(new LinearUnit("hp", 745.699872, uman.get("W")));
+
         } catch (UnitsManager.UnitExistsException e) {
         }
 
