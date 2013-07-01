@@ -525,7 +525,13 @@ A few examples:
 
     <category name="misc">
         <unit name="hp" fullname="Horse power" class="linear">
-            <scale>550</scale>
+            <scale>745.699872</scale>
+            <derive>W</derive>
+            <!-- The exact definition for mechanical horse power as defined by Watt himself
+                 is 550 lbf*ft/s, but current units engine implementation doesn't allow
+                 so deep conversions yet, so it can't be converted to watts this way.
+                 Hence I define it as a simple linear unit derived from watt. -->
+            <!--<scale>550</scale>
             <derive>
                 <unit class="product">
                     <derive>ft</derive>
@@ -537,7 +543,7 @@ A few examples:
                         </unit>
                     </derive>
                 </unit>
-            </derive>
+            </derive>-->
         </unit>
     </category>
 </units>
