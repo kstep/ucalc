@@ -522,4 +522,22 @@ A few examples:
             </derive>
         </unit>
     </category>
+
+    <category name="misc">
+        <unit name="hp" fullname="Horse power" class="linear">
+            <scale>550</scale>
+            <derive>
+                <unit class="product">
+                    <derive>ft</derive>
+                    <derive>lbf</derive>
+                    <derive>
+                        <unit class="power">
+                            <derive>s</derive>
+                            <power>-1</power>
+                        </unit>
+                    </derive>
+                </unit>
+            </derive>
+        </unit>
+    </category>
 </units>
