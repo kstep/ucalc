@@ -67,6 +67,10 @@ class ProductUnit extends DerivedUnit {
             combinations.rewind();
         }
 
+        if (combinations.hasNext()) {
+            throw this.new ConversionException(unit);
+        }
+
         return result;
     }
 
@@ -110,6 +114,10 @@ class ProductUnit extends DerivedUnit {
             }
 
             combinations.rewind();
+        }
+
+        if (combinations.hasNext()) {
+            throw unit.new ConversionException(this);
         }
 
         return result;
