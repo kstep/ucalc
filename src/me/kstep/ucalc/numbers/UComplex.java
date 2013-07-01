@@ -3,6 +3,7 @@ package me.kstep.ucalc.numbers;
 import java.text.Format;
 
 import me.kstep.ucalc.operations.UMath;
+import me.kstep.ucalc.units.UnitNum;
 
 public class UComplex extends UNumber {
 
@@ -65,7 +66,7 @@ public class UComplex extends UNumber {
     }
 
     public UReal angle() {
-        return (UReal) UMath.atan2(imag, real);
+        return (UReal) ((UnitNum) UMath.atan2(imag, real)).value;
     }
 
     public boolean isReal() {
@@ -99,11 +100,18 @@ public class UComplex extends UNumber {
             ("(" + real.toString() + " + " + imag.toString() + "j)"));
     }
 
+	private static boolean showPolarForm = false;
+	public static void showPolarForm(boolean value) {
+		showPolarForm = value;
+	}
+	
     public String format(Format formatter) {
         return
             isReal()? real.format(formatter):
-            isImag()? imag.format(formatter) + "j":
-            "(" + real.format(formatter) + " + " + imag.format(formatter) + "j)";
+			showPolarForm?
+			("(" + abs().format(formatter) + "; " + angle().format(formatter) + ")"):
+            (isImag()? imag.format(formatter) + "j":
+            "(" + real.format(formatter) + " + " + imag.format(formatter) + "j)");
     }
 
     public UNumber add(Number other) {

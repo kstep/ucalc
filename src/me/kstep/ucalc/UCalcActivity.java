@@ -57,6 +57,7 @@ import android.content.SharedPreferences;
 import me.kstep.ucalc.views.UTextView;
 import me.kstep.ucalc.formatters.FloatingFormat;
 import me.kstep.ucalc.util.Effects;
+import me.kstep.ucalc.numbers.UComplex;
 
 public class UCalcActivity extends Activity implements SharedPreferences.OnSharedPreferenceChangeListener {
     private UStack stack;
@@ -125,6 +126,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
 
         UStack.simplfyUnits(preferences.getBoolean("simplify_units", false));
         URational.showAsFloat(!preferences.getBoolean("show_ratios", false));
+		UComplex.showPolarForm(preferences.getBoolean("show_polar_complex", false));
         Effects.setFeedback(preferences.getBoolean("haptic_feedback", false), preferences.getBoolean("sound_feedback", false));
     }
 
