@@ -10,5 +10,7 @@ class OrOp extends UOperation {
     public void apply(UState state, UStack stack) {
         stack.push(new UInteger(stack.pop().longValue() | stack.pop().longValue()));
     }
+
+    public int priority() { return PRI_ADD; } // TODO
 }
 

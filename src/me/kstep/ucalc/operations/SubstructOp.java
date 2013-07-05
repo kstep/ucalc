@@ -12,4 +12,6 @@ class SubstructOp extends UOperation {
         UNumber y = stack.pop();
         stack.push(y.sub(x));
     }
+
+    public int priority() { return PRI_ADD; }
 }

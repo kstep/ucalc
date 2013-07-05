@@ -12,5 +12,8 @@ class DecimentOp extends UOperation {
     public void apply(UState state, UStack stack) {
         stack.push(TEN.pow(stack.pop()));
     }
+
+    public int priority() { return PRI_POW; }
+    public byte assoc() { return ASSOC_RIGHT; }
 }
 

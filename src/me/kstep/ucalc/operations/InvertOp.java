@@ -9,4 +9,6 @@ class InvertOp extends UOperation {
     public void apply(UState state, UStack stack) {
         stack.push(stack.pop().inv());
     }
+
+    public int priority() { return PRI_MUL; }
 }

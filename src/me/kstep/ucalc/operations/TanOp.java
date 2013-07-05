@@ -15,4 +15,6 @@ class TanOp extends UOperation {
         }
         stack.push(UMath.tan(x));
     }
+
+    public int priority() { return PRI_FUN; }
 }

@@ -11,4 +11,6 @@ class AddOp extends UOperation {
         //Log.d("ucalc", stack.get(1).getClass().toString() + " + " + stack.get(0).getClass().toString());
         stack.push(stack.pop().add(stack.pop()));
     }
+
+    public int priority() { return PRI_ADD; }
 }

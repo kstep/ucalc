@@ -9,5 +9,8 @@ class CubicRootOp extends UOperation {
     public void apply(UState state, UStack stack) {
         stack.push(UMath.cbrt(stack.pop()));
     }
+
+    public int priority() { return PRI_POW; }
+    public byte assoc() { return ASSOC_RIGHT; }
 }
 

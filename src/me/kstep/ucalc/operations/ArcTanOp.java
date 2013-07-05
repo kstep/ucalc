@@ -13,4 +13,6 @@ class ArcTanOp extends UOperation {
         stack.push(!state.appendAngleUnit && result instanceof UnitNum?
                    ((UnitNum) result).value: result);
     }
+
+    public int priority() { return PRI_FUN; }
 }

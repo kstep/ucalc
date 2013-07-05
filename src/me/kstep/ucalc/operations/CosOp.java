@@ -15,4 +15,6 @@ class CosOp extends UOperation {
         }
         stack.push(UMath.cos(x));
     }
+
+    public int priority() { return PRI_FUN; }
 }

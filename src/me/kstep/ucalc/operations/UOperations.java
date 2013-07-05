@@ -71,6 +71,7 @@ public class UOperations extends Hashtable<CharSequence,UOperation> {
         return instance;
     }
 
+    @SuppressWarnings("rawtypes")
     public int autoFill() {
         int loaded = 0;
         for (Class c : OPERATIONS) {

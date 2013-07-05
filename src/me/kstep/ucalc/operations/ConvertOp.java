@@ -15,5 +15,7 @@ class ConvertOp extends UOperation {
             stack.push(new UnitNum(stack.pop(), ((UnitNum) x).unit));
         }
     }
+
+    public int priority() { return PRI_NUL; } // TODO
 }
 

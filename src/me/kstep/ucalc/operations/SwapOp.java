@@ -13,4 +13,6 @@ class SwapOp extends UOperation {
         stack.push(x);
         stack.push(y);
     }
+
+    public int priority() { return PRI_FUN; }
 }

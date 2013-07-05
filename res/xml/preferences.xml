@@ -6,6 +6,7 @@
 
         <CheckBoxPreference android:key="inverse_trig_units" android:title="Inverse trig units" android:summary="Reverse triginometric function results will have units" android:defaultValue="true" />
         <CheckBoxPreference android:key="simplify_units" android:title="Simplify units" android:defaultValue="true" />
+        <CheckBoxPreference android:key="natural_evaluator" android:title="Natural evalutation" android:summary="Work as normal calculator, use Enter to finish evaluation" android:defaultValue="false" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Display Settings" android:key="display">

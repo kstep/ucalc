@@ -9,4 +9,6 @@ class SquereRootOp extends UOperation {
     public void apply(UState state, UStack stack) {
         stack.push(stack.pop().root());
     }
+
+    public int priority() { return PRI_FUN; }
 }

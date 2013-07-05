@@ -12,4 +12,7 @@ class PowerOp extends UOperation {
         UNumber y = stack.pop();
         stack.push(y.pow(x));
     }
+
+    public int priority() { return PRI_POW; }
+    public byte assoc() { return ASSOC_RIGHT; }
 }

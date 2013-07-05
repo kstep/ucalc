@@ -9,4 +9,7 @@ class CubeOp extends UOperation {
     public void apply(UState state, UStack stack) {
         stack.push(stack.peek().mul(stack.peek().mul(stack.pop())));
     }
+
+    public int priority() { return PRI_POW; }
+    public byte assoc() { return ASSOC_RIGHT; }
 }

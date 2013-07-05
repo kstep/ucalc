@@ -9,4 +9,6 @@ class MultiplyOp extends UOperation {
     public void apply(UState state, UStack stack) {
         stack.push(stack.pop().mul(stack.pop()));
     }
+
+    public int priority() { return PRI_MUL; }
 }

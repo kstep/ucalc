@@ -12,4 +12,6 @@ class DivideYOp extends UOperation {
         UNumber y = stack.pop();
         stack.push(x.div(y));
     }
+
+    public int priority() { return PRI_MUL; }
 }

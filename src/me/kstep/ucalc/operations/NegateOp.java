@@ -9,4 +9,6 @@ class NegateOp extends UOperation {
     public void apply(UState state, UStack stack) {
         stack.push(stack.pop().neg());
     }
+
+    public int priority() { return PRI_FUN; }
 }

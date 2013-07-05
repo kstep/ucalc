@@ -9,4 +9,6 @@ class LogOp extends UOperation {
     public void apply(UState state, UStack stack) {
         stack.push(UMath.log10(stack.pop()));
     }
+
+    public int priority() { return PRI_FUN; }
 }

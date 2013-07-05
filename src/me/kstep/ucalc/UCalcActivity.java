@@ -59,6 +59,10 @@ import me.kstep.ucalc.formatters.FloatingFormat;
 import me.kstep.ucalc.util.Effects;
 import me.kstep.ucalc.numbers.UComplex;
 
+import me.kstep.ucalc.evaluators.UEvalulator;
+import me.kstep.ucalc.evaluators.URPNEvaluator;
+import me.kstep.ucalc.evaluators.UNaturalEvaluator;
+
 public class UCalcActivity extends Activity implements SharedPreferences.OnSharedPreferenceChangeListener {
     private UStack stack;
     private UUndoStack undos;
@@ -67,6 +71,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
     private UOperations operations;
     private UnitsManager units;
     private UState state;
+    private UEvalulator evaluator;
 
     public enum Mode {
         NORMAL,
@@ -128,6 +133,12 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
         URational.showAsFloat(!preferences.getBoolean("show_ratios", false));
 		UComplex.showPolarForm(preferences.getBoolean("show_polar_complex", false));
         Effects.setFeedback(preferences.getBoolean("haptic_feedback", false), preferences.getBoolean("sound_feedback", false));
+
+        if (preferences.getBoolean("natural_evaluator", false)) {
+            evaluator = new UNaturalEvaluator();
+        } else {
+            evaluator = new URPNEvaluator();
+        }
     }
 
     private void applyPreferences() {
@@ -144,6 +155,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
         restoreState(savedInstanceState);
 
         operations = UOperations.getInstance();
+        evaluator = new URPNEvaluator();
         undos = new UUndoStack();
 
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
@@ -361,6 +373,20 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
         } else {
             pushStack();
         }
+
+        try {
+            if (evaluator.finish(stack, state)) {
+                showStack();
+            }
+
+        } catch (UCalcException e) {
+            showToast(e.getMessage());
+            evaluator.reset();
+
+        } catch (EmptyStackException e) {
+            showToast("Stack underflow!");
+            evaluator.reset();
+        }
     }
 
     public void onBackspaceButtonClick(View view) {
@@ -386,19 +412,17 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
     public void onOperationApply(UOperation op) {
         updateStack();
 
-        if (stack.size() < op.arity()) {
-            showToast("Not enough operands!");
-        } else {
-            try {
-                op.apply(state, stack);
-                System.gc();
+        try {
+            evaluator.addOp(op, stack, state);
+            System.gc();
 
-            } catch (UCalcException e) {
-                showToast(e.getMessage());
+        } catch (UCalcException e) {
+            showToast(e.getMessage());
+            evaluator.reset();
 
-            } catch (EmptyStackException e) {
-                showToast("Stack underflow!");
-            }
+        } catch (EmptyStackException e) {
+            showToast("Stack underflow!");
+            evaluator.reset();
         }
 
         showStack();
@@ -438,6 +462,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
     public void onClearButtonClick(View view) {
         undos.push(stack.clone());
         stack.clear();
+        evaluator.reset();
         showStack();
     }
 

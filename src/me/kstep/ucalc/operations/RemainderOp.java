@@ -12,4 +12,6 @@ class RemainderOp extends UOperation {
         UNumber y = stack.pop();
         stack.push(y.mod(x));
     }
+
+    public int priority() { return PRI_MUL; }
 }

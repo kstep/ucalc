@@ -9,4 +9,6 @@ class LnOp extends UOperation {
     public void apply(UState state, UStack stack) {
         stack.push(UMath.log(stack.pop()));
     }
+
+    public int priority() { return PRI_FUN; }
 }

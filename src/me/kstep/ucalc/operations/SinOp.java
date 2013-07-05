@@ -15,4 +15,6 @@ class SinOp extends UOperation {
         }
         stack.push(UMath.sin(x));
     }
+
+    public int priority() { return PRI_FUN; }
 }
