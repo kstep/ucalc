@@ -15,6 +15,7 @@ import android.util.Log;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.content.Intent;
 import android.view.View;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -30,6 +31,8 @@ import android.app.FragmentTransaction;
 import android.app.ActionBar;
 import android.preference.PreferenceManager;
 
+import me.kstep.ucalc.activities.UPreferenceActivity;
+
 import me.kstep.ucalc.views.UEditView;
 import me.kstep.ucalc.views.UStackView;
 import me.kstep.ucalc.views.UNoticeDialog;
@@ -37,7 +40,6 @@ import me.kstep.ucalc.views.UToast;
 
 import me.kstep.ucalc.views.UStackFragment;
 import me.kstep.ucalc.views.UMemoryFragment;
-import me.kstep.ucalc.views.USettingsFragment;
 import me.kstep.ucalc.views.URadixDialog;
 import me.kstep.ucalc.views.UUnitsView;
 
@@ -237,13 +239,9 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
         return memory;
     }
 
-    private USettingsFragment settings_fragment = null;
     public void onOptionsButtonClick(View view) {
-        if (settings_fragment == null) {
-            settings_fragment = new USettingsFragment();
-        }
-
-        startFragment(settings_fragment, "Settings");
+        Intent intent = new Intent(this, UPreferenceActivity.class);
+        startActivity(intent);
     }
 
     public void setRadix(int value) {
