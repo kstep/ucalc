@@ -515,6 +515,8 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
             ab.setTitle(title);
             ab.show();
         }
+
+        invalidateOptionsMenu(); // give fragment a chance to update options menu
     }
 
     public boolean finishFragment() {

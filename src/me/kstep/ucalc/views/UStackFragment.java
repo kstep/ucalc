@@ -9,6 +9,9 @@ import android.widget.ListView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.View;
+import android.view.MenuInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.content.Context;
 import android.content.ClipboardManager;
 import android.content.ClipData;
@@ -45,17 +48,19 @@ public class UStackFragment extends ListFragment {
     ArrayAdapter<UNumber> adapter;
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceBundle) {
-        super.onActivityCreated(savedInstanceBundle);
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.stack_context_menu, menu);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
         final UCalcActivity activity = (UCalcActivity) getActivity();
         final ClipboardManager clipboard = (ClipboardManager) activity.getSystemService(Context.CLIPBOARD_SERVICE);
 
-        adapter = new StackAdapter<UNumber>(activity, R.layout.list_item, R.id.list_item, activity.getStack());
-        setListAdapter(adapter);
-
-        ((Button) activity.findViewById(R.id.stack_copy_button)).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
+        switch (item.getItemId()) {
+            case R.id.menu_copy:
                 try {
                     ListView lv = getListView();
                     int index = lv.getCheckedItemPosition();
@@ -64,24 +69,35 @@ public class UStackFragment extends ListFragment {
 
                 } catch (ArrayIndexOutOfBoundsException e) {
                 }
-            }
-        });
+            return true;
 
-        ((Button) activity.findViewById(R.id.stack_paste_button)).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
+            case R.id.menu_paste:
                 try {
                     Double value = Double.valueOf(clipboard.getPrimaryClip().getItemAt(0).coerceToText(activity).toString());
                     if (value != null) {
-                        UNumber item = new UFloat(value);
-                        adapter.insert(item, 0);
+                        UNumber num = new UFloat(value);
+                        adapter.insert(num, 0);
                         getListView().setItemChecked(0, true);
                     }
 
                 } catch (NullPointerException e) {
                 } catch (NumberFormatException e) {
                 }
-            }
-        });
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceBundle) {
+        super.onActivityCreated(savedInstanceBundle);
+        setHasOptionsMenu(true);
+
+        final UCalcActivity activity = (UCalcActivity) getActivity();
+
+        adapter = new StackAdapter<UNumber>(activity, R.layout.list_item, R.id.list_item, activity.getStack());
+        setListAdapter(adapter);
 
         DragSortListView dslv = (DragSortListView) getListView();
         dslv.setDropListener(new DragSortListView.DropListener() {
