@@ -104,7 +104,7 @@ public class UMemoryFragment extends ListFragment {
         View view = inflater.inflate(R.layout.umemory_view, null);
 
         ActionBar ab = getActivity().getActionBar();
-        ab.setTitle("Memory");
+        ab.setTitle(R.string.frag_title_memory);
         ab.show();
 
         return view;

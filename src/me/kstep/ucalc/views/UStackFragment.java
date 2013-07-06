@@ -129,7 +129,7 @@ public class UStackFragment extends ListFragment {
         View view = inflater.inflate(R.layout.ustack_view, null);
 
         ActionBar ab = getActivity().getActionBar();
-        ab.setTitle("Stack");
+        ab.setTitle(R.string.frag_title_stack);
         ab.show();
 
         return view;
