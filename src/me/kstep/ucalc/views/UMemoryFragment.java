@@ -5,6 +5,7 @@ import java.util.EmptyStackException;
 import android.app.ListFragment;
 import android.app.ActionBar;
 import android.os.Bundle;
+import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 
@@ -34,6 +35,12 @@ public class UMemoryFragment extends ListFragment {
         inflater.inflate(R.menu.memory_context_menu, menu);
     }
 
+    public void setSelection(int pos) {
+        ListView lv = getListView();
+        lv.requestFocusFromTouch();
+        lv.setSelection(0);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         final UStack stack = ((UCalcActivity) getActivity()).getStack();
@@ -42,7 +49,7 @@ public class UMemoryFragment extends ListFragment {
             case R.id.menu_store:
                 try {
                     adapter.insert(stack.peek(), 0);
-                    getListView().setItemChecked(0, true);
+                    setSelection(0);
 
                 } catch (EmptyStackException e) {
                 }

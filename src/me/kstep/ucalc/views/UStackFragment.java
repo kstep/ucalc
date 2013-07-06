@@ -55,6 +55,12 @@ public class UStackFragment extends ListFragment {
         inflater.inflate(R.menu.stack_context_menu, menu);
     }
 
+    public void setSelection(int pos) {
+        ListView lv = getListView();
+        lv.requestFocusFromTouch();
+        lv.setSelection(0);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         final UCalcActivity activity = (UCalcActivity) getActivity();
@@ -78,7 +84,7 @@ public class UStackFragment extends ListFragment {
                     if (value != null) {
                         UNumber num = new UFloat(value);
                         adapter.insert(num, 0);
-                        getListView().setItemChecked(0, true);
+                        setSelection(0);
                     }
 
                 } catch (NullPointerException e) {

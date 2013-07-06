@@ -9,6 +9,7 @@
     android:dividerHeight="1dp"
     android:drawSelectorOnTop="false"
     android:choiceMode="singleChoice"
+    android:listSelector="?android:attr/colorActivatedHighlight"
     android:background="?android:attr/windowBackground"
 
     dslv:drag_enabled="true"
