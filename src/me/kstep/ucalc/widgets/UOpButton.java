@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.util.AttributeSet;
 
-import me.kstep.ucalc.UCalcActivity;
+import me.kstep.ucalc.activities.UCalcActivity;
 import me.kstep.ucalc.operations.UOperations;
 import me.kstep.ucalc.operations.UOperationException;
 

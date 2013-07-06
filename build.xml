@@ -87,7 +87,7 @@
             <arg value="am" />
             <arg value="start" />
             <arg value="-n" />
-            <arg value="me.kstep.ucalc/me.kstep.ucalc.UCalcActivity" />
+            <arg value="me.kstep.ucalc/me.kstep.ucalc.activities.UCalcActivity" />
         </exec>
     </target>
 </project>

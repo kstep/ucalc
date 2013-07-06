@@ -1,4 +1,4 @@
-package me.kstep.ucalc;
+package me.kstep.ucalc.activities;
 
 import java.util.EmptyStackException;
 import java.util.ArrayList;
@@ -59,11 +59,20 @@ import android.content.SharedPreferences;
 import me.kstep.ucalc.views.UTextView;
 import me.kstep.ucalc.formatters.FloatingFormat;
 import me.kstep.ucalc.util.Effects;
+import me.kstep.ucalc.util.UCalcException;
 import me.kstep.ucalc.numbers.UComplex;
 
 import me.kstep.ucalc.evaluators.UEvalulator;
 import me.kstep.ucalc.evaluators.URPNEvaluator;
 import me.kstep.ucalc.evaluators.UNaturalEvaluator;
+
+import me.kstep.ucalc.collections.UStack;
+import me.kstep.ucalc.collections.UState;
+import me.kstep.ucalc.collections.UUndoStack;
+import me.kstep.ucalc.collections.UMemory;
+import me.kstep.ucalc.collections.UConstants;
+
+import me.kstep.ucalc.R;
 
 public class UCalcActivity extends Activity implements SharedPreferences.OnSharedPreferenceChangeListener {
     private UStack stack;

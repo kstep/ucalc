@@ -6,7 +6,7 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
-import me.kstep.ucalc.UCalcActivity;
+import me.kstep.ucalc.activities.UCalcActivity;
 
 public class URadixDialog extends DialogFragment implements DialogInterface.OnClickListener {
 

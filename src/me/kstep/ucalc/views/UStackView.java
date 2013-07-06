@@ -8,7 +8,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 import me.kstep.ucalc.numbers.UNumber;
-import me.kstep.ucalc.UStack;
+import me.kstep.ucalc.collections.UStack;
 
 public class UStackView extends UTextView {
     public UStackView(Context context) {

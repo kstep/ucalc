@@ -1,4 +1,4 @@
-package me.kstep.ucalc;
+package me.kstep.ucalc.collections;
 
 import java.util.Hashtable;
 
@@ -6,9 +6,9 @@ import me.kstep.ucalc.units.UnitNum;
 import me.kstep.ucalc.units.UnitsManager;
 import me.kstep.ucalc.units.Unit;
 
-final class UConstants extends Hashtable<CharSequence,UConstants.Item> {
+final public class UConstants extends Hashtable<CharSequence,UConstants.Item> {
 
-    class Item {
+    public static class Item {
         final public String name;
         final public String description;
         final public Number value;

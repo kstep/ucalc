@@ -17,7 +17,7 @@ import android.content.ClipboardManager;
 import android.content.ClipData;
 
 import java.util.Stack;
-import me.kstep.ucalc.UCalcActivity;
+import me.kstep.ucalc.activities.UCalcActivity;
 import me.kstep.ucalc.numbers.UNumber;
 import me.kstep.ucalc.numbers.UFloat;
 

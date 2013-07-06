@@ -1,4 +1,4 @@
-package me.kstep.ucalc;
+package me.kstep.ucalc.collections;
 
 import java.util.ArrayList;
 

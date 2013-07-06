@@ -10,7 +10,7 @@ import me.kstep.ucalc.units.Unit;
 import me.kstep.ucalc.units.UnitsManager;
 import me.kstep.ucalc.units.UnitPrefix;
 
-import me.kstep.ucalc.UCalcActivity;
+import me.kstep.ucalc.activities.UCalcActivity;
 
 import me.kstep.ucalc.util.TableView;
 import me.kstep.ucalc.util.KeypadAdapter;

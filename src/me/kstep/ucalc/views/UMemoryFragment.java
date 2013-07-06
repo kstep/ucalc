@@ -17,8 +17,8 @@ import android.view.MenuItem;
 import com.mobeta.android.dslv.DragSortListView;
 import com.mobeta.android.dslv.DragSortController;
 
-import me.kstep.ucalc.UCalcActivity;
-import me.kstep.ucalc.UStack;
+import me.kstep.ucalc.activities.UCalcActivity;
+import me.kstep.ucalc.collections.UStack;
 import me.kstep.ucalc.numbers.UNumber;
 
 import me.kstep.ucalc.R;

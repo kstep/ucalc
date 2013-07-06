@@ -1,6 +1,6 @@
 package me.kstep.ucalc.numbers;
 
-import me.kstep.ucalc.UCalcException;
+import me.kstep.ucalc.util.UCalcException;
 
 public class UNumberException extends UCalcException {
     final static long serialVersionUID = 0L;

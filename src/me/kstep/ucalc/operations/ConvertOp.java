@@ -1,10 +1,10 @@
 package me.kstep.ucalc.operations;
 
-import me.kstep.ucalc.UStack;
+import me.kstep.ucalc.collections.UStack;
 import me.kstep.ucalc.numbers.UNumber;
 import me.kstep.ucalc.units.UnitNum;
 import me.kstep.ucalc.units.Unit;
-import me.kstep.ucalc.UState;
+import me.kstep.ucalc.collections.UState;
 
 class ConvertOp extends UOperation {
     public int arity() { return 2; }

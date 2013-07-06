@@ -1,4 +1,4 @@
-package me.kstep.ucalc;
+package me.kstep.ucalc.util;
 
 abstract public class UCalcException extends RuntimeException {
     public UCalcException(String message) {

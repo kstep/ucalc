@@ -8,7 +8,7 @@ import me.kstep.ucalc.units.UnitsManager;
 import me.kstep.ucalc.units.UnitException;
 import me.kstep.ucalc.units.Unit;
 
-import me.kstep.ucalc.UCalcActivity;
+import me.kstep.ucalc.activities.UCalcActivity;
 import android.view.ViewGroup;
 
 public class UUnitButton extends UButton implements View.OnClickListener, View.OnLongClickListener {

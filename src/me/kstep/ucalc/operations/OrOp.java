@@ -1,8 +1,8 @@
 package me.kstep.ucalc.operations;
 
-import me.kstep.ucalc.UStack;
+import me.kstep.ucalc.collections.UStack;
 import me.kstep.ucalc.numbers.UInteger;
-import me.kstep.ucalc.UState;
+import me.kstep.ucalc.collections.UState;
 
 class OrOp extends UOperation {
     public int arity() { return 2; }

@@ -1,7 +1,7 @@
 package me.kstep.ucalc.operations;
 
-import me.kstep.ucalc.UStack;
-import me.kstep.ucalc.UState;
+import me.kstep.ucalc.collections.UStack;
+import me.kstep.ucalc.collections.UState;
 
 class InvertOp extends UOperation {
     public int arity() { return 1; }
