@@ -2,6 +2,12 @@
 <resources>
     <string name="app_name">UCalc Beta</string>
 
+    <string name="frag_title_memory">Memory</string>
+    <string name="frag_title_stack">Stack</string>
+
+    <string name="pref_title_general">General Settings</string>
+    <string name="pref_title_display">Display Settings</string>
+
     <string name="pref_title_dark_theme">Dark theme</string>
     <string name="pref_title_sound_feedback">Sound</string>
     <string name="pref_title_haptic_feedback">Haptic feedback</string>
@@ -10,7 +16,6 @@
     <string name="pref_title_natural_evaluator">Natural evalutation</string>
     <string name="pref_title_naive_evaluator">Naive arithmetics</string>
     <string name="pref_title_rpn_functions_evaluator">RPN-style functions</string>
-    <string name="pref_title_display">Display Settings</string>
     <string name="pref_title_precision">Precision</string>
     <string name="pref_title_decimal_separator">Decimal separator</string>
     <string name="pref_title_group_separator">Group separator</string>

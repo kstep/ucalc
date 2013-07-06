@@ -2,6 +2,9 @@
 <resources>
     <string name="app_name">UCalc Beta</string>
 
+    <string name="frag_title_memory">Память</string>
+    <string name="frag_title_stack">Стек</string>
+
     <string name="pref_title_general">Основные настройки</string>
     <string name="pref_title_display">Настройки отображения</string>
 
