@@ -16,6 +16,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.view.View;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -126,7 +127,14 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
         state = (UState) loadFromFile("state.bin", new UState());
     }
 
-    private void applyPreferences(SharedPreferences preferences) {
+    private int oldThemeId = android.R.style.Theme_Holo_Light;
+
+    private void applyPreferences(SharedPreferences preferences, boolean canRecreate) {
+        int themeId = preferences.getBoolean("dark_theme", false)? android.R.style.Theme_Holo: android.R.style.Theme_Holo_Light;
+        setTheme(themeId);
+        if (canRecreate && oldThemeId != themeId) { recreate(); }
+        oldThemeId = themeId;
+
         UTextView editView = (UTextView) findViewById(R.id.view_edit);
         FloatingFormat newFormat = new FloatingFormat(
                 preferences.getInt("precision", 7),
@@ -169,8 +177,8 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
         }
     }
 
-    private void applyPreferences() {
-        applyPreferences(PreferenceManager.getDefaultSharedPreferences(this));
+    private void applyPreferences(boolean canRecreate) {
+        applyPreferences(PreferenceManager.getDefaultSharedPreferences(this), canRecreate);
     }
 
     /** Called when the activity is first created. */
@@ -187,7 +195,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
         undos = new UUndoStack();
 
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
-        applyPreferences();
+        applyPreferences(false);
 
         setContentView(R.layout.main);
         showStack();
@@ -201,7 +209,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
     }
 
     public void onSharedPreferenceChanged(SharedPreferences preferences, String key) {
-        applyPreferences(preferences);
+        applyPreferences(preferences, true);
     }
 
     @Override
@@ -267,6 +275,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
 
     public void onOptionsButtonClick(View view) {
         Intent intent = new Intent(this, UPreferenceActivity.class);
+        intent.putExtra("themeId", oldThemeId);
         startActivity(intent);
     }
 
@@ -509,7 +518,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
             stack_fragment = new UStackFragment();
         }
 
-        startFragment(stack_fragment, "Stack");
+        startFragment(stack_fragment);
     }
 
     private UMemoryFragment memory_fragment;
@@ -518,7 +527,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
             memory_fragment = new UMemoryFragment();
         }
 
-        startFragment(memory_fragment, "Memory");
+        startFragment(memory_fragment);
     }
 
     public void onSelectRadixButtonClick(View view) {
@@ -526,7 +535,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
         dialog.show(getFragmentManager(), "popup");
     }
 
-    public void startFragment(Fragment fragment, String title) {
+    public void startFragment(Fragment fragment) {
         updateStack();
 
         FragmentManager fragman = getFragmentManager();
@@ -535,12 +544,6 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
         txn.add(R.id.main_layout, fragment);
         txn.addToBackStack(null);
         txn.commit();
-
-        if (title != null) {
-            ActionBar ab = getActionBar();
-            ab.setTitle(title);
-            ab.show();
-        }
 
         invalidateOptionsMenu(); // give fragment a chance to update options menu
     }

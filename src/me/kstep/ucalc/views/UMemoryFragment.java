@@ -3,6 +3,7 @@ package me.kstep.ucalc.views;
 import java.util.EmptyStackException;
 
 import android.app.ListFragment;
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -94,6 +95,11 @@ public class UMemoryFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceBundle) {
         View view = inflater.inflate(R.layout.umemory_view, null);
+
+        ActionBar ab = getActivity().getActionBar();
+        ab.setTitle("Memory");
+        ab.show();
+
         return view;
     }
 }

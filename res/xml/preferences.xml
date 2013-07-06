@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:key="general" android:title="General Settings">
+        <CheckBoxPreference android:key="dark_theme" android:title="Dark theme" android:defaultValue="false" />
         <CheckBoxPreference android:key="sound_feedback" android:title="Sound" android:summary="Clicking sound on buttons press" android:defaultValue="false" />
         <CheckBoxPreference android:key="haptic_feedback" android:title="Haptic feedback" android:summary="Vibrate on buttons press" android:defaultValue="false" />
 

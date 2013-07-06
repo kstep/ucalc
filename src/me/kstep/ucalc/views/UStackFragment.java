@@ -1,5 +1,6 @@
 package me.kstep.ucalc.views;
 
+import android.app.ActionBar;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -120,6 +121,11 @@ public class UStackFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceBundle) {
         View view = inflater.inflate(R.layout.ustack_view, null);
+
+        ActionBar ab = getActivity().getActionBar();
+        ab.setTitle("Stack");
+        ab.show();
+
         return view;
     }
 }

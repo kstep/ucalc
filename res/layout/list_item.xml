@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/list_item"
     android:gravity="bottom"
     android:orientation="horizontal"
     android:layout_width="match_parent"
@@ -13,7 +12,6 @@
     android:paddingTop="5dp"
     android:paddingBottom="5dp"
     android:textSize="24sp"
-    android:textColor="#000000"
     android:gravity="left|center_vertical|clip_horizontal"
     android:layout_height="match_parent"
     android:layout_weight="1"
