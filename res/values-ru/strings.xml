@@ -4,6 +4,12 @@
 
     <string name="settings_title">Настройки</string>
 
+    <string name="menu_copy">Копировать</string>
+    <string name="menu_paste">Вставить</string>
+    <string name="menu_clear">Очистить</string>
+    <string name="menu_recall">Вернуть</string>
+    <string name="menu_store">Запомнить</string>
+
     <string name="frag_title_memory">Память</string>
     <string name="frag_title_stack">Стек</string>
 

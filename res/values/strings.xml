@@ -4,6 +4,12 @@
 
     <string name="settings_title">Settings</string>
 
+    <string name="menu_copy">Copy</string>
+    <string name="menu_paste">Paste</string>
+    <string name="menu_clear">Clear</string>
+    <string name="menu_recall">Recall</string>
+    <string name="menu_store">Store</string>
+
     <string name="frag_title_memory">Memory</string>
     <string name="frag_title_stack">Stack</string>
 
