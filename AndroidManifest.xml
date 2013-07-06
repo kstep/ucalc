@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.UPreferenceActivity" android:label="Settings" android:screenOrientation="portrait">
+        <activity android:name=".activities.UPreferenceActivity" android:label="@string/settings_title" android:screenOrientation="portrait">
             <intent-filter>
                 <category android:name="android.intent.category.PREFERENCE" />
             </intent-filter>
