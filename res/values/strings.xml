@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">UCalc Beta</string>
 
+    <string name="pref_title_dark_theme">Dark theme</string>
+    <string name="pref_title_sound_feedback">Sound</string>
+    <string name="pref_title_haptic_feedback">Haptic feedback</string>
+    <string name="pref_title_inverse_trig_units">Inverse trig units</string>
+    <string name="pref_title_simplify_units">Simplify units</string>
+    <string name="pref_title_natural_evaluator">Natural evalutation</string>
+    <string name="pref_title_naive_evaluator">Naive arithmetics</string>
+    <string name="pref_title_rpn_functions_evaluator">RPN-style functions</string>
+    <string name="pref_title_display">Display Settings</string>
+    <string name="pref_title_precision">Precision</string>
+    <string name="pref_title_decimal_separator">Decimal separator</string>
+    <string name="pref_title_group_separator">Group separator</string>
+    <string name="pref_title_group_size">Group size</string>
+    <string name="pref_title_show_ratios">Ratios as is if possible</string>
+    <string name="pref_title_show_polar_complex">Polar complex numbers</string>
+
+    <string name="pref_summary_sound_feedback">Clicking sound on buttons press</string>
+    <string name="pref_summary_haptic_feedback">Vibrate on buttons press</string>
+    <string name="pref_summary_inverse_trig_units">Reverse triginometric function results will have units</string>
+    <string name="pref_summary_natural_evaluator">Work as normal calculator, use Enter to finish evaluation</string>
+    <string name="pref_summary_naive_evaluator">Do not take operations precedence into account</string>
+    <string name="pref_summary_rpn_functions_evaluator">Execute function on stack immediately (like in RPN mode)</string>
+    <string name="pref_summary_precision">Number of decimal digits to display (highest precision available is used inside anyway)</string>
+    <string name="pref_summary_show_ratios">Show 0.3333… as 1/3, unless tainted by irrational numbers like π</string>
+    <string name="pref_summary_show_polar_complex">Show complex numbers as a pair of magnitude and angle</string>
 </resources>
