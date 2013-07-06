@@ -4,7 +4,6 @@ import me.kstep.ucalc.operations.UOperation;
 import me.kstep.ucalc.collections.UStack;
 import me.kstep.ucalc.collections.UState;
 import java.util.Stack;
-import java.util.EmptyStackException;
 
 public class UNaturalEvaluator extends UEvalulator {
     static private class OpStack extends Stack<UOperation> {

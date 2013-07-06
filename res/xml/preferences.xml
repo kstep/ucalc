@@ -7,6 +7,9 @@
         <CheckBoxPreference android:key="inverse_trig_units" android:title="Inverse trig units" android:summary="Reverse triginometric function results will have units" android:defaultValue="true" />
         <CheckBoxPreference android:key="simplify_units" android:title="Simplify units" android:defaultValue="true" />
         <CheckBoxPreference android:key="natural_evaluator" android:title="Natural evalutation" android:summary="Work as normal calculator, use Enter to finish evaluation" android:defaultValue="false" />
+
+        <CheckBoxPreference android:dependency="natural_evaluator" android:key="naive_evaluator" android:title="Naive arithmetics" android:summary="Do not take operations precedence into account" android:defaultValue="false" />
+        <CheckBoxPreference android:dependency="natural_evaluator" android:key="rpn_functions_evaluator" android:title="RPN-style functions" android:summary="Execute function on stack immediately (like in RPN mode)" android:defaultValue="true" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Display Settings" android:key="display">

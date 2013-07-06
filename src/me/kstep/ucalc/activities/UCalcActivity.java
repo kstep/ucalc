@@ -65,6 +65,9 @@ import me.kstep.ucalc.numbers.UComplex;
 import me.kstep.ucalc.evaluators.UEvalulator;
 import me.kstep.ucalc.evaluators.URPNEvaluator;
 import me.kstep.ucalc.evaluators.UNaturalEvaluator;
+import me.kstep.ucalc.evaluators.UNaturalFnEvaluator;
+import me.kstep.ucalc.evaluators.UNaiveEvaluator;
+import me.kstep.ucalc.evaluators.UNaiveFnEvaluator;
 
 import me.kstep.ucalc.collections.UStack;
 import me.kstep.ucalc.collections.UState;
@@ -146,7 +149,21 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
         Effects.setFeedback(preferences.getBoolean("haptic_feedback", false), preferences.getBoolean("sound_feedback", false));
 
         if (preferences.getBoolean("natural_evaluator", false)) {
-            evaluator = new UNaturalEvaluator();
+
+            if (preferences.getBoolean("naive_evaluator", false)) {
+                if (preferences.getBoolean("rpn_functions_evaluator", true)) {
+                    evaluator = new UNaiveFnEvaluator();
+                } else {
+                    evaluator = new UNaiveEvaluator();
+                }
+            } else {
+                if (preferences.getBoolean("rpn_functions_evaluator", true)) {
+                    evaluator = new UNaturalFnEvaluator();
+                } else {
+                    evaluator = new UNaturalEvaluator();
+                }
+            }
+
         } else {
             evaluator = new URPNEvaluator();
         }
