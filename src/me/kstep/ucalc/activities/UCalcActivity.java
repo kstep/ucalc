@@ -396,16 +396,19 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
     }
 
     public void onEnterButtonClick(View view) {
+        boolean pushNeeded = false;
 
         if (editView.isEditing()) {
             updateStack();
         } else {
-            pushStack();
+            pushNeeded = true;
         }
 
         try {
             if (evaluator.finish(stack, state)) {
                 showStack();
+            } else if (pushNeeded) {
+                pushStack();
             }
 
         } catch (UCalcException e) {

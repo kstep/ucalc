@@ -14,6 +14,10 @@ public class UNaturalEvaluator extends UEvalulator {
 
     @Override
     public boolean finish(UStack stack, UState state) {
+        if (opStack.size() == 0) {
+            return false;
+        }
+
         while (opStack.size() > 0) {
             opStack.pop().apply(state, stack);
         }

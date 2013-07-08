@@ -12,9 +12,10 @@ public class UNaiveEvaluator extends UEvalulator {
         if (lastOp != null) {
             lastOp.apply(state, stack);
             lastOp = null;
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     @Override
