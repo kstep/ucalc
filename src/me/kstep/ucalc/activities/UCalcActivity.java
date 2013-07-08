@@ -135,7 +135,6 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
         if (canRecreate && oldThemeId != themeId) { recreate(); }
         oldThemeId = themeId;
 
-        UTextView editView = (UTextView) findViewById(R.id.view_edit);
         FloatingFormat newFormat = new FloatingFormat(
                 preferences.getInt("precision", 7),
                 preferences.getInt("group_size", 3),
@@ -146,7 +145,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
             UTextView.setGlobalFormat(newFormat);
         } else {
             editView.setFormat(newFormat);
-            ((UTextView) findViewById(R.id.view_stack)).setFormat(newFormat);
+            stackView.setFormat(newFormat);
         }
 
         state.appendAngleUnit = preferences.getBoolean("inverse_trig_units", true);
@@ -181,6 +180,9 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
         applyPreferences(PreferenceManager.getDefaultSharedPreferences(this), canRecreate);
     }
 
+    private UEditView editView;
+    private UStackView stackView;
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -198,6 +200,9 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
         applyPreferences(false);
 
         setContentView(R.layout.main);
+        stackView = (UStackView) findViewById(R.id.view_stack);
+        editView = (UEditView) findViewById(R.id.view_edit);
+
         showStack();
 
         ActionBar ab = getActionBar();
@@ -295,7 +300,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
         }
     }
     private void pushStack() {
-        pushStack(((UEditView) findViewById(R.id.view_edit)).getValue());
+        pushStack(editView.getValue());
     }
 
     /**
@@ -314,8 +319,6 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
     }
 
     private void showStack() {
-        UEditView editView = (UEditView) findViewById(R.id.view_edit);
-        UStackView stackView = (UStackView) findViewById(R.id.view_stack);
         editView.stopEditing();
 
         try {
@@ -328,7 +331,6 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
     }
 
     public void updateStack() {
-        UEditView editView = (UEditView) findViewById(R.id.view_edit);
         Number value = editView.getValue();
 
         popStack();
@@ -344,7 +346,6 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
     }
 
     public void onDigitEnter(CharSequence ch) {
-        UEditView editView = (UEditView) findViewById(R.id.view_edit);
         if (!editView.isEditing()) {
             pushStack();
             editView.setValue(Float.NaN);
@@ -355,7 +356,6 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
     }
 
     public void onUnitEnter(Unit unit) {
-        UEditView editView = (UEditView) findViewById(R.id.view_edit);
         UToggleButton button = (UToggleButton) findViewById(R.id.main_layout).findViewWithTag(unit.getCategory().toString());
         button.performClick();
 
@@ -379,7 +379,6 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
     }
 
     public void onDotButtonClick(View view) {
-        UEditView editView = (UEditView) findViewById(R.id.view_edit);
         String text = editView.getText().toString();
         if (!editView.isEditing()) {
             pushStack();
@@ -391,15 +390,12 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
     }
 
     public void onConstantPush(CharSequence name) {
-        UEditView editView = (UEditView) findViewById(R.id.view_edit);
-
         if (constants.containsKey(name)) {
             pushStack(constants.get(name).value);
         }
     }
 
     public void onEnterButtonClick(View view) {
-        UEditView editView = (UEditView) findViewById(R.id.view_edit);
 
         if (editView.isEditing()) {
             updateStack();
@@ -423,7 +419,6 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
     }
 
     public void onBackspaceButtonClick(View view) {
-        UEditView editView = (UEditView) findViewById(R.id.view_edit);
         if (!editView.isEmpty()) {
             if (editView.isEditing()) {
                 Number value = editView.getValue();
@@ -470,7 +465,6 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
     }
 
     public void onSignToggleButtonClick(View view) {
-        UEditView editView = (UEditView) findViewById(R.id.view_edit);
         if (!editView.isEmpty()) {
             if (editView.isEditing()) {
                 editView.toggleSign();
@@ -481,7 +475,6 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
     }
 
     public void onExponentButtonClick(View view) {
-        UEditView editView = (UEditView) findViewById(R.id.view_edit);
         String text = editView.getText().toString();
         if (!editView.isEditing()) {
             pushStack();
