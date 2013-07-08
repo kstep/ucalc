@@ -129,10 +129,12 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
 
     private int oldThemeId = android.R.style.Theme_Holo_Light;
 
-    private void applyPreferences(SharedPreferences preferences, boolean canRecreate) {
+    private void applyPreferences(SharedPreferences preferences, boolean viewInitialized) {
         int themeId = preferences.getBoolean("dark_theme", false)? android.R.style.Theme_Holo: android.R.style.Theme_Holo_Light;
         setTheme(themeId);
-        if (canRecreate && oldThemeId != themeId) { recreate(); }
+
+        if (viewInitialized && (oldThemeId != themeId)) { recreate(); }
+
         oldThemeId = themeId;
 
         FloatingFormat newFormat = new FloatingFormat(
@@ -174,10 +176,14 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
         } else {
             evaluator = new URPNEvaluator();
         }
+
+        if (stackView != null) {
+            showStack();
+        }
     }
 
-    private void applyPreferences(boolean canRecreate) {
-        applyPreferences(PreferenceManager.getDefaultSharedPreferences(this), canRecreate);
+    private void applyPreferences(boolean viewInitialized) {
+        applyPreferences(PreferenceManager.getDefaultSharedPreferences(this), viewInitialized);
     }
 
     private UEditView editView;
