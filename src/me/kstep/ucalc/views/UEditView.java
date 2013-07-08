@@ -37,7 +37,7 @@ public class UEditView extends UTextView {
         if (UNumber.isNaN(newval)) {
             setText("");
         } else {
-            setText(UNumber.format(value, formatter));
+            setText(editing? value.toString(): UNumber.format(value, formatter));
         }
         syncValue = true;
     }
