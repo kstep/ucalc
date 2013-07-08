@@ -328,6 +328,8 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
         } catch (EmptyStackException e) {
             editView.setValue(Float.NaN);
         }
+
+        ((TextView) findViewById(R.id.evaluator_indicator)).setText(evaluator.indicator());
     }
 
     public void updateStack() {

@@ -22,4 +22,9 @@ public class URPNEvaluator extends UEvalulator {
 
         op.apply(state, stack);
     }
+
+    @Override
+    public String indicator() {
+        return "";
+    }
 }

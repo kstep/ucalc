@@ -31,5 +31,10 @@ public class UNaiveEvaluator extends UEvalulator {
     public void reset() {
         lastOp = null;
     }
+
+    @Override
+    public String indicator() {
+        return lastOp == null? "": lastOp.toString();
+    }
 }
 

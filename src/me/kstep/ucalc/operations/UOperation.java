@@ -27,4 +27,8 @@ abstract public class UOperation {
 
     final static public byte ASSOC_LEFT = 0;
     final static public byte ASSOC_RIGHT = 1;
+
+    public String toString() {
+        return name().toString();
+    }
 }

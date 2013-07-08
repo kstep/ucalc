@@ -3,6 +3,7 @@ package me.kstep.ucalc.evaluators;
 import me.kstep.ucalc.operations.UOperation;
 import me.kstep.ucalc.collections.UStack;
 import me.kstep.ucalc.collections.UState;
+import me.kstep.ucalc.util.TextUtil;
 import java.util.Stack;
 
 public class UNaturalEvaluator extends UEvalulator {
@@ -46,5 +47,12 @@ public class UNaturalEvaluator extends UEvalulator {
     @Override
     public void reset() {
         opStack.clear();
+    }
+
+    @Override
+    public String indicator() {
+        return (opStack.size() == 0)? "": (
+                opStack.peek().toString() + (opStack.size() == 1? "": TextUtil.superscriptInt(opStack.size()))
+            );
     }
 }

@@ -9,8 +9,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.graphics.Typeface;
 
-import android.text.Html;
-import android.text.Spanned;
+import me.kstep.ucalc.util.TextUtil;
 import me.kstep.ucalc.formatters.FloatingFormat;
 
 public class UTextView extends TextView {
@@ -40,26 +39,8 @@ public class UTextView extends TextView {
         setFormat(getGlobalFormat());
     }
 
-    public static Spanned unicodeToHtml(CharSequence value) {
-        return Html.fromHtml(
-               value.toString()
-                    .replace("\n", "<br />")
-                    .replace("⁰", "<sup><small>0</small></sup>")
-                    .replace("¹", "<sup><small>1</small></sup>")
-                    .replace("²", "<sup><small>2</small></sup>")
-                    .replace("³", "<sup><small>3</small></sup>")
-                    .replace("⁴", "<sup><small>4</small></sup>")
-                    .replace("⁵", "<sup><small>5</small></sup>")
-                    .replace("⁶", "<sup><small>6</small></sup>")
-                    .replace("⁷", "<sup><small>7</small></sup>")
-                    .replace("⁸", "<sup><small>8</small></sup>")
-                    .replace("⁹", "<sup><small>9</small></sup>")
-                    .replace("¯", "<sup><small>−</small></sup>")
-                    .replace("</small></sup><sup><small>", ""));
-    }
-
     public void setHtml(CharSequence value) {
-        setText(unicodeToHtml(value));
+        setText(TextUtil.unicodeToHtml(value));
     }
 
     protected static NumberFormat globalFormatter = null;
