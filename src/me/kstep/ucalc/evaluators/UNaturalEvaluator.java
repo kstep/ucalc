@@ -52,7 +52,7 @@ public class UNaturalEvaluator extends UEvalulator {
     @Override
     public String indicator() {
         return (opStack.size() == 0)? "": (
-                opStack.peek().toString() + (opStack.size() == 1? "": TextUtil.superscriptInt(opStack.size()))
+                opStack.peek().toString() + (opStack.size() == 1? "": TextUtil.subscriptInt(opStack.size()))
             );
     }
 }
