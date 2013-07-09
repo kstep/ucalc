@@ -8,6 +8,7 @@ public class TextUtil {
         return Html.fromHtml(
                value.toString()
                     .replace("\n", "<br />")
+
                     .replace("⁰", "<sup><small>0</small></sup>")
                     .replace("¹", "<sup><small>1</small></sup>")
                     .replace("²", "<sup><small>2</small></sup>")
@@ -19,41 +20,55 @@ public class TextUtil {
                     .replace("⁸", "<sup><small>8</small></sup>")
                     .replace("⁹", "<sup><small>9</small></sup>")
                     .replace("¯", "<sup><small>−</small></sup>")
+
+                    .replace("₀", "<sub><small>0</small></sub>")
+                    .replace("₁", "<sub><small>1</small></sub>")
+                    .replace("₂", "<sub><small>2</small></sub>")
+                    .replace("₃", "<sub><small>3</small></sub>")
+                    .replace("₄", "<sub><small>4</small></sub>")
+                    .replace("₅", "<sub><small>5</small></sub>")
+                    .replace("₆", "<sub><small>6</small></sub>")
+                    .replace("₇", "<sub><small>7</small></sub>")
+                    .replace("₈", "<sub><small>8</small></sub>")
+                    .replace("₉", "<sub><small>9</small></sub>")
+                    .replace("₋", "<sub><small>−</small></sub>")
+
                     .replace("</small></sup><sup><small>", ""));
     }
+
+    private static final char[] SUPERSCRIPT_DIGITS = new char[]{'⁰', '¹', '²', '³', '⁴', '⁵', '⁶', '⁷', '⁸', '⁹', '¯'};
+    private static final char[] SUBSCRIPT_DIGITS = new char[]{'₀', '₁', '₂', '₃', '₄', '₅', '₆', '₇', '₈', '₉', '₋'};
 
     /**
      * This piece of code converts integer numbers into superscript
      * representation to autoformat unit name. It uses Unicode
      * superscript numbers.
      */
-    public static String superscriptInt(int power) {
+    public static String superscriptInt(int value) {
+        return translateInt(value, SUPERSCRIPT_DIGITS);
+    }
+
+    public static String subscriptInt(int value) {
+        return translateInt(value, SUBSCRIPT_DIGITS);
+    }
+
+    private static String translateInt(int value, char[] alphabet) {
+        int base = alphabet.length - 1;
         StringBuilder name = new StringBuilder();
 
         /**
          * We loop through single digits of initial number
          * and convert them one by one.
          */
-        for (int p = Math.abs(power); p > 0; p /= 10) {
-            switch (p % 10) {
-            case 0: name.append('⁰'); break;
-            case 1: name.append('¹'); break;
-            case 2: name.append('²'); break;
-            case 3: name.append('³'); break;
-            case 4: name.append('⁴'); break;
-            case 5: name.append('⁵'); break;
-            case 6: name.append('⁶'); break;
-            case 7: name.append('⁷'); break;
-            case 8: name.append('⁸'); break;
-            case 9: name.append('⁹'); break;
-            }
+        for (int p = Math.abs(value); p > 0; p /= base) {
+            name.append(alphabet[p % base]);
         }
 
         /**
          * Here we append superscript minus in case initial number is negative.
          */
-        if (power < 0) {
-            name.append('¯');
+        if (value < 0) {
+            name.append(alphabet[base]);
         }
 
         /**
