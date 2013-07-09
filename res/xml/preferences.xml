@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ucalc="http://schemas.android.com/apk/res/me.kstep.ucalc"
+    >
     <PreferenceCategory android:key="general" android:title="@string/pref_title_general">
         <CheckBoxPreference android:key="dark_theme" android:title="@string/pref_title_dark_theme" android:defaultValue="false" />
         <CheckBoxPreference android:key="sound_feedback" android:title="@string/pref_title_sound_feedback" android:summary="@string/pref_summary_sound_feedback" android:defaultValue="false" />
@@ -14,13 +17,13 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_title_display" android:key="display">
-        <me.kstep.ucalc.preferences.IntegerPreference android:key="precision" android:title="@string/pref_title_precision" android:numeric="integer" android:defaultValue="7" android:summary="@string/pref_summary_precision" />
+        <me.kstep.ucalc.preferences.IntegerPreference android:key="precision" android:title="@string/pref_title_precision" android:defaultValue="7" android:summary="@string/pref_summary_precision" ucalc:minValue="0" ucalc:maxValue="30" />
 
-        <ListPreference android:key="decimal_separator" android:title="@string/pref_title_decimal_separator" android:entryValues="@array/decimal_separators" android:entries="@array/decimal_separator_names" android:defaultValue="," />
+        <me.kstep.ucalc.preferences.SelectPreference android:key="decimal_separator" android:title="@string/pref_title_decimal_separator" android:entryValues="@array/decimal_separators" android:entries="@array/decimal_separator_names" android:defaultValue="," android:summary="@string/pref_summary_current_string_value" />
 
-        <ListPreference android:key="group_separator" android:title="@string/pref_title_group_separator" android:entryValues="@array/group_separators" android:entries="@array/group_separator_names" android:defaultValue="." />
+        <me.kstep.ucalc.preferences.SelectPreference android:key="group_separator" android:title="@string/pref_title_group_separator" android:entryValues="@array/group_separators" android:entries="@array/group_separator_names" android:defaultValue="." android:summary="@string/pref_summary_current_string_value" />
 
-        <me.kstep.ucalc.preferences.IntegerPreference android:key="group_size" android:title="@string/pref_title_group_size" android:numeric="integer" android:defaultValue="3" />
+        <me.kstep.ucalc.preferences.IntegerPreference android:key="group_size" android:title="@string/pref_title_group_size" android:summary="@string/pref_summary_current_integer_value" android:numeric="integer" android:defaultValue="3" ucalc:minValue="2" ucalc:maxValue="10" />
 
         <CheckBoxPreference android:key="show_ratios" android:title="@string/pref_title_show_ratios" android:summary="@string/pref_summary_show_ratios" android:defaultValue="false" />
         <CheckBoxPreference android:key="show_polar_complex" android:title="@string/pref_title_show_polar_complex" android:summary="@string/pref_summary_show_polar_complex" android:defaultValue="false" />
