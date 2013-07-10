@@ -135,10 +135,12 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
 
     private void applyPreferences(SharedPreferences preferences, boolean viewInitialized) {
         int themeId = preferences.getBoolean("dark_theme", false)? android.R.style.Theme_Holo: android.R.style.Theme_Holo_Light;
+        if (viewInitialized && ((oldThemeId != themeId) || preferences.getBoolean("load_currencies", false))) {
+            recreate();
+            return;
+        }
+
         setTheme(themeId);
-
-        if (viewInitialized && (oldThemeId != themeId)) { recreate(); }
-
         oldThemeId = themeId;
 
         FloatingFormat newFormat = new FloatingFormat(
@@ -182,11 +184,6 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
         }
 
         if (preferences.getBoolean("load_currencies", false)) {
-            if (viewInitialized) {
-                units.clear();
-                recreate();
-            }
-
             String currenciesSource = preferences.getString("currencies_source", "cbr");
 
             UnitCurrenciesLoader currenciesLoader = null;

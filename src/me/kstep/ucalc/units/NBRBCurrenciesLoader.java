@@ -81,7 +81,7 @@ public class NBRBCurrenciesLoader extends UnitCurrenciesLoader {
             }
         }
 
-        Unit unit = new LinearUnit(cName, cScale * cRate, UNumber.ZERO, baseCurrency);
+        Unit unit = new LinearUnit(cName, cRate / cScale, baseCurrency);
         unit.fullname = cFullname;
         unit.description = "";
         unit.category = Unit.Category.MISCELLANEOUS;

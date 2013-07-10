@@ -57,8 +57,6 @@ public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void,
     }
 
     public UnitsManager load(UnitsManager uman) {
-        uman.add(baseCurrency);
-
         List<Unit> units;
 
         // Try to load from cache with default timeout
@@ -80,7 +78,7 @@ public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void,
         if (units != null) {
             uman.addAll(units);
         } else {
-            Toast.makeText(getContext(), R.string.err_currencies_loading_failed, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(), R.string.err_currencies_loading_failed, Toast.LENGTH_SHORT).show();
         }
 
         return uman;
@@ -107,8 +105,12 @@ public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void,
         return loadFromCache(CACHE_DEFAULT_TIMEOUT);
     }
 
+    public void clearCache() {
+        new File(getCacheFilename()).delete();
+    }
+
     protected String getCacheFilename() {
-        return getContext().getFilesDir().getAbsolutePath() + "/" + CACHE_FILENAME;
+        return getContext().getFilesDir().getAbsolutePath() + "/" + getClass().getSimpleName() + "-" + CACHE_FILENAME;
     }
 
     protected List<Unit> loadFromCache(int timeout) {
@@ -154,6 +156,8 @@ public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void,
     }
 
     protected List<Unit> loadFromNetwork() {
+        List<Unit> units = null;
+
         try {
             InputStream in = openStream();
 
@@ -161,14 +165,18 @@ public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void,
             parser.setInput(in, null);
             parser.nextTag();
 
-            return readStream(parser);
+            units = readStream(parser);
 
         } catch (XmlPullParserException e) {
         } catch (IOException e) {
         } catch (IllegalStateException e) {
         }
 
-        return null;
+        if (units != null) {
+            units.add(0, baseCurrency);
+        }
+
+        return units;
     }
 
     protected InputStream openStream() throws IOException {
