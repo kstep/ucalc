@@ -9,7 +9,7 @@
     <string name="menu_clear">Очистить</string>
     <string name="menu_recall">Вернуть</string>
     <string name="menu_store">Запомнить</string>
-	<string name="menu_share">Послать</string>
+    <string name="menu_share">Послать</string>
 
     <string name="frag_title_memory">Память</string>
     <string name="frag_title_stack">Стек</string>
@@ -49,7 +49,12 @@
     <string name="pref_summary_current_integer_value">Значение: %d</string>
     <string name="pref_summary_current_string_value">Значение: %s</string>
 
-	<string name="info_currencies_loading_started">Загружаются курсы валют…</string>
+    <string name="info_currencies_loading_started">Загружаются курсы валют…</string>
     <string name="err_currencies_loading_failed">Ошибка при загрузке курсов валют</string>
-	<string name="info_currencies_loading_succeed">Курсы валют успешно загружены</string>
+    <string name="info_currencies_loading_succeed">Курсы валют успешно загружены</string>
+
+    <string name="help_unit_base">Это базовая единица измерения.</string>
+    <string name="help_unit_definition">Определение: %s</string>
+
+    <string name="btn_title_dismiss">Закрыть</string>
 </resources>

@@ -7,6 +7,8 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import me.kstep.ucalc.R;
+
 public class UNoticeDialog extends DialogFragment implements DialogInterface.OnClickListener {
     private CharSequence title;
     private CharSequence message;
@@ -31,7 +33,7 @@ public class UNoticeDialog extends DialogFragment implements DialogInterface.OnC
 
         builder.setMessage(message);
         builder.setTitle(title);
-        builder.setNegativeButton("Dismiss", this);
+        builder.setNegativeButton(R.string.btn_title_dismiss, this);
 
         return builder.create();
     }
