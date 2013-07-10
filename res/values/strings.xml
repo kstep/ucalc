@@ -9,6 +9,7 @@
     <string name="menu_clear">Clear</string>
     <string name="menu_recall">Recall</string>
     <string name="menu_store">Store</string>
+	<string name="menu_share">Share</string>
 
     <string name="frag_title_memory">Memory</string>
     <string name="frag_title_stack">Stack</string>

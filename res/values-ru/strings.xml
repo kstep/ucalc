@@ -9,6 +9,7 @@
     <string name="menu_clear">Очистить</string>
     <string name="menu_recall">Вернуть</string>
     <string name="menu_store">Запомнить</string>
+	<string name="menu_share">Послать</string>
 
     <string name="frag_title_memory">Память</string>
     <string name="frag_title_stack">Стек</string>

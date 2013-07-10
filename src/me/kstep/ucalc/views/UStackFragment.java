@@ -26,6 +26,8 @@ import com.mobeta.android.dslv.DragSortListView;
 import com.mobeta.android.dslv.DragSortController;
 
 import me.kstep.ucalc.R;
+import android.widget.ShareActionProvider;
+import android.content.Intent;
 
 public class UStackFragment extends ListFragment {
 
@@ -60,6 +62,18 @@ public class UStackFragment extends ListFragment {
         lv.requestFocusFromTouch();
         lv.setSelection(0);
     }
+	
+	public String getSelection(boolean resetSelection) {
+		try {
+			ListView lv = getListView();
+			int index = lv.getCheckedItemPosition();
+			if (resetSelection) lv.setItemChecked(index, false);
+			return adapter.getItem(index).toString();
+
+		} catch (ArrayIndexOutOfBoundsException e) {
+			return "";
+		}
+	}
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -68,22 +82,14 @@ public class UStackFragment extends ListFragment {
 
         switch (item.getItemId()) {
             case R.id.menu_copy:
-                try {
-                    ListView lv = getListView();
-                    int index = lv.getCheckedItemPosition();
-                    clipboard.setPrimaryClip(ClipData.newPlainText(null, adapter.getItem(index).toString()));
-                    lv.setItemChecked(index, false);
-
-                } catch (ArrayIndexOutOfBoundsException e) {
-                }
+                clipboard.setPrimaryClip(ClipData.newPlainText(null, getSelection(true)));
             return true;
 
             case R.id.menu_paste:
                 try {
-                    Double value = Double.valueOf(clipboard.getPrimaryClip().getItemAt(0).coerceToText(activity).toString());
+                    UNumber value = UNumber.valueOf(clipboard.getPrimaryClip().getItemAt(0).coerceToText(activity).toString());
                     if (value != null) {
-                        UNumber num = new UFloat(value);
-                        adapter.insert(num, 0);
+                        adapter.insert(value, 0);
                         setSelection(0);
                     }
 
@@ -91,6 +97,14 @@ public class UStackFragment extends ListFragment {
                 } catch (NumberFormatException e) {
                 }
             return true;
+			
+			case R.id.menu_share:
+			    Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, getSelection(true));
+                sendIntent.setType("text/plain");
+			    startActivity(sendIntent);
+			return true;
         }
 
         return false;
