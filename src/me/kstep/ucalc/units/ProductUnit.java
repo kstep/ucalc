@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 class ProductUnit extends DerivedUnit {
+    final static long serialVersionUID = 0L;
     Unit[] targetUnits;
 
     boolean autoname = false;

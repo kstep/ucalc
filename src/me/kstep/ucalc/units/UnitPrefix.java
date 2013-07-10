@@ -8,6 +8,8 @@ import java.lang.reflect.Field;
  * or *milliliter*.
  */
 public class UnitPrefix extends LinearUnit {
+    final static long serialVersionUID = 0L;
+
     /**
      * Here go prefixes, which define positive powers of 10.
      */
@@ -96,7 +98,8 @@ public class UnitPrefix extends LinearUnit {
                 prefixes[j] = new UnitPrefix(n + "-", n, Unit.NONE);
 
             } catch (IllegalAccessException e) {
-            } catch (IllegalArgumentException e) {}
+            } catch (IllegalArgumentException e) {
+            } catch (ArithmeticException e) {}
         }
         return prefixes;
     }

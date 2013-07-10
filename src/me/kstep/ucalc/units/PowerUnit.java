@@ -9,6 +9,7 @@ import me.kstep.ucalc.util.TextUtil;
  * *meter*, *square meter* and *cubic meter*.
  */
 class PowerUnit extends DerivedUnit {
+    final static long serialVersionUID = 0L;
 
     Unit targetUnit;
 

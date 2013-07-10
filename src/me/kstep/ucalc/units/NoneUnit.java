@@ -3,6 +3,8 @@ package me.kstep.ucalc.units;
 import me.kstep.ucalc.numbers.UNumber;
 
 final class NoneUnit extends Unit {
+    final static long serialVersionUID = 0L;
+
     private NoneUnit() {
         super("");
     }

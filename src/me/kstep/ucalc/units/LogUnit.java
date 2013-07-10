@@ -7,6 +7,7 @@ import me.kstep.ucalc.numbers.UFloat;
  * This class represents logarithmic units like dB.
  */
 class LogUnit extends Unit {
+    final static long serialVersionUID = 0L;
 
     double base;
     double logbase;

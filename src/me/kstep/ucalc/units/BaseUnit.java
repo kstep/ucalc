@@ -10,6 +10,7 @@ import me.kstep.ucalc.numbers.UNumber;
  * The examples of basic units in SI are meter, second or kilogram.
  */
 final class BaseUnit extends Unit {
+    final static long serialVersionUID = 0L;
 
     private static int seqId = 1;
     private int id;

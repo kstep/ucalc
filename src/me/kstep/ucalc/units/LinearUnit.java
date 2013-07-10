@@ -9,6 +9,8 @@ import me.kstep.ucalc.numbers.UNumber;
  * and *b* an `offset`.
  */
 class LinearUnit extends Unit {
+    final static long serialVersionUID = 0L;
+
     protected Unit targetUnit;
     protected UNumber scale;
     protected UNumber offset;

@@ -2,6 +2,7 @@ package me.kstep.ucalc.units;
 
 import me.kstep.ucalc.numbers.UNumber;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,7 @@ import java.util.LinkedHashMap;
  * with other units, but does not determine unit names or coefficients.
  * .
  */
-public abstract class Unit {
+public abstract class Unit implements Serializable {
 
     public enum Category {
         TIME("time"),
