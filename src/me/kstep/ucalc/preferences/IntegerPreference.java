@@ -86,7 +86,8 @@ public class IntegerPreference extends DialogPreference implements DialogInterfa
         super.onDialogClosed(isPositive);
 
         if (isPositive && shouldPersist()) {
-            persistInt(seekbar.getProgress() + minValue);
+            int value = getValueFromInput();
+            persistInt(value);
             notifyChanged();
         }
     }
@@ -110,12 +111,10 @@ public class IntegerPreference extends DialogPreference implements DialogInterfa
         currentValueView.setText(String.valueOf(progress + minValue));
     }
 
-    @Override
-    public boolean onEditorAction(TextView tv, int actionId, KeyEvent ev) {
-
+    private int getValueFromInput() {
         int value = 0;
         try {
-            value = Integer.parseInt(tv.getText().toString(), 10);
+            value = Integer.parseInt(currentValueView.getText().toString(), 10);
         } catch (NumberFormatException e) {
         }
 
@@ -125,6 +124,12 @@ public class IntegerPreference extends DialogPreference implements DialogInterfa
             value = maxValue;
         }
 
+        return value;
+    }
+
+    @Override
+    public boolean onEditorAction(TextView tv, int actionId, KeyEvent ev) {
+        int value = getValueFromInput();
         seekbar.setProgress(value - minValue);
         return true;
     }
