@@ -90,11 +90,11 @@ A few examples:
             <derive>wk</derive>
             <scale>2</scale>
         </unit>
-        <unit class="linear" name="sday" fullname="Solar day">
+        <unit class="linear" name="sday" fullname="Sidereal day">
             <derive>hr</derive>
             <scale>23.934469591898</scale>
         </unit>
-        <unit class="linear" name="syr" fullname="Solar year">
+        <unit class="linear" name="syr" fullname="Sidereal year">
             <derive>day</derive>
             <scale>366.256401862834</scale>
         </unit>
