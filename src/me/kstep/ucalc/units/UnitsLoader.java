@@ -27,7 +27,7 @@ public class UnitsLoader {
     public static UnitsManager loadPrefixes(UnitsManager uman) {
         Unit[] units = UnitPrefix.getPrefixes();
         for (Unit unit : units) {
-            uman.add(unit, Unit.Category.PREFIX);
+            uman.add(unit, unit.fullname, Unit.Category.PREFIX);
         }
         return uman;
     }

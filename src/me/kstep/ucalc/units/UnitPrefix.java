@@ -10,46 +10,71 @@ import java.lang.reflect.Field;
 public class UnitPrefix extends LinearUnit {
     final static long serialVersionUID = 0L;
 
-    /**
-     * Here go prefixes, which define positive powers of 10.
-     */
-    final static public double da = 10.0;
-    final static public double h = 100.0;
-    final static public double k = 1000;
-    final static public double M = 1e6;
-    final static public double G = 1e9;
-    final static public double T = 1e12;
-    final static public double P = 1e15;
-    final static public double E = 1e18;
-    final static public double Z = 1e21;
-    final static public double Y = 1e24;
+    public static class Prefix {
+        final public String name;
+        final public String fullname;
+        final public double scale;
 
-    /**
-     * These are relatively new prefixes for positive powers of 2,
-     * usually used in computer science.
-     */
-    final static public double Ki = 1024.0;
-    final static public double Mi = 1024.0*1024;
-    final static public double Gi = 1024.0*1024*1024;
-    final static public double Ti = 1024.0*1024*1024*1024;
-    final static public double Pi = 1024.0*1024*1024*1024*1024;
-    final static public double Ei = 1024.0*1024*1024*1024*1024*1024;
-    final static public double Zi = 1024.0*1024*1024*1024*1024*1024*1024;
-    final static public double Yi = 1024.0*1024*1024*1024*1024*1024*1024*1024;
+        Prefix(double scale, String name) {
+            this(scale, name, name);
+        }
 
-    /**
-     * Now to the prefixes for negative powers of 10.
-     */
-    final static public double d = 0.1;
-    final static public double c = 0.01;
-    final static public double m = 0.001;
-    final static public double µ = 1e-6;
-    final static public double n = 1e-9;
-    final static public double p = 1e-12;
-    final static public double f = 1e-15;
-    final static public double a = 1e-18;
-    final static public double z = 1e-21;
-    final static public double y = 1e-24;
+        Prefix(double scale, String name, String fullname) {
+            this.scale = scale;
+            this.name = name;
+            this.fullname = fullname;
+        }
+
+        Unit asUnit() {
+            Unit unit = new UnitPrefix(name + "-", name, Unit.NONE);
+            unit.fullname = fullname;
+            unit.category = Unit.Category.PREFIX;
+            return unit;
+        }
+    }
+
+    final static Prefix[] PREFIXES = new Prefix[]{
+        /**
+         * Prefixes for negative powers of 10.
+         */
+        new Prefix(1e-24, "y", "yocto"),
+        new Prefix(1e-21, "z", "zepto"),
+        new Prefix(1e-18, "a", "atto"),
+        new Prefix(1e-15, "f", "femto"),
+        new Prefix(1e-12, "p", "pico"),
+        new Prefix(1e-9, "n", "nano"),
+        new Prefix(1e-6, "μ", "micro"),
+        new Prefix(1e-3, "m", "milli"),
+        new Prefix(1e-2, "c", "centi"),
+        new Prefix(1e-1, "d", "deci"),
+
+        /**
+         * Here go prefixes, which define positive powers of 10.
+         */
+        new Prefix(10, "da", "deca"),
+        new Prefix(100, "h", "hecto"),
+        new Prefix(1000, "k", "kilo"),
+        new Prefix(1e6, "M", "Mega"),
+        new Prefix(1e9, "G", "Giga"),
+        new Prefix(1e12, "T", "Tera"),
+        new Prefix(1e15, "P", "Peta"),
+        new Prefix(1e18, "E", "Exa"),
+        new Prefix(1e21, "Z", "Zetta"),
+        new Prefix(1e24, "Y", "Yotta"),
+
+        /**
+         * These are relatively new prefixes for positive powers of 2,
+         * usually used in computer science.
+         */
+        new Prefix(1024.0, "Ki", "Kibi"),
+        new Prefix(1024.0*1024, "Mi", "Mibi"),
+        new Prefix(1024.0*1024*1024, "Gi", "Gibi"),
+        new Prefix(1024.0*1024*1024*1024, "Ti", "Tibi"),
+        new Prefix(1024.0*1024*1024*1024*1024, "Pi", "Pibi"),
+        new Prefix(1024.0*1024*1024*1024*1024*1024, "Ei", "Ebi"),
+        new Prefix(1024.0*1024*1024*1024*1024*1024*1024, "Zi", "Zibi"),
+        new Prefix(1024.0*1024*1024*1024*1024*1024*1024*1024, "Yi", "Yibi"),
+    };
 
     /**
      * We override constructor to define prefixed units conviniently.
@@ -62,45 +87,23 @@ public class UnitPrefix extends LinearUnit {
         super(name, prefixToScale(prefix), targetUnit);
     }
 
-    /**
-     * This method is a little magical. It uses introspection to lookup
-     * prefix value in one of class constants above.
-     */
     public static double prefixToScale(String prefix) {
-        try {
-            Field property = UnitPrefix.class.getDeclaredField(prefix);
-            return property.getDouble(null);
-
-        } catch (IllegalAccessException e) {
-            return 0.0;
-
-        } catch (NoSuchFieldException e) {
-            return 0.0;
+        for (Prefix p : PREFIXES) {
+            if (p.name.equals(prefix)) {
+                return p.scale;
+            }
         }
+
+        return 0.0;
     }
 
     public static Unit[] getPrefixes() {
-        Field[] fields = UnitPrefix.class.getDeclaredFields();
-        Unit[] prefixes = new Unit[fields.length];
+        Unit[] prefixes = new Unit[PREFIXES.length];
 
-        for (int i = 0; i < fields.length; i++) {
-            try {
-                double v = fields[i].getDouble(null);
-                String n = fields[i].getName();
-
-                int j = (int) Math.round(Math.log10(v));
-                if (-3 > j || j > 3) {
-                    j = j / 3 + (j < 0 ? -2: 2);
-                }
-                j += j < 0 ? 10: (n.length() == 2 && n.charAt(1) == 'i' ? 17: 9);
-
-                android.util.Log.d("unitprefix", fields[i].getName() + " goes to " + j + " (" + ((long)v % 1024) + ")");
-                prefixes[j] = new UnitPrefix(n + "-", n, Unit.NONE);
-
-            } catch (IllegalAccessException e) {
-            } catch (IllegalArgumentException e) {
-            } catch (ArithmeticException e) {}
+        for (int i = 0; i < prefixes.length; i++) {
+            prefixes[i] = PREFIXES[i].asUnit();
         }
+
         return prefixes;
     }
 
