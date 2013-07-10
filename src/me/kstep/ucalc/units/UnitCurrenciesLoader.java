@@ -24,6 +24,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import me.kstep.ucalc.R;
+import me.kstep.ucalc.views.UToast;
 
 public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void, UnitsManager> {
     final protected Unit baseCurrency;
@@ -78,7 +79,7 @@ public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void,
         if (units != null) {
             uman.addAll(units);
         } else {
-            //Toast.makeText(getContext(), R.string.err_currencies_loading_failed, Toast.LENGTH_SHORT).show();
+			cancel(false);
         }
 
         return uman;
@@ -241,4 +242,18 @@ public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void,
         return load(params[0]);
     }
 
+	@Override
+	protected void onPreExecute() {
+		UToast.show(getContext(), R.string.info_currencies_loading_started);
+	}
+
+	@Override
+	protected void onPostExecute(UnitsManager uman) {
+		UToast.show(getContext(), R.string.info_currencies_loading_succeed);
+	}
+
+	@Override
+	protected void onCancelled(UnitsManager uman) {
+		UToast.show(getContext(), R.string.err_currencies_loading_failed);
+	}
 }

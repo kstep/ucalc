@@ -14,4 +14,8 @@ public class UToast extends Toast {
         toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 30);
         toast.show();
     }
+	
+	public static void show(Context context, int resid) {
+		show(context, context.getResources().getString(resid));
+	}
 }

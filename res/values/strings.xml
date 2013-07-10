@@ -48,5 +48,7 @@
     <string name="pref_summary_current_integer_value">Current value: %d</string>
     <string name="pref_summary_current_string_value">Current value: %s</string>
 
+	<string name="info_currencies_loading_started">Loading currencies…</string>
     <string name="err_currencies_loading_failed">Currencies loading failed</string>
+	<string name="info_currencies_loading_succeed">Currencies loaded successfully</string>
 </resources>

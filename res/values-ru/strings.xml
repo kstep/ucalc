@@ -48,5 +48,7 @@
     <string name="pref_summary_current_integer_value">Значение: %d</string>
     <string name="pref_summary_current_string_value">Значение: %s</string>
 
+	<string name="info_currencies_loading_started">Загружаются курсы валют…</string>
     <string name="err_currencies_loading_failed">Ошибка при загрузке курсов валют</string>
+	<string name="info_currencies_loading_succeed">Курсы валют успешно загружены</string>
 </resources>
