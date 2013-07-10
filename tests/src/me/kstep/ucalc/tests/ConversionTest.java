@@ -5,32 +5,36 @@ import me.kstep.ucalc.units.UnitsLoader;
 import me.kstep.ucalc.units.UnitsManager;
 import me.kstep.ucalc.numbers.UNumber;
 
-import junit.framework.TestCase;
 import org.junit.Test;
+import org.junit.Before;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+import static org.junit.Assert.*;
 
-public class ConversionTest extends TestCase {
+public class ConversionTest {
     private UnitsManager uman;
 
     public ConversionTest() {
         super();
     }
 
-    protected void setUp() {
+    @Before
+    public void setUp() {
         uman = UnitsLoader.load();
         uman.simplifyAll();
     }
 
     @Test
-    public void testReciprocalConversion() {
+    public void reciprocalConversion() {
         Unit ohm = uman.get("ohm");
         Unit S = uman.get("S");
 
-        assertEquals(0.1, ohm.to(10.0, S).doubleValue());
-        assertEquals(10.0, ohm.from(0.1, S).doubleValue());
+        assertEquals(0.1, ohm.to(10.0, S).doubleValue(), 0.0001);
+        assertEquals(10.0, ohm.from(0.1, S).doubleValue(), 0.0001);
     }
 
     @Test
-    public void testMultiplication() {
+    public void multiplication() {
         Unit N = uman.get("N");
         Unit ml = uman.get("ml");
         Unit _ = ml.mul(N).div(N);
@@ -40,7 +44,7 @@ public class ConversionTest extends TestCase {
     }
 
     @Test
-    public void testUnbalancedProductConversion() {
+    public void unbalancedProductConversion() {
         Unit lbf = uman.get("lbf");
         Unit N = uman.get("N");
 
@@ -48,7 +52,7 @@ public class ConversionTest extends TestCase {
     }
 
     @Test
-    public void testIndirectConversion() {
+    public void indirectConversion() {
         Unit eV = uman.get("eV");
         Unit J = uman.get("J");
 
@@ -57,7 +61,7 @@ public class ConversionTest extends TestCase {
     }
 
     @Test
-    public void testDeepUnbalancedConversion() {
+    public void deepUnbalancedConversion() {
         Unit hp = uman.get("hp");
         Unit W = uman.get("W");
 

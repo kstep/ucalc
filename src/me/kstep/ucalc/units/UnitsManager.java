@@ -183,6 +183,12 @@ public class UnitsManager {
         return add(unit, fullname, description, Unit.Category.MISCELLANEOUS);
     }
 
+    public void addAll(Collection<Unit> units) {
+        for (Unit unit : units) {
+            add(unit);
+        }
+    }
+
     public Unit get(CharSequence name) {
         Unit unit = units.get(name.toString());
         if (unit == null) {
@@ -463,5 +469,12 @@ public class UnitsManager {
         System.gc();
     }
 
+    public int size() {
+        return units.size();
+    }
+
+    public boolean isEmpty() {
+        return units.size() == 0;
+    }
 }
 

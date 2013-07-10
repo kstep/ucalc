@@ -76,6 +76,10 @@ import me.kstep.ucalc.collections.UUndoStack;
 import me.kstep.ucalc.collections.UMemory;
 import me.kstep.ucalc.collections.UConstants;
 
+import me.kstep.ucalc.units.UnitCurrenciesLoader;
+import me.kstep.ucalc.units.CBRCurrenciesLoader;
+import me.kstep.ucalc.units.NBRBCurrenciesLoader;
+
 import me.kstep.ucalc.R;
 
 public class UCalcActivity extends Activity implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -175,6 +179,28 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
 
         } else {
             evaluator = new URPNEvaluator();
+        }
+
+        if (preferences.getBoolean("load_currencies", false)) {
+            if (viewInitialized) {
+                units.clear();
+                recreate();
+            }
+
+            String currenciesSource = preferences.getString("currencies_source", "cbr");
+
+            UnitCurrenciesLoader currenciesLoader = null;
+            boolean wifiOnly = preferences.getBoolean("use_wifi_only", true);
+
+            if (currenciesSource.equals("cbr")) {
+                currenciesLoader = new CBRCurrenciesLoader(this, wifiOnly);
+            } else if (currenciesSource.equals("nbrb")) {
+                currenciesLoader = new NBRBCurrenciesLoader(this, wifiOnly);
+            }
+
+            if (currenciesLoader != null) {
+                currenciesLoader.execute(units);
+            }
         }
 
         if (stackView != null) {

@@ -407,20 +407,6 @@ A few examples:
             <derive>°C</derive>
             <description>A 1/96 of scale between brine's freezing point and normal human body temperature</description>
         </unit>
-
-        <unit class="base" name="USD" fullname="United States Dollar" />
-        <unit class="linear" name="UAH" fullname="Ukranian Hryvna">
-            <derive>USD</derive>
-            <rscale>8.10</rscale>
-        </unit>
-        <unit class="linear" name="BYR" fullname="Belarusian Ruble">
-            <derive>USD</derive>
-            <rscale>8650</rscale>
-        </unit>
-        <unit class="linear" name="RUR" fullname="Russian Ruble">
-            <derive>USD</derive>
-            <rscale>30</rscale>
-        </unit>
     </category>
 
     <category name="elec">

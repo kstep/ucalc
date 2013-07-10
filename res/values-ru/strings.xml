@@ -15,6 +15,7 @@
 
     <string name="pref_title_general">Основные настройки</string>
     <string name="pref_title_display">Настройки отображения</string>
+    <string name="pref_title_network">Сетевые настройки</string>
 
     <string name="pref_title_dark_theme">Тёмная тема</string>
     <string name="pref_title_sound_feedback">Звук</string>
@@ -30,6 +31,9 @@
     <string name="pref_title_group_size">Размер групп</string>
     <string name="pref_title_show_ratios">Дроби по возможности</string>
     <string name="pref_title_show_polar_complex">Полярные комплексные числа</string>
+    <string name="pref_title_load_currencies">Загружать курсы валют из сети</string>
+    <string name="pref_title_currencies_source">Источник курсов валют</string>
+    <string name="pref_title_use_wifi_only">Загружать только по Wi-Fi</string>
 
     <string name="pref_summary_sound_feedback">Кликающий звук при нажатии на клавиши</string>
     <string name="pref_summary_haptic_feedback">Вибрация при нажатии на клавиши</string>
@@ -43,4 +47,6 @@
 
     <string name="pref_summary_current_integer_value">Значение: %d</string>
     <string name="pref_summary_current_string_value">Значение: %s</string>
+
+    <string name="err_currencies_loading_failed">Ошибка при загрузке курсов валют</string>
 </resources>

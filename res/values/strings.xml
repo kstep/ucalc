@@ -15,6 +15,7 @@
 
     <string name="pref_title_general">General Settings</string>
     <string name="pref_title_display">Display Settings</string>
+    <string name="pref_title_network">Network Settings</string>
 
     <string name="pref_title_dark_theme">Dark theme</string>
     <string name="pref_title_sound_feedback">Sound</string>
@@ -30,6 +31,9 @@
     <string name="pref_title_group_size">Group size</string>
     <string name="pref_title_show_ratios">Ratios as is if possible</string>
     <string name="pref_title_show_polar_complex">Polar complex numbers</string>
+    <string name="pref_title_load_currencies">Load currencies from Internet</string>
+    <string name="pref_title_currencies_source">Currencies source</string>
+    <string name="pref_title_use_wifi_only">Load via Wi-Fi only</string>
 
     <string name="pref_summary_sound_feedback">Clicking sound on buttons press</string>
     <string name="pref_summary_haptic_feedback">Vibrate on buttons press</string>
@@ -43,4 +47,6 @@
 
     <string name="pref_summary_current_integer_value">Current value: %d</string>
     <string name="pref_summary_current_string_value">Current value: %s</string>
+
+    <string name="err_currencies_loading_failed">Currencies loading failed</string>
 </resources>

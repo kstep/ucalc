@@ -6,6 +6,9 @@
 
     <uses-sdk android:minSdkVersion="14" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:theme="@android:style/Theme.Holo.Light"
         android:icon="@drawable/ic_launcher"
@@ -23,7 +26,12 @@
 
         <activity android:name=".activities.UPreferenceActivity" android:label="@string/settings_title" android:screenOrientation="portrait">
             <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.PREFERENCE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MANAGE_NETWORK_USAGE" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
     </application>
