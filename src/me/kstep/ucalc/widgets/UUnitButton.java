@@ -1,5 +1,7 @@
 package me.kstep.ucalc.widgets;
 
+import android.text.TextUtils;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
@@ -51,7 +53,7 @@ public class UUnitButton extends UButton implements View.OnClickListener, View.O
             Unit unit = uman.get(getText().toString());
             activity.showPopup(
                 unit.getFullname() != null? unit.getFullname() + " (" + unit.toString() + ")": unit.toString(),
-                (unit.getDescription() != ""? unit.getDescription() + "\n\n": "") +
+                (TextUtils.isEmpty(unit.getDescription())? "": unit.getDescription() + "\n\n") +
                 (unit.isBasic()? "This is a base unit.": "This unit is defined as: " + unit.getDefinition()));
 
         } catch (UnitException e) {
