@@ -20,7 +20,6 @@ public class CBRCurrenciesLoader  extends UnitCurrenciesLoader {
         Unit unit = new BaseUnit("RUR");
         unit.category = Unit.Category.MISCELLANEOUS;
         unit.fullname = "Russian ruble";
-        unit.description = "";
         return unit;
     }
 
@@ -83,7 +82,6 @@ public class CBRCurrenciesLoader  extends UnitCurrenciesLoader {
 
         Unit unit = new LinearUnit(cName, cRate / cScale, baseCurrency);
         unit.fullname = cFullname;
-        unit.description = "";
         unit.category = Unit.Category.MISCELLANEOUS;
         return unit;
     }
