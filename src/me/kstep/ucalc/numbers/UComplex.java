@@ -100,16 +100,16 @@ public class UComplex extends UNumber {
             ("(" + real.toString() + " + " + imag.toString() + "j)"));
     }
 
-	private static boolean showPolarForm = false;
-	public static void showPolarForm(boolean value) {
-		showPolarForm = value;
-	}
-	
+    private static boolean showPolarForm = false;
+    public static void showPolarForm(boolean value) {
+        showPolarForm = value;
+    }
+    
     public String format(Format formatter) {
         return
             isReal()? real.format(formatter):
-			showPolarForm?
-			("(" + abs().format(formatter) + "; " + angle().format(formatter) + ")"):
+            showPolarForm?
+            ("(" + abs().format(formatter) + "; " + angle().format(formatter) + ")"):
             (isImag()? imag.format(formatter) + "j":
             "(" + real.format(formatter) + " + " + imag.format(formatter) + "j)");
     }

@@ -10,9 +10,9 @@
         android:title="@string/menu_paste"
         android:showAsAction="ifRoom|collapseActionView|withText"
     />
-	<item
-		android:id="@+id/menu_share"
-        android:showAsAction="ifRoom|collapseActionView|withText"
+    <item
+        android:id="@+id/menu_share"
         android:title="@string/menu_share"
+        android:showAsAction="ifRoom|collapseActionView|withText"
     />
 </menu>

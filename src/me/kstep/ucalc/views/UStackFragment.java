@@ -62,18 +62,18 @@ public class UStackFragment extends ListFragment {
         lv.requestFocusFromTouch();
         lv.setSelection(0);
     }
-	
-	public String getSelection(boolean resetSelection) {
-		try {
-			ListView lv = getListView();
-			int index = lv.getCheckedItemPosition();
-			if (resetSelection) lv.setItemChecked(index, false);
-			return adapter.getItem(index).toString();
+    
+    public String getSelection(boolean resetSelection) {
+        try {
+            ListView lv = getListView();
+            int index = lv.getCheckedItemPosition();
+            if (resetSelection) lv.setItemChecked(index, false);
+            return adapter.getItem(index).toString();
 
-		} catch (ArrayIndexOutOfBoundsException e) {
-			return "";
-		}
-	}
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return "";
+        }
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -97,14 +97,14 @@ public class UStackFragment extends ListFragment {
                 } catch (NumberFormatException e) {
                 }
             return true;
-			
-			case R.id.menu_share:
-			    Intent sendIntent = new Intent();
+            
+            case R.id.menu_share:
+                Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_TEXT, getSelection(true));
                 sendIntent.setType("text/plain");
-			    startActivity(sendIntent);
-			return true;
+                startActivity(sendIntent);
+            return true;
         }
 
         return false;

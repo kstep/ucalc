@@ -135,91 +135,93 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
 
     private void applyPreferences(SharedPreferences preferences, String key) {
 
-		if (key != null) {
-		// these settings can be setup at start up only
-        if ("dark_theme".equals(key)
-			|| "load_currencies".equals(key)
-			|| "currencies_source".equals(key)
-			|| "use_wifi_only".equals(key)
-			|| "currency_load_frequency".equals(key)) {
-            recreate();
-            return;
-        }
+        if (key != null) {
+            // these settings can be setup at start up only
+            if ("dark_theme".equals(key)
+                    || "load_currencies".equals(key)
+                    || "currencies_source".equals(key)
+                    || "use_wifi_only".equals(key)
+                    || "currency_load_frequency".equals(key)) {
+                recreate();
+                return;
+            }
         } else {
-		currentThemeId = preferences.getBoolean("dark_theme", false)? android.R.style.Theme_Holo: android.R.style.Theme_Holo_Light;
-        setTheme(currentThemeId);
-		}
-
-		if (key == null
-		    || key.equals("precision")
-			|| key.equals("group_size")
-			|| key.equals("decimal_separator")
-			|| key.equals("group_separator")) {
-        FloatingFormat newFormat = new FloatingFormat(
-                preferences.getInt("precision", 7),
-                preferences.getInt("group_size", 3),
-                preferences.getString("decimal_separator", ".").charAt(0),
-                preferences.getString("group_separator", ",").charAt(0));
-
-        if (editView == null) {
-            UTextView.setGlobalFormat(newFormat);
-        } else {
-            editView.setFormat(newFormat);
-            stackView.setFormat(newFormat);
+            currentThemeId = preferences.getBoolean("dark_theme", false)? android.R.style.Theme_Holo: android.R.style.Theme_Holo_Light;
+            setTheme(currentThemeId);
         }
-		}
+
+        if (key == null
+                || key.equals("precision")
+                || key.equals("group_size")
+                || key.equals("decimal_separator")
+                || key.equals("group_separator")) {
+
+            FloatingFormat newFormat = new FloatingFormat(
+                    preferences.getInt("precision", 7),
+                    preferences.getInt("group_size", 3),
+                    preferences.getString("decimal_separator", ".").charAt(0),
+                    preferences.getString("group_separator", ",").charAt(0));
+
+            if (editView == null) {
+                UTextView.setGlobalFormat(newFormat);
+            } else {
+                editView.setFormat(newFormat);
+                stackView.setFormat(newFormat);
+            }
+        }
 
         state.appendAngleUnit = preferences.getBoolean("inverse_trig_units", true);
 
         UStack.simplfyUnits(preferences.getBoolean("simplify_units", false));
         URational.showAsFloat(!preferences.getBoolean("show_ratios", false));
-		UComplex.showPolarForm(preferences.getBoolean("show_polar_complex", false));
+        UComplex.showPolarForm(preferences.getBoolean("show_polar_complex", false));
         Effects.setFeedback(preferences.getBoolean("haptic_feedback", false), preferences.getBoolean("sound_feedback", false));
 
-		if (key == null
-		    || key.equals("natural_evaluator")
-			|| key.equals("naive_evaluator")
-			|| key.equals("rpn_functions_evaluator")) {
-        if (preferences.getBoolean("natural_evaluator", false)) {
+        if (key == null
+                || key.equals("natural_evaluator")
+                || key.equals("naive_evaluator")
+                || key.equals("rpn_functions_evaluator")) {
 
-            if (preferences.getBoolean("naive_evaluator", false)) {
-                if (preferences.getBoolean("rpn_functions_evaluator", true)) {
-                    evaluator = new UNaiveFnEvaluator();
+            if (preferences.getBoolean("natural_evaluator", false)) {
+
+                if (preferences.getBoolean("naive_evaluator", false)) {
+                    if (preferences.getBoolean("rpn_functions_evaluator", true)) {
+                        evaluator = new UNaiveFnEvaluator();
+                    } else {
+                        evaluator = new UNaiveEvaluator();
+                    }
                 } else {
-                    evaluator = new UNaiveEvaluator();
+                    if (preferences.getBoolean("rpn_functions_evaluator", true)) {
+                        evaluator = new UNaturalFnEvaluator();
+                    } else {
+                        evaluator = new UNaturalEvaluator();
+                    }
                 }
+
             } else {
-                if (preferences.getBoolean("rpn_functions_evaluator", true)) {
-                    evaluator = new UNaturalFnEvaluator();
-                } else {
-                    evaluator = new UNaturalEvaluator();
+                evaluator = new URPNEvaluator();
+            }
+        }
+
+        if (key == null) {
+            if (preferences.getBoolean("load_currencies", false)) {
+                String currenciesSource = preferences.getString("currencies_source", "cbr");
+
+                UnitCurrenciesLoader currenciesLoader = null;
+                boolean wifiOnly = preferences.getBoolean("use_wifi_only", true);
+                int cacheTimeout = 86400 / preferences.getInt("currency_load_frequency", 1);
+
+                if (currenciesSource.equals("cbr")) {
+                    currenciesLoader = new CBRCurrenciesLoader(this, cacheTimeout, wifiOnly);
+                } else if (currenciesSource.equals("nbrb")) {
+                    currenciesLoader = new NBRBCurrenciesLoader(this, cacheTimeout, wifiOnly);
+                }
+
+                if (currenciesLoader != null) {
+                    currenciesLoader.load(units);
                 }
             }
-
-        } else {
-            evaluator = new URPNEvaluator();
         }
-		}
-
-		if (key == null) {
-        if (preferences.getBoolean("load_currencies", false)) {
-            String currenciesSource = preferences.getString("currencies_source", "cbr");
-
-            UnitCurrenciesLoader currenciesLoader = null;
-            boolean wifiOnly = preferences.getBoolean("use_wifi_only", true);
-            int cacheTimeout = 86400 / preferences.getInt("currency_load_frequency", 1);
-
-            if (currenciesSource.equals("cbr")) {
-                currenciesLoader = new CBRCurrenciesLoader(this, cacheTimeout, wifiOnly);
-            } else if (currenciesSource.equals("nbrb")) {
-                currenciesLoader = new NBRBCurrenciesLoader(this, cacheTimeout, wifiOnly);
-            }
-
-            if (currenciesLoader != null) {
-                currenciesLoader.load(units);
-            }
-        }
-		}
 
         if (stackView != null) {
             showStack();

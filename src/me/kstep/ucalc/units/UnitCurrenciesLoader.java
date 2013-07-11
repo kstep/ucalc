@@ -66,10 +66,10 @@ public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void,
 
         // Cache failed, try to load from network
         if (units == null) {
-			execute(uman);
+            execute(uman);
         } else {
-			uman.addAll(units);
-		}
+            uman.addAll(units);
+        }
 
         return uman;
     }
@@ -229,18 +229,18 @@ public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void,
 
     protected List<Unit> doInBackground(UnitsManager... params) {
         List<Unit> units = loadFromNetwork();
-		if (units == null) {
-			units = loadFromCache(0);
-			cancel(false);
-		} else {
-			saveToCache(units);
-		}
-		
-		if (units != null) {
-			params[0].addAll(units);
-		}
+        if (units == null) {
+            units = loadFromCache(0);
+            cancel(false);
+        } else {
+            saveToCache(units);
+        }
+        
+        if (units != null) {
+            params[0].addAll(units);
+        }
 
-		return units;
+        return units;
     }
 
     @Override
@@ -250,7 +250,7 @@ public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void,
 
     @Override
     protected void onPostExecute(List<Unit> units) {
-		String message = getContext().getResources().getString(R.string.info_currencies_loading_succeed, units == null? 0: units.size());
+        String message = getContext().getResources().getString(R.string.info_currencies_loading_succeed, units == null? 0: units.size());
         UToast.show(getContext(), message, UToast.LENGTH_LONG);
     }
 
