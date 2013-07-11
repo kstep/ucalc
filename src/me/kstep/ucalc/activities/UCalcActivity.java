@@ -131,18 +131,30 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
         state = (UState) loadFromFile("state.bin", new UState());
     }
 
-    private int oldThemeId = android.R.style.Theme_Holo_Light;
+    private int currentThemeId = android.R.style.Theme_Holo_Light;
 
-    private void applyPreferences(SharedPreferences preferences, boolean viewInitialized) {
-        int themeId = preferences.getBoolean("dark_theme", false)? android.R.style.Theme_Holo: android.R.style.Theme_Holo_Light;
-        if (viewInitialized && ((oldThemeId != themeId) || preferences.getBoolean("load_currencies", false))) {
+    private void applyPreferences(SharedPreferences preferences, String key) {
+
+		if (key != null) {
+		// these settings can be setup at start up only
+        if ("dark_theme".equals(key)
+			|| "load_currencies".equals(key)
+			|| "currencies_source".equals(key)
+			|| "use_wifi_only".equals(key)
+			|| "currency_load_frequency".equals(key)) {
             recreate();
             return;
         }
+        } else {
+		currentThemeId = preferences.getBoolean("dark_theme", false)? android.R.style.Theme_Holo: android.R.style.Theme_Holo_Light;
+        setTheme(currentThemeId);
+		}
 
-        setTheme(themeId);
-        oldThemeId = themeId;
-
+		if (key == null
+		    || key.equals("precision")
+			|| key.equals("group_size")
+			|| key.equals("decimal_separator")
+			|| key.equals("group_separator")) {
         FloatingFormat newFormat = new FloatingFormat(
                 preferences.getInt("precision", 7),
                 preferences.getInt("group_size", 3),
@@ -155,6 +167,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
             editView.setFormat(newFormat);
             stackView.setFormat(newFormat);
         }
+		}
 
         state.appendAngleUnit = preferences.getBoolean("inverse_trig_units", true);
 
@@ -163,6 +176,10 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
 		UComplex.showPolarForm(preferences.getBoolean("show_polar_complex", false));
         Effects.setFeedback(preferences.getBoolean("haptic_feedback", false), preferences.getBoolean("sound_feedback", false));
 
+		if (key == null
+		    || key.equals("natural_evaluator")
+			|| key.equals("naive_evaluator")
+			|| key.equals("rpn_functions_evaluator")) {
         if (preferences.getBoolean("natural_evaluator", false)) {
 
             if (preferences.getBoolean("naive_evaluator", false)) {
@@ -182,7 +199,9 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
         } else {
             evaluator = new URPNEvaluator();
         }
+		}
 
+		if (key == null) {
         if (preferences.getBoolean("load_currencies", false)) {
             String currenciesSource = preferences.getString("currencies_source", "cbr");
 
@@ -197,17 +216,18 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
             }
 
             if (currenciesLoader != null) {
-                currenciesLoader.execute(units);
+                currenciesLoader.load(units);
             }
         }
+		}
 
         if (stackView != null) {
             showStack();
         }
     }
 
-    private void applyPreferences(boolean viewInitialized) {
-        applyPreferences(PreferenceManager.getDefaultSharedPreferences(this), viewInitialized);
+    private void applyPreferences() {
+        applyPreferences(PreferenceManager.getDefaultSharedPreferences(this), null);
     }
 
     private UEditView editView;
@@ -227,7 +247,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
         undos = new UUndoStack();
 
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
-        applyPreferences(false);
+        applyPreferences();
 
         setContentView(R.layout.main);
         stackView = (UStackView) findViewById(R.id.view_stack);
@@ -244,7 +264,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
     }
 
     public void onSharedPreferenceChanged(SharedPreferences preferences, String key) {
-        applyPreferences(preferences, true);
+        applyPreferences(preferences, key);
     }
 
     @Override
@@ -310,7 +330,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
 
     public void onOptionsButtonClick(View view) {
         Intent intent = new Intent(this, UPreferenceActivity.class);
-        intent.putExtra("themeId", oldThemeId);
+        intent.putExtra("themeId", currentThemeId);
         startActivity(intent);
     }
 
