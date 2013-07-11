@@ -11,8 +11,8 @@ import me.kstep.ucalc.numbers.UNumber;
 
 public class NBRBCurrenciesLoader extends UnitCurrenciesLoader {
 
-    public NBRBCurrenciesLoader(Context ctx, boolean wifiOnly) {
-        super(ctx, wifiOnly);
+    public NBRBCurrenciesLoader(Context ctx, int timeout, boolean wifiOnly) {
+        super(ctx, timeout, wifiOnly);
     }
 
     @Override

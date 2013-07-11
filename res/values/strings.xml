@@ -35,6 +35,7 @@
     <string name="pref_title_load_currencies">Load currencies from Internet</string>
     <string name="pref_title_currencies_source">Currencies source</string>
     <string name="pref_title_use_wifi_only">Load via Wi-Fi only</string>
+    <string name="pref_title_currency_load_frequency">Currencies update frequency</string>
 
     <string name="pref_summary_sound_feedback">Clicking sound on buttons press</string>
     <string name="pref_summary_haptic_feedback">Vibrate on buttons press</string>
@@ -45,6 +46,7 @@
     <string name="pref_summary_precision">Number of decimal digits to display (highest precision available is used inside anyway). Current value: %d</string>
     <string name="pref_summary_show_ratios">Show 0.3333… as 1/3, unless tainted by irrational numbers like π</string>
     <string name="pref_summary_show_polar_complex">Show complex numbers as a pair of magnitude and angle</string>
+    <string name="pref_summary_currency_load_frequency">Update currencies %d times per day</string>
 
     <string name="pref_summary_current_integer_value">Current value: %d</string>
     <string name="pref_summary_current_string_value">Current value: %s</string>

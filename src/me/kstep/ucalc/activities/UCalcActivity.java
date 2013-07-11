@@ -188,11 +188,12 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
 
             UnitCurrenciesLoader currenciesLoader = null;
             boolean wifiOnly = preferences.getBoolean("use_wifi_only", true);
+            int cacheTimeout = 86400 / preferences.getInt("currency_load_frequency", 1);
 
             if (currenciesSource.equals("cbr")) {
-                currenciesLoader = new CBRCurrenciesLoader(this, wifiOnly);
+                currenciesLoader = new CBRCurrenciesLoader(this, cacheTimeout, wifiOnly);
             } else if (currenciesSource.equals("nbrb")) {
-                currenciesLoader = new NBRBCurrenciesLoader(this, wifiOnly);
+                currenciesLoader = new NBRBCurrenciesLoader(this, cacheTimeout, wifiOnly);
             }
 
             if (currenciesLoader != null) {

@@ -47,9 +47,10 @@ public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void,
         }
     }
 
-    public UnitCurrenciesLoader(Context ctx, boolean wifiOnly) {
+    public UnitCurrenciesLoader(Context ctx, int timeout, boolean wifiOnly) {
         baseCurrency = getBaseUnit();
         context = ctx;
+        cacheTimeout = timeout;
         useWifiOnly = wifiOnly;
     }
 
@@ -86,7 +87,7 @@ public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void,
     }
 
     private static final String CACHE_FILENAME = "currencies.cache";
-    private static final int CACHE_DEFAULT_TIMEOUT = 86400;
+    private int cacheTimeout = 86400;
 
     protected void saveToCache(List<Unit> units) {
         if (units == null) {
@@ -103,7 +104,7 @@ public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void,
     }
 
     protected List<Unit> loadFromCache() {
-        return loadFromCache(CACHE_DEFAULT_TIMEOUT);
+        return loadFromCache(cacheTimeout);
     }
 
     public void clearCache() {

@@ -35,6 +35,7 @@
     <string name="pref_title_load_currencies">Загружать курсы валют из сети</string>
     <string name="pref_title_currencies_source">Источник курсов валют</string>
     <string name="pref_title_use_wifi_only">Загружать только по Wi-Fi</string>
+    <string name="pref_title_currency_load_frequency">Частота обновления курсов валют</string>
 
     <string name="pref_summary_sound_feedback">Кликающий звук при нажатии на клавиши</string>
     <string name="pref_summary_haptic_feedback">Вибрация при нажатии на клавиши</string>
@@ -45,6 +46,7 @@
     <string name="pref_summary_precision">Число видимых знаков после запятой (все вычисления всё равно идут с наилучшей доступной точностью). Значение: %d</string>
     <string name="pref_summary_show_ratios">Показывать дроби (1/3 вместо 0.3333…) если не были использованы иррациональные числа вроде π</string>
     <string name="pref_summary_show_polar_complex">Показывать комплексные числа как пару модуля и угла</string>
+    <string name="pref_summary_currency_load_frequency">Обновлять курсы валют %d раз в день</string>
 
     <string name="pref_summary_current_integer_value">Значение: %d</string>
     <string name="pref_summary_current_string_value">Значение: %s</string>
