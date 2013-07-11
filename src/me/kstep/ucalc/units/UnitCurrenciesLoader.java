@@ -255,7 +255,15 @@ public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void,
     }
 
     @Override
-    protected void onCancelled(UnitsManager uman) {
-        UToast.show(getContext(), R.string.err_currencies_loading_failed, UToast.LENGTH_LONG);
+    protected void onCancelled(List<Unit> units) {
+        String message;
+
+        if (units == null) {
+            message = getContext().getResources().getString(R.string.err_currencies_loading_failed);
+        } else {
+            message = getContext().getResources().getString(R.string.err_currencies_loaded_from_cache, units.size());
+        }
+
+        UToast.show(getContext(), message, UToast.LENGTH_LONG);
     }
 }

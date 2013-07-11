@@ -53,6 +53,7 @@
 
     <string name="info_currencies_loading_started">Загружаются курсы валют…</string>
     <string name="err_currencies_loading_failed">Ошибка при загрузке курсов валют</string>
+    <string name="err_currencies_loaded_from_cache">Ошибка при загрузке курсов валют по сети, %d валют загружено из кеша</string>
     <string name="info_currencies_loading_succeed">Успешно загружено %d валют</string>
 
     <string name="help_unit_base">Это базовая единица измерения.</string>
