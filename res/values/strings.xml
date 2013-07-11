@@ -53,7 +53,7 @@
 
     <string name="info_currencies_loading_started">Loading currencies…</string>
     <string name="err_currencies_loading_failed">Currencies loading failed</string>
-    <string name="info_currencies_loading_succeed">Currencies loaded successfully</string>
+    <string name="info_currencies_loading_succeed">%d currencies loaded successfully</string>
 
     <string name="help_unit_base">This is a base unit.</string>
     <string name="help_unit_definition">This unit is defined as: %s</string>

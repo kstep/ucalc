@@ -53,7 +53,7 @@
 
     <string name="info_currencies_loading_started">Загружаются курсы валют…</string>
     <string name="err_currencies_loading_failed">Ошибка при загрузке курсов валют</string>
-    <string name="info_currencies_loading_succeed">Курсы валют успешно загружены</string>
+    <string name="info_currencies_loading_succeed">Успешно загружено %d валют</string>
 
     <string name="help_unit_base">Это базовая единица измерения.</string>
     <string name="help_unit_definition">Определение: %s</string>

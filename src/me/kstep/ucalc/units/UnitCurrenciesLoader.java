@@ -26,7 +26,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import me.kstep.ucalc.R;
 import me.kstep.ucalc.views.UToast;
 
-public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void, UnitsManager> {
+public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void, List<Unit>> {
     final protected Unit baseCurrency;
     final protected Context context;
     final protected boolean useWifiOnly;
@@ -66,22 +66,10 @@ public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void,
 
         // Cache failed, try to load from network
         if (units == null) {
-            units = loadFromNetwork();
-
-            // Network failed, try to force load from cache
-            if (units == null) {
-                units = loadFromCache(0);
-            } else {
-                saveToCache(units);
-            }
-        }
-
-        // If loading succeeded, put units to units manager
-        if (units != null) {
-            uman.addAll(units);
+			execute(uman);
         } else {
-			cancel(false);
-        }
+			uman.addAll(units);
+		}
 
         return uman;
     }
@@ -239,8 +227,20 @@ public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void,
         }
     }
 
-    protected UnitsManager doInBackground(UnitsManager... params) {
-        return load(params[0]);
+    protected List<Unit> doInBackground(UnitsManager... params) {
+        List<Unit> units = loadFromNetwork();
+		if (units == null) {
+			units = loadFromCache(0);
+			cancel(false);
+		} else {
+			saveToCache(units);
+		}
+		
+		if (units != null) {
+			params[0].addAll(units);
+		}
+
+		return units;
     }
 
     @Override
@@ -249,8 +249,9 @@ public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void,
     }
 
     @Override
-    protected void onPostExecute(UnitsManager uman) {
-        UToast.show(getContext(), R.string.info_currencies_loading_succeed, UToast.LENGTH_LONG);
+    protected void onPostExecute(List<Unit> units) {
+		String message = getContext().getResources().getString(R.string.info_currencies_loading_succeed, units == null? 0: units.size());
+        UToast.show(getContext(), message, UToast.LENGTH_LONG);
     }
 
     @Override
