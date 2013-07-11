@@ -242,18 +242,18 @@ public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void,
         return load(params[0]);
     }
 
-	@Override
-	protected void onPreExecute() {
-		UToast.show(getContext(), R.string.info_currencies_loading_started);
-	}
+    @Override
+    protected void onPreExecute() {
+        UToast.show(getContext(), R.string.info_currencies_loading_started, UToast.LENGTH_LONG);
+    }
 
-	@Override
-	protected void onPostExecute(UnitsManager uman) {
-		UToast.show(getContext(), R.string.info_currencies_loading_succeed);
-	}
+    @Override
+    protected void onPostExecute(UnitsManager uman) {
+        UToast.show(getContext(), R.string.info_currencies_loading_succeed, UToast.LENGTH_LONG);
+    }
 
-	@Override
-	protected void onCancelled(UnitsManager uman) {
-		UToast.show(getContext(), R.string.err_currencies_loading_failed);
-	}
+    @Override
+    protected void onCancelled(UnitsManager uman) {
+        UToast.show(getContext(), R.string.err_currencies_loading_failed, UToast.LENGTH_LONG);
+    }
 }
