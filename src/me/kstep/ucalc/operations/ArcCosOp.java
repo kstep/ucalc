@@ -10,9 +10,8 @@ class ArcCosOp extends UOperation {
     public int arity() { return 1; }
     public CharSequence name() { return "acos"; }
     public void apply(UState state, UStack stack) {
-        UNumber result = UMath.acos(stack.pop(), state.angleUnit);
-        stack.push(!state.appendAngleUnit && result instanceof UnitNum?
-            ((UnitNum) result).value: result);
+        UNumber result = UMath.acos(stack.pop(), state.appendAngleUnit? state.angleUnit: null);
+        stack.push(result);
     }
 
     public int priority() { return PRI_FUN; }
