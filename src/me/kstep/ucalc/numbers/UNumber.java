@@ -237,7 +237,11 @@ public abstract class UNumber extends Number {
     abstract public boolean equals(Number other);
 
     public boolean equals(Object other) {
-        return (other instanceof Number)? UNumber.valueOf((Number) other).equals(this): false;
+		try {
+            return (other instanceof Number)? UNumber.valueOf((Number) other).equals(this): false;
+		} catch (UNumber.ConversionException e) {
+			return false;
+		}
     }
 
     public static Pair<?,?> coerce(Number num1, Number num2) {
