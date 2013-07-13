@@ -136,6 +136,9 @@ final public class UMath {
     }
 
     public static UNumber exp(UNumber value) {
+		if (value instanceof UComplex) {
+			return E.pow(value);
+		}
         return new UFloat(Math.exp(value.doubleValue()));
     }
 
