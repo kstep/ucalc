@@ -13,6 +13,7 @@ final public class UMath {
 
     final public static UNumber PI = new UFloat(Math.PI);
     final public static UNumber E = new UFloat(Math.E);
+	final public static UNumber LN10 = new UFloat(Math.log(10));
 
     public static UNumber angle(UNumber value) {
         if (value instanceof UnitNum) {
@@ -99,11 +100,23 @@ final public class UMath {
     }
 
     public static UNumber log10(UNumber value) {
+		if (value instanceof UComplex || value.doubleValue() < 0) {
+			return log(value).div(LN10);
+		}
         return new UFloat(Math.log10(value.doubleValue()));
     }
 
     public static UNumber log(UNumber value) {
-        return new UFloat(Math.log(value.doubleValue()));
+		if (value instanceof UComplex) {
+			UComplex phi = (UComplex) value;
+			return new UComplex(Math.log(phi.abs().doubleValue()), phi.angle());
+		}
+		
+		double teta = value.doubleValue();
+		if (teta < 0) {
+			return new UComplex(Math.log(-teta), Math.PI);
+		}
+        return new UFloat(Math.log(teta));
     }
 
     public static UNumber exp(UNumber value) {
