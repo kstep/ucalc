@@ -106,7 +106,7 @@ public abstract class UNumber extends Number {
     public class ConversionException extends UNumberException {
         final static long serialVersionUID = 0L;
         public ConversionException(Class<? extends Number> targetClass) {
-            super("Can not convert to " + targetClass);
+            super("Can not convert to " + targetClass.getSimpleName());
         }
     }
 
