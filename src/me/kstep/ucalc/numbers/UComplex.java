@@ -75,7 +75,7 @@ public class UComplex extends UNumber {
     }
 
     public UReal angle() {
-        return (UReal) ((UnitNum) UMath.atan2(imag, real)).value;
+        return (UReal) UMath.atan2(imag, real);
     }
 
     public boolean isReal() {
