@@ -7,6 +7,9 @@ import me.kstep.ucalc.units.UnitNum;
 
 public class UComplex extends UNumber {
 
+    final public static UComplex J = new UComplex(UNumber.ZERO, UNumber.ONE);
+    final public static UComplex _J = new UComplex(UNumber.ZERO, UNumber._ONE);
+	
     public UNumber simplify() {
         return isReal()? real.simplify(): this;
     }

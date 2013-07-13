@@ -15,7 +15,7 @@ final public class UMath {
     final public static UNumber E = new UFloat(Math.E);
 	final public static UNumber LN10 = new UFloat(Math.log(10));
 
-    public static UNumber angle(UNumber value) {
+    private static UNumber fromAngle(UNumber value) {
         if (value instanceof UnitNum) {
             UnitNum num = (UnitNum) value;
             return (num.unit == radian? num: num.convert(radian)).value;
@@ -23,6 +23,11 @@ final public class UMath {
             return value;
         }
     }
+	
+	private static UNumber toAngle(UNumber value, Unit unit) {
+		return unit == null? value:
+		    new UnitNum(unit.from(value, radian), unit);
+	}
 
 	// \cos(a+bi) = \cos a \cosh b - i\sin a \sinh b
 	// \sin(a+bi) = \sin a \cosh b + i\cos a \sinh b
@@ -36,7 +41,7 @@ final public class UMath {
     // \ln re^{iP} = \ln r + iP + 2k\pi i
 	// \ln (-1) = \ln \left(1e^{i\pi}\right) = \pi i
     public static UNumber sin(UNumber value) {
-		UNumber phi = angle(value);
+		UNumber phi = fromAngle(value);
 		if (phi instanceof UComplex) {
 			UComplex teta = (UComplex) phi;
             return new UComplex(
@@ -50,7 +55,7 @@ final public class UMath {
     }
 
     public static UNumber cos(UNumber value) {
-		UNumber phi = angle(value);
+		UNumber phi = fromAngle(value);
 		if (phi instanceof UComplex) {
 			UComplex teta = (UComplex) phi;
             return new UComplex(
@@ -64,21 +69,29 @@ final public class UMath {
     }
 
     public static UNumber acos(UNumber value, Unit unit) {
-        return new UnitNum(unit.from(new UFloat(Math.acos(value.doubleValue())), radian), unit);
+		if (value instanceof UComplex) {
+			UNumber root = UNumber.ONE.sub(value.mul(value)).root();
+			return toAngle(UComplex._J.mul(log(value.add/*sub*/(root.mul(UComplex.J)))), unit);
+		}
+		return toAngle(new UFloat(Math.acos(value.doubleValue())), unit);
     }
     public static UNumber acos(UNumber value) {
-        return acos(value, radian);
+        return acos(value, null);
     }
 
     public static UNumber asin(UNumber value, Unit unit) {
-        return new UnitNum(unit.from(new UFloat(Math.asin(value.doubleValue())), radian), unit);
+		if (value instanceof UComplex) {
+			UNumber root = UNumber.ONE.sub(value.mul(value)).root();
+			return toAngle(UComplex._J.mul(log(value.mul(UComplex.J).add/*sub*/(root))), unit);
+		}
+        return toAngle(new UFloat(Math.asin(value.doubleValue())), unit);
     }
     public static UNumber asin(UNumber value) {
-        return asin(value, radian);
+        return asin(value, null);
     }
 
     public static UNumber tan(UNumber value) {
-		UNumber phi = angle(value);
+		UNumber phi = fromAngle(value);
 		if (phi instanceof UComplex) {
 			return sin(phi).div(cos(phi));
 		}
@@ -86,17 +99,20 @@ final public class UMath {
     }
 
     public static UNumber atan(UNumber value, Unit unit) {
-        return new UnitNum(unit.from(new UFloat(Math.atan(value.doubleValue())), radian), unit);
+		if (value instanceof UComplex) {
+			return toAngle(UComplex.J.div(2).mul(log(UComplex.J.add(value).div(UComplex.J.sub(value)))), unit);
+		}
+        return toAngle(new UFloat(Math.atan(value.doubleValue())), unit);
     }
     public static UNumber atan(UNumber value) {
-        return atan(value, radian);
+        return atan(value, null);
     }
 
     public static UNumber atan2(UNumber value1, UNumber value2, Unit unit) {
-        return new UnitNum(unit.from(new UFloat(Math.atan2(value1.doubleValue(), value2.doubleValue())), radian), unit);
+        return toAngle(new UFloat(Math.atan2(value1.doubleValue(), value2.doubleValue())), unit);
     }
     public static UNumber atan2(UNumber value1, UNumber value2) {
-        return atan2(value1, value2, radian);
+        return atan2(value1, value2, null);
     }
 
     public static UNumber log10(UNumber value) {
