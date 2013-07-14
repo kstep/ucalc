@@ -57,6 +57,7 @@
 
     <string name="help_unit_base">This is a base unit.</string>
     <string name="help_unit_definition">This unit is defined as: %s</string>
+	<string name="help_btn_operation" formatted="false">This is a “%s” operation button. It takes %d arguments from the stack and puts %d items back to it.</string>
 
     <string name="btn_title_dismiss">Dismiss</string>
 </resources>
