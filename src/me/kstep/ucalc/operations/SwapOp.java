@@ -6,6 +6,7 @@ import me.kstep.ucalc.numbers.UNumber;
 
 class SwapOp extends UOperation {
     public int arity() { return 2; }
+	public int effect() { return 2; }
     public CharSequence name() { return "swap"; }
     public void apply(UState state, UStack stack) {
         UNumber x = stack.pop();
