@@ -12,5 +12,10 @@ class CubicRootOp extends UOperation {
 
     public int priority() { return PRI_POW; }
     public byte assoc() { return ASSOC_RIGHT; }
+	public String help() {
+		return "This is a cubic root operation. " +
+		       "It takes one argument from the stack, " +
+			   "takes cubic root of it and puts the result back.";
+	}
 }
 

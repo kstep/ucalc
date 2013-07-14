@@ -33,4 +33,11 @@ public class ConjugateOp extends UOperation {
 	public CharSequence name() {
 		return "conj";
 	}
+	public String help() {
+		return "This is an conjugate oppression. " +
+			"It takes one complex argument from the stack and " +
+			"puts conjugate complex number back. " +
+			"(The complex number with reversed imaginary part sign.) " +
+			"It does nothing for real (non-complex) values.";
+	}
 }

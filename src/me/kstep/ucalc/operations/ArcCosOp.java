@@ -15,4 +15,13 @@ class ArcCosOp extends UOperation {
     }
 
     public int priority() { return PRI_FUN; }
+	public String help() {
+		return "This is an arccosine function operation. " +
+		       "It takes one argument from the stack and " +
+			   "puts arccos(x) of it back. " +
+			   "The result angle unit is defined " +
+			   "by current [deg/rad] button state. " +
+			   "See also “Inverse trig units” option to " +
+			   "produce results with angle units attached.";
+	}
 }
