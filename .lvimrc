@@ -1,5 +1,7 @@
 
-let class_path = "/opt/android-sdk/platforms/android-15/android.jar:/home/kstep/workspace/UCalc/src:/home/kstep/workspace/UCalc/gen:/home/kstep/workspace/UCalc/tests/src:/usr/share/java/junit.jar"
+let g:class_path = "/opt/android-sdk/platforms/android-15/android.jar:/home/kstep/workspace/UCalc/src:/home/kstep/workspace/UCalc/gen:/home/kstep/workspace/UCalc/tests/src:/usr/share/java/junit.jar"
+
+let g:syntastic_java_javac_classpath = g:class_path
 
 if (match($CLASSPATH, class_path) == -1)
     let $CLASSPATH=$CLASSPATH . ':' . class_path
