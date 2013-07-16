@@ -1,13 +1,11 @@
 package me.kstep.ucalc.util;
 
-import java.lang.reflect.Field;
-
 import android.content.Context;
 import android.media.AudioManager;
+import android.os.Build;
 import android.view.HapticFeedbackConstants;
 import android.view.View;
-
-import android.os.Build;
+import java.lang.reflect.Field;
 
 public class Effects {
     protected static boolean hapticFeedback = false;

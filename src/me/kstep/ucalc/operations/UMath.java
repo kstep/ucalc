@@ -1,10 +1,10 @@
 package me.kstep.ucalc.operations;
 
-import me.kstep.ucalc.numbers.UNumber;
 import me.kstep.ucalc.numbers.UFloat;
 import me.kstep.ucalc.numbers.UInteger;
-import me.kstep.ucalc.units.UnitNum;
+import me.kstep.ucalc.numbers.UNumber;
 import me.kstep.ucalc.units.Unit;
+import me.kstep.ucalc.units.UnitNum;
 import me.kstep.ucalc.units.UnitsManager;
 
 final public class UMath {

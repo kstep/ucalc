@@ -1,9 +1,8 @@
 package me.kstep.ucalc.units;
 
 import java.text.Format;
-
-import me.kstep.ucalc.numbers.UNumber;
 import me.kstep.ucalc.numbers.UFloat;
+import me.kstep.ucalc.numbers.UNumber;
 
 public class UnitNum extends UNumber {
     final static long serialVersionUID = 0L;

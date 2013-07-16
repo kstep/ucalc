@@ -1,20 +1,17 @@
 package me.kstep.ucalc.widgets;
 
-import java.util.HashMap;
-import java.util.ArrayList;
-
-import android.widget.CompoundButton;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
-import android.graphics.Typeface;
-
-import me.kstep.ucalc.activities.UCalcActivity;
-import me.kstep.ucalc.util.FontFitter;
-import me.kstep.ucalc.util.Effects;
-
+import android.widget.CompoundButton;
+import java.util.ArrayList;
+import java.util.HashMap;
 import me.kstep.ucalc.R;
+import me.kstep.ucalc.activities.UCalcActivity;
+import me.kstep.ucalc.util.Effects;
+import me.kstep.ucalc.util.FontFitter;
 
 public class UToggleButton extends CompoundButton implements CompoundButton.OnCheckedChangeListener, UCalcActivity.OnModeChangedListener, View.OnClickListener {
 

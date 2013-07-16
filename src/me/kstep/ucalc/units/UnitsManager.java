@@ -7,28 +7,28 @@
 
 package me.kstep.ucalc.units;
 
-import java.lang.reflect.Constructor;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Array;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Set;
+import me.kstep.ucalc.numbers.UNumber;
 
 /**
  * We use hashmap to store unit name → instance mapping, array list to represent
  * array of units, collection and set to provide units collection and keys set.
  */
-import java.util.LinkedHashMap;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Set;
 
 /**
  * Also we strive to support unit definitions loading from external files,
  * hence these imports.
  */
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.IOException;
 
-import me.kstep.ucalc.numbers.UNumber;
 
 /**
  * Now to the core class itself.

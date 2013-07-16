@@ -1,12 +1,11 @@
 package me.kstep.ucalc.widgets;
 
 import android.content.Context;
-import android.view.View;
 import android.util.AttributeSet;
-
+import android.view.View;
 import me.kstep.ucalc.activities.UCalcActivity;
-import me.kstep.ucalc.operations.UOperations;
 import me.kstep.ucalc.operations.UOperationException;
+import me.kstep.ucalc.operations.UOperations;
 
 class UOpButton extends UButton implements View.OnClickListener {
     public UOpButton(Context context) {

@@ -1,10 +1,10 @@
 package me.kstep.ucalc.evaluators;
 
-import me.kstep.ucalc.operations.UOperation;
+import java.util.Stack;
 import me.kstep.ucalc.collections.UStack;
 import me.kstep.ucalc.collections.UState;
+import me.kstep.ucalc.operations.UOperation;
 import me.kstep.ucalc.util.TextUtil;
-import java.util.Stack;
 
 public class UNaturalEvaluator extends UEvalulator {
     static private class OpStack extends Stack<UOperation> {

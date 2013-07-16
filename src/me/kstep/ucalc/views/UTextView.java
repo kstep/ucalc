@@ -1,16 +1,14 @@
 package me.kstep.ucalc.views;
 
-import java.text.NumberFormat;
+import android.content.Context;
+import android.graphics.Typeface;
+import android.util.AttributeSet;
+import android.widget.TextView;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-
-import android.widget.TextView;
-import android.content.Context;
-import android.util.AttributeSet;
-import android.graphics.Typeface;
-
-import me.kstep.ucalc.util.TextUtil;
+import java.text.NumberFormat;
 import me.kstep.ucalc.formatters.FloatingFormat;
+import me.kstep.ucalc.util.TextUtil;
 
 public class UTextView extends TextView {
     public UTextView(Context context) {

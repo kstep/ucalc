@@ -2,11 +2,9 @@ package me.kstep.ucalc.views;
 
 import android.content.Context;
 import android.util.AttributeSet;
-
-import android.widget.LinearLayout;
 import android.view.LayoutInflater;
 import android.view.View;
-
+import android.widget.LinearLayout;
 import me.kstep.ucalc.R;
 
 public class UKeypadView extends LinearLayout {

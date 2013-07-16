@@ -1,7 +1,7 @@
 package me.kstep.ucalc.units;
 
-import me.kstep.ucalc.numbers.UNumber;
 import me.kstep.ucalc.numbers.UFloat;
+import me.kstep.ucalc.numbers.UNumber;
 
 /**
  * This class represents logarithmic units like dB.

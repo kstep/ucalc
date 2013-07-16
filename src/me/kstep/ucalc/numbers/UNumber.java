@@ -1,7 +1,6 @@
 package me.kstep.ucalc.numbers;
 
 import java.text.Format;
-
 import me.kstep.ucalc.operations.UOperation;
 import me.kstep.ucalc.units.Unit;
 import me.kstep.ucalc.units.UnitNum;

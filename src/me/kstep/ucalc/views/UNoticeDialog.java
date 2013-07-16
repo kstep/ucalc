@@ -1,12 +1,11 @@
 package me.kstep.ucalc.views;
 
-import android.app.DialogFragment;
-import android.app.Dialog;
-import android.app.AlertDialog;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-
 import me.kstep.ucalc.R;
 
 public class UNoticeDialog extends DialogFragment implements DialogInterface.OnClickListener {

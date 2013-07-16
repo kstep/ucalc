@@ -1,8 +1,8 @@
 package me.kstep.ucalc.operations;
 
 import me.kstep.ucalc.collections.UStack;
-import me.kstep.ucalc.numbers.UNumber;
 import me.kstep.ucalc.collections.UState;
+import me.kstep.ucalc.numbers.UNumber;
 
 class DivideYOp extends UOperation {
     public int arity() { return 2; }

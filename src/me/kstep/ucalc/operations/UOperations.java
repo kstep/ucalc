@@ -1,7 +1,7 @@
 package me.kstep.ucalc.operations;
 
-import java.util.Hashtable;
 import android.util.Log;
+import java.util.Hashtable;
 
 public class UOperations extends Hashtable<CharSequence,UOperation> {
     final static long serialVersionUID = 0L;

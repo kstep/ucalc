@@ -1,29 +1,24 @@
 package me.kstep.ucalc.views;
 
-import java.util.EmptyStackException;
-
-import android.app.ListFragment;
 import android.app.ActionBar;
+import android.app.ListFragment;
 import android.os.Bundle;
-import android.widget.ListView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-
 import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-
-import com.mobeta.android.dslv.DragSortListView;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 import com.mobeta.android.dslv.DragSortController;
-
+import com.mobeta.android.dslv.DragSortListView;
+import java.util.EmptyStackException;
+import me.kstep.ucalc.R;
 import me.kstep.ucalc.activities.UCalcActivity;
 import me.kstep.ucalc.collections.UStack;
 import me.kstep.ucalc.numbers.UNumber;
-
-import me.kstep.ucalc.R;
 
 public class UMemoryFragment extends ListFragment {
     ArrayAdapter<UNumber> adapter;

@@ -1,17 +1,15 @@
 package me.kstep.ucalc.widgets;
 
-import android.widget.Button;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
-import android.graphics.Typeface;
-
-import me.kstep.ucalc.util.FontFitter;
+import android.widget.Button;
+import me.kstep.ucalc.R;
 import me.kstep.ucalc.activities.UCalcActivity;
 import me.kstep.ucalc.util.Effects;
-
-import me.kstep.ucalc.R;
+import me.kstep.ucalc.util.FontFitter;
 
 public class UButton extends Button implements UCalcActivity.OnModeChangedListener, View.OnClickListener {
     public UButton(Context context) {

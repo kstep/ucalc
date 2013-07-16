@@ -1,9 +1,9 @@
 package me.kstep.ucalc.collections;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import me.kstep.ucalc.units.Unit;
 import me.kstep.ucalc.units.UnitsManager;
-import java.io.Serializable;
 
 public class UState implements Serializable {
     final static long serialVersionUID = 0L;

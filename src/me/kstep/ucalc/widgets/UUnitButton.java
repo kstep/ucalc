@@ -1,20 +1,16 @@
 package me.kstep.ucalc.widgets;
 
-import android.text.TextUtils;
-import android.content.res.Resources;
-
 import android.content.Context;
+import android.content.res.Resources;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
-
-import me.kstep.ucalc.units.UnitsManager;
-import me.kstep.ucalc.units.UnitException;
-import me.kstep.ucalc.units.Unit;
-
-import me.kstep.ucalc.activities.UCalcActivity;
 import android.view.ViewGroup;
-
 import me.kstep.ucalc.R;
+import me.kstep.ucalc.activities.UCalcActivity;
+import me.kstep.ucalc.units.Unit;
+import me.kstep.ucalc.units.UnitException;
+import me.kstep.ucalc.units.UnitsManager;
 
 public class UUnitButton extends UButton implements View.OnClickListener, View.OnLongClickListener {
     public UUnitButton(Context context) {

@@ -1,9 +1,9 @@
 package me.kstep.ucalc.operations;
 
+import javax.xml.transform.Result;
 import me.kstep.ucalc.collections.UStack;
 import me.kstep.ucalc.collections.UState;
 import me.kstep.ucalc.numbers.UNumber;
-import javax.xml.transform.Result;
 import me.kstep.ucalc.units.UnitNum;
 
 class ArcCosOp extends UOperation {

@@ -1,10 +1,10 @@
 package me.kstep.ucalc.formatters;
 
 import java.text.DecimalFormat;
-import java.text.FieldPosition;
-import java.text.ParsePosition;
-import java.text.NumberFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.FieldPosition;
+import java.text.NumberFormat;
+import java.text.ParsePosition;
 
 public class FloatingFormat extends DecimalFormat {
     final static long serialVersionUID = 0L;

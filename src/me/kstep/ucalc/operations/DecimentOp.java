@@ -1,8 +1,8 @@
 package me.kstep.ucalc.operations;
 
 import me.kstep.ucalc.collections.UStack;
-import me.kstep.ucalc.numbers.UInteger;
 import me.kstep.ucalc.collections.UState;
+import me.kstep.ucalc.numbers.UInteger;
 
 class DecimentOp extends UOperation {
     final private UInteger TEN = new UInteger(10);

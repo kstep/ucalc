@@ -1,7 +1,7 @@
 package me.kstep.ucalc.preferences;
 
-import android.preference.ListPreference;
 import android.content.Context;
+import android.preference.ListPreference;
 import android.util.AttributeSet;
 
 public class SelectPreference extends ListPreference {

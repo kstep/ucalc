@@ -1,14 +1,11 @@
 package me.kstep.ucalc.views;
 
-import java.util.List;
-
-import android.util.Log;
-
 import android.content.Context;
 import android.util.AttributeSet;
-
-import me.kstep.ucalc.numbers.UNumber;
+import android.util.Log;
+import java.util.List;
 import me.kstep.ucalc.collections.UStack;
+import me.kstep.ucalc.numbers.UNumber;
 
 public class UStackView extends UTextView {
     public UStackView(Context context) {

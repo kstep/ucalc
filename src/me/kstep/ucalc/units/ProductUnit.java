@@ -1,11 +1,10 @@
 package me.kstep.ucalc.units;
 
-import me.kstep.ucalc.numbers.UNumber;
-import me.kstep.ucalc.numbers.UInteger;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import me.kstep.ucalc.numbers.UInteger;
+import me.kstep.ucalc.numbers.UNumber;
 
 class ProductUnit extends DerivedUnit {
     final static long serialVersionUID = 0L;

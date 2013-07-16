@@ -1,9 +1,9 @@
 package me.kstep.ucalc.units;
 
-import java.util.Iterator;
 import java.util.ArrayList;
-import java.util.ListIterator;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 class UnitCombinationsIterator implements Iterator<Unit> {

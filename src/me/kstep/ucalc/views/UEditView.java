@@ -4,9 +4,9 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import java.text.ParseException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
 import me.kstep.ucalc.numbers.UNumber;
 import me.kstep.ucalc.util.FontFitter;
 

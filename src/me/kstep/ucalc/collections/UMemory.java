@@ -1,10 +1,8 @@
 package me.kstep.ucalc.collections;
 
 import java.util.ArrayList;
-
-import me.kstep.ucalc.numbers.UNumber;
 import me.kstep.ucalc.numbers.UInteger;
-
+import me.kstep.ucalc.numbers.UNumber;
 
 public class UMemory extends ArrayList<UNumber> {
     private static final long serialVersionUID = 0L;

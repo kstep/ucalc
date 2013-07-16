@@ -1,10 +1,9 @@
 package me.kstep.ucalc.collections;
 
 import java.util.Hashtable;
-
+import me.kstep.ucalc.units.Unit;
 import me.kstep.ucalc.units.UnitNum;
 import me.kstep.ucalc.units.UnitsManager;
-import me.kstep.ucalc.units.Unit;
 
 final public class UConstants extends Hashtable<CharSequence,UConstants.Item> {
 

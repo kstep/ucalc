@@ -1,13 +1,12 @@
 package me.kstep.ucalc.units;
 
+import android.content.Context;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
+import me.kstep.ucalc.numbers.UNumber;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
-import java.util.List;
-import java.util.LinkedList;
-import android.content.Context;
-
-import me.kstep.ucalc.numbers.UNumber;
 
 public class CBRCurrenciesLoader  extends UnitCurrenciesLoader {
 

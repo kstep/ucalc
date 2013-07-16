@@ -1,86 +1,65 @@
 package me.kstep.ucalc.activities;
 
-import java.util.EmptyStackException;
-import java.util.ArrayList;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.IOException;
-import java.io.FileNotFoundException;
-import java.io.Serializable;
-
-import android.util.Log;
-
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
-import android.os.Bundle;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.view.View;
-import android.view.Gravity;
-import android.view.MenuItem;
-import android.view.LayoutInflater;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.FrameLayout;
-
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.ActionBar;
-import android.preference.PreferenceManager;
-
-import me.kstep.ucalc.activities.UPreferenceActivity;
-
-import me.kstep.ucalc.views.UEditView;
-import me.kstep.ucalc.views.UStackView;
-import me.kstep.ucalc.views.UNoticeDialog;
-import me.kstep.ucalc.views.UToast;
-
-import me.kstep.ucalc.views.UStackFragment;
-import me.kstep.ucalc.views.UMemoryFragment;
-import me.kstep.ucalc.views.URadixDialog;
-import me.kstep.ucalc.views.UUnitsView;
-
-import me.kstep.ucalc.operations.UOperations;
-import me.kstep.ucalc.operations.UOperation;
-import me.kstep.ucalc.numbers.URational;
-import me.kstep.ucalc.numbers.UNumber;
-
-import me.kstep.ucalc.units.Unit;
-import me.kstep.ucalc.units.UnitsLoader;
-import me.kstep.ucalc.units.UnitsManager;
-import me.kstep.ucalc.units.UnitException;
-import me.kstep.ucalc.units.UnitNum;
-import me.kstep.ucalc.widgets.UToggleButton;
+import android.content.Intent;
 import android.content.SharedPreferences;
-
-import me.kstep.ucalc.views.UTextView;
-import me.kstep.ucalc.formatters.FloatingFormat;
-import me.kstep.ucalc.util.Effects;
-import me.kstep.ucalc.util.UCalcException;
-import me.kstep.ucalc.numbers.UComplex;
-
-import me.kstep.ucalc.evaluators.UEvalulator;
-import me.kstep.ucalc.evaluators.URPNEvaluator;
-import me.kstep.ucalc.evaluators.UNaturalEvaluator;
-import me.kstep.ucalc.evaluators.UNaturalFnEvaluator;
-import me.kstep.ucalc.evaluators.UNaiveEvaluator;
-import me.kstep.ucalc.evaluators.UNaiveFnEvaluator;
-
+import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.FrameLayout;
+import android.widget.TextView;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.EmptyStackException;
+import me.kstep.ucalc.R;
+import me.kstep.ucalc.collections.UConstants;
+import me.kstep.ucalc.collections.UMemory;
 import me.kstep.ucalc.collections.UStack;
 import me.kstep.ucalc.collections.UState;
 import me.kstep.ucalc.collections.UUndoStack;
-import me.kstep.ucalc.collections.UMemory;
-import me.kstep.ucalc.collections.UConstants;
-
-import me.kstep.ucalc.units.UnitCurrenciesLoader;
+import me.kstep.ucalc.evaluators.UEvalulator;
+import me.kstep.ucalc.evaluators.UNaiveEvaluator;
+import me.kstep.ucalc.evaluators.UNaiveFnEvaluator;
+import me.kstep.ucalc.evaluators.UNaturalEvaluator;
+import me.kstep.ucalc.evaluators.UNaturalFnEvaluator;
+import me.kstep.ucalc.evaluators.URPNEvaluator;
+import me.kstep.ucalc.formatters.FloatingFormat;
+import me.kstep.ucalc.numbers.UComplex;
+import me.kstep.ucalc.numbers.UNumber;
+import me.kstep.ucalc.numbers.URational;
+import me.kstep.ucalc.operations.UOperation;
+import me.kstep.ucalc.operations.UOperations;
 import me.kstep.ucalc.units.CBRCurrenciesLoader;
 import me.kstep.ucalc.units.NBRBCurrenciesLoader;
-
-import me.kstep.ucalc.R;
+import me.kstep.ucalc.units.Unit;
+import me.kstep.ucalc.units.UnitCurrenciesLoader;
+import me.kstep.ucalc.units.UnitNum;
+import me.kstep.ucalc.units.UnitsLoader;
+import me.kstep.ucalc.units.UnitsManager;
+import me.kstep.ucalc.util.Effects;
+import me.kstep.ucalc.util.UCalcException;
+import me.kstep.ucalc.views.UEditView;
+import me.kstep.ucalc.views.UMemoryFragment;
+import me.kstep.ucalc.views.UNoticeDialog;
+import me.kstep.ucalc.views.URadixDialog;
+import me.kstep.ucalc.views.UStackFragment;
+import me.kstep.ucalc.views.UStackView;
+import me.kstep.ucalc.views.UTextView;
+import me.kstep.ucalc.views.UToast;
+import me.kstep.ucalc.views.UUnitsView;
+import me.kstep.ucalc.widgets.UToggleButton;
 
 public class UCalcActivity extends Activity implements SharedPreferences.OnSharedPreferenceChangeListener {
     private UStack stack;

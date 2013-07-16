@@ -1,7 +1,6 @@
 package me.kstep.ucalc.numbers;
 
 import java.text.Format;
-
 import me.kstep.ucalc.operations.UMath;
 import me.kstep.ucalc.units.UnitNum;
 
@@ -104,7 +103,7 @@ public class UComplex extends UNumber {
     public static void showPolarForm(boolean value) {
         showPolarForm = value;
     }
-    
+
     public String format(Format formatter) {
         return
             isReal()? real.format(formatter):

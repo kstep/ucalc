@@ -1,12 +1,11 @@
 package me.kstep.ucalc.units;
 
-import me.kstep.ucalc.numbers.UNumber;
-
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.LinkedHashMap;
+import me.kstep.ucalc.numbers.UNumber;
 
 /**
  * This is a base unit class, which determines main Unit interface

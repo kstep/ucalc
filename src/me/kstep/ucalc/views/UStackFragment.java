@@ -2,32 +2,28 @@ package me.kstep.ucalc.views;
 
 import android.app.ActionBar;
 import android.app.ListFragment;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-import android.view.View;
-import android.view.MenuInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.content.Context;
-import android.content.ClipboardManager;
-import android.content.ClipData;
-
-import java.util.Stack;
-import me.kstep.ucalc.activities.UCalcActivity;
-import me.kstep.ucalc.numbers.UNumber;
-import me.kstep.ucalc.numbers.UFloat;
-
-import com.mobeta.android.dslv.DragSortListView;
-import com.mobeta.android.dslv.DragSortController;
-
-import me.kstep.ucalc.R;
 import android.widget.ShareActionProvider;
-import android.content.Intent;
+import com.mobeta.android.dslv.DragSortController;
+import com.mobeta.android.dslv.DragSortListView;
+import java.util.Stack;
+import me.kstep.ucalc.R;
+import me.kstep.ucalc.activities.UCalcActivity;
+import me.kstep.ucalc.numbers.UFloat;
+import me.kstep.ucalc.numbers.UNumber;
 
 public class UStackFragment extends ListFragment {
 
@@ -62,7 +58,7 @@ public class UStackFragment extends ListFragment {
         lv.requestFocusFromTouch();
         lv.setSelection(0);
     }
-    
+
     public String getSelection(boolean resetSelection) {
         try {
             ListView lv = getListView();
@@ -97,7 +93,7 @@ public class UStackFragment extends ListFragment {
                 } catch (NumberFormatException e) {
                 }
             return true;
-            
+
             case R.id.menu_share:
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);

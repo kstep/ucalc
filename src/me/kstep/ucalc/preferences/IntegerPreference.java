@@ -7,14 +7,13 @@ import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
-
 import me.kstep.ucalc.R;
 
 public class IntegerPreference extends DialogPreference implements DialogInterface.OnClickListener, SeekBar.OnSeekBarChangeListener, TextView.OnEditorActionListener {

@@ -1,21 +1,16 @@
 package me.kstep.ucalc.views;
 
-import java.util.List;
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.util.AttributeSet;
-
-import me.kstep.ucalc.units.Unit;
-import me.kstep.ucalc.units.UnitsManager;
-import me.kstep.ucalc.units.UnitPrefix;
-
-import me.kstep.ucalc.activities.UCalcActivity;
-
-import me.kstep.ucalc.util.TableView;
-import me.kstep.ucalc.util.KeypadAdapter;
-
+import java.util.ArrayList;
+import java.util.List;
 import me.kstep.ucalc.R;
+import me.kstep.ucalc.activities.UCalcActivity;
+import me.kstep.ucalc.units.Unit;
+import me.kstep.ucalc.units.UnitPrefix;
+import me.kstep.ucalc.units.UnitsManager;
+import me.kstep.ucalc.util.KeypadAdapter;
+import me.kstep.ucalc.util.TableView;
 
 public class UUnitsView extends TableView {
 

@@ -1,23 +1,19 @@
 package me.kstep.ucalc.units;
 
-import java.io.IOException;
-import java.io.InputStream;
+import android.content.Context;
+import android.content.res.XmlResourceParser;
+import android.util.Log;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
-
+import me.kstep.ucalc.numbers.UInteger;
+import me.kstep.ucalc.numbers.UNumber;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
-
-import android.content.Context;
-import android.content.res.XmlResourceParser;
-
-import android.util.Log;
-
-import me.kstep.ucalc.numbers.UNumber;
-import me.kstep.ucalc.numbers.UInteger;
-import java.lang.reflect.Field;
 
 public class UnitsLoader {
     public static UnitsManager loadPrefixes() {

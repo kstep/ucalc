@@ -1,30 +1,27 @@
 package me.kstep.ucalc.units;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
+import android.widget.Toast;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileNotFoundException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.File;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
-
-import android.os.AsyncTask;
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.widget.Toast;
-
+import me.kstep.ucalc.R;
+import me.kstep.ucalc.views.UToast;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
-
-import me.kstep.ucalc.R;
-import me.kstep.ucalc.views.UToast;
 
 public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void, List<Unit>> {
     final protected Unit baseCurrency;
@@ -235,7 +232,7 @@ public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void,
         } else {
             saveToCache(units);
         }
-        
+
         if (units != null) {
             params[0].addAll(units);
         }
