@@ -1,8 +1,5 @@
-package me.kstep.ucalc.tests;
+package me.kstep.ucalc.units;
 
-import me.kstep.ucalc.units.Unit;
-import me.kstep.ucalc.units.UnitsLoader;
-import me.kstep.ucalc.units.UnitsManager;
 import me.kstep.ucalc.numbers.UNumber;
 
 import org.junit.Test;
@@ -11,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import static org.junit.Assert.*;
 
+@RunWith(JUnit4.class)
 public class ConversionTest {
     private UnitsManager uman;
 
@@ -48,7 +46,7 @@ public class ConversionTest {
         Unit lbf = uman.get("lbf");
         Unit N = uman.get("N");
 
-        assertTrue(22.4808943 - N.to(100, lbf).floatValue() < 0.00001);
+        assertEquals(22.4808943, N.to(100, lbf).floatValue(), 0.00001);
     }
 
     @Test
@@ -57,7 +55,7 @@ public class ConversionTest {
         Unit J = uman.get("J");
 
         UNumber _ = eV.to(100, J);
-        assertTrue(16.021765e-18 - _.floatValue() < 0.00001);
+        assertEquals(16.021765e-18, _.floatValue(), 0.00001);
     }
 
     @Test
@@ -67,7 +65,7 @@ public class ConversionTest {
 
         UNumber _ = hp.to(1, W);
 
-        assertTrue(745.699872 - _.doubleValue() < 0.00001);
+        assertEquals(745.699872, _.doubleValue(), 0.00001);
     }
 
     private void println(Object... objs) {
