@@ -12,6 +12,7 @@
     </string-array>
 
     <string-array name="currencies_source_names">
+        <item>Европейский центробанк</item>
         <item>Центробанк РФ</item>
         <item>Нацбанк РБ</item>
     </string-array>

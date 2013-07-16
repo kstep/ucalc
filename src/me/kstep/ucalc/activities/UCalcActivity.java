@@ -42,6 +42,7 @@ import me.kstep.ucalc.numbers.URational;
 import me.kstep.ucalc.operations.UOperation;
 import me.kstep.ucalc.operations.UOperations;
 import me.kstep.ucalc.units.CBRCurrenciesLoader;
+import me.kstep.ucalc.units.ECBCurrenciesLoader;
 import me.kstep.ucalc.units.NBRBCurrenciesLoader;
 import me.kstep.ucalc.units.Unit;
 import me.kstep.ucalc.units.UnitCurrenciesLoader;
@@ -194,6 +195,8 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
                     currenciesLoader = new CBRCurrenciesLoader(this, cacheTimeout, wifiOnly);
                 } else if (currenciesSource.equals("nbrb")) {
                     currenciesLoader = new NBRBCurrenciesLoader(this, cacheTimeout, wifiOnly);
+                } else if (currenciesSource.equals("ecb")) {
+                    currenciesLoader = new ECBCurrenciesLoader(this, cacheTimeout, wifiOnly);
                 }
 
                 if (currenciesLoader != null) {
