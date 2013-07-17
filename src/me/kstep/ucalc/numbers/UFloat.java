@@ -69,13 +69,21 @@ public class UFloat extends UReal {
     }
 
     public UNumber pow(Number other) {
-        UFloat num = new UFloat(Math.pow(value, other.doubleValue()));
-        return num.isNaN()? new UComplex(0, Math.pow(-value, other.doubleValue())): num;
+        try {
+            UFloat num = new UFloat(Math.pow(value, other.doubleValue()));
+            return num.isNaN()? new UComplex(0, Math.pow(-value, other.doubleValue())): num;
+        } catch (UNumber.ConversionException e) {
+            return super.pow(other);
+        }
     }
 
     public UNumber root(Number other) {
-        UFloat num = new UFloat(Math.pow(value, 1 / other.doubleValue()));
-        return num.isNaN()? new UComplex(0, Math.pow(-value, 1 / other.doubleValue())): num;
+        try {
+            UFloat num = new UFloat(Math.pow(value, 1 / other.doubleValue()));
+            return num.isNaN()? new UComplex(0, Math.pow(-value, 1 / other.doubleValue())): num;
+        } catch (UNumber.ConversionException e) {
+            return super.root(other);
+        }
     }
 
     public UNumber root() {

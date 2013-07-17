@@ -86,6 +86,7 @@ public abstract class UNumber extends Number {
     }
 
     final public static UInteger ONE = new UInteger(1);
+    final public static UInteger _ONE = new UInteger(-1);
     final public static UInteger ZERO = new UInteger(0);
 
     public UNumber() {}
@@ -104,7 +105,7 @@ public abstract class UNumber extends Number {
     public class ConversionException extends UNumberException {
         final static long serialVersionUID = 0L;
         public ConversionException(Class<? extends Number> targetClass) {
-            super("Can not convert to " + targetClass);
+            super("Can not convert to " + targetClass.getSimpleName());
         }
     }
 
@@ -235,7 +236,11 @@ public abstract class UNumber extends Number {
     abstract public boolean equals(Number other);
 
     public boolean equals(Object other) {
-        return (other instanceof Number)? UNumber.valueOf((Number) other).equals(this): false;
+        try {
+            return (other instanceof Number)? UNumber.valueOf((Number) other).equals(this): false;
+        } catch (UNumber.ConversionException e) {
+            return false;
+        }
     }
 
     public static Pair<?,?> coerce(Number num1, Number num2) {

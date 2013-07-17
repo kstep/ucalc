@@ -210,6 +210,14 @@ A few examples:
             <scale>29.573531</scale>
             <derive>ml</derive>
         </unit>
+		<unit class="linear" name="tsp" fullname="Teaspoon">
+			<scale>4.9289216</scale>
+			<derive>ml</derive>
+		</unit>
+		<unit class="linear" name="tbsp" fullname="Tablespoon">
+			<scale>14.786765</scale>
+			<derive>ml</derive>
+		</unit>
     </category>
 
     <category name="weight">

@@ -17,5 +17,12 @@ class ConvertOp extends UOperation {
     }
 
     public int priority() { return PRI_NUL; } // TODO
+    public String help() {
+        return "This is a measure units conversion operation. " +
+               "It takes two values with units from the stack, " +
+               "converts y to the unit of x and puts result " +
+               "back to the stack. The x's value means nothing " +
+               "to the operation and is silently ignored.";
+    }
 }
 

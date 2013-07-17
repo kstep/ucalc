@@ -12,4 +12,9 @@ class CubeOp extends UOperation {
 
     public int priority() { return PRI_POW; }
     public byte assoc() { return ASSOC_RIGHT; }
+    public String help() {
+        return "This is a cube opration. " +
+               "It takes single value from the stack " +
+               "raises it to 3rd power and puts the result back.";
+    }
 }

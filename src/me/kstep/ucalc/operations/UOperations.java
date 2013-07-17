@@ -54,6 +54,8 @@ public class UOperations extends Hashtable<CharSequence,UOperation> {
         DecimentOp.class,
         ConvertOp.class,
         SwapOp.class,
+        ConjugateOp.class,
+        DecomposeOp.class,
     };
 
     private UOperations() {

@@ -58,6 +58,7 @@
 
     <string name="help_unit_base">Это базовая единица измерения.</string>
     <string name="help_unit_definition">Определение: %s</string>
-
+    <string name="help_btn_operation" formatted="false">Это кнопка операции «%s». Операция берёт %d аргументов из стека и кладёт обратно %d значений.</string>
+	
     <string name="btn_title_dismiss">Закрыть</string>
 </resources>

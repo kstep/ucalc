@@ -6,6 +6,9 @@ import me.kstep.ucalc.units.UnitNum;
 
 public class UComplex extends UNumber {
 
+    final public static UComplex J = new UComplex(UNumber.ZERO, UNumber.ONE);
+    final public static UComplex _J = new UComplex(UNumber.ZERO, UNumber._ONE);
+
     public UNumber simplify() {
         return isReal()? real.simplify(): this;
     }
@@ -15,9 +18,15 @@ public class UComplex extends UNumber {
     public UReal real;
     public UReal imag;
 
+    public static UComplex polar(Number abs, Number angle) {
+        double r = UNumber.valueOf(abs).doubleValue();
+        double phi = UNumber.valueOf(angle).doubleValue();
+        return new UComplex(r * Math.cos(phi), r * Math.sin(phi));
+    }
+
     public UComplex() {
-        real = new UFloat(0.0);
-        imag = new UFloat(0.0);
+        real = UNumber.ZERO;
+        imag = UNumber.ZERO;
     }
 
     public UComplex(Number re) {
@@ -27,11 +36,11 @@ public class UComplex extends UNumber {
 
         } else if (re instanceof UReal) {
             real = (UReal) re;
-            imag = new UFloat(0.0);
+            imag = UNumber.ZERO;
 
         } else {
             real = new UFloat(re);
-            imag = new UFloat(0.0);
+            imag = UNumber.ZERO;
         }
     }
 
@@ -65,7 +74,7 @@ public class UComplex extends UNumber {
     }
 
     public UReal angle() {
-        return (UReal) ((UnitNum) UMath.atan2(imag, real)).value;
+        return (UReal) UMath.atan2(imag, real);
     }
 
     public boolean isReal() {
@@ -187,8 +196,22 @@ public class UComplex extends UNumber {
             } else {
                 double newRadius = abs().pow(other).doubleValue();
                 double newAngle = UNumber.valueOf(other).mul(angle()).doubleValue();
-                return new UComplex(new UFloat(newRadius * Math.cos(newAngle)), new UFloat(newRadius * Math.sin(newAngle)));
+                return polar(newRadius, newAngle);
             }
+
+        } else if (other instanceof UComplex) {
+            UComplex phi = (UComplex) other;
+            double myRadiusLn = Math.log(abs().doubleValue());
+            double myAngle = angle().doubleValue();
+            double phiReal = phi.real.doubleValue();
+            double phiImag = phi.imag.doubleValue();
+
+            double newRadius = Math.exp(
+                phiReal * myRadiusLn
+                - phiImag * myAngle);
+            double newAngle = phiReal * myAngle
+                + phiImag * myRadiusLn;
+            return polar(newRadius, newAngle);
 
         } else {
             return super.pow(other);

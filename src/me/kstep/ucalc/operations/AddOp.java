@@ -14,4 +14,8 @@ class AddOp extends UOperation {
     }
 
     public int priority() { return PRI_ADD; }
+    public String help() {
+        return "This is an addition operation. It takes two numbers from the stack, " +
+               "sums them up and puts the result back to the stack.";
+    }
 }

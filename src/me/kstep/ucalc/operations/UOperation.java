@@ -32,4 +32,8 @@ abstract public class UOperation {
     public String toString() {
         return name().toString();
     }
+
+    public String help() {
+        return null;
+    }
 }

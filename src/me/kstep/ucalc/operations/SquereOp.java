@@ -13,4 +13,10 @@ class SquereOp extends UOperation {
 
     public int priority() { return PRI_POW; }
     public byte assoc() { return ASSOC_RIGHT; }
+    public String help() {
+        return "This is a squere operation. " +
+               "It takes one value from the stack " +
+               "raises it to 2nd power and puts the " +
+               "result back.";
+    }
 }
