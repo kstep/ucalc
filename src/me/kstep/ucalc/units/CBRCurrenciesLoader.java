@@ -16,7 +16,7 @@ public class CBRCurrenciesLoader  extends UnitCurrenciesLoader {
 
     @Override
     protected Unit getBaseUnit() {
-        Unit unit = new BaseUnit("RUR");
+        Unit unit = new BaseUnit("RUB");
         unit.category = Unit.Category.MISCELLANEOUS;
         unit.fullname = "Russian ruble";
         return unit;
