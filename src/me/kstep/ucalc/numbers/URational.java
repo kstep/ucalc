@@ -17,8 +17,10 @@ public class URational extends UReal {
     final private static long PRECISION_BASE = 100000L;
 
     private static boolean showAsFloat = false;
-    public static void showAsFloat(boolean value) {
+	private static boolean showMixedFractions = false;
+    public static void showAsFloat(boolean value, boolean mixed) {
         showAsFloat = value;
+		showMixedFractions = mixed;
     }
 
     public long numerator;
@@ -129,8 +131,11 @@ public class URational extends UReal {
 
     public String format(Format formatter) {
         return isInteger()? formatter.format(numerator):
-            showAsFloat? formatter.format(doubleValue()):
-                formatter.format(numerator) + "/" + formatter.format(denomenator);
+            showAsFloat? formatter.format(doubleValue()): (
+			    isImproper() && showMixedFractions?
+			    formatter.format(wholeNumber()) + " " + formatter.format(properNumerator()) + "/" + formatter.format(denomenator):
+                formatter.format(numerator) + "/" + formatter.format(denomenator)
+			);
     }
 
     public UNumber pow(Number other) {
@@ -211,6 +216,18 @@ public class URational extends UReal {
     public int hashCode() {
         return (int) (numerator << 16 ^ denomenator);
     }
+	
+	public boolean isImproper() {
+		return Math.abs(numerator) > denomenator;
+	}
+	
+	public long wholeNumber() {
+		return numerator / denomenator;
+	}
+	
+	public long properNumerator() {
+		return Math.abs(numerator % denomenator);
+	}
 
     public boolean equals(Number other) {
         return (other instanceof URational && ((URational) other).numerator == numerator && ((URational) other).denomenator == denomenator)

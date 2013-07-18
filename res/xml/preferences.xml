@@ -26,6 +26,8 @@
         <me.kstep.ucalc.preferences.IntegerPreference android:key="group_size" android:title="@string/pref_title_group_size" android:summary="@string/pref_summary_current_integer_value" android:numeric="integer" android:defaultValue="3" ucalc:minValue="2" ucalc:maxValue="10" />
 
         <CheckBoxPreference android:key="show_ratios" android:title="@string/pref_title_show_ratios" android:summary="@string/pref_summary_show_ratios" android:defaultValue="false" />
+		<CheckBoxPreference android:key="show_mixed_ratios" android:title="@string/pref_title_show_mixed_ratios" android:summary="@string/pref_summary_show_mixed_ratios" android:defaultValue="false" android:dependency="show_ratios" />
+
         <CheckBoxPreference android:key="show_polar_complex" android:title="@string/pref_title_show_polar_complex" android:summary="@string/pref_summary_show_polar_complex" android:defaultValue="false" />
     </PreferenceCategory>
 

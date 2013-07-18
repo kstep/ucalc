@@ -153,7 +153,8 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
         state.appendAngleUnit = preferences.getBoolean("inverse_trig_units", true);
 
         UStack.simplfyUnits(preferences.getBoolean("simplify_units", false));
-        URational.showAsFloat(!preferences.getBoolean("show_ratios", false));
+        URational.showAsFloat(!preferences.getBoolean("show_ratios", false),
+		    preferences.getBoolean("show_mixed_ratios", false));
         UComplex.showPolarForm(preferences.getBoolean("show_polar_complex", false));
         Effects.setFeedback(preferences.getBoolean("haptic_feedback", false), preferences.getBoolean("sound_feedback", false));
 
