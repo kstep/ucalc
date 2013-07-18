@@ -405,13 +405,13 @@ A few examples:
         </unit>
 
         <unit name="°C" fullname="Celsius" class="linear">
-            <offset>+273.16</offset>
+            <offset>27316/100</offset>
             <derive>°K</derive>
             <description>A 1/100 of scale between water's freezing and boiling points</description>
         </unit>
         <unit name="°F" fullname="Fahrenheit" class="linear">
             <rscale>9/5</rscale>
-            <roffset>+32</roffset>
+            <roffset>32</roffset>
             <derive>°C</derive>
             <description>A 1/96 of scale between brine's freezing point and normal human body temperature</description>
         </unit>
