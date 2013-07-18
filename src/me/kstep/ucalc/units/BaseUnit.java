@@ -25,13 +25,13 @@ final class BaseUnit extends Unit {
      * and `from()` methods just delegate conversion to other unit.
      */
     public UNumber to(UNumber value, Unit unit) throws UnitException {
-        if (unit == this) return value;
+        if (equals(unit)) return value;
         if (unit instanceof BaseUnit) throw this.new ConversionException(unit);
         return unit.from(value, this);
     }
 
     public UNumber from(UNumber value, Unit unit) throws UnitException {
-        if (unit == this) return value;
+        if (equals(unit)) return value;
         if (unit instanceof BaseUnit) throw unit.new ConversionException(this);
         return unit.to(value, this);
     }
@@ -42,7 +42,7 @@ final class BaseUnit extends Unit {
      * an end vertex of units graph).
      */
     public boolean direct(Unit unit) {
-        return unit == this;
+        return equals(unit);
     }
 
     /**
@@ -51,7 +51,9 @@ final class BaseUnit extends Unit {
      * to any other unit except *meter*.
      */
     public boolean equals(Unit other) {
-        return other == this;
+        return other == this || (
+		    (other instanceof BaseUnit) && name.equals(other.name)
+		);
     }
 
     public Unit simplify(int depth) {
