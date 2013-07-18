@@ -14,7 +14,8 @@
     <string name="frag_title_memory">Memory</string>
     <string name="frag_title_stack">Stack</string>
 
-    <string name="pref_title_general">General Settings</string>
+    <string name="pref_title_style">Style Settings</string>
+    <string name="pref_title_calculation">Calculation Settings</string>
     <string name="pref_title_display">Display Settings</string>
     <string name="pref_title_network">Network Settings</string>
 

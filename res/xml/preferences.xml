@@ -3,11 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ucalc="http://schemas.android.com/apk/res/me.kstep.ucalc"
     >
-    <PreferenceCategory android:key="general" android:title="@string/pref_title_general">
+    <PreferenceCategory android:key="style" android:title="@string/pref_title_style">
         <CheckBoxPreference android:key="dark_theme" android:title="@string/pref_title_dark_theme" android:defaultValue="false" />
         <CheckBoxPreference android:key="sound_feedback" android:title="@string/pref_title_sound_feedback" android:summary="@string/pref_summary_sound_feedback" android:defaultValue="false" />
         <CheckBoxPreference android:key="haptic_feedback" android:title="@string/pref_title_haptic_feedback" android:summary="@string/pref_summary_haptic_feedback" android:defaultValue="false" />
+    </PreferenceCategory>
 
+    <PreferenceCategory android:key="calculation" android:title="@string/pref_title_calculation">
         <CheckBoxPreference android:key="inverse_trig_units" android:title="@string/pref_title_inverse_trig_units" android:summary="@string/pref_summary_inverse_trig_units" android:defaultValue="true" />
         <CheckBoxPreference android:key="simplify_units" android:title="@string/pref_title_simplify_units" android:defaultValue="true" />
         <CheckBoxPreference android:key="natural_evaluator" android:title="@string/pref_title_natural_evaluator" android:summary="@string/pref_summary_natural_evaluator" android:defaultValue="false" />
