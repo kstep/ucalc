@@ -41,6 +41,6 @@
 
         <me.kstep.ucalc.preferences.IntegerPreference android:key="currency_load_frequency" android:title="@string/pref_title_currency_load_frequency" android:summary="@string/pref_summary_currency_load_frequency" android:defaultValue="1" ucalc:maxValue="6" ucalc:minValue="1" android:dependency="load_currencies" />
 
-        <MultiSelectListPreference android:key="show_currencies" android:title="@string/pref_title_show_currencies" android:dependency="load_currencies" android:entries="@array/currency_names" android:entryValues="@array/currency_codes" />
+        <MultiSelectListPreference android:key="show_currencies" android:title="@string/pref_title_show_currencies" android:dependency="load_currencies" android:entries="@array/currency_names" android:entryValues="@array/currency_codes" android:summary="@string/pref_summary_show_currencies" android:defaultValue="@array/empty_array" />
     </PreferenceCategory>
 </PreferenceScreen>

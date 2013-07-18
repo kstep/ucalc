@@ -30,4 +30,6 @@
         <item>Central Bank of Russia</item>
         <item>National Bank of Belarus</item>
     </string-array>
+
+    <string-array name="empty_array"></string-array>
 </resources>
