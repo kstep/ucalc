@@ -22,6 +22,7 @@ import me.kstep.ucalc.views.UToast;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
+import java.util.Set;
 
 public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void, List<Unit>> {
     final protected Unit baseCurrency;
@@ -52,10 +53,19 @@ public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void,
     }
 
     final public UnitsManager load() {
-        return load(UnitsManager.getInstance());
+        return load(UnitsManager.getInstance(), null);
     }
 
-    public UnitsManager load(UnitsManager uman) {
+    final public UnitsManager load(UnitsManager uman) {
+        return load(uman, null);
+    }
+
+    final public UnitsManager load(Set<String> filter) {
+        return load(UnitsManager.getInstance(), filter);
+    }
+
+    private Set<String> unitsFilter;
+    public UnitsManager load(UnitsManager uman, Set<String> filter) {
         List<Unit> units;
 
         // Try to load from cache with default timeout
@@ -63,12 +73,21 @@ public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void,
 
         // Cache failed, try to load from network
         if (units == null) {
+            unitsFilter = filter;
             execute(uman);
         } else {
-            uman.addAll(units);
+            addAllUnits(uman, units, filter);
         }
 
         return uman;
+    }
+
+    private void addAllUnits(UnitsManager uman, List<Unit> units, Set<String> filter) {
+        for (Unit unit : units) {
+            if (filter == null || filter.size() == 0 || filter.contains(unit.toString())) {
+                uman.add(unit);
+            }
+        }
     }
 
     private static final String CACHE_FILENAME = "currencies.cache";
@@ -234,7 +253,7 @@ public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void,
         }
 
         if (units != null) {
-            params[0].addAll(units);
+            addAllUnits(params[0], units, unitsFilter);
         }
 
         return units;

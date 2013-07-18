@@ -120,6 +120,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
             if ("dark_theme".equals(key)
                     || "load_currencies".equals(key)
                     || "currencies_source".equals(key)
+                    || "show_currencies".equals(key)
                     || "use_wifi_only".equals(key)
                     || "currency_load_frequency".equals(key)) {
                 recreate();
@@ -201,7 +202,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
                 }
 
                 if (currenciesLoader != null) {
-                    currenciesLoader.load(units);
+                    currenciesLoader.load(units, preferences.getStringSet("show_currencies", null));
                 }
             }
         }
