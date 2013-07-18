@@ -37,7 +37,8 @@
     <string name="pref_title_currencies_source">Currencies source</string>
     <string name="pref_title_use_wifi_only">Load via Wi-Fi only</string>
     <string name="pref_title_currency_load_frequency">Currencies update frequency</string>
-	<string name="pref_title_show_mixed_ratios">Mixed fractions</string>
+    <string name="pref_title_show_mixed_ratios">Mixed fractions</string>
+    <string name="pref_title_show_currencies">Visible currencies</string>
 
     <string name="pref_summary_sound_feedback">Clicking sound on buttons press</string>
     <string name="pref_summary_haptic_feedback">Vibrate on buttons press</string>

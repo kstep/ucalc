@@ -37,7 +37,8 @@
     <string name="pref_title_currencies_source">Источник курсов валют</string>
     <string name="pref_title_use_wifi_only">Загружать только по Wi-Fi</string>
     <string name="pref_title_currency_load_frequency">Частота обновления курсов валют</string>
-	<string name="pref_title_show_mixed_ratios">Смешанные дроби</string>
+    <string name="pref_title_show_mixed_ratios">Смешанные дроби</string>
+    <string name="pref_title_show_currencies">Видимые валюты</string>
 
     <string name="pref_summary_sound_feedback">Кликающий звук при нажатии на клавиши</string>
     <string name="pref_summary_haptic_feedback">Вибрация при нажатии на клавиши</string>
