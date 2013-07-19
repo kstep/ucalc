@@ -14,6 +14,7 @@ import me.kstep.ucalc.numbers.UNumber;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
+import me.kstep.ucalc.numbers.URational;
 
 public class UnitsLoader {
     public static UnitsManager loadPrefixes() {
@@ -313,6 +314,10 @@ public class UnitsLoader {
 
             uman.add(new ProductUnit("ohm", uman.get("V"), new PowerUnit(uman.get("A"), -1)));
             uman.add(new ProductUnit("S", uman.get("A"), new PowerUnit(uman.get("V"), -1)));
+
+            uman.add(new BaseUnit("°K"));
+            uman.add(new LinearUnit("°C", uman.get("°K"), 273.16));
+            uman.add(new LinearUnit("°F", new URational(9, 5), 32, uman.get("°C")));
 
         } catch (UnitsManager.UnitExistsException e) {
         }

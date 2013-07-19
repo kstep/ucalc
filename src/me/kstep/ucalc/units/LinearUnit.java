@@ -116,7 +116,7 @@ class LinearUnit extends Unit {
         if (this == unit) return value;
 
         if (this.direct(unit)) {
-            return this.scale.mul(value).add(this.offset);
+            return value.mul(this.scale).add(this.offset);
 
         } else if (unit.direct(this)) {
             return unit.from(value, this);
@@ -159,7 +159,8 @@ class LinearUnit extends Unit {
         Unit unit = targetUnit.simplify(depth);
 
         if (unit instanceof LinearUnit) {
-            unit = new LinearUnit(name, ((LinearUnit) unit).scale.mul(scale), ((LinearUnit) unit).targetUnit, ((LinearUnit) unit).offset.mul(scale).add(offset));
+            LinearUnit other = (LinearUnit) unit;
+            unit = new LinearUnit(name, scale.mul(other.scale), other.targetUnit, offset.mul(other.scale).add(other.offset));
         } else if (!scale.equals(UNumber.ONE) || !offset.equals(UNumber.ZERO)) {
             unit = new LinearUnit(name, scale, unit, offset);
         } else {

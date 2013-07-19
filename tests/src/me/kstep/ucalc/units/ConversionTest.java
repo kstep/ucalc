@@ -24,6 +24,18 @@ public class ConversionTest extends AndroidTestCase {
     }
 
     //@Test
+    public void testOffsetConversion() {
+        Unit C = uman.get("°C");
+        Unit F = uman.get("°F");
+
+        assertEquals(32, C.to(0, F).doubleValue(), 0.001);
+        assertEquals(0, F.to(32, C).doubleValue(), 0.001);
+
+        assertEquals(212.0, F.from(100, C).doubleValue(), 0.001);
+        assertEquals(212.0, C.to(100, F).doubleValue(), 0.001);
+    }
+
+    //@Test
     public void testReciprocalConversion() {
         Unit ohm = uman.get("ohm");
         Unit S = uman.get("S");
