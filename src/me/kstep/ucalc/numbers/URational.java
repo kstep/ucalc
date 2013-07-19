@@ -53,8 +53,17 @@ public class URational extends UReal {
         int divisor = value.indexOf('/');
 
         if (divisor == -1) {
-            numerator = Long.valueOf(value);
-            denomenator = 1L;
+			divisor = value.indexOf('_');
+			if (divisor == -1) {
+                numerator = Long.valueOf(value);
+                denomenator = 1L;
+			} else {
+				numerator = Long.valueOf(value.replace("_", ""));
+				denomenator = (long) Math.pow(10, value.length() - divisor - 1);
+				
+				fix();
+				reduce();
+			}
 
         } else {
             numerator = Long.valueOf(value.substring(0, divisor));
