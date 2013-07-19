@@ -415,6 +415,11 @@ A few examples:
             <derive>°C</derive>
             <description>A 1/96 of scale between brine's freezing point and normal human body temperature</description>
         </unit>
+		<unit name="°R" fullname="Rankine" class="linear">
+            <roffset>45967/100</roffset>
+            <derive>°F</derive>
+            <description>Absolute temperature scale like Kelvin's, but with degree size the same as of Farhenheit</description>
+        </unit>
     </category>
 
     <category name="elec">
