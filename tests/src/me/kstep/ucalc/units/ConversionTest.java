@@ -31,6 +31,18 @@ public class ConversionTest extends AndroidTestCase {
     }
 
     //@Test
+    public void testPowerConversion() {
+        Unit m3 = uman.get("m³");
+        Unit l = uman.get("l");
+
+        assertEquals(1000, m3.to(1, l).doubleValue(), 0.0001);
+        assertEquals(1000, l.from(1, m3).doubleValue(), 0.0001);
+
+        assertEquals(0.001, m3.from(1, l).doubleValue(), 0.0001);
+        assertEquals(0.001, l.to(1, m3).doubleValue(), 0.0001);
+    }
+
+    //@Test
     public void testOffsetConversion() {
         Unit C = uman.get("°C");
         Unit F = uman.get("°F");

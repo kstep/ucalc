@@ -63,23 +63,25 @@ class PowerUnit extends DerivedUnit {
     }
 
     public UNumber to(UNumber value, Unit unit) {
-        if (this == unit) return value;
+        if (equals(unit)) return value;
         if (unit instanceof PowerUnit) {
-            UNumber result = targetUnit.to(UNumber.ONE, ((PowerUnit) unit).targetUnit).pow(power).mul(value);
-            return (power ^ ((PowerUnit) unit).power) >= 0? result: result.inv();
+            PowerUnit other = (PowerUnit) unit;
+            UNumber result = targetUnit.to(UNumber.ONE, other.targetUnit).pow(other.power).mul(value);
+            return (power ^ other.power) >= 0? result: result.inv();
         } else {
-            UNumber result = targetUnit.to(UNumber.ONE, unit).pow(power).mul(value);
+            UNumber result = targetUnit.to(UNumber.ONE, unit).mul(value);
             return (power < 0 && targetUnit.equals(unit))? result.inv(): result;
         }
     }
 
     public UNumber from(UNumber value, Unit unit) {
-        if (this == unit) return value;
+        if (equals(unit)) return value;
         if (unit instanceof PowerUnit) {
-            UNumber result = targetUnit.from(UNumber.ONE, ((PowerUnit) unit).targetUnit).pow(power).mul(value);
-            return (power ^ ((PowerUnit) unit).power) >= 0? result: result.inv();
+            PowerUnit other = (PowerUnit) unit;
+            UNumber result = targetUnit.from(UNumber.ONE, other.targetUnit).pow(power).mul(value);
+            return (power ^ other.power) >= 0? result: result.inv();
         } else {
-            UNumber result = targetUnit.from(UNumber.ONE, unit).pow(power).mul(value);
+            UNumber result = targetUnit.from(UNumber.ONE, unit).mul(value);
             return (power < 0 && targetUnit.equals(unit))? result.inv(): result;
         }
     }
@@ -111,6 +113,10 @@ class PowerUnit extends DerivedUnit {
                 case 1:
                     return unit;
                 default:
+                    if (targetUnit == unit) {
+                        return this;
+                    }
+
                     if (autoname) {
                         unit = new PowerUnit(unit, power);
                     } else {
