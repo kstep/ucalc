@@ -69,7 +69,8 @@ final public class UMath {
     }
 
     public static UNumber acos(UNumber value, Unit unit) {
-        if (value instanceof UComplex) {
+        if (value instanceof UComplex && !((UComplex) value).isReal()
+                || Math.abs(value.doubleValue()) > 1) {
             UNumber root = UNumber.ONE.sub(value.mul(value)).root();
             return toAngle(UComplex._J.mul(log(value.add/*sub*/(root.mul(UComplex.J)))), unit);
         }
@@ -80,7 +81,8 @@ final public class UMath {
     }
 
     public static UNumber asin(UNumber value, Unit unit) {
-        if (value instanceof UComplex) {
+        if (value instanceof UComplex && !((UComplex) value).isReal()
+                || Math.abs(value.doubleValue()) > 1) {
             UNumber root = UNumber.ONE.sub(value.mul(value)).root();
             return toAngle(UComplex._J.mul(log(value.mul(UComplex.J).add/*sub*/(root))), unit);
         }
