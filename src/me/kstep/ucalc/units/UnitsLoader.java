@@ -319,6 +319,8 @@ public class UnitsLoader {
             uman.add(new LinearUnit("°C", uman.get("°K"), 273.16));
             uman.add(new LinearUnit("°F", new URational(9, 5), 32, uman.get("°C")));
 
+            uman.add(new LinearUnit("mole", 6.0221412927e23, Unit.NONE));
+
         } catch (UnitsManager.UnitExistsException e) {
         }
 

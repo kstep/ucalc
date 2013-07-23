@@ -20,11 +20,14 @@ final class NoneUnit extends Unit {
 
     public UNumber to(UNumber value, Unit unit) throws UnitException {
         if (this == unit) return value;
-        throw this.new ConversionException(unit);
+        if (unit instanceof BaseUnit) throw this.new ConversionException(unit);
+        return unit.from(value, this);
     }
+
     public UNumber from(UNumber value, Unit unit) throws UnitException {
         if (this == unit) return value;
-        throw unit.new ConversionException(this);
+        if (unit instanceof BaseUnit) throw unit.new ConversionException(this);
+        return unit.to(value, this);
     }
 
     public boolean direct(Unit unit) {

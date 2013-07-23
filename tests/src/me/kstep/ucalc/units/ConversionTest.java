@@ -24,6 +24,13 @@ public class ConversionTest extends AndroidTestCase {
     }
 
     //@Test
+    public void testDimensionlessConversion() {
+        Unit mole = uman.get("mole");
+        assertEquals(6.0221412927e23, mole.to(1, Unit.NONE).doubleValue(), 0.00000001);
+        assertEquals(6.0221412927e23, Unit.NONE.from(1, mole).doubleValue(), 0.00000001);
+    }
+
+    //@Test
     public void testOffsetConversion() {
         Unit C = uman.get("°C");
         Unit F = uman.get("°F");
