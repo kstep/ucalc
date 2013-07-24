@@ -7,6 +7,9 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.view.MenuItem;
 import me.kstep.ucalc.R;
+import android.content.pm.PackageManager;
+import android.preference.Preference;
+import android.app.Activity;
 
 public class UPreferenceActivity extends PreferenceActivity {
 
@@ -15,7 +18,18 @@ public class UPreferenceActivity extends PreferenceActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferences);
+			Preference p = findPreference("version");
+			p.setSummary(String.format(p.getSummary().toString(), getVersionName()));
         }
+		
+		public String getVersionName() {
+			try {
+				Activity activity = getActivity();
+				return activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0).versionName;
+			} catch (PackageManager.NameNotFoundException e) {
+				return "";
+			}
+		}
     }
 
     @Override

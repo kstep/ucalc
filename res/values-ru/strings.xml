@@ -78,5 +78,5 @@
     <string name="btn_title_dismiss">Закрыть</string>
 	
 	<string name="pref_title_version">© Константин Степанов, 2013</string>
-	<string name="pref_summary_version">Версия 0.9</string>
+	<string name="pref_summary_version">Версия %s</string>
 </resources>

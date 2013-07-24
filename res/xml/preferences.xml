@@ -74,6 +74,7 @@
 				android:data="http://www.greenwoodsoftware.com/unc/iphone/index.html" />
 		</Preference>
 		<Preference
+			android:key="version"
 			android:title="@string/pref_title_version"
 			android:summary="@string/pref_summary_version"
 			/>
