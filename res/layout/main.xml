@@ -15,7 +15,7 @@
             <me.kstep.ucalc.views.UEditView android:id="@+id/view_edit" style="@style/UCText.Edit" android:ellipsize="start" android:layout_width="match_parent" android:layout_height="match_parent" />
             <me.kstep.ucalc.views.UTextView android:id="@+id/evaluator_indicator" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="end|top" android:paddingRight="10dp" />
         </FrameLayout>
-        <me.kstep.ucalc.widgets.UButton android:text="help" style="@style/UCBtn.Opt" android:onClick="onOptionsButtonClick" />
+        <me.kstep.ucalc.widgets.UButton android:text="opt" style="@style/UCBtn.Opt" android:onClick="onOptionsButtonClick" />
     </LinearLayout>
 
     <LinearLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="2">
