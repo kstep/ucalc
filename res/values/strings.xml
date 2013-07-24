@@ -18,6 +18,7 @@
     <string name="pref_title_calculation">Calculation Settings</string>
     <string name="pref_title_display">Display Settings</string>
     <string name="pref_title_network">Network Settings</string>
+	<string name="pref_title_about">About</string>
 
     <string name="pref_title_dark_theme">Dark theme</string>
     <string name="pref_title_sound_feedback">Sound</string>
@@ -55,7 +56,16 @@
 
     <string name="pref_summary_current_integer_value">Current value: %d</string>
     <string name="pref_summary_current_string_value">Current value: %s</string>
-
+	
+	<string name="pref_title_repo">Github repository</string>
+	<string name="pref_summary_repo">github.com/kstep/ucalc</string>
+	<string name="pref_title_bugs">Bugtracker</string>
+	<string name="pref_summary_bugs">github.com/kstep/ucalc/issues</string>
+	<string name="pref_title_email">Email developer</string>
+	<string name="pref_summary_email">me@kstep.me</string>
+	<string name="pref_title_unc">Unc: A Units Calculator</string>
+    <string name="pref_summary_unc">iPhone units calculator UCalc was inspired by</string>
+	
     <string name="info_currencies_loading_started">Loading currencies…</string>
     <string name="err_currencies_loading_failed">Currencies loading failed</string>
     <string name="err_currencies_loaded_from_cache">Currencies loading failed, %d currencies loaded from cache</string>
@@ -66,4 +76,7 @@
 	<string name="help_btn_operation" formatted="false">This is a “%s” operation button. It takes %d arguments from the stack and puts %d items back to it.</string>
 
     <string name="btn_title_dismiss">Dismiss</string>
+	
+    <string name="pref_title_version">© Konstantin Stepanov, 2013</string>
+	<string name="pref_summary_version">Version 0.9</string>
 </resources>

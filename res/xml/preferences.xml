@@ -43,4 +43,39 @@
 
         <MultiSelectListPreference android:key="show_currencies" android:title="@string/pref_title_show_currencies" android:dependency="load_currencies" android:entries="@array/currency_names" android:entryValues="@array/currency_codes" android:summary="@string/pref_summary_show_currencies" android:defaultValue="@array/empty_array" />
     </PreferenceCategory>
+	
+	<PreferenceCategory android:title="@string/pref_title_about" android:key="about">
+		<Preference
+			android:title="@string/pref_title_repo"
+			android:summary="@string/pref_summary_repo"
+			>
+			<intent android:action="android.intent.action.VIEW"
+				android:data="http://github.com/kstep/ucalc" />
+		</Preference>
+		<Preference
+			android:title="@string/pref_title_bugs"
+			android:summary="@string/pref_summary_bugs"
+		>
+			<intent android:action="android.intent.action.VIEW"
+				android:data="http://github.com/kstep/ucalc/issues" />
+		</Preference>
+		<Preference
+			android:title="@string/pref_title_email"
+			android:summary="@string/pref_summary_email"
+		>
+			<intent android:action="android.intent.action.VIEW"
+				android:data="mailto:me@kstep.me" />
+		</Preference>
+		<Preference
+			android:title="@string/pref_title_unc"
+			android:summary="@string/pref_summary_unc"
+		>
+			<intent android:action="android.intent.action.VIEW"
+				android:data="http://www.greenwoodsoftware.com/unc/iphone/index.html" />
+		</Preference>
+		<Preference
+			android:title="@string/pref_title_version"
+			android:summary="@string/pref_summary_version"
+			/>
+	</PreferenceCategory>
 </PreferenceScreen>
