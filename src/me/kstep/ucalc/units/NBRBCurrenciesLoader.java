@@ -18,7 +18,7 @@ public class NBRBCurrenciesLoader extends UnitCurrenciesLoader {
     protected Unit getBaseUnit() {
         Unit unit = new BaseUnit("BYR");
         unit.category = Unit.Category.MISCELLANEOUS;
-        unit.fullname = "Belarussian ruble";
+        unit.fullname = getCurrencyFullname("BYR");
         return unit;
     }
 
@@ -80,7 +80,7 @@ public class NBRBCurrenciesLoader extends UnitCurrenciesLoader {
         }
 
         Unit unit = new LinearUnit(cName, cRate / cScale, baseCurrency);
-        unit.fullname = cFullname;
+        unit.fullname = getCurrencyFullname(cName, cFullname);
         unit.category = Unit.Category.MISCELLANEOUS;
         return unit;
     }

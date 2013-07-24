@@ -23,6 +23,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 import java.util.Set;
+import android.content.res.Resources;
 
 public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void, List<Unit>> {
     final protected Unit baseCurrency;
@@ -31,6 +32,23 @@ public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void,
 
     public Context getContext() {
         return context;
+    }
+
+    public String getCurrencyFullname(String name, String def) {
+        Resources res = getContext().getResources();
+        String[] codes = res.getStringArray(R.array.currency_codes);
+
+        for (int i = 0; i < codes.length; i++) {
+            if (codes[i].equals(name)) {
+                return res.getStringArray(R.array.currency_names)[i];
+            }
+        }
+
+        return def;
+    }
+
+    public String getCurrencyFullname(String name) {
+        return getCurrencyFullname(name, "");
     }
 
     protected abstract List<Unit> readStream(XmlPullParser parser) throws XmlPullParserException, IOException;
@@ -46,8 +64,8 @@ public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void,
     }
 
     public UnitCurrenciesLoader(Context ctx, int timeout, boolean wifiOnly) {
-        baseCurrency = getBaseUnit();
         context = ctx;
+        baseCurrency = getBaseUnit();
         cacheTimeout = timeout;
         useWifiOnly = wifiOnly;
     }

@@ -18,7 +18,7 @@ public class ECBCurrenciesLoader extends UnitCurrenciesLoader {
     protected Unit getBaseUnit() {
         Unit unit = new BaseUnit("EUR");
         unit.category = Unit.Category.MISCELLANEOUS;
-        unit.fullname = "Euro";
+        unit.fullname = getCurrencyFullname("EUR");
         return unit;
     }
 
@@ -67,7 +67,7 @@ public class ECBCurrenciesLoader extends UnitCurrenciesLoader {
         }
 
         Unit unit = new LinearUnit(cName, 1 / cRate, baseCurrency);
-        unit.fullname = cName;
+        unit.fullname = getCurrencyFullname(cName);
         unit.category = Unit.Category.MISCELLANEOUS;
         return unit;
     }
