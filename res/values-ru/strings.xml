@@ -18,7 +18,7 @@
     <string name="pref_title_calculation">Настройки вычислений</string>
     <string name="pref_title_display">Настройки отображения</string>
     <string name="pref_title_network">Сетевые настройки</string>
-	<string name="pref_title_about">О калькуляторе</string>
+    <string name="pref_title_about">О калькуляторе</string>
 
     <string name="pref_title_dark_theme">Тёмная тема</string>
     <string name="pref_title_sound_feedback">Звук</string>
@@ -56,14 +56,14 @@
 
     <string name="pref_summary_current_integer_value">Значение: %d</string>
     <string name="pref_summary_current_string_value">Значение: %s</string>
-	
-	<string name="pref_title_repo">Репозиторий на Github</string>
-	<string name="pref_summary_repo">github.com/kstep/ucalc</string>
-	<string name="pref_title_bugs">Багтрекер</string>
-	<string name="pref_summary_bugs">github.com/kstep/ucalc/issues</string>
-	<string name="pref_title_email">Написать разработчику</string>
-	<string name="pref_summary_email">me@kstep.me</string>
-	<string name="pref_title_unc">Unc: A Units Calculator</string>
+
+    <string name="pref_title_repo">Репозиторий на Github</string>
+    <string name="pref_summary_repo">github.com/kstep/ucalc</string>
+    <string name="pref_title_bugs">Багтрекер</string>
+    <string name="pref_summary_bugs">github.com/kstep/ucalc/issues</string>
+    <string name="pref_title_email">Написать разработчику</string>
+    <string name="pref_summary_email">me@kstep.me</string>
+    <string name="pref_title_unc">Unc: A Units Calculator</string>
     <string name="pref_summary_unc">Калькулятор под iPhone, который вдохновил меня на UCalc</string>
 
     <string name="info_currencies_loading_started">Загружаются курсы валют…</string>
@@ -74,9 +74,9 @@
     <string name="help_unit_base">Это базовая единица измерения.</string>
     <string name="help_unit_definition">Определение: %s</string>
     <string name="help_btn_operation" formatted="false">Это кнопка операции «%s». Операция берёт %d аргументов из стека и кладёт обратно %d значений.</string>
-	
+
     <string name="btn_title_dismiss">Закрыть</string>
-	
-	<string name="pref_title_version">© Константин Степанов, 2013</string>
-	<string name="pref_summary_version">Версия %s</string>
+
+    <string name="pref_title_version">© Константин Степанов, 2013</string>
+    <string name="pref_summary_version">Версия %s</string>
 </resources>
