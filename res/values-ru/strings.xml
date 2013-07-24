@@ -66,6 +66,10 @@
     <string name="pref_title_unc">Unc: A Units Calculator</string>
     <string name="pref_summary_unc">Калькулятор под iPhone, который вдохновил меня на UCalc</string>
 
+    <string name="pref_summary_show_currencies_all">показать все валюты</string>
+    <string name="pref_summary_show_currencies_some">показать %s</string>
+    <string name="pref_summary_show_currencies_more">и ещё %d</string>
+
     <string name="info_currencies_loading_started">Загружаются курсы валют…</string>
     <string name="err_currencies_loading_failed">Ошибка при загрузке курсов валют</string>
     <string name="err_currencies_loaded_from_cache">Ошибка при загрузке курсов валют по сети, %d валют загружено из кеша</string>

@@ -52,7 +52,6 @@
     <string name="pref_summary_show_polar_complex">Show complex numbers as a pair of magnitude and angle</string>
     <string name="pref_summary_currency_load_frequency">Update currencies %d times per day</string>
     <string name="pref_summary_show_mixed_ratios">Show improper fractions in mixed form (3/2 as 1 1/2)</string>
-    <string name="pref_summary_show_currencies">Select none to show all, otherwise shows only selected currencies (if source doesn\'t give data for a currency, it won\'t be visible anyway)</string>
 
     <string name="pref_summary_current_integer_value">Current value: %d</string>
     <string name="pref_summary_current_string_value">Current value: %s</string>
@@ -65,7 +64,11 @@
     <string name="pref_summary_email">me@kstep.me</string>
     <string name="pref_title_unc">Unc: A Units Calculator</string>
     <string name="pref_summary_unc">iPhone units calculator UCalc was inspired by</string>
-	
+
+    <string name="pref_summary_show_currencies_all">show all currencies</string>
+    <string name="pref_summary_show_currencies_some">show %s</string>
+    <string name="pref_summary_show_currencies_more">and %d more</string>
+
     <string name="info_currencies_loading_started">Loading currencies…</string>
     <string name="err_currencies_loading_failed">Currencies loading failed</string>
     <string name="err_currencies_loaded_from_cache">Currencies loading failed, %d currencies loaded from cache</string>
