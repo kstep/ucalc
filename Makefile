@@ -82,4 +82,4 @@ start:
 $(MANIFEST): $(MANIFEST).in
 	sed -e "s/android:versionName=\"VERSION\"/android:versionName=\"$$(git describe --tags | sed 's/^v//')\"/" < $(MANIFEST).in > $(MANIFEST)
 
-.PHONY: clean debug installd log start sign align release verify installr update-version
+.PHONY: clean debug installd log start sign align release verify installr update-version AndroidManifest.xml
