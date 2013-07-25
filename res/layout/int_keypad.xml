@@ -37,8 +37,8 @@
         <me.kstep.ucalc.widgets.UDigitButton android:text="7" style="@style/UCBtn.Sym" />
         <me.kstep.ucalc.widgets.UDigitButton android:text="8" style="@style/UCBtn.Sym" />
         <me.kstep.ucalc.widgets.UDigitButton android:text="9" style="@style/UCBtn.Sym" />
-        <me.kstep.ucalc.widgets.UOpButton android:text="÷" ucalc:keypad_mode="normal" android:textSize="24sp" style="@style/UCBtn.Fun" />
-        <me.kstep.ucalc.widgets.UOpButton android:text="÷y" ucalc:keypad_mode="alt" android:textSize="24sp" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.widgets.UOpButton android:text="÷" ucalc:keypad_mode_all="0" android:textSize="24sp" style="@style/UCBtn.Fun" />
+        <me.kstep.ucalc.widgets.UOpButton android:text="÷y" ucalc:keypad_mode_all="1" android:textSize="24sp" style="@style/UCBtn.Fun" />
     </LinearLayout>
 
     <LinearLayout android:layout_height="0dp" android:layout_width="match_parent" android:orientation="horizontal" android:layout_weight="1">
@@ -60,8 +60,8 @@
                 <me.kstep.ucalc.widgets.UDigitButton android:text="1" style="@style/UCBtn.Sym" />
                 <me.kstep.ucalc.widgets.UDigitButton android:text="2" style="@style/UCBtn.Sym" />
                 <me.kstep.ucalc.widgets.UDigitButton android:text="3" style="@style/UCBtn.Sym" />
-                <me.kstep.ucalc.widgets.UOpButton android:text="−" ucalc:keypad_mode="normal" android:textSize="24sp" style="@style/UCBtn.Fun" />
-                <me.kstep.ucalc.widgets.UOpButton android:text="−y" ucalc:keypad_mode="alt" android:textSize="24sp" style="@style/UCBtn.Fun" />
+                <me.kstep.ucalc.widgets.UOpButton android:text="−" ucalc:keypad_mode_all="0" android:textSize="24sp" style="@style/UCBtn.Fun" />
+                <me.kstep.ucalc.widgets.UOpButton android:text="−y" ucalc:keypad_mode_all="1" android:textSize="24sp" style="@style/UCBtn.Fun" />
             </LinearLayout>
 
             <LinearLayout android:layout_height="0dp" android:layout_width="match_parent" android:orientation="horizontal" android:layout_weight="1">

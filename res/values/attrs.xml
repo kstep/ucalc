@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
-    <attr name="keypad_mode">
-        <enum name="normal" value="0" />
-        <enum name="alt" value="1" />
-    </attr>
+    <attr name="keypad_mode_all" format="integer" />
+    <attr name="keypad_mode_any" format="integer" />
+    <attr name="keypad_mode_mask" format="integer" />
+
     <attr name="units_category">
         <enum name="time" value="0"></enum>
         <enum name="dist" value="1"></enum>
@@ -18,11 +18,15 @@
     </declare-styleable>
 
     <declare-styleable name="UButton">
-        <attr name="keypad_mode" />
+        <attr name="keypad_mode_all" />
+        <attr name="keypad_mode_any" />
+        <attr name="keypad_mode_mask" />
     </declare-styleable>
 
     <declare-styleable name="UToggleButton">
-        <attr name="keypad_mode" />
+        <attr name="keypad_mode_all" />
+        <attr name="keypad_mode_any" />
+        <attr name="keypad_mode_mask" />
         <attr name="radio_group" format="string" />
     </declare-styleable>
 

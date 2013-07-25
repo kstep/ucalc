@@ -34,16 +34,16 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_title_network" android:key="network">
-        <CheckBoxPreference android:key="load_currencies" android:title="@string/pref_title_load_currencies" android:defaultValue="false" /> 
+        <CheckBoxPreference android:key="load_currencies" android:title="@string/pref_title_load_currencies" android:defaultValue="false" />
 
         <me.kstep.ucalc.preferences.SelectPreference android:key="currencies_source" android:title="@string/pref_title_currencies_source" android:entryValues="@array/currencies_sources" android:entries="@array/currencies_source_names" android:defaultValue="cbr" android:summary="@string/pref_summary_current_string_value" android:dependency="load_currencies" />
-        <CheckBoxPreference android:key="use_wifi_only" android:title="@string/pref_title_use_wifi_only" android:defaultValue="true" android:dependency="load_currencies" /> 
+        <CheckBoxPreference android:key="use_wifi_only" android:title="@string/pref_title_use_wifi_only" android:defaultValue="true" android:dependency="load_currencies" />
 
         <me.kstep.ucalc.preferences.IntegerPreference android:key="currency_load_frequency" android:title="@string/pref_title_currency_load_frequency" android:summary="@string/pref_summary_currency_load_frequency" android:defaultValue="1" ucalc:maxValue="6" ucalc:minValue="1" android:dependency="load_currencies" />
 
         <me.kstep.ucalc.preferences.MultiSelectPreference android:key="show_currencies" android:title="@string/pref_title_show_currencies" android:dependency="load_currencies" android:entries="@array/currency_names" android:entryValues="@array/currency_codes" android:summary="@string/pref_summary_current_string_value" android:defaultValue="@array/empty_array" />
     </PreferenceCategory>
-	
+
     <PreferenceCategory android:title="@string/pref_title_about" android:key="about">
         <Preference
             android:key="version"

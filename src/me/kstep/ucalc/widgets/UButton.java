@@ -27,7 +27,9 @@ public class UButton extends Button implements UCalcActivity.OnModeChangedListen
         initialize((UCalcActivity) context, context.obtainStyledAttributes(attrs, R.styleable.UButton, defStyle, 0));
     }
 
-    private UCalcActivity.Mode mode = null;
+    private int keypad_mode_all = -1;
+    private int keypad_mode_any = -1;
+    private int keypad_mode_mask = 0;
 
     private View.OnClickListener superOnClickListener;
 
@@ -38,14 +40,12 @@ public class UButton extends Button implements UCalcActivity.OnModeChangedListen
         setEllipsize(null);
 
         if (attrs != null) {
-
-            int mymode = attrs.getInt(R.styleable.UButton_keypad_mode, -1);
-            switch (mymode) {
-                case 0: mode = UCalcActivity.Mode.NORMAL; break;
-                case 1: mode = UCalcActivity.Mode.ALT; break;
-            }
-
-            if (mode != null) {
+            keypad_mode_all = attrs.getInt(R.styleable.UButton_keypad_mode_all, -1);
+            keypad_mode_any = attrs.getInt(R.styleable.UButton_keypad_mode_any, -1);
+            
+            if (keypad_mode_all > -1
+                || keypad_mode_any > -1) {
+                keypad_mode_mask = attrs.getInt(R.styleable.UButton_keypad_mode_mask, 1);
                 context.addOnModeChangedListener(this);
             }
 
@@ -56,11 +56,13 @@ public class UButton extends Button implements UCalcActivity.OnModeChangedListen
         setOnClickListener(this);
     }
 
-    public void onModeChanged(UCalcActivity.Mode newmode) {
-        if (mode == newmode) {
-            setVisibility(View.VISIBLE);
+    public void onModeChanged(int keypad_mode) {
+        keypad_mode = keypad_mode & keypad_mode_mask;
+        android.util.Log.d("UCalc", String.format("btn: %s, mode: %d, mode_all: %d, mode_any: %d, mode & mode_any: %d", getText(), keypad_mode, keypad_mode_all, keypad_mode_any, keypad_mode & keypad_mode_any));
+        if (keypad_mode_all > -1) {
+            setVisibility(keypad_mode == keypad_mode_all? View.VISIBLE: View.GONE);
         } else {
-            setVisibility(View.GONE);
+            setVisibility((keypad_mode & keypad_mode_any) == 0? View.GONE: View.VISIBLE);
         }
     }
 

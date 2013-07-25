@@ -29,6 +29,47 @@ final public class UMath {
             new UnitNum(unit.from(value, radian), unit);
     }
 
+    public static UNumber sinh(UNumber value) {
+        if (value instanceof UComplex) {
+            UComplex arg = (UComplex) value;
+            double a = arg.real.doubleValue();
+            double b = arg.imag.doubleValue();
+
+            return new UComplex(Math.sinh(a) * Math.cos(b), Math.cosh(a) * Math.sin(b));
+        }
+        return new UFloat(Math.sinh(value.doubleValue()));
+    }
+
+    public static UNumber cosh(UNumber value) {
+        if (value instanceof UComplex) {
+            UComplex arg = (UComplex) value;
+            double a = arg.real.doubleValue();
+            double b = arg.imag.doubleValue();
+
+            return new UComplex(Math.cosh(a) * Math.cos(b), Math.sinh(a) * Math.sin(b));
+        }
+        return new UFloat(Math.cosh(value.doubleValue()));
+    }
+
+    public static UNumber tanh(UNumber value) {
+        if (value instanceof UComplex) {
+            return sinh(value).div(cosh(value));
+        }
+        return new UFloat(Math.tanh(value.doubleValue()));
+    }
+
+    public static UNumber asinh(UNumber value) {
+        return log(value.add(value.mul(value).add(UNumber.ONE).root()));
+    }
+
+    public static UNumber acosh(UNumber value) {
+        return log(value.add(value.mul(value).sub(UNumber.ONE).root()));
+    }
+
+    public static UNumber atanh(UNumber value) {
+        return log(value.add(UNumber.ONE).div(value.sub(UNumber.ONE))).div(2);
+    }
+
     // \cos(a+bi) = \cos a \cosh b - i\sin a \sinh b
     // \sin(a+bi) = \sin a \cosh b + i\cos a \sinh b
     // \cosh(a+bi) = \cosh a \cos b + i\sinh a \sin b
