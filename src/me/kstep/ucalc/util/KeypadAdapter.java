@@ -23,7 +23,7 @@ public class KeypadAdapter<T> extends ArrayAdapter<T> {
         int numRows = uview.getNumRows();
 
         if (numRows > 0) {
-            int height = uview.getMeasuredHeight() - numRows * (1 + view.getPaddingTop() + view.getPaddingBottom()) - uview.getPaddingTop() - uview.getPaddingBottom();
+            int height = uview.getHeight() - numRows * (view.getPaddingTop() + view.getPaddingBottom()) - uview.getPaddingTop() - uview.getPaddingBottom();
             view.setMinimumHeight(height / numRows);
         }
 

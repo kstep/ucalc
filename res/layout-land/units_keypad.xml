@@ -7,20 +7,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
 >
-    <Space android:layout_weight="4" android:layout_width="match_parent" android:layout_height="0dp" android:layout_margin="2dp" />
-    <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="6" android:layout_margin="2dp">
-        <Space android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="1dp" />
+    <Space android:layout_weight="3.1" android:layout_width="match_parent" android:layout_height="0dp" android:layout_margin="1dp" />
+    <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="6.2" android:layout_margin="2dp">
+        <Space android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="6.1" android:layout_margin="2dp" />
         <me.kstep.ucalc.views.UUnitsView
             android:layout_width="0dp"
-            android:layout_weight="5"
+            android:layout_weight="4"
             android:layout_height="match_parent"
             android:id="@+id/units_keypad"
-            android:numColumns="5"
+            android:numColumns="4"
             android:horizontalSpacing="7dp"
             android:verticalSpacing="7dp"
             android:background="@color/main_bg"
-            android:paddingBottom="2dp"
-            ucalc:numRows="6"
+            ucalc:numRows="4"
             />
     </LinearLayout>
 </LinearLayout>
