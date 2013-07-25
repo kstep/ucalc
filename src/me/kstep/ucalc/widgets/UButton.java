@@ -27,7 +27,9 @@ public class UButton extends Button implements UCalcActivity.OnModeChangedListen
         initialize((UCalcActivity) context, context.obtainStyledAttributes(attrs, R.styleable.UButton, defStyle, 0));
     }
 
-    private int mode = -1;
+    private int keypad_mode_all = -1;
+	private int keypad_mode_any = -1;
+	private int keypad_mode_mask = 0;
 
     private View.OnClickListener superOnClickListener;
 
@@ -38,9 +40,12 @@ public class UButton extends Button implements UCalcActivity.OnModeChangedListen
         setEllipsize(null);
 
         if (attrs != null) {
-            mode = attrs.getInt(R.styleable.UButton_keypad_mode, -1);
-
-            if (mode > -1) {
+            keypad_mode_all = attrs.getInt(R.styleable.UButton_keypad_mode_all, -1);
+            keypad_mode_any = attrs.getInt(R.styleable.UButton_keypad_mode_any, -1);
+			
+            if (keypad_mode_all > -1
+			    || keypad_mode_any > -1) {
+				keypad_mode_mask = attrs.getInt(R.styleable.UButton_keypad_mode_mask, 1);
                 context.addOnModeChangedListener(this);
             }
 
@@ -51,11 +56,12 @@ public class UButton extends Button implements UCalcActivity.OnModeChangedListen
         setOnClickListener(this);
     }
 
-    public void onModeChanged(int newmode) {
-        if (mode == newmode) {
-            setVisibility(View.VISIBLE);
+    public void onModeChanged(int keypad_mode) {
+		keypad_mode = keypad_mode & keypad_mode_mask;
+        if (keypad_mode_all > -1) {
+            setVisibility(keypad_mode == keypad_mode_all? View.VISIBLE: View.GONE);
         } else {
-            setVisibility(View.GONE);
+            setVisibility((keypad_mode & keypad_mode_any) == 0? View.GONE: View.VISIBLE);
         }
     }
 
