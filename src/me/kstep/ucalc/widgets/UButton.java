@@ -28,8 +28,8 @@ public class UButton extends Button implements UCalcActivity.OnModeChangedListen
     }
 
     private int keypad_mode_all = -1;
-	private int keypad_mode_any = -1;
-	private int keypad_mode_mask = 0;
+    private int keypad_mode_any = -1;
+    private int keypad_mode_mask = 0;
 
     private View.OnClickListener superOnClickListener;
 
@@ -42,10 +42,10 @@ public class UButton extends Button implements UCalcActivity.OnModeChangedListen
         if (attrs != null) {
             keypad_mode_all = attrs.getInt(R.styleable.UButton_keypad_mode_all, -1);
             keypad_mode_any = attrs.getInt(R.styleable.UButton_keypad_mode_any, -1);
-			
+            
             if (keypad_mode_all > -1
-			    || keypad_mode_any > -1) {
-				keypad_mode_mask = attrs.getInt(R.styleable.UButton_keypad_mode_mask, 1);
+                || keypad_mode_any > -1) {
+                keypad_mode_mask = attrs.getInt(R.styleable.UButton_keypad_mode_mask, 1);
                 context.addOnModeChangedListener(this);
             }
 
@@ -57,7 +57,8 @@ public class UButton extends Button implements UCalcActivity.OnModeChangedListen
     }
 
     public void onModeChanged(int keypad_mode) {
-		keypad_mode = keypad_mode & keypad_mode_mask;
+        keypad_mode = keypad_mode & keypad_mode_mask;
+        android.util.Log.d("UCalc", String.format("btn: %s, mode: %d, mode_all: %d, mode_any: %d, mode & mode_any: %d", getText(), keypad_mode, keypad_mode_all, keypad_mode_any, keypad_mode & keypad_mode_any));
         if (keypad_mode_all > -1) {
             setVisibility(keypad_mode == keypad_mode_all? View.VISIBLE: View.GONE);
         } else {

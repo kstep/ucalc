@@ -45,8 +45,8 @@ public class UToggleButton extends CompoundButton implements CompoundButton.OnCh
     }
 
     private int keypad_mode_all = -1;
-	private int keypad_mode_any = -1;
-	private int keypad_mode_mask = 0;
+    private int keypad_mode_any = -1;
+    private int keypad_mode_mask = 0;
     private String radio_group = null;
 
     private void initialize(UCalcActivity context, TypedArray attrs) {
@@ -57,11 +57,11 @@ public class UToggleButton extends CompoundButton implements CompoundButton.OnCh
 
         if (attrs != null) {
             keypad_mode_all = attrs.getInt(R.styleable.UToggleButton_keypad_mode_all, -1);
-            keypad_mode_any = attrs.getInt(R.styleable.UButton_keypad_mode_any, -1);
+            keypad_mode_any = attrs.getInt(R.styleable.UToggleButton_keypad_mode_any, -1);
 
             if (keypad_mode_all > -1
-			    || keypad_mode_any > -1) {
-				keypad_mode_mask = attrs.getInt(R.styleable.UButton_keypad_mode_mask, 1);
+                || keypad_mode_any > -1) {
+                keypad_mode_mask = attrs.getInt(R.styleable.UToggleButton_keypad_mode_mask, 1);
                 context.addOnModeChangedListener(this);
             }
 
@@ -81,8 +81,8 @@ public class UToggleButton extends CompoundButton implements CompoundButton.OnCh
         setOnClickListener(this);
     }
 
-	public void onModeChanged(int keypad_mode) {
-		keypad_mode = keypad_mode & keypad_mode_mask;
+    public void onModeChanged(int keypad_mode) {
+        keypad_mode = keypad_mode & keypad_mode_mask;
         if (keypad_mode_all > -1) {
             setVisibility(keypad_mode == keypad_mode_all? View.VISIBLE: View.GONE);
         } else {

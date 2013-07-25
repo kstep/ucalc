@@ -83,7 +83,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
     public void addOnModeChangedListener(OnModeChangedListener listener) {
         if (listener != null) {
             mode_listeners.add(listener);
-			listener.onModeChanged(mode);
+            listener.onModeChanged(mode);
         }
     }
 
@@ -541,10 +541,10 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
 
     public void onModeButtonClick(View view) {
         CompoundButton button = (CompoundButton) view;
-		String name = button.getText().toString();
-		int bmode = name.equals("alt")? KEYPAD_MODE_ALT:
-		            name.equals("hyp")? KEYPAD_MODE_HYPER:
-					KEYPAD_MODE_NORMAL;
+        String name = button.getText().toString();
+        int bmode = name.equals("alt")? KEYPAD_MODE_ALT:
+                    name.equals("hyp")? KEYPAD_MODE_HYPER:
+                    KEYPAD_MODE_NORMAL;
 
         setMode(button.isChecked()? mode | bmode: mode & ~bmode);
     }

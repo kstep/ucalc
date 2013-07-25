@@ -40,7 +40,7 @@
         <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode_all="1" ucalc:keypad_mode_mask="3" android:text="asin" style="@style/UCBtn.Fun" />
         <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode_all="1" ucalc:keypad_mode_mask="3" android:text="acos" style="@style/UCBtn.Fun" />
         <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode_all="1" ucalc:keypad_mode_mask="3" android:text="atan" style="@style/UCBtn.Fun" />
-			
+
         <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode_all="2" ucalc:keypad_mode_mask="3" android:text="sinh" style="@style/UCBtn.Fun" />
         <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode_all="2" ucalc:keypad_mode_mask="3" android:text="cosh" style="@style/UCBtn.Fun" />
         <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode_all="2" ucalc:keypad_mode_mask="3" android:text="tanh" style="@style/UCBtn.Fun" />
