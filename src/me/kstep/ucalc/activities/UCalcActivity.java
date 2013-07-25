@@ -539,7 +539,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
         ((Button) view).setText(state.angleUnit.toString());
     }
 
-    public void onAltModeButtonClick(View view) {
+    public void onModeButtonClick(View view) {
         CompoundButton button = (CompoundButton) view;
 		String name = button.getText().toString();
 		int bmode = name.equals("alt")? KEYPAD_MODE_ALT:
