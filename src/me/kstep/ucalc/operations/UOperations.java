@@ -7,6 +7,7 @@ public class UOperations extends Hashtable<CharSequence,UOperation> {
     final static long serialVersionUID = 0L;
 
     static public class UOperationNotFoundException extends UOperationException {
+        final static long serialVersionUID = 0L;
         UOperationNotFoundException(CharSequence name) {
             super("Operation not found: `" + name + "'");
         }
@@ -33,6 +34,12 @@ public class UOperations extends Hashtable<CharSequence,UOperation> {
         ArcCosOp.class,
         ArcSinOp.class,
         ArcTanOp.class,
+        CoshOp.class,
+        SinhOp.class,
+        TanhOp.class,
+        ArcCoshOp.class,
+        ArcSinhOp.class,
+        ArcTanhOp.class,
         LogOp.class,
         SquereRootOp.class,
         AddOp.class,

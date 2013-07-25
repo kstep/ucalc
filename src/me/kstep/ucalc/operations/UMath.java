@@ -29,6 +29,33 @@ final public class UMath {
             new UnitNum(unit.from(value, radian), unit);
     }
 
+    public static UNumber sinh(UNumber value) {
+        return new UFloat(Math.sinh(value.doubleValue()));
+    }
+
+    public static UNumber cosh(UNumber value) {
+        return new UFloat(Math.cosh(value.doubleValue()));
+    }
+
+    public static UNumber tanh(UNumber value) {
+        return new UFloat(Math.tanh(value.doubleValue()));
+    }
+
+    public static UNumber asinh(UNumber value) {
+        double x = value.doubleValue();
+        return new UFloat(Math.log(x + Math.sqrt(x*x + 1.0)));
+    }
+
+    public static UNumber acosh(UNumber value) {
+        double x = value.doubleValue();
+        return new UFloat(Math.log(x + Math.sqrt(x*x - 1.0)));
+    }
+
+    public static UNumber atanh(UNumber value) {
+        double x = value.doubleValue();
+        return new UFloat(Math.log((x + 1.0) / (x - 1.0)) / 2.0);
+    }
+
     // \cos(a+bi) = \cos a \cosh b - i\sin a \sinh b
     // \sin(a+bi) = \sin a \cosh b + i\cos a \sinh b
     // \cosh(a+bi) = \cosh a \cos b + i\sinh a \sin b
