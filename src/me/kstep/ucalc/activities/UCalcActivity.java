@@ -72,9 +72,9 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
     private UState state;
     private UEvalulator evaluator;
 
-	final static int MODE_NORMAL = 0;
-	final static int MODE_ALT = 1;
-	final static int MODE_HYPER = 2;
+	final static int KEYPAD_MODE_NORMAL = 0;
+	final static int KEYPAD_MODE_ALT = 1;
+	final static int KEYPAD_MODE_HYPER = 2;
 
     public interface OnModeChangedListener {
         public void onModeChanged(int mode);
@@ -234,7 +234,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
 
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
         applyPreferences();
-		setMode(MODE_NORMAL);
+		setMode(KEYPAD_MODE_NORMAL);
 
         setContentView(R.layout.main);
         stackView = (UStackView) findViewById(R.id.view_stack);
@@ -542,9 +542,9 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
     public void onAltModeButtonClick(View view) {
         CompoundButton button = (CompoundButton) view;
 		String name = button.getText().toString();
-		int bmode = name.equals("alt")? MODE_ALT:
-		            name.equals("hyp")? MODE_HYPER:
-					MODE_NORMAL;
+		int bmode = name.equals("alt")? KEYPAD_MODE_ALT:
+		            name.equals("hyp")? KEYPAD_MODE_HYPER:
+					KEYPAD_MODE_NORMAL;
 
         setMode(button.isChecked()? mode | bmode: mode & ~bmode);
     }
