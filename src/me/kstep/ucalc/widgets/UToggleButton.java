@@ -44,7 +44,7 @@ public class UToggleButton extends CompoundButton implements CompoundButton.OnCh
         }
     }
 
-    private UCalcActivity.Mode mode = null;
+    private int mode = -1;
     private String radio_group = null;
 
     private void initialize(UCalcActivity context, TypedArray attrs) {
@@ -54,14 +54,9 @@ public class UToggleButton extends CompoundButton implements CompoundButton.OnCh
         setTypeface(tf);
 
         if (attrs != null) {
+            mode = attrs.getInt(R.styleable.UToggleButton_keypad_mode, -1);
 
-            int mymode = attrs.getInt(R.styleable.UToggleButton_keypad_mode, -1);
-            switch (mymode) {
-                case 0: mode = UCalcActivity.Mode.NORMAL; break;
-                case 1: mode = UCalcActivity.Mode.ALT; break;
-            }
-
-            if (mode != null) {
+            if (mode > -1) {
                 context.addOnModeChangedListener(this);
             }
 
@@ -81,7 +76,7 @@ public class UToggleButton extends CompoundButton implements CompoundButton.OnCh
         setOnClickListener(this);
     }
 
-    public void onModeChanged(UCalcActivity.Mode newmode) {
+    public void onModeChanged(int newmode) {
         if (mode == newmode) {
             setVisibility(View.VISIBLE);
         } else {

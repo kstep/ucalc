@@ -72,26 +72,26 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
     private UState state;
     private UEvalulator evaluator;
 
-    public enum Mode {
-        NORMAL,
-        ALT,
-    }
+	final static int MODE_NORMAL = 0;
+	final static int MODE_ALT = 1;
+	final static int MODE_HYPER = 2;
 
     public interface OnModeChangedListener {
-        public void onModeChanged(Mode mode);
+        public void onModeChanged(int mode);
     }
 
     public void addOnModeChangedListener(OnModeChangedListener listener) {
         if (listener != null) {
             mode_listeners.add(listener);
+			listener.onModeChanged(mode);
         }
     }
 
     private ArrayList<OnModeChangedListener> mode_listeners = new ArrayList<OnModeChangedListener>();
 
-    private Mode mode = null;
+    private int mode = 0;
 
-    public void setMode(Mode mode) {
+    public void setMode(int mode) {
         if (mode != this.mode) {
             this.mode = mode;
 
@@ -101,7 +101,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
         }
     }
 
-    public Mode getMode() {
+    public int getMode() {
         return mode;
     }
 
@@ -234,6 +234,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
 
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
         applyPreferences();
+		setMode(MODE_NORMAL);
 
         setContentView(R.layout.main);
         stackView = (UStackView) findViewById(R.id.view_stack);
@@ -245,8 +246,6 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
         ab.hide();
-
-        setMode(Mode.NORMAL);
     }
 
     public void onSharedPreferenceChanged(SharedPreferences preferences, String key) {
@@ -542,8 +541,12 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
 
     public void onAltModeButtonClick(View view) {
         CompoundButton button = (CompoundButton) view;
+		String name = button.getText().toString();
+		int bmode = name.equals("alt")? MODE_ALT:
+		            name.equals("hyp")? MODE_HYPER:
+					MODE_NORMAL;
 
-        setMode(button.isChecked()? Mode.ALT: Mode.NORMAL);
+        setMode(button.isChecked()? mode | bmode: mode & ~bmode);
     }
 
     private UStackFragment stack_fragment;

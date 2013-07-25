@@ -27,7 +27,7 @@ public class UButton extends Button implements UCalcActivity.OnModeChangedListen
         initialize((UCalcActivity) context, context.obtainStyledAttributes(attrs, R.styleable.UButton, defStyle, 0));
     }
 
-    private UCalcActivity.Mode mode = null;
+    private int mode = -1;
 
     private View.OnClickListener superOnClickListener;
 
@@ -38,14 +38,9 @@ public class UButton extends Button implements UCalcActivity.OnModeChangedListen
         setEllipsize(null);
 
         if (attrs != null) {
+            mode = attrs.getInt(R.styleable.UButton_keypad_mode, -1);
 
-            int mymode = attrs.getInt(R.styleable.UButton_keypad_mode, -1);
-            switch (mymode) {
-                case 0: mode = UCalcActivity.Mode.NORMAL; break;
-                case 1: mode = UCalcActivity.Mode.ALT; break;
-            }
-
-            if (mode != null) {
+            if (mode > -1) {
                 context.addOnModeChangedListener(this);
             }
 
@@ -56,7 +51,7 @@ public class UButton extends Button implements UCalcActivity.OnModeChangedListen
         setOnClickListener(this);
     }
 
-    public void onModeChanged(UCalcActivity.Mode newmode) {
+    public void onModeChanged(int newmode) {
         if (mode == newmode) {
             setVisibility(View.VISIBLE);
         } else {
