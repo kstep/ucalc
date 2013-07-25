@@ -11,9 +11,20 @@ class ConvertOp extends UOperation {
     public CharSequence name() { return "conv"; }
     public void apply(UState state, UStack stack) {
         UNumber x = stack.pop();
-        stack.push(new UnitNum(stack.pop(),
-		    (x instanceof UnitNum)?
-			    ((UnitNum) x).unit: Unit.NONE));
+		UNumber y = stack.pop();
+		Unit to = (x instanceof UnitNum)?
+		            ((UnitNum) x).unit:
+					Unit.NONE;
+		Unit from;
+		
+		if (y instanceof UnitNum) {
+			from = ((UnitNum) y).unit;
+			y = ((UnitNum) y).value;
+		} else {
+			from = Unit.NONE;
+		}
+		
+        stack.push(new UnitNum(to.from(y, from), to));
     }
 
     public int priority() { return PRI_NUL; } // TODO
