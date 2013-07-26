@@ -29,7 +29,8 @@
 
         <LinearLayout android:orientation="vertical" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="6">
             <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
-                <me.kstep.ucalc.widgets.UOpButton android:text="1/x" style="@style/UCBtn.Fun" />
+
+                <me.kstep.ucalc.widgets.UToggleButton android:onClick="onModeButtonClick" android:text="alt" style="@style/UCBtn.Mod" />
                 <me.kstep.ucalc.widgets.UOpButton android:text="conv" style="@style/UCBtn.Fun" />
                 <me.kstep.ucalc.widgets.UButton android:text="per" style="@style/UCBtn.Act" />
                 <me.kstep.ucalc.widgets.UToggleButton android:tag="prefix" android:text="prefix" android:onClick="onUnitCategoryButtonClick" style="@style/UCBtn.Act" />
@@ -38,7 +39,7 @@
             </LinearLayout>
 
             <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
-                <me.kstep.ucalc.widgets.UOpButton android:text="yˣ" style="@style/UCBtn.Fun" />
+                <me.kstep.ucalc.widgets.UButton android:text="mem" style="@style/UCBtn.Mod" android:onClick="onMemoryButtonClick" />
                 <me.kstep.ucalc.widgets.UConstButton android:text="π" style="@style/UCBtn.Sym" />
 
                 <me.kstep.ucalc.widgets.UDigitButton android:text="7" style="@style/UCBtn.Sym" />
@@ -88,7 +89,7 @@
                 <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode_all="3" ucalc:keypad_mode_mask="3" android:text="acosh" style="@style/UCBtn.Fun" />
                 <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode_all="3" ucalc:keypad_mode_mask="3" android:text="atanh" style="@style/UCBtn.Fun" />
 
-                <me.kstep.ucalc.widgets.UToggleButton android:onClick="onModeButtonClick" android:text="alt" style="@style/UCBtn.Mod" />
+                <me.kstep.ucalc.widgets.UOpButton android:text="1/x" style="@style/UCBtn.Fun" />
             </LinearLayout>
             <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
                 <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode_all="0" android:text="ln" style="@style/UCBtn.Fun" />
@@ -101,7 +102,7 @@
                 <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode_all="1" android:text="x³" style="@style/UCBtn.Fun" />
                 <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode_all="1" android:text="∛x" style="@style/UCBtn.Fun" />
 
-                <me.kstep.ucalc.widgets.UButton android:text="mem" style="@style/UCBtn.Mod" android:onClick="onMemoryButtonClick" />
+                <me.kstep.ucalc.widgets.UOpButton android:text="yˣ" style="@style/UCBtn.Fun" />
             </LinearLayout>
         </LinearLayout>
 
