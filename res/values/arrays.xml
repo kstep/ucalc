@@ -31,5 +31,16 @@
         <item>National Bank of Belarus</item>
     </string-array>
 
+    <string-array name="orientation_values">
+        <item>auto</item>
+        <item>portrait</item>
+        <item>landscape</item>
+    </string-array>
+    <string-array name="orientation_names">
+        <item>Automatic</item>
+        <item>Portrait</item>
+        <item>Landscape</item>
+    </string-array>
+
     <string-array name="empty_array"></string-array>
 </resources>

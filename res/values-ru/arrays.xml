@@ -16,4 +16,10 @@
         <item>Центробанк РФ</item>
         <item>Нацбанк РБ</item>
     </string-array>
+
+    <string-array name="orientation_names">
+        <item>Автоматически</item>
+        <item>Портретная</item>
+        <item>Ландшафтная</item>
+    </string-array>
 </resources>

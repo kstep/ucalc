@@ -7,6 +7,7 @@
         <CheckBoxPreference android:key="dark_theme" android:title="@string/pref_title_dark_theme" android:defaultValue="false" />
         <CheckBoxPreference android:key="sound_feedback" android:title="@string/pref_title_sound_feedback" android:summary="@string/pref_summary_sound_feedback" android:defaultValue="false" />
         <CheckBoxPreference android:key="haptic_feedback" android:title="@string/pref_title_haptic_feedback" android:summary="@string/pref_summary_haptic_feedback" android:defaultValue="false" />
+        <me.kstep.ucalc.preferences.SelectPreference android:key="orientation" android:title="@string/pref_title_orientation" android:summary="@string/pref_summary_current_string_value" android:entries="@array/orientation_names" android:entryValues="@array/orientation_values" android:defaultValue="auto" />
     </PreferenceCategory>
 
     <PreferenceCategory android:key="calculation" android:title="@string/pref_title_calculation">

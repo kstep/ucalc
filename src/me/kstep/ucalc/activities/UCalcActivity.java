@@ -7,6 +7,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -129,6 +130,15 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
         } else {
             currentThemeId = preferences.getBoolean("dark_theme", false)? android.R.style.Theme_Holo: android.R.style.Theme_Holo_Light;
             setTheme(currentThemeId);
+        }
+
+        if (key == null || key.equals("orientation")) {
+            String orientation = preferences.getString("orientation", "auto");
+            setRequestedOrientation(
+                    orientation.equals("auto")? ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED:
+                    orientation.equals("portrait")? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT:
+                    orientation.equals("landscape")? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE:
+                    ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         }
 
         if (key == null
