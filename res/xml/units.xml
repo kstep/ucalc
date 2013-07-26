@@ -409,11 +409,11 @@ A few examples:
         </unit>
 
         <unit class="base" name="°K" fullname="Kelvin">
-            <description>1/273.16 of thermodynamic temperature of the triple point of water</description>
+            <description>1/273.15 of thermodynamic temperature of the triple point of water</description>
         </unit>
 
         <unit name="°C" fullname="Celsius" class="linear">
-            <offset>27316/100</offset>
+            <offset>27315/100</offset>
             <derive>°K</derive>
             <description>A 1/100 of scale between water's freezing and boiling points</description>
         </unit>
