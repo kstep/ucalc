@@ -53,7 +53,6 @@
     <string name="pref_summary_show_polar_complex">Показывать комплексные числа как пару модуля и угла</string>
     <string name="pref_summary_currency_load_frequency">Обновлять курсы валют %d раз в день</string>
     <string name="pref_summary_show_mixed_ratios">Неправильные дроби показывать как смешанные (1 1/2 вместо 3/2)</string>
-    <string name="pref_summary_show_currencies">Если не выбрана ни одна валюта, то показывать все, иначе будут видны только выбранные (если источник не даёт данные по валюте, то она не будет видна)</string>
 
     <string name="pref_summary_current_integer_value">Значение: %d</string>
     <string name="pref_summary_current_string_value">Значение: %s</string>
