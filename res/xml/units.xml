@@ -90,6 +90,14 @@ A few examples:
             <derive>wk</derive>
             <scale>2</scale>
         </unit>
+        <unit name="mon" fullname="Month" class="linear">
+            <derive>day</derive>
+            <scale>365/12</scale>
+        </unit>
+        <unit name="smon" fullname="Sidereal month" class="linear">
+            <derive>day</derive>
+            <scale>27.321661547</scale>
+        </unit>
         <unit class="linear" name="sday" fullname="Sidereal day">
             <derive>hr</derive>
             <scale>23.934469591898</scale>
