@@ -21,11 +21,13 @@
     </string-array>
 
     <string-array name="currencies_sources">
+        <item>oer</item>
         <item>ecb</item>
         <item>cbr</item>
         <item>nbrb</item>
     </string-array>
     <string-array name="currencies_source_names">
+        <item>Open Exchange Rates</item>
         <item>European Central Bank</item>
         <item>Central Bank of Russia</item>
         <item>National Bank of Belarus</item>
