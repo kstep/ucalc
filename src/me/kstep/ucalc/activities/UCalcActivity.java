@@ -73,6 +73,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
     private UnitsManager units;
     private UState state;
     private UEvalulator evaluator;
+	private UnitCurrenciesLoader currenciesLoader;
 
 	final static int KEYPAD_MODE_NORMAL = 0;
 	final static int KEYPAD_MODE_ALT = 1;
@@ -106,6 +107,10 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
     public int getMode() {
         return mode;
     }
+	
+	public UnitCurrenciesLoader getCurrenciesLoader() {
+		return currenciesLoader;
+	}
 
     private void restoreState(Bundle savedState) {
         stack = (UStack) loadFromFile("stack.bin", new UStack());
@@ -200,7 +205,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
             if (preferences.getBoolean("load_currencies", false)) {
                 String currenciesSource = preferences.getString("currencies_source", "cbr");
 
-                UnitCurrenciesLoader currenciesLoader = null;
+                currenciesLoader = null;
                 boolean wifiOnly = preferences.getBoolean("use_wifi_only", true);
                 int cacheTimeout = 86400 / preferences.getInt("currency_load_frequency", 1);
 

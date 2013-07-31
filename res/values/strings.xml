@@ -66,6 +66,10 @@
     <string name="pref_title_unc">Unc: A Units Calculator</string>
     <string name="pref_summary_unc">iPhone units calculator UCalc was inspired by</string>
 
+	<string name="pref_summary_load_currencies">Last loaded: %s</string>
+	<string name="pref_summary_load_currencies_unknown">unknown</string>
+	<string name="pref_summary_load_currencies_never">never</string>
+
     <string name="pref_summary_show_currencies_all">show all currencies</string>
     <string name="pref_summary_show_currencies_some">show %s</string>
     <string name="pref_summary_show_currencies_more">and %d more</string>

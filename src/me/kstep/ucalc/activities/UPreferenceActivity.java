@@ -4,12 +4,15 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.view.MenuItem;
+import java.util.Date;
 import me.kstep.ucalc.R;
+import me.kstep.ucalc.units.UnitCurrenciesLoader;
 
 public class UPreferenceActivity extends PreferenceActivity {
 
@@ -18,8 +21,13 @@ public class UPreferenceActivity extends PreferenceActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferences);
-            Preference p = findPreference("version");
+            Preference p;
+
+			p = findPreference("version");
             p.setSummary(String.format(p.getSummary().toString(), getVersionName()));
+			
+			p = findPreference("load_currencies");
+			p.setSummary(String.format(p.getSummary().toString(), getCurrenciesCacheLastLoaded()));
         }
 
         public String getVersionName() {
@@ -30,6 +38,18 @@ public class UPreferenceActivity extends PreferenceActivity {
                 return "";
             }
         }
+		
+		public String getCurrenciesCacheLastLoaded() {
+			Resources res = getResources();
+			Activity activity = getActivity().getParent();
+			if (activity == null || !(activity instanceof UCalcActivity)) {
+				return res.getString(R.string.pref_summary_load_currencies_unknown);
+			}
+			
+			UnitCurrenciesLoader loader = ((UCalcActivity) activity).getCurrenciesLoader();
+			Date lastmod = loader == null? null: loader.getLastLoadedDate();
+			return lastmod == null? res.getString(R.string.pref_summary_load_currencies_never): lastmod.toLocaleString();
+		}
     }
 
     @Override

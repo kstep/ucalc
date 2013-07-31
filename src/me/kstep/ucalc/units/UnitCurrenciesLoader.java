@@ -1,10 +1,10 @@
 package me.kstep.ucalc.units;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.widget.Toast;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -16,14 +16,14 @@ import java.io.ObjectOutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import me.kstep.ucalc.R;
 import me.kstep.ucalc.views.UToast;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
-import java.util.Set;
-import android.content.res.Resources;
 
 public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void, List<Unit>> {
     final protected Unit baseCurrency;
@@ -124,6 +124,11 @@ public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void,
         } catch (IOException e) {
         }
     }
+	
+	public Date getLastLoadedDate() {
+		File fn = new File(getCacheFilename());
+		return fn.exists()? new Date(fn.lastModified()): null;
+	}
 
     protected List<Unit> loadFromCache() {
         return loadFromCache(cacheTimeout);
