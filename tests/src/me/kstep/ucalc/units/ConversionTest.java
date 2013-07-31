@@ -12,15 +12,61 @@ import me.kstep.ucalc.numbers.UNumber;
 //@RunWith(JUnit4.class)
 public class ConversionTest extends AndroidTestCase {
     private UnitsManager uman;
+	
+	public void loadUnits() {
+        try {
+            uman.clear();
+
+            uman.add(new BaseUnit("kg"));
+            uman.add(new BaseUnit("m"));
+            uman.add(new BaseUnit("s"));
+            uman.add(new BaseUnit("A"));
+
+            uman.add(new PowerUnit(uman.get("m"), 3));
+            uman.add(new LinearUnit("l", 0.001, uman.get("m³")));
+            uman.add(new UnitPrefix("m", uman.get("l")));
+
+            uman.add(new ProductUnit("N", uman.get("kg"), uman.get("m"), new PowerUnit(uman.get("s"), -2)));
+
+            uman.add(new ProductUnit("J", uman.get("N"), uman.get("m")));
+            uman.add(new ProductUnit("W", uman.get("J"), new PowerUnit(uman.get("s"), -1)));
+
+            uman.add(new ProductUnit("V", uman.get("W"), new PowerUnit(uman.get("A"), -1)));
+
+            uman.add(new ProductUnit("C", uman.get("A"), uman.get("s")));
+            uman.add(new LinearUnit("eV", 1.602176565e-19, new ProductUnit(uman.get("C"), uman.get("V"))));
+
+            uman.add(new LinearUnit("lb", 0.45359237, uman.get("kg")));
+            uman.add(new LinearUnit("gf", 9.80665, new ProductUnit(uman.get("m"), new PowerUnit(uman.get("s"), -2))));
+            uman.add(new ProductUnit("lbf", uman.get("gf"), uman.get("lb")));
+
+            // TODO: redefine as 550 lbf*ft/s
+            uman.add(new LinearUnit("hp", 745.699872, uman.get("W")));
+
+
+            uman.add(new ProductUnit("ohm", uman.get("V"), new PowerUnit(uman.get("A"), -1)));
+            uman.add(new ProductUnit("S", uman.get("A"), new PowerUnit(uman.get("V"), -1)));
+
+            uman.add(new BaseUnit("°K"));
+            uman.add(new LinearUnit("°C", uman.get("°K"), 273.16));
+            uman.add(new LinearUnit("°F", new URational(9, 5), 32, uman.get("°C")));
+
+            uman.add(new LinearUnit("mole", 6.0221412927e23, Unit.NONE));
+
+        } catch (UnitsManager.UnitExistsException e) {
+        }
+
+		uman.simplifyAll();
+    }
 
     public ConversionTest() {
         super();
+		uman = UnitsManager.getInstance();
     }
 
     //@Before
     protected void setUp() {
-        uman = UnitsLoader.load();
-        uman.simplifyAll();
+        loadUnits();
     }
 
     //@Test
