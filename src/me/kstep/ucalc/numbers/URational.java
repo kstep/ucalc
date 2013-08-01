@@ -8,7 +8,19 @@ import java.text.Format;
  */
 public class URational extends UReal {
 
+    public static class DivisionByZeroException extends ArithmeticException {
+		DivisionByZeroException() {
+			super("/ by zero");
+		}
+	}
+
     public UNumber simplify() {
+		if (denomenator == 0) {
+			return numerator > 0? UNumber.INF:
+			    numerator < 0? UNumber._INF:
+				UNumber.NAN;
+		}
+
         return isInteger()? new UInteger(numerator): this;
     }
 
@@ -93,7 +105,8 @@ public class URational extends UReal {
 
     private void fix() {
         if (denomenator == 0) {
-            throw new ArithmeticException("/ by zero");
+			numerator = numerator < 0? -1: numerator > 0? 1: 0;
+            //throw new DivisionByZeroException();
         }
 
         if (denomenator < 0) {
@@ -135,10 +148,18 @@ public class URational extends UReal {
     }
 
     public String toString() {
+		if (denomenator == 0) {
+			return simplify().toString();
+		}
+
         return isInteger()? "" + numerator: numerator + "/" + denomenator;
     }
 
     public String format(Format formatter) {
+		if (denomenator == 0) {
+			return simplify().format(formatter);
+		}
+
         return isInteger()? formatter.format(numerator):
             showAsFloat? formatter.format(doubleValue()): (
 			    isImproper() && showMixedFractions?
@@ -170,9 +191,11 @@ public class URational extends UReal {
     }
 
     public URational reduce() {
-        long base = gcd(numerator, denomenator);
-        numerator /= base;
-        denomenator /= base;
+		if (denomenator != 0) {
+            long base = gcd(numerator, denomenator);
+            numerator /= base;
+            denomenator /= base;
+		}
         return this;
     }
 
