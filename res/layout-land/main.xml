@@ -62,7 +62,7 @@
 
         <me.kstep.ucalc.widgets.UButton android:text="float" style="@style/UCBtn.Mod" android:onClick="onSelectRadixButtonClick" android:id="@+id/radix_button" />
         <me.kstep.ucalc.widgets.UButton android:text="EEX" ucalc:keypad_mode_all="0" android:onClick="onExponentButtonClick" style="@style/UCBtn.Sym" />
-		<me.kstep.ucalc.widgets.UDigitButton android:text="j" ucalc:keypad_mode_all="1" style="@style/UCBtn.Sym" />
+        <me.kstep.ucalc.widgets.UDigitButton android:text="j" ucalc:keypad_mode_all="1" style="@style/UCBtn.Sym" />
         <me.kstep.ucalc.widgets.UDigitButton android:text="4" style="@style/UCBtn.Sym" />
         <me.kstep.ucalc.widgets.UDigitButton android:text="5" style="@style/UCBtn.Sym" />
         <me.kstep.ucalc.widgets.UDigitButton android:text="6" style="@style/UCBtn.Sym" />
@@ -71,13 +71,14 @@
 
     <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="2">
         <LinearLayout android:orientation="vertical" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="5.5">
-			<LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
+            <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
                 <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode_all="0" android:text="ln" style="@style/UCBtn.Fun" />
                 <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode_all="0" android:text="log" style="@style/UCBtn.Fun" />
                 <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode_all="1" android:text="eˣ" style="@style/UCBtn.Fun" />
                 <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode_all="1" android:text="10ˣ" style="@style/UCBtn.Fun" />
 
-				<me.kstep.ucalc.widgets.UOpButton android:text="yˣ" style="@style/UCBtn.Fun" />
+                <me.kstep.ucalc.widgets.UOpButton android:text="yˣ" ucalc:keypad_mode_all="0" style="@style/UCBtn.Fun" />
+                <me.kstep.ucalc.widgets.UOpButton android:text="%" ucalc:keypad_mode_all="1" style="@style/UCBtn.Fun" />
 
                 <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode_all="0" android:text="x²" style="@style/UCBtn.Fun" />
                 <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode_all="0" android:text="√x" style="@style/UCBtn.Fun" />
@@ -103,7 +104,8 @@
                 <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode_all="3" ucalc:keypad_mode_mask="3" android:text="acosh" style="@style/UCBtn.Fun" />
                 <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode_all="3" ucalc:keypad_mode_mask="3" android:text="atanh" style="@style/UCBtn.Fun" />
 
-                <me.kstep.ucalc.widgets.UOpButton android:text="1/x" style="@style/UCBtn.Fun" />
+                <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode_all="0" android:text="1/x" style="@style/UCBtn.Fun" />
+                <me.kstep.ucalc.widgets.UOpButton ucalc:keypad_mode_all="1" android:text="mod" style="@style/UCBtn.Fun" />
             </LinearLayout>
         </LinearLayout>
 
