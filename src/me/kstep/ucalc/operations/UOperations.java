@@ -63,6 +63,7 @@ public class UOperations extends Hashtable<CharSequence,UOperation> {
         SwapOp.class,
         ConjugateOp.class,
         DecomposeOp.class,
+        PercentOp.class,
     };
 
     private UOperations() {
