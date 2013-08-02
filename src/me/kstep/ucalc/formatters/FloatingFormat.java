@@ -66,9 +66,9 @@ public class FloatingFormat extends DecimalFormat {
 
     public Number parse(String p1, ParsePosition p2) {
         applyPattern(expFormat);
-		if (p1.endsWith("j")) {
-			return new UComplex(0, super.parse(p1.length() == 1? "1": p1, p2));
-		}
+        if (p1.endsWith("j")) {
+            return new UComplex(0, super.parse(p1.length() == 1? "1": p1, p2));
+        }
         return super.parse(p1, p2);
     }
 }

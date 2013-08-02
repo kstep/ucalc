@@ -73,11 +73,11 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
     private UnitsManager units;
     private UState state;
     private UEvalulator evaluator;
-	private UnitCurrenciesLoader currenciesLoader;
+    private UnitCurrenciesLoader currenciesLoader;
 
-	final static int KEYPAD_MODE_NORMAL = 0;
-	final static int KEYPAD_MODE_ALT = 1;
-	final static int KEYPAD_MODE_HYPER = 2;
+    final static int KEYPAD_MODE_NORMAL = 0;
+    final static int KEYPAD_MODE_ALT = 1;
+    final static int KEYPAD_MODE_HYPER = 2;
 
     public interface OnModeChangedListener {
         public void onModeChanged(int mode);
@@ -107,10 +107,10 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
     public int getMode() {
         return mode;
     }
-	
-	public UnitCurrenciesLoader getCurrenciesLoader() {
-		return currenciesLoader;
-	}
+
+    public UnitCurrenciesLoader getCurrenciesLoader() {
+        return currenciesLoader;
+    }
 
     private void restoreState(Bundle savedState) {
         stack = (UStack) loadFromFile("stack.bin", new UStack());
@@ -171,7 +171,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
 
         UStack.simplfyUnits(preferences.getBoolean("simplify_units", false));
         URational.showAsFloat(!preferences.getBoolean("show_ratios", false),
-		    preferences.getBoolean("show_mixed_ratios", false));
+            preferences.getBoolean("show_mixed_ratios", false));
         UComplex.showPolarForm(preferences.getBoolean("show_polar_complex", false));
         Effects.setFeedback(preferences.getBoolean("haptic_feedback", false), preferences.getBoolean("sound_feedback", false));
 
@@ -252,7 +252,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
 
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
         applyPreferences();
-		setMode(KEYPAD_MODE_NORMAL);
+        setMode(KEYPAD_MODE_NORMAL);
 
         setContentView(R.layout.main);
         stackView = (UStackView) findViewById(R.id.view_stack);

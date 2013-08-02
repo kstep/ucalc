@@ -9,17 +9,17 @@ import java.text.Format;
 public class URational extends UReal {
 
     public static class DivisionByZeroException extends ArithmeticException {
-		DivisionByZeroException() {
-			super("/ by zero");
-		}
-	}
+        DivisionByZeroException() {
+            super("/ by zero");
+        }
+    }
 
     public UNumber simplify() {
-		if (denomenator == 0) {
-			return numerator > 0? UNumber.INF:
-			    numerator < 0? UNumber._INF:
-				UNumber.NAN;
-		}
+        if (denomenator == 0) {
+            return numerator > 0? UNumber.INF:
+                numerator < 0? UNumber._INF:
+                UNumber.NAN;
+        }
 
         return isInteger()? new UInteger(numerator): this;
     }
@@ -29,10 +29,10 @@ public class URational extends UReal {
     final private static long PRECISION_BASE = 100000L;
 
     private static boolean showAsFloat = false;
-	private static boolean showMixedFractions = false;
+    private static boolean showMixedFractions = false;
     public static void showAsFloat(boolean value, boolean mixed) {
         showAsFloat = value;
-		showMixedFractions = mixed;
+        showMixedFractions = mixed;
     }
 
     public long numerator;
@@ -65,17 +65,17 @@ public class URational extends UReal {
         int divisor = value.indexOf('/');
 
         if (divisor == -1) {
-			divisor = value.indexOf('_');
-			if (divisor == -1) {
+            divisor = value.indexOf('_');
+            if (divisor == -1) {
                 numerator = Long.valueOf(value);
                 denomenator = 1L;
-			} else {
-				numerator = Long.valueOf(value.replace("_", ""));
-				denomenator = (long) Math.pow(10, value.length() - divisor - 1);
-				
-				fix();
-				reduce();
-			}
+            } else {
+                numerator = Long.valueOf(value.replace("_", ""));
+                denomenator = (long) Math.pow(10, value.length() - divisor - 1);
+
+                fix();
+                reduce();
+            }
 
         } else {
             numerator = Long.valueOf(value.substring(0, divisor));
@@ -105,7 +105,7 @@ public class URational extends UReal {
 
     private void fix() {
         if (denomenator == 0) {
-			numerator = numerator < 0? -1: numerator > 0? 1: 0;
+            numerator = numerator < 0? -1: numerator > 0? 1: 0;
             //throw new DivisionByZeroException();
         }
 
@@ -148,24 +148,24 @@ public class URational extends UReal {
     }
 
     public String toString() {
-		if (denomenator == 0) {
-			return simplify().toString();
-		}
+        if (denomenator == 0) {
+            return simplify().toString();
+        }
 
         return isInteger()? "" + numerator: numerator + "/" + denomenator;
     }
 
     public String format(Format formatter) {
-		if (denomenator == 0) {
-			return simplify().format(formatter);
-		}
+        if (denomenator == 0) {
+            return simplify().format(formatter);
+        }
 
         return isInteger()? formatter.format(numerator):
             showAsFloat? formatter.format(doubleValue()): (
-			    isImproper() && showMixedFractions?
-			    formatter.format(wholeNumber()) + " " + formatter.format(properNumerator()) + "/" + formatter.format(denomenator):
+                isImproper() && showMixedFractions?
+                formatter.format(wholeNumber()) + " " + formatter.format(properNumerator()) + "/" + formatter.format(denomenator):
                 formatter.format(numerator) + "/" + formatter.format(denomenator)
-			);
+            );
     }
 
     public UNumber pow(Number other) {
@@ -191,11 +191,11 @@ public class URational extends UReal {
     }
 
     public URational reduce() {
-		if (denomenator != 0) {
+        if (denomenator != 0) {
             long base = gcd(numerator, denomenator);
             numerator /= base;
             denomenator /= base;
-		}
+        }
         return this;
     }
 
@@ -248,18 +248,18 @@ public class URational extends UReal {
     public int hashCode() {
         return (int) (numerator << 16 ^ denomenator);
     }
-	
-	public boolean isImproper() {
-		return Math.abs(numerator) > denomenator;
-	}
-	
-	public long wholeNumber() {
-		return numerator / denomenator;
-	}
-	
-	public long properNumerator() {
-		return Math.abs(numerator % denomenator);
-	}
+
+    public boolean isImproper() {
+        return Math.abs(numerator) > denomenator;
+    }
+
+    public long wholeNumber() {
+        return numerator / denomenator;
+    }
+
+    public long properNumerator() {
+        return Math.abs(numerator % denomenator);
+    }
 
     public boolean equals(Number other) {
         return (other instanceof URational && ((URational) other).numerator == numerator && ((URational) other).denomenator == denomenator)

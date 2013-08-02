@@ -52,8 +52,8 @@ final class BaseUnit extends Unit {
      */
     public boolean equals(Unit other) {
         return other == this || (
-		    (other instanceof BaseUnit) && name.equals(other.name)
-		);
+            (other instanceof BaseUnit) && name.equals(other.name)
+        );
     }
 
     public Unit simplify(int depth) {

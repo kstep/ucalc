@@ -88,9 +88,9 @@ public abstract class UNumber extends Number {
     final public static UInteger ONE = new UInteger(1);
     final public static UInteger _ONE = new UInteger(-1);
     final public static UInteger ZERO = new UInteger(0);
-	final public static UFloat INF = new UFloat(1.0/0.0);
-	final public static UFloat _INF = new UFloat(-1.0/0.0);
-	final public static UFloat NAN = new UFloat(0.0/0.0);
+    final public static UFloat INF = new UFloat(1.0/0.0);
+    final public static UFloat _INF = new UFloat(-1.0/0.0);
+    final public static UFloat NAN = new UFloat(0.0/0.0);
 
     public UNumber() {}
     public UNumber(Number value) {}

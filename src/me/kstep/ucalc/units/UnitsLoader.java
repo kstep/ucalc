@@ -123,7 +123,7 @@ public class UnitsLoader {
                         categoryName.equals("dist")? Unit.Category.DISTANCE:
                         categoryName.equals("weight")? Unit.Category.WEIGHT:
                         categoryName.equals("elec")? Unit.Category.ELECTRIC:
-						categoryName.equals("@none")? null:
+                        categoryName.equals("@none")? null:
                         Unit.Category.MISCELLANEOUS);
             }
         }

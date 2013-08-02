@@ -12,8 +12,8 @@ import me.kstep.ucalc.numbers.UNumber;
 //@RunWith(JUnit4.class)
 public class ConversionTest extends AndroidTestCase {
     private UnitsManager uman;
-	
-	public void loadUnits() {
+
+    public void loadUnits() {
         try {
             uman.clear();
 
@@ -56,12 +56,12 @@ public class ConversionTest extends AndroidTestCase {
         } catch (UnitsManager.UnitExistsException e) {
         }
 
-		uman.simplifyAll();
+        uman.simplifyAll();
     }
 
     public ConversionTest() {
         super();
-		uman = UnitsManager.getInstance();
+        uman = UnitsManager.getInstance();
     }
 
     //@Before

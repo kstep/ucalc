@@ -124,11 +124,11 @@ public abstract class UnitCurrenciesLoader extends AsyncTask<UnitsManager, Void,
         } catch (IOException e) {
         }
     }
-	
-	public Date getLastLoadedDate() {
-		File fn = new File(getCacheFilename());
-		return fn.exists()? new Date(fn.lastModified()): null;
-	}
+
+    public Date getLastLoadedDate() {
+        File fn = new File(getCacheFilename());
+        return fn.exists()? new Date(fn.lastModified()): null;
+    }
 
     protected List<Unit> loadFromCache() {
         return loadFromCache(cacheTimeout);

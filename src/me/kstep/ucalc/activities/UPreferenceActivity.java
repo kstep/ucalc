@@ -23,11 +23,11 @@ public class UPreferenceActivity extends PreferenceActivity {
             addPreferencesFromResource(R.xml.preferences);
             Preference p;
 
-			p = findPreference("version");
+            p = findPreference("version");
             p.setSummary(String.format(p.getSummary().toString(), getVersionName()));
-			
-			p = findPreference("load_currencies");
-			p.setSummary(String.format(p.getSummary().toString(), getCurrenciesCacheLastLoaded()));
+
+            p = findPreference("load_currencies");
+            p.setSummary(String.format(p.getSummary().toString(), getCurrenciesCacheLastLoaded()));
         }
 
         public String getVersionName() {
@@ -38,18 +38,18 @@ public class UPreferenceActivity extends PreferenceActivity {
                 return "";
             }
         }
-		
-		public String getCurrenciesCacheLastLoaded() {
-			Resources res = getResources();
-			Activity activity = getActivity().getParent();
-			if (activity == null || !(activity instanceof UCalcActivity)) {
-				return res.getString(R.string.pref_summary_load_currencies_unknown);
-			}
-			
-			UnitCurrenciesLoader loader = ((UCalcActivity) activity).getCurrenciesLoader();
-			Date lastmod = loader == null? null: loader.getLastLoadedDate();
-			return lastmod == null? res.getString(R.string.pref_summary_load_currencies_never): lastmod.toLocaleString();
-		}
+
+        public String getCurrenciesCacheLastLoaded() {
+            Resources res = getResources();
+            Activity activity = getActivity().getParent();
+            if (activity == null || !(activity instanceof UCalcActivity)) {
+                return res.getString(R.string.pref_summary_load_currencies_unknown);
+            }
+
+            UnitCurrenciesLoader loader = ((UCalcActivity) activity).getCurrenciesLoader();
+            Date lastmod = loader == null? null: loader.getLastLoadedDate();
+            return lastmod == null? res.getString(R.string.pref_summary_load_currencies_never): lastmod.toLocaleString();
+        }
     }
 
     @Override

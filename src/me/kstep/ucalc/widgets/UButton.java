@@ -42,7 +42,7 @@ public class UButton extends Button implements UCalcActivity.OnModeChangedListen
         if (attrs != null) {
             keypad_mode_all = attrs.getInt(R.styleable.UButton_keypad_mode_all, -1);
             keypad_mode_any = attrs.getInt(R.styleable.UButton_keypad_mode_any, -1);
-            
+
             if (keypad_mode_all > -1
                 || keypad_mode_any > -1) {
                 keypad_mode_mask = attrs.getInt(R.styleable.UButton_keypad_mode_mask, 1);
