@@ -77,7 +77,7 @@ log:
 	adb logcat | grep E/AndroidRuntime
 
 start:
-	ant start
+	adb shell am start -n me.kstep.ucalc/me.kstep.ucalc.activities.UCalcActivity
 
 $(MANIFEST): $(MANIFEST).in
 	sed -e "s/android:versionName=\"VERSION\"/android:versionName=\"$$(git describe --tags | sed 's/^v//')\"/" < $(MANIFEST).in > $(MANIFEST)
