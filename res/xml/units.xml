@@ -339,14 +339,6 @@ A few examples:
     </category>
 
     <category name="misc">
-        <unit name="%" fullname="Percent" class="linear">
-            <scale>1/100</scale>
-            <derive>@none</derive>
-        </unit>
-        <unit name="‰" fullname="Permille" class="linear">
-            <scale>1/1000</scale>
-            <derive>@none</derive>
-        </unit>
         <unit class="product" name="J" fullname="Joule">
             <description>A work applied by force of 1 N through a distance of 1 meter</description>
             <derive>N</derive>
