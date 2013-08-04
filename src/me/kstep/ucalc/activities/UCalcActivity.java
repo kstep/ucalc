@@ -334,6 +334,7 @@ public class UCalcActivity extends Activity implements SharedPreferences.OnShare
     public void onOptionsButtonClick(View view) {
         Intent intent = new Intent(this, UPreferenceActivity.class);
         intent.putExtra("themeId", currentThemeId);
+		intent.putExtra("lastCurrenciesLoaded", currenciesLoader == null? null: currenciesLoader.getLastLoadedDate());
         startActivity(intent);
     }
 

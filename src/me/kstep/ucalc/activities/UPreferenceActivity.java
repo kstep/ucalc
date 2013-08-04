@@ -41,14 +41,12 @@ public class UPreferenceActivity extends PreferenceActivity {
 
         public String getCurrenciesCacheLastLoaded() {
             Resources res = getResources();
-            Activity activity = getActivity().getParent();
-            if (activity == null || !(activity instanceof UCalcActivity)) {
-                return res.getString(R.string.pref_summary_load_currencies_unknown);
+            Object lastmod = getActivity().getIntent().getExtras().get("lastCurrenciesLoaded");
+            if (lastmod == null || !(lastmod instanceof Date)) {
+                return res.getString(R.string.pref_summary_load_currencies_never);
             }
 
-            UnitCurrenciesLoader loader = ((UCalcActivity) activity).getCurrenciesLoader();
-            Date lastmod = loader == null? null: loader.getLastLoadedDate();
-            return lastmod == null? res.getString(R.string.pref_summary_load_currencies_never): lastmod.toLocaleString();
+            return ((Date) lastmod).toLocaleString();
         }
     }
 
