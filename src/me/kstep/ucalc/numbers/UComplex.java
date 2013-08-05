@@ -49,8 +49,8 @@ public class UComplex extends UNumber {
 
         if (value.endsWith("j")) { // pure imaginary
             int j = value.indexOf('j');
-            real = new UFloat(0.0);
-            imag = new UFloat(value.substring(0, j));
+            real = UNumber.ZERO;
+            imag = (UReal) UNumber.valueOf(value.substring(0, j));
 
         } else if (value.startsWith("(") && value.endsWith(")")) {
             int j = value.indexOf('j');
@@ -59,18 +59,18 @@ public class UComplex extends UNumber {
                 throw new NumberFormatException("For input string: \"" + value + "\"");
             }
 
-            real = new UFloat(value.substring(1, split));
-            imag = new UFloat(value.substring(split + 3, j));
+            real = (UReal) UNumber.valueOf(value.substring(1, split));
+            imag = (UReal) UNumber.valueOf(value.substring(split + 3, j));
 
         } else {
-            real = new UFloat(value);
-            imag = new UFloat(0.0);
+            real = (UReal) UNumber.valueOf(value);
+            imag = UNumber.ZERO;
         }
     }
 
     public UComplex(Number re, Number im) {
-        real = (re instanceof UReal)? ((UReal) re): (new UFloat(re));
-        imag = (im instanceof UReal)? ((UReal) im): (new UFloat(im));
+        real = (re instanceof UReal)? ((UReal) re): (UReal) UNumber.valueOf(re);
+        imag = (im instanceof UReal)? ((UReal) im): (UReal) UNumber.valueOf(im);
     }
 
     public UReal angle() {
